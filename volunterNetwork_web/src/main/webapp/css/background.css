@@ -1,0 +1,139 @@
+@CHARSET "UTF-8";
+/*------------public-------------*/
+body {
+    margin: 0;
+    font-family: 微软雅黑;
+   
+    background-repeat: no-repea;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: #DDDDDD
+
+}
+*{font-size:14px;font-family:'microsoft yahei';}
+.fr{float:right;}
+.logo{float:left;margin:0px 20px;}
+.logo img{height:75px;}
+.top-link{height:75px;line-height:75px;}
+.top-link a .adminIcon{background:url('../images/admin_bg.png') -37px -9px;}
+.top-link a{display:inline-block;margin:0 0 0 8px;padding:0 10px;color:#fff;cursor:pointer;}
+.top-link a:hover{color:#d6d6d6;}
+.top-link a i{width:25px;height:25px;display:inline-block;position:relative;top:8px;}
+.top-link a span{text-shadow:2px 2px 2px #333;}
+.top1 {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 17px;
+    font-height: 20px;
+    font-family: 楷体;
+    background-color: #09a9cf
+}
+
+.title {
+    float:left;
+    margin:-12px 20px;
+    font-size: 40px;
+    color: #FFFFFF;
+    font-height: 55px;
+    font-family: 隶书;
+}
+.title h3{
+	font-size:40px;
+}
+.top2 {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    height: 77px;
+    text-align: center;
+    color: #ccffff;
+    background-color: #09a9cf
+}
+
+.left {
+    position: absolute;
+    left: 0px;
+    top: 97px;
+    width: 200px;
+    height: 85%;
+    border-right: 1px solid #9370DB;
+    color: #000000;
+    font-size: 20px;
+    text-align: center;
+    background-color: #9ec4f6
+}
+
+.right {
+    position: absolute;
+    left: 200px;
+    top:97px;
+    width: 85.2%;
+    height: 85%;
+    border-top: 0px solid #484860;
+    font-size: 14px;
+    text-align: center;
+}
+
+.end {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    color: #556B2F;
+    font-size: 17px;
+    font-height: 20px;
+    font-family: 楷体;
+    background-color: #C0C0C0
+}
+
+.div1 {
+    text-align: center;
+    width: 200px;
+    padding-top: 10px;
+}
+
+.div2 {
+    height: 40px;
+    line-height: 40px;
+    margin-left:-25px;
+    cursor: pointer;
+    font-size: 18px;
+    position: relative;
+    border-bottom: #ccc 0px dotted;
+}
+.div3 {
+	width:200px;
+	
+    display: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+.div3 ul {
+    margin: 0;
+    padding: 0;
+}
+.div3 li {	
+    height: 30px;
+    line-height: 30px;
+    list-style: none;
+    border-bottom: #ccc 1px dotted;  
+    background:#37C6C0
+}
+.a {
+	
+	width:100px;
+    text-decoration: none;
+    color: #000000;
+    font-size: 15px;
+    margin-left:4px;
+}
+.a1 {
+    text-decoration: none;
+    color: #000000;
+    font-size: 18px;
+}

@@ -1,0 +1,341 @@
+@charset "utf-8";
+.mb_10{margin-bottom:10px;}
+.disB{display:block;}
+.disN{display:none;}
+.fz12{font-size: 12px;}
+body{font-size: 12px;}
+
+#personalCenter{margin-top:60px;margin-bottom:30px;}
+
+.bgC_pink{background-color: pink;}
+/* -------------------------左边菜单栏------------------------- */
+.bgC_pink{ background-color: pink;}
+.left_nav_box{width:212px;}
+.left_nav_box .head_setting{padding:15px;}
+.left_nav_box .head_setting_left{width:57px;height:57px;overflow: hidden;border:1px solid #ddd;}
+.left_nav_box .head_setting_left .pic{width:100%;height:100%;}
+.left_nav_box .head_setting_right{padding-left:77px;}
+.left_nav_box .head_setting_right .user_name{font-size:14px;line-height:28px;padding-top:3px;}
+.left_nav_box .head_setting_right .setting_btn{width:64px;height:24px;background-color: #67ade8;border-radius:4px;color:#fff;font-size:14px;text-align: center;line-height:24px;display:block;}
+.left_nav_box .nav_block_title{margin-left:5px;padding:0 7px;line-height:30px;height:30px;font-size:14px;border-bottom:2px solid #7bb431;margin-bottom:-2px;}
+.left_nav_box .nav_block_item{line-height:40px;height:40px;border-top:1px solid #f1eded;padding:0 12px;}
+.left_nav_box .nav_block_item .item_con{position: relative;height:40px;padding-left:23px;cursor:pointer;}
+.left_nav_box .nav_block_item .item_con:before{position: absolute;content:'';width:17px;height:17px;left: 0;top:50%;background-image: url(../../img/sprite2.png);background-repeat:no-repeat;transform: translateY(-50%);}
+.left_nav_box .nav_block_item.my_msg .item_con:before{background-position:-28px -58px;}
+.left_nav_box .nav_block_item.improve .item_con:before{background-position:-45px -58px;}
+.left_nav_box .nav_block_item.yht .item_con:before{background-position:-62px -58px;}
+.left_nav_box .nav_block_item.my_project .item_con:before{background-position:-79px -58px;}
+.left_nav_box .nav_block_item.applyZyzCard .item_con:before{background-position:-96px -58px;}
+.left_nav_box .nav_block_item.zyzCardProgress .item_con:before{background-position:-113px -58px;}
+.left_nav_box .nav_block_item.ser_record .item_con:before{background-position:-130px -58px;}
+.left_nav_box .nav_block_item.my_microblog .item_con:before{background-position:-147px -58px;}
+.left_nav_box .nav_block_item.my_certificate .item_con:before{background-position:-164px -58px;}
+.left_nav_box .nav_block_item.vol_duration .item_con:before{background-position:-181px -58px;}
+.left_nav_box .nav_block_item.rank .item_con:before{background-position:-198px -58px;}
+.left_nav_box .nav_block_item.score .item_con:before{background-position:-48px -78px;}
+.left_nav_box .nav_block_item.v .item_con:before{background-position:-28px -78px;}
+/* -------------------------左边菜单栏 end------------------------- */
+
+/* --------------------------总的公共部分-------------------------- */
+.personal_content_right{width:970px;}
+.more_selects .select_box{margin-right:10px;}
+.personal_content_right .content_common_box .title_box{padding:0 15px;margin-bottom:40px;}
+.personal_content_right .content_common_box .title_list{border-bottom:1px solid #e4e6e9;height:60px;font-size: 0;text-align: center;}
+.personal_content_right .content_common_box .title_list .title_item{padding:0 12px;line-height:59px;height:59px;cursor:pointer;font-size:14px;display:inline-block;margin:0 15px;}
+.personal_content_right .content_common_box .title_list .title_item:hover{color:#da4453;}
+.personal_content_right .content_common_box .title_list .title_item.cur{color:#da4453;border-bottom:2px solid #da4453;}
+.personal_content_right .content_common_box .left_title{line-height:35px;height:35px;padding-left:17px;margin-left:10px;position: relative;width:83px;font-size:12px;}
+.personal_content_right .content_common_box .left_title .before{position: absolute;height:100%;color:#da4453;left:0;top:0;line-height:39px;}
+.personal_content_right .content_common_box .right_input{border:1px solid #ccc;line-height:33px;height:33px;padding:0 12px;width:274px;font-size: 12px;}
+    /* 下拉菜单 */
+.personal_content_right .content_common_box .select{padding:0 24px 0 12px;line-height:35px;height:35px;border:1px solid #ccc;background-color:transparent;}
+.personal_content_right .content_common_box .select_box{z-index:10;}
+.personal_content_right .content_common_box .select_box:before{position: absolute;content:'';width:10px;height:5px;right:7px;top:50%;margin-top:-3px;background-image: url(../../img/sprite2.png);background-repeat:no-repeat;background-position:-45px 0;z-index:-1;}
+.personal_content_right .content_common_box .select_box.deep:before{background-position:-101px 0;}
+    /* 分页 */
+.page_style1{text-align: center;margin-top:30px;}
+.page_style1 .layui-laypage{margin:0;}
+.page_style1 .layui-laypage-last{float: right;}
+.page_style1 .layui-laypage-first{float: left;}
+.page_style1 .layui-disabled{display:none;}
+.page_style1 .layui-laypage a, 
+.page_style1 .layui-laypage span{padding:0;margin:0 4px;width:35px;height:35px;border-radius:2px;line-height:35px;font-size:14px;}
+.page_style1 .layui-laypage a, 
+.page_style1 .layui-laypage button, 
+.page_style1 .layui-laypage input, 
+.page_style1 .layui-laypage select, 
+.page_style1 .layui-laypage span{border:0 none;}
+.page_style1 .layui-laypage a:hover{color:#da4453;}
+.page_style1 .layui-laypage .layui-laypage-curr .layui-laypage-em{background-color: #da4453;}
+.page_style1 .layui-laypage .layui-laypage-spr{background-color:transparent;}
+.page_style1 .layui-laypage-prev,
+.page_style1 .layui-laypage-first,
+.page_style1 .layui-laypage-last,
+.page_style1 .layui-laypage-next{width:100px !important;}
+/* --------------------------总的公共部分 end-------------------------- */
+
+/* ---------------------我的消息--------------------- */
+.my_message_box .my_message_inner{padding-bottom:48px;}
+.my_message_box .title_box{margin-bottom:30px;}
+.my_message_box .my_msg_block{padding:0 72px;}
+.my_message_box .about_me{display:none;}
+.my_message_box .msg_block_title{margin-bottom:30px;}
+.my_message_box .msg_block_title .item{width:100px;line-height:30px;height:30px;text-align: center;border-radius:4px;font-size:14px;margin-right:44px;cursor:pointer;}
+.my_message_box .msg_block_title .item:last-of-type{margin-right:0;}
+.my_message_box .msg_block_title .item:hover{color:#da4453;}
+.my_message_box .msg_block_title .item.cur{background-color: #da4453;color:#fff;}
+.my_message_box .msg_block_list{position: relative;}
+.my_message_box .msg_block_list .page_style1{position: absolute;margin-top:0;left:50%;transform:translateX(-50%);width:100%;bottom:-183px;}
+.my_message_box .msg_block_list .page_style1 .page_count_show{font-size:14px;color:#999;line-height:70px;}
+.my_message_box .msg_block_list .page_style1 .page_count_show span{color:#333;}
+.my_message_box .msg_block_list .msg_item_con{display:block;padding-left:42px;height:80px;}
+.my_message_box .msg_block_list .msg_item_con:before{content:'';position: absolute;left:0;top:0;background:url(../../img/sprite2.png) no-repeat -91px -78px;width:22px;height:19px;}
+.my_message_box .msg_block_list .msg_item_con:hover:before{background-position:-67px -78px;}
+.my_message_box .msg_block_list .msg_item_head{padding-right:45px;line-height:15px;height:15px;}
+.my_message_box .msg_block_list .msg_item_head .item_head_left{color:#2185cf;}
+.my_message_box .msg_block_list .msg_item_head .item_head_right{color:#999;}
+.my_message_box .msg_block_list .msg_item_txt{padding-top:8px;line-height:20px;}
+.my_message_box .msg_block_list .msg_item .delete_msg{position: absolute;right:0;top:0;color:#999;line-height:15px;height:15px;cursor:pointer;}
+/* ---------------------我的消息 end --------------------- */
+
+/* ---------------------完善资料--------------------- */
+/* 完善资料的公共部分 */
+.improve_info_box .improve_info_content .select.long{width:300px;}
+.improve_info_box .improve_info_content .select.short{width:78px;}
+.improve_info_box .improve_info_content .select.border_color1{border-color:#7a7a7a;}
+.improve_info_box .improve_info_content .bot_btn_box{padding-left:110px;margin-top:40px;}
+.improve_info_box .improve_info_content .bot_btn_box .btn{width:142px;height:35px;line-height:35px;text-align: center;border-radius:2px;margin-right:15px;color:#fff;}
+.improve_info_box .improve_info_content .bot_btn_box .submit{background-color: #2185cf;}
+.improve_info_box .improve_info_content .bot_btn_box .cancel{background-color: #ff8814;margin-right:0;}
+/* 完善资料的公共部分 end */
+/* 完善资料 》个人资料*/
+.improve_info_box .personal_info{padding:0 45px 118px;}
+.improve_info_box .personal_info_inner{padding-bottom:50px;border-bottom:1px solid #eee;}
+.improve_info_box .personal_info .left_title .within{color:#ff8814;}
+.improve_info_box .personal_info .item_box .tail_txt{color:#ff8814;line-height:35px;height:35px;margin-left:30px;font-size: 12px;}
+.improve_info_box .personal_info .save_btn{position: absolute;top:0;right:-104px;width:74px;height:35px;line-height:35px;color:#fff;font-size:14px;text-align: center;border-radius:2px;background-color: #67ade8;}
+.improve_info_box .personal_info .upload_cardPic .left_title{width:auto;}
+.improve_info_box .personal_info .upload_cardPic .right_box{padding-left:110px;}
+.improve_info_box .personal_info .upload_cardPic .right_box.upload_pic_box{
+	padding:0;
+	margin-left:110px;
+}
+.improve_info_box .personal_info .upload_cardPic .preview_box{width:240px;background-color: #eee;}
+.improve_info_box .personal_info .upload_cardPic .preview_btn{width:56px;background-color: #fff;text-align: center;margin-left:-1px;font-size: 12px;}
+.improve_info_box .personal_info .upload_cardPic .preview_btn input[type="file"]{position: absolute;width:100%;height:100%;opacity:0;left:0;top:0;}
+.improve_info_box .personal_info .upload_cardPic .upload_btn{width:140px;text-align: center;background-color: #eee;margin-left:15px;border-radius:2px;}
+.improve_info_box .personal_info .invite_reterence .right_box{padding-top:5px;}
+.improve_info_box .personal_info .invite_reterence .reterence_info{line-height:24px;font-size: 12px;}
+.improve_info_box .personal_info .reterence_info.verifying .status{color:#ff8814;}
+.improve_info_box .personal_info .textarea{border:1px solid #ccc;padding:8px 12px;border-radius:4px;background-color: #eee;width:730px;height:190px;font-size: 12px;}
+/* 完善资料 》个人资料 end */
+/* 完善资料 》归属组织*/
+.improve_info_box .belong_to_org{padding:0 45px;min-height:636px;}
+.improve_info_box .belong_to_org .item_box .right_box{padding-left:54px;}
+.improve_info_box .belong_to_org .left_title .add{position: absolute;right:-35px;top:0;width:35px;height:35px;background:url(../../img/sprite2.png) no-repeat -227px -8px;cursor:pointer;}
+.improve_info_box .belong_to_org .item_box .right_input_out.width_status .right_input{border-color:#7a7a7a;}
+.improve_info_box .belong_to_org .within2{position: absolute;color:#ccc;left: 10px;top:15px;}
+.improve_info_box .belong_to_org .tail_txt{margin-left:20px;line-height:35px;height:35px;padding-left:30px;font-size: 12px;}
+.improve_info_box .belong_to_org .verifying .tail_txt{color:#da4453;}
+.improve_info_box .belong_to_org .tail_txt .btn{position: absolute;width:12px;height:12px;background: url(../../img/sprite2.png) no-repeat -115px -81px;left:0;top:11px;cursor:pointer;}
+/* 完善资料 》归属组织 end */
+/* 完善资料 》邀请证明人*/
+.invitation_certificate{padding:0 45px;min-height:636px;}
+.invitation_certificate .item_box .right_box{padding-left:54px;}
+.invitation_certificate .left_title .add{position: absolute;right:-35px;top:0;width:35px;height:35px;background:url(../../img/sprite2.png) no-repeat -227px -8px;cursor:pointer;}
+.invitation_certificate .right_box .del{
+	font-size: 28px;
+    margin-left: 10px;
+    width: 35px;
+    height: 35px;
+    color: #fff;
+    border-radius: 17px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #29ade2;}
+.invitation_certificate .item_box .right_input_out.width_status .right_input{border-color:#7a7a7a;}
+.invitation_certificate .item_box .right_input_out.width_status .right_input.right_input1{border-color:#7a7a7a; margin-right: 10px; width: 100px;}
+.invitation_certificate .within2{position: absolute;color:#ccc;left: 10px;top:15px;}
+.invitation_certificate .tail_txt{margin-left:20px;line-height:35px;height:35px;padding-left:30px;font-size: 12px;}
+.invitation_certificate .verifying .tail_txt{color:#da4453;}
+.invitation_certificate .tail_txt .btn{position: absolute;width:12px;height:12px;background: url(../../img/sprite2.png) no-repeat -115px -81px;left:0;top:11px;cursor:pointer;}
+/* 完善资料 》邀请证明人 end */
+/*第三方绑定》弹出框*/
+/* 弹出层 */
+.popup_box{position: fixed;width:100%;height:100%;background-color:rgba(0,0,0,.5);left:0;top:0;z-index:1000;}
+.popup_box1{position: fixed;width:100%;height:100%;background-color:rgba(0,0,0,.5);left:0;top:0;z-index:1000;}
+.popup_box .imgBox{position: absolute;left:50%;top:50%;transform:translate(-50%, -50%);}
+.popup_box .imgBox .close{position: absolute;right:-32px;top:-32px;width:32px;height:32px;background:url(../../img/sprite2.png) no-repeat -263px -10px;cursor:pointer;}
+.change_popup_box .center{background-color: #fff;left:50%;top:50%;position: absolute;}
+.change_popup_box .center .center_title{line-height:30px;height:30px;padding:0 15px;color:#fff;background-color: #2185cf;}
+.change_popup_box .center .center_body{padding:15px;}
+.change_popup_box .center .center_body .input{width:298px;height:33px;line-height:33px;border:1px solid #ccc;padding:0 10px;}
+.change_popup_box .center .center_body .color_red{  color: #e9573f  }
+.change_popup_box .center .center_body .item2 .input{width:198px;}
+.change_popup_box .center .center_body .item2 .yzm{width:90px;height:35px;margin-left:10px;}
+.change_popup_box .center .center_body .item2 .yzm img{width:100%;height:100%;}
+.change_popup_box .center .center_body .item2 .yzm_btn{display: inline-block;width:90px;height:35px;margin-left:10px;line-height: 35px;text-align: center;background-color: cadetblue;cursor: pointer;}
+.change_popup_box .center .center_body .item2 .yzm_btn:hover{color: #eded64;}
+.change_popup_box .center .btns{text-align: center;font-size:0;}
+.change_popup_box .center .btns .btn{display:inline-block;width:90px;height:30px;line-height:30px;color:#fff;cursor:pointer;border-radius:3px;margin:0 10px;font-size:14px;}
+.change_popup_box .center .btns .ok{background-color: #2185cf;}
+.change_popup_box .center .btns .no{background-color: #999;}
+.change_popup_box .center .btns .btn:hover{color: #eded64;}
+
+/* 完善资料 》第三方绑定 */
+.improve_info_box .third_party_binding{padding:0 27px;min-height:355px;}
+.improve_info_box .third_party_binding .binding_item{width:100px;margin:0 45px 20px;}
+.improve_info_box .third_party_binding .third_party_img{width:100px;height:100px;overflow: hidden;}
+.improve_info_box .third_party_binding .third_party_img .img{width:100%;height:100%;}
+.improve_info_box .third_party_binding .binding_txt{height:65px;font-size: 12px;}
+.improve_info_box .third_party_binding .binding_txt .txt{padding-top:8px;line-height:18px;text-align: center;color:#2b0c13;}
+.improve_info_box .third_party_binding .binding_btn{display:block;width:74px;height:35px;line-height:35px;text-align: center;color:#fff;border-radius:2px;margin:0 auto;}
+.improve_info_box .third_party_binding .not_bind .binding_btn{background-color: #2185cf;}
+.improve_info_box .third_party_binding .binded .binding_btn{background-color: #ff8814;}
+/* 完善资料 》第三方绑定 end */
+/* 完善资料 》修改密码 */
+.improve_info_box .modify_password{padding:0 45px;min-height:636px;}
+.improve_info_box .modify_password .modify_password_inner{padding-bottom:50px;border-bottom:1px solid #eee;}
+.improve_info_box .right_verify_box{margin-left:20px;line-height:35px;height:35px;margin-left:30px;display:none;}
+.improve_info_box .right_verify_box .verify_icon{position: absolute;left:0;top:50%;margin-top:-14px;background-image: url(../../img/sprite2.png);background-repeat:no-repeat;width:28px;height:28px;}
+.improve_info_box .right_verify_box .verify_txt{padding-left:43px;}
+.improve_info_box .modify_password .pass .verify_icon{background-position:0 -30px;}
+.improve_info_box .modify_password .pass .right_verify_box{display:block;}
+.improve_info_box .modify_password .fail .right_verify_box{display:block;}
+.improve_info_box .modify_password .fail .verify_icon{background-position:0 -58px;}
+.improve_info_box .modify_password .fail .verify_txt{color:#ff8814;}
+.improve_info_box .modify_password .fail .right_input{border-color:#ff8814;}
+.improve_info_box .modify_password .bot_btn_box .btns{padding-bottom:33px;}
+.improve_info_box .modify_password .bot_btn_box .link{text-decoration:underline;line-height:12px;position: absolute;right:0;bottom:0;}
+/* 完善资料 》修改密码 end */
+/* 完善资料 》密保设置 */
+.improve_info_box .security_setting{padding:0 45px;min-height:636px;}
+.improve_info_box .security_inner{padding-bottom:50px;border-bottom:1px solid #eee;}
+/* 完善资料 》密保设置 end */
+/* ---------------------完善资料 end --------------------- */
+
+/* ---------------------我的项目 --------------------- */
+.my_project_box .title_box{margin-bottom:0 !important;}
+.my_project_box .my_project_item{padding:0 20px;}
+.my_project_box .project_item_con{padding:20px 0;border-bottom:1px solid #e4e6e9;}
+.my_project_box .my_project_item:last-child .project_item_con{border-bottom:none;}
+.my_project_box .project_item_con .item_con_left{width:188px;height:140px;}
+.my_project_box .project_item_con .item_con_left img{width:100%;height:100%;}
+.my_project_box .project_item_con .item_con_right{padding-left:212px;height:140px;}
+.my_project_box .project_item_con .item_con_title{line-height:21px;margin-bottom: 10px;}
+.my_project_box .project_item_con .item_con_title .within{color:#ff8814;}
+.my_project_box .project_item_con .center_txt{height:80px;margin-bottom:10px;}
+.my_project_box .project_item_con .center_txt_item{line-height:20px;color:#999;}
+.my_project_box .project_item_con .item_con_right .link{line-height:18px;color:#ff8814;}
+.my_project_box .project_item_con .item_con_right .right{padding-top:48px;}
+.my_project_box .project_item_con .item_con_right .right_txt_item{line-height:33px;font-size: 14px;}
+/* ---------------------我的项目 end --------------------- */
+
+/* ---------------------申请志愿者证 --------------------- */
+.volCard_box .volCard_inner_content{padding:0 50px;}
+.volCard_box .volCard_inner_content .info_block_inner{padding:50px 50px 35px;background-color:#eee;}
+.volCard_box .volCard_inner_content .left_title{margin-left:0;}
+.volCard_box .volCard_inner_content .select.long{width:230px;}
+.volCard_box .volCard_inner_content .select.short{width:118px;}
+.volCard_box .volCard_inner_content .kindly_reminder_box{padding-left:100px;}
+.volCard_box .volCard_inner_content .kindly_reminder{color:#ff9833;background-color: #fee6ce;padding:5px 15px;line-height:22px;}
+.volCard_box .label{display:block;padding-left:22px;}
+.volCard_box .label input{position: absolute;left:0;top:10px;}
+.volCard_box .label:before{content:'';position: absolute;width:12px;height:12px;background:url(../../img/sprite2.png) no-repeat -131px -81px;left: 0;top:50%;margin-top:-6px;}
+.volCard_box .volCard_inner_content .radio_item{margin-right:25px;overflow: hidden;}
+.volCard_box .volCard_inner_content .label{line-height:35px;height:35px;}
+.volCard_box .supply_block .sex_select .label{line-height:12px;height:12px;}
+.volCard_box .label.selected:before{background-position:-145px -81px;}
+.volCard_box .bank_card_select .bank_pic_box{width:150px;height:33px;border:1px solid #ccc;background-color: #fff;position: relative;}
+.volCard_box .bank_card_select .bank_pic_box .bank_pic{position: absolute;left:10px;top:50%;transform:translateY(-50%);}
+.volCard_box .supply_block .right_input{width:206px;}
+.volCard_box .registered_address .select_box{float: left;margin-right:15px;}
+.volCard_box .registered_address .select1{width:120px;}
+.volCard_box .registered_address .select2{width:140px;}
+.volCard_box .registered_address .select3{width:160px;}
+.volCard_box .registered_address .right_input{width:576px;}
+.volCard_box .name_spell_box .surname_spell{margin-right:12px;}
+.volCard_box .name_spell_box .name_spell .left_title{width:auto;padding-right:12px;}
+.volCard_box .sex_select,
+.volCard_box .sex_select .left_title{height:12px;line-height:12px;}
+.volCard_box .sex_select .left_title .before{line-height:14px;}
+.volCard_box .tatted_code_box{margin-left:12px;cursor:pointer;line-height:35px;}
+.volCard_box .tatted_code_box .tatted_code{width:90px;height:35px;margin-right:12px;}
+.volCard_box .identifying_code{cursor:pointer;text-align: center;width:80px;height:35px;line-height:35px;background-color: #c2c2c2;color:#fff;border-radius:2px;margin-left:5px;}
+.volCard_box .iden_photo .left_title{line-height:17px;}
+.volCard_box .iden_photo .photo_box{width:228px;border:1px solid #ccc;height:33px;background-color: #fff;border-right:0 none;}
+.volCard_box .iden_photo .preview_btn_out{width:68px;height:33px;line-height:33px;border:1px solid #ccc;text-align: center;background-color: #fff;overflow: hidden;}
+.volCard_box .iden_photo .preview_btn{position: absolute;left:0;top:0;width:100%;height:100%;opacity:0;}
+.volCard_box .iden_photo .upload_btn{width:80px;height:35px;line-height:35px;background-color: #2185cf;color:#fff;border-radius:2px;text-align: center;margin-left:15px;}
+.volCard_box .bot_btn_box{padding:50px 0 50px 154px;}
+.volCard_box .bot_btn_box .btn{width:142px;height:35px;line-height:35px;text-align: center;border-radius:2px;color:#fff;font-size:14px;}
+.volCard_box .supply_block .bot_btn_box .btn{background-color: #2185cf;}
+.volCard_box .confirm_block .age_select .left_title{line-height:17px;}
+.volCard_box .confirm_block .lkwd{margin-bottom:50px;}
+.volCard_box .confirm_block .lkwd .toSelect{text-align: center;width:80px;height:35px;line-height:35px;color:#fff;border-radius:2px;margin-left:12px;background-color: #c2c2c2;cursor:pointer;}
+.volCard_box .confirm_block .big_title{font-weight: bold;color:#fff;font-size:14px;height:35px;line-height:35px;border-radius:2px;background-color: #2185cf;padding:0 15px;margin-bottom:30px;}
+.volCard_box .confirm_block .right_input{width:176px;}
+.volCard_box .confirm_block .right_input.long{width:278px;}
+.volCard_box .papers_term .right_input{text-align: center;}
+.volCard_box .confirm_block .bot_btn_box .sure{background-color: #2185cf;margin-right:15px;}
+.volCard_box .confirm_block .bot_btn_box .prev{background-color: #ff8814;}
+/* ---------------------申请志愿者证 end --------------------- */
+
+/* ---------------------志愿者证申请进度 --------------------- */
+.volCard_apply_box .title_box{margin-bottom:60px !important;}
+.volCard_apply_box .progress_show_box{padding:0 110px;margin-bottom:45px;}
+.volCard_apply_box .progress_block{padding-bottom:80px;}
+.volCard_apply_box .progress_block .center_phare{text-align: center;font-size:14px;color:#999;}
+.volCard_apply_box .progress_block .center_phare span{color:#da4453;}
+.volCard_apply_box .progress_show_box .progress_pic{height:25px;margin-bottom:5px;}
+.volCard_apply_box .progress_show_box .progress_pic_line{position: absolute;width:100%;height:2px;background-color: #e4e6e9;top:12px;}
+.volCard_apply_box .progress_show_box .progress_pic_num{background-image: url(../../img/sprite2.png);background-repeat:no-repeat;background-position:0 -142px;width:25px;height:25px;position: absolute;left:50%;margin-left:-12.5px;top:0;}
+.volCard_apply_box .progress_show_box .progress_txt{line-height:24px;text-align: center;font-size: 14px;}
+.volCard_apply_box .progress_show_box .progress_item.cur .progress_pic_line{background-color: #da4453;}
+.volCard_apply_box .progress_show_box .progress_item.cur .progress_txt{color:#da4453;}
+.volCard_apply_box .progress_show_box .progress_item1.cur .progress_pic_num{background-position:0 -167px;}
+.volCard_apply_box .progress_show_box .progress_item2.cur .progress_pic_num{background-position:0 -192px;}
+.volCard_apply_box .progress_show_box .progress_item3.cur .progress_pic_num{background-position:0 -217px;}
+.volCard_apply_box .progress_show_box .progress_item4.cur .progress_pic_num{background-position:0 -242px;}
+.volCard_apply_box .progress_show_box .progress_item5.cur .progress_pic_num{background-position:0 -267px;}
+.volCard_apply_box .bank_card_box{width:798px;border:1px solid #eee;margin:0 auto;padding:50px 0;text-align: center;}
+.volCard_apply_box .bank_card_box .card_inner_list{margin-bottom:20px;}
+.volCard_apply_box .bank_card_box .card_item{display:inline-block;height:186px;background-color: #e2e2e2;border-radius:15px;}
+.volCard_apply_box .bank_card_box .card_item_con{position: absolute;width:90%;top:50%;transform:translateY(-50%);padding:0 5%;}
+.volCard_apply_box .bank_card_box .card_inner_list .p1{line-height:25px;font-size: 15px;font-weight: 600;}
+.volCard_apply_box .bank_card_box .card_inner_list .hot_line{color:#999;margin-left:12px;}
+.volCard_apply_box .bank_card_box .card_inner_list .p2{line-height:38px;font-size: 24px;font-weight: bold;}
+.volCard_apply_box .bank_card_box .card_inner_list .p3{line-height:34px;color:#999;font-size: 14px;}
+.volCard_apply_box .bank_card_box .card_inner_list .p4{font-size: 18px;}
+.volCard_apply_box .bank_card_box .card_inner_list1 .card_item{width:320px;margin:0 12px;}
+.volCard_apply_box .bank_card_box .card_inner_list2 .card_item{width:218px;margin:0 60px;}
+.volCard_apply_box .bank_card_box .tips{line-height:20px;color:#999;margin:27px 0 56px;}
+.volCard_apply_box .bank_card_box .link{width:142px;height:35px;line-height:35px;border-radius:2px;background-color: #2185cf;text-align: center;display:block;color:#fff;font-size: 14px;margin:0 auto;}
+.volCard_apply_box .progress_show_box2{background-color: #eee;width:750px;border-radius:2px;margin:55px auto 0;}
+.volCard_apply_box .progress_show_box2 .progress_show_list2{padding:24px 30px 47px;}
+.volCard_apply_box .progress_show_box2 .progress_item{line-height:22px;font-size: 14px;margin-bottom:10px;}
+.volCard_apply_box .progress_show_box2 .progress_right_txt{padding-left:118px;}
+.volCard_apply_box .progress_show_box2 .progress_txt{position: relative;}
+.volCard_apply_box .progress_show_box2 .progress_right_txt .upload_pic{position: absolute;width:70px;height:28px;line-height:28px;color:#fff;text-align: center;border-radius:2px;background-color: #2185cf;right:-80px;top:-2px;}
+/* ---------------------志愿者证申请进度 end --------------------- */
+
+/* ---------------------服务记录 --------------------- */
+.ser_record_box{height:580px;}
+.ser_record_box .ser_record_inner{padding:15px 10px;}
+.ser_record_box .ser_record_inner table{width:100%;}
+.ser_record_box .ser_record_inner th{background-color: #eaeaea;height:35px;line-height:35px;border:1px solid #e2e2e2;}
+.ser_record_box .ser_record_inner td{height:30px;line-height:30px;border:1px solid #e2e2e2;text-align: center;}
+#serviceRePage{text-align: center;}
+.ser_record_box .layui-laypage{margin:30px 0 0;}
+.ser_record_box .layui-laypage a, .layui-laypage span{margin:0 3px;padding:0;width:24px;height:24px;line-height:24px;text-align: center;color:#666;}
+.ser_record_box .layui-laypage .layui-laypage-prev,
+.ser_record_box .layui-laypage .layui-laypage-next{width:65px;color:#da6b34;}
+.ser_record_box .layui-laypage a:hover{color:#da6b34;}
+.ser_record_box .layui-laypage .layui-laypage-curr .layui-laypage-em{background-color:transparent;border:2px solid #da6b34;color:#da6b34;width:20px;height:20px;}
+.ser_record_box .layui-laypage .layui-laypage-curr em{color:#da6b34;}
+.ser_record_box .layui-laypage select{padding:0 4px;height:24px;}
+.ser_record_box .layui-laypage select:focus{border-color:#da6b34 !important;}
+.ser_record_box .layui-laypage .layui-laypage-limits{width:auto;}
+/* ---------------------服务记录 end --------------------- */
+
+
