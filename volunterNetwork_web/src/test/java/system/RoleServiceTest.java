@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 
 import com.xxx.volunterNetwork.domain.College;
+import com.xxx.volunterNetwork.domain.Permission;
 import com.xxx.volunterNetwork.domain.Role;
 import com.xxx.volunterNetwork.domain.User;
 import com.xxx.volunterNetwork.service.ICollegeService;
@@ -34,15 +35,27 @@ public class RoleServiceTest {
 	@Test
 	@Rollback(value = false)
 	public void save() {
-		for(int i=1;i<=100;i++) {
+		/*for(int i=1;i<=100;i++) {
 			Role role = new Role();
 			role.setRemark("备注"+i);
 			role.setRoleName("管理员"+i);
 			role.setCreateTime(new Date());
 			roleService.saveOrUpdate(role);
-		}
+		}*/
+		Permission permission = new Permission();
+		permission.setState(1);
+		permission.setUrl("332");
 		
-
+		Role role = new Role();
+		role.setRoleName("管理员");
+		role.setOrderNo(1);
+		 
+		role.getPermission().add(permission);
+		permission.getRole().add(role);
+		
+	
+		
+		roleService.saveOrUpdate(role);
 	
 		
 	}

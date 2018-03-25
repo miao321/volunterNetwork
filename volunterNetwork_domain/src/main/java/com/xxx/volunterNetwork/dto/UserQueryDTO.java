@@ -19,30 +19,36 @@ import com.xxx.volunterNetwork.domain.User;
  */
 public class UserQueryDTO {	
 	private Long id;
-	private Long users_id;
-	private Long roles_id;
+	private Long userId;
+	private Long roleId;
 	private String roleName;
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public void setUsers_id(Long users_id) {
-		this.users_id = users_id;
+	
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
-	public void setRoles_id(Long roles_id) {
-		this.roles_id = roles_id;
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
 	}
+
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
 	public Long getId() {
 		return id;
 	}
-	public Long getUsers_id() {
-		return users_id;
+	
+	public Long getUserId() {
+		return userId;
 	}
-	public Long getRoles_id() {
-		return roles_id;
+
+	public Long getRoleId() {
+		return roleId;
 	}
+
 	public String getRoleName() {
 		return roleName;
 	}

@@ -41,7 +41,7 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
 		<bean id="exceptionResolver" class="com.xxx.volunterNetwork.exception.ShiroExceptionResolver"/>
 	<!-- springmvc 页面重定向设置： -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/pages/" />
+		<!-- <property name="prefix" value="/WEB-INF/pages/" /> -->
 		<property name="suffix" value=".jsp" />
 	</bean>
 	 <!-- 创建jdbcTemplate，并且通过IOC的依赖注入的构造注入方式注入c3p0连接池对象，那么获取到jdbcTemplate后就能够直接使用 -->
@@ -58,8 +58,10 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
 	<mvc:resources  mapping="/css/**" location="/css/" />
 	<mvc:resources  mapping="/fonts/**" location="/fonts/" />
 	<mvc:resources  mapping="/images/**" location="/images/" />
-	<mvc:resources  mapping="/lang/**" location="/lang/" />
-	<mvc:resources  mapping="/skin/**" location="/skin/" />
+	<!-- <mvc:resources  mapping="/lang/**" location="/lang/" /> -->
+	<mvc:resources  mapping="/components/**" location="/components/" />
+	<mvc:resources  mapping="/stat/**" location="/stat/" />
+	<mvc:resources  mapping="/kindeditor/**" location="/kindeditor/" />
 	
 	
 </beans>

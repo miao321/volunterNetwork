@@ -35,13 +35,13 @@ public class UserServiceTest {
 	@Rollback(value = false)
 	public void save() {
 		
-			User user = new User();
+			/*User user = new User();
 			user.setUserName("aaa");
 			user.setStudentNo("123");
 			user.setState(1);
-			userService.saveOrUpdate(user);
+			userService.saveOrUpdate(user);*/
 		
-		/*User user = new User();
+		User user = new User();
 		user.setStudentNo("201441402302");
 		user.setPassword("123");
 		user.setUserName("aaa");
@@ -58,7 +58,7 @@ public class UserServiceTest {
 		college.setUser(user);
 		role.getUsers().add(user);
 		
-		userService.saveOrUpdate(user);*/
+		userService.saveOrUpdate(user);
 	
 		
 	}

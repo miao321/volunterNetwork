@@ -30,6 +30,7 @@ public class ModuleController {
 	private static final Logger logger = LoggerFactory.getLogger(ModuleController.class);
 	@Autowired
 	private IModuleService moduleService;
+	String sPath = System.getProperty("evan.webapp");
 	@RequestMapping("/saveOrUpdate")
 	public @ResponseBody ExtAjaxResponse saveOrUpdate(Module module) {
 		
@@ -101,7 +102,7 @@ public class ModuleController {
 		session.setAttribute("pageSize", page.getSize());//当前页条数
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
-		return "system/module";	
+		return "/WEB-INF/pages/system/module";	
 	}
 
 

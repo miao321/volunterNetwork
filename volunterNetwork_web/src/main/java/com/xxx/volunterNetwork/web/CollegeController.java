@@ -73,9 +73,9 @@ public class CollegeController {
 			if (college != null) {
 				collegeService.delete(college);
 			}
-			return "system/college";
+			return "/WEB-INF/pages/system/college";
 		} catch (Exception e) {
-			return "system/college";
+			return "/WEB-INF/pages/system/college";
 		}		
 	}
 	@RequestMapping("/deleteColleges")
@@ -112,7 +112,7 @@ public class CollegeController {
 		session.setAttribute("pageSize", page.getSize());//当前页条数
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
-		return "system/college";
+		return "/WEB-INF/pages/system/college";
 	}
 
 	@RequestMapping("disableCollege")

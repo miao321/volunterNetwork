@@ -53,6 +53,7 @@
 					</div>				
 				</div>
 				<span style="color:red;argin-top:4px;margin-left:20px;">${result2}</span>
+				<span style="color:red;argin-top:4px;margin-left:20px;">${result3}</span>
 				<div class="form-group">
 					<div class="col-sm-12" style="margin-top:15px">
 						<button type="submit" id="login" class="btn btn-primary" class="form-control" style="width:100%">登录</button>

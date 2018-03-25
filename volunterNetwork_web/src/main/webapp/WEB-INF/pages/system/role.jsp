@@ -137,7 +137,7 @@ function editRole(id){
 				$("#createBy").val(result.createBy);
 				$("#createCollege").val(result.createCollege);
 				$("#createTime").val(result.createTime);
-				$("#updateB1").val(result.updateBy);
+				$("#updateB").val(result.updateBy);
 				$("#updateTime").val(result.updateTime);
 				if(result.state == 1){
 					$("#state").val("启用");
@@ -171,7 +171,8 @@ function saveRole() {
 		 type : "POST",
 		 url : "update",    
          dataType : "json",
-         data:{id:id,collegeName:collegeName,major:major,state:state},
+         data:{id:id,roleName:roleName,orderNo:orderNo,remark:remark,createBy:createBy,
+        	 createCollege:createCollege,createTime:createTime,updateBy:updateBy,updateTime:updateTime,state:state},
 		 cache : false,
 		 async : true,
 		 success : function(data) {		
@@ -256,6 +257,38 @@ function addPermission(){
 			// alert(result);			
 		 }
 	}); 
+}
+function savePermission(){
+	 var checkbox = document.getElementsByName("pId"); 
+	 var checkbox2 = document.getElementsByName("id"); 
+    var strIds =[];
+    var roleIds =[];
+    for ( var i = 0; i < checkbox.length; i++) {  
+        if(checkbox[i].checked){  
+       	 strIds.push(checkbox[i].value); 
+        }  
+    } 
+    for ( var j = 0; j < checkbox2.length; j++) {  
+        if(checkbox2[j].checked){  
+        	roleIds.push(checkbox2[j].value); 
+        }  
+    }    
+   
+	 $.ajax({			 
+		 type : "POST",	
+        dataType : "json",
+		 url : "savePermission",
+		 data : {permissionId:strIds.toString(),roleId:roleIds.toString()},
+		 cache : false,
+		 async : true,
+		 success : function(result) {	
+			 location.reload(); 			
+		 },
+		 failure: function(result){
+			 alert(result.msg);
+		 }
+		
+	}); 	
 }
 </script>
 </head>
@@ -364,21 +397,62 @@ function addPermission(){
 				</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-inline">
-					<fieldset>
-						 <label>角色名字:</label><input type="text" id="roleName2"/><br/>
-						 <label>备注:</label><input type="text" id="remark2"/><br/>
-						 <label>编号:</label><input type="text" id="orderNo2"/><br/>
-						 <label>创建者:</label><input type="text" id="createBy2"/><br/>
-						 <label>创建者学院:</label><input type="text" id="createCollege2"/><br/>
-						 <label>创建时间:</label><input type="text" class="Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime2"/><br/>
-						 <label>修改者:</label><input type="text" id="updateBy2"/><br/>
-						 <label>修改时间:</label><input type="text" class="Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime2"/><br/>						 
-						 <label id="state2">学院状态:
-						 	<input type="radio" name="radio" value="1"/> 启用
+				<form method="post" class="form-horizontal" role="form" >
+					 <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">角色名字:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="roleName2" name="roleName2" class="form-control" placeholder="请输入角色名字">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">备注:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="remark2" name="remark2" class="form-control" placeholder="请输入备注">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">编号:</label>
+					    <div class="col-sm-10">
+					      <input  type="text" id="orderNo2" name="orderNo2" class="form-control" placeholder="请输入编号">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">创建者:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="createBy2" name="createBy2" class="form-control" placeholder="请输入创建者">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">创建者学院:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="createCollege2" name="createCollege2" class="form-control" placeholder="请输入创建者学院">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">创建时间:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime2" name="createTime2" placeholder="请输入创建时间" style="height:34px;">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">修改者:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="updateBy2" name="updateBy2" class="form-control" placeholder="请输入修改者">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">修改时间:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime2" name="updateTime2" placeholder="请输入修改时间" style="height:34px;">
+					    </div>
+					  </div>
+					   <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-4 control-label" id="state2" >用户状态:&nbsp;&nbsp;
+					    	<input type="radio" name="radio" value="1" style="padding-left: 4px;"/> 启用					    	
 						 	<input type="radio" name="radio" value="0"/> 停用
-						 </label> 
-					</fieldset>
+					    </label>
+					  </div>
+				
 				</form>
 			</div>
 			<div class="modal-footer">
@@ -408,20 +482,66 @@ function addPermission(){
 				</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-inline">
-					<fieldset>
-						 <input type="hidden" id="id">
-						 <label>角色名字:</label><input type="text" id="roleName"/><br/>
-						 <label>备注:</label><input type="text" id="remark"/><br/>
-						 <label>编号:</label><input type="text" id="orderNo"/><br/>
-						 <label>创建者:</label><input type="text" id="createBy"/><br/>
-						 <label>创建者学院:</label><input type="text" id="createCollege"/><br/>
-						 <label>创建时间:</label><input type="text" id="createTime"/><br/>
-						 <label>修改者:</label><input type="text" id="updateBy"/><br/>
-						 <label>修改时间:</label><input type="text" id="updateTime"/><br/>						 
-						 <label>学院状态:</label><input type="text" id="state" readonly="true"/><br/>
-					</fieldset>
+				<form method="post" class="form-horizontal" role="form" >
+					<input type="hidden" id="id">
+					 <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">角色名字:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="roleName" name="roleName" class="form-control" placeholder="请输入角色名字">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">备注:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="remark" name="remark" class="form-control" placeholder="请输入备注">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">编号:</label>
+					    <div class="col-sm-10">
+					      <input  type="text" id="orderNo" name="orderNo" class="form-control" placeholder="请输入编号">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">创建者:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="createBy" name="createBy" class="form-control" placeholder="请输入创建者">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">创建者学院:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="createCollege" name="createCollege" class="form-control" placeholder="请输入创建者学院">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">创建时间:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime" name="createTime" placeholder="请输入创建时间" style="height:34px;">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">修改者:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="updateBy" name="updateBy" class="form-control" placeholder="请输入修改者">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">修改时间:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime" name="updateTime" placeholder="请输入修改时间" style="height:34px;">
+					    </div>
+					  </div>
+					   <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">用户状态:</label>
+					    <div class="col-sm-10">
+					    	<input type="text" id="state" class="form-control" readonly="true"/>
+					    </div>
+					    
+					  </div>
+				
 				</form>
+				
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" 
@@ -447,19 +567,66 @@ function addPermission(){
 				</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-inline">
-					<fieldset>					
-						 <label>角色名字:</label><input type="text" id="roleName1" value="${result.roleName }" style="padding-left: 4px;"/><br/>
-						 <label>备注:</label><input type="text" id="remark1" value="${result.remark }" style="padding-left: 4px;"/><br/>
-						 <label>编号:</label><input type="text" id="orderNo1" value="${result.orderNo }" style="padding-left: 4px;"/><br/>
-						 <label>创建者:</label><input type="text" id="createBy1" value="${result.createBy }" style="padding-left: 4px;"/><br/>
-						 <label>创建者学院:</label><input type="text" id="createCollege1" value="${result.createCollege }" style="padding-left: 4px;"/><br/>
-						 <label>创建时间:</label><input type="text" id="createTime1" value="${result.createTime }" style="padding-left: 4px;"/><br/>
-						 <label>修改者:</label><input type="text" id="updateBy1" value="${result.updateBy }" style="padding-left: 4px;"/><br/>
-						 <label>修改时间:</label><input type="text" id="updateTime1" value="${result.updateTime }" style="padding-left: 4px;"/><br/>						 
-						 <label>学院状态:</label><input type="text" id="state1" value="${result.state }" style="padding-left: 4px;"/><br/>						
-					</fieldset>
+				<form method="post" class="form-horizontal" role="form" >
+					<input type="hidden" id="id">
+					 <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">角色名字:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="roleName1" name="roleName1" class="form-control" placeholder="请输入角色名字"  value="${result.roleName }">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">备注:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="remark1" name="remark1" class="form-control" placeholder="请输入备注" value="${result.remark }">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">编号:</label>
+					    <div class="col-sm-10">
+					      <input  type="text" id="orderNo1" name="orderNo1" class="form-control" placeholder="请输入编号" value="${result.orderNo }">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">创建者:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="createBy1" name="createBy1" class="form-control" placeholder="请输入创建者" value="${result.createBy }">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">创建者学院:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="createCollege1" name="createCollege1" class="form-control" placeholder="请输入创建者学院" value="${result.createCollege }">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">创建时间:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime1" name="createTime1" placeholder="请输入创建时间" style="height:34px;" value="${result.createTime }">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">修改者:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="updateBy1" name="updateBy1" class="form-control" placeholder="请输入修改者" value="${result.updateBy }">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">修改时间:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime1" name="updateTime1" placeholder="请输入修改时间" style="height:34px;" value="${result.updateTime }">
+					    </div>
+					  </div>
+					   <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">用户状态:</label>
+					    <div class="col-sm-10">
+					    	<input type="text" id="state1" class="form-control" value="${result.state }"/>
+					    </div>
+					    
+					  </div>
+				
 				</form>
+				
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" 
@@ -498,7 +665,7 @@ function addPermission(){
 				<button type="button" class="btn btn-default" 
 						data-dismiss="modal">取消
 				</button>
-				<button type="button" class="btn btn-primary" onclick="saveRole()">
+				<button type="button" class="btn btn-primary" onclick="savePermission()">
 					保存
 				</button>				
 			</div>

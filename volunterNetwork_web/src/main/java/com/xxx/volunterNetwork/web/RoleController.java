@@ -5,9 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.xxx.volunterNetwork.anno.SysControllerLog;
-import com.xxx.volunterNetwork.domain.College;
+import com.xxx.volunterNetwork.domain.Permission;
 import com.xxx.volunterNetwork.domain.Role;
-import com.xxx.volunterNetwork.domain.User;
+import com.xxx.volunterNetwork.dto.PermissionQueryDTO;
 import com.xxx.volunterNetwork.dto.RoleQueryDTO;
+import com.xxx.volunterNetwork.service.IPermissionService;
 import com.xxx.volunterNetwork.service.IRoleService;
 import com.xxx.volunterNetwork.util.ExtAjaxResponse;
 import com.xxx.volunterNetwork.util.ExtJsonResult;
@@ -39,6 +36,8 @@ public class RoleController {
 	private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 	@Autowired
 	private IRoleService roleService;
+	@Autowired
+	private IPermissionService permissionService;
 	
 	@RequestMapping("/saveOrUpdate")
 //	@RequiresPermissions("role/saveOrUpdate")
@@ -55,6 +54,40 @@ public class RoleController {
 			return new ExtAjaxResponse(false, "操作失败");
 		}	
 	}
+	@RequestMapping("/savePermission")
+	public @ResponseBody ExtAjaxResponse savePermission(PermissionQueryDTO permissionQueryDTO,@RequestParam Long permissionId,@RequestParam Long roleId) {
+		//Role role = roleService.findOne(roleId);
+		
+		/*if (roleQueryDTO.g != null) {
+			return new ExtAjaxResponse(false, "该用户已经拥有此角色");
+		}*/
+		/*if (permissionQueryDTO.getRole_id() != null) {
+			return new ExtAjaxResponse(false, "该角色已经拥有此权限");
+		}*/
+		/*Role role3 = roleService.findRole(roleName);
+		permissionQueryDTO.setRole_id(role3.getId());
+		System.out.println("role3:"+role3);*/
+		
+		Role role = roleService.findOne(roleId);
+		System.out.println(role+"+++++++");
+		Permission permission = permissionService.findOne(permissionId);		
+		permission.getRole().add(role);
+		Role role2 = new Role();
+		role2.getPermission().add(permission);
+		//role.getPermission().add(permission);
+		
+	/*	Role role = roleService.findOne(roleId);
+		Permission permission = PermissionService.findOne(permissionId);
+		role.getPermission().add(permission);
+		permission.getRole().add(role);*/
+		
+		try {
+			permissionService.saveOrUpdate(permission);	
+			return new ExtAjaxResponse(true, "操作成功");
+		} catch (Exception e) {
+			return new ExtAjaxResponse(false, "操作失败");
+		}	
+	}	
 	@RequestMapping("/update")
 	public @ResponseBody ExtAjaxResponse update(Role role) {
 		/*if (collegeService.findCollege(college.getCollegeName()) != null) {
@@ -126,7 +159,7 @@ public class RoleController {
 		session.setAttribute("pageSize", page.getSize());//当前页条数
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
-		return "system/role";
+		return "/WEB-INF/pages/system/role";
 		
 	}
 	/*

@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 /**
  * 
  * @author miao
@@ -101,14 +103,14 @@ public class Module implements Serializable {
 	public String getCreateCollege() {
 		return createCollege;
 	}
-	@DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")
 	public Date getCreateTime() {
 		return createTime;
 	}
 	public String getUpdateBy() {
 		return updateBy;
 	}
-	@DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss") 
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")
 	public Date getUpdateTime() {
 		return updateTime;
 	}

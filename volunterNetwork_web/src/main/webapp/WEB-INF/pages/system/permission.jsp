@@ -318,16 +318,32 @@ function enablePermission(id){
 				</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-inline">
-					<fieldset>
-						 <label>资源URL:</label><input type="text" id="url2"/><br/>
-						 <label>token:</label><input type="text" id="token2"/><br/>
-						 <label>权限描述:</label><input type="text" id="description2"/><br/>
-						 <label id="state2">权限状态:
-						 	<input type="radio" name="radio" value="1"/> 启用
+				<form method="post" class="form-horizontal" role="form" >
+					<input type="hidden" id="id">
+					 <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">资源URL:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="url2" name="url2" class="form-control" placeholder="请输入资源URL">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">token:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="token2" name="token2" class="form-control" placeholder="请输入token">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">权限描述:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="description2" name="description2" class="form-control" placeholder="请输入权限描述">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-4 control-label" id="state2" >用户状态:&nbsp;&nbsp;
+					    	<input type="radio" name="radio" value="1" style="padding-left: 4px;"/> 启用					    	
 						 	<input type="radio" name="radio" value="0"/> 停用
-						 </label> 
-					</fieldset>
+					    </label>
+					  </div>
 				</form>
 			</div>
 			<div class="modal-footer">
@@ -357,15 +373,34 @@ function enablePermission(id){
 				</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-inline">
-					<fieldset>
-						 <input type="hidden" id="id">
-						 <label>资源URL:</label><input type="text" id="url"/><br/>
-						 <label>token:</label><input type="text" id="token"/><br/>
-						 <label>权限描述:</label><input type="text" id="description"/><br/>						
-						 <label>学院状态:</label><input type="text" id="state" readonly="true"/><br/>
-					</fieldset>
+				<form method="post" class="form-horizontal" role="form" >
+					<input type="hidden" id="id">
+					 <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">资源URL:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="url" name="url" class="form-control" placeholder="请输入资源URL">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">token:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="token" name="token" class="form-control" placeholder="请输入token">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">权限描述:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="description" name="description" class="form-control" placeholder="请输入权限描述">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">用户状态:</label>
+					    <div class="col-sm-10">
+					    	<input type="text" id="state" class="form-control" readonly="true"/>
+					    </div>					    
+					  </div>
 				</form>
+			
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" 
@@ -391,14 +426,35 @@ function enablePermission(id){
 				</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-inline">
-					<fieldset>
-					 	 <label>资源URL:</label><input type="text" id="url1" value="${result.url }" style="padding-left: 4px;"/><br/>
-						 <label>token:</label><input type="text" id="token1" value="${result.token }" style="padding-left: 4px;"/><br/>
-						 <label>权限描述:</label><input type="text" id="description1" value="${result.description }" style="padding-left: 4px;"/><br/>
-						 <label>学院状态:</label><input type="text" id="state1" value="${result.state }" style="padding-left: 4px;"/><br/>						
-					</fieldset>
+				<form method="post" class="form-horizontal" role="form" >
+					<input type="hidden" id="id">
+					 <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">资源URL:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="url1" name="url1" class="form-control" value="${result.url }">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">token:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="token1" name="token1" class="form-control" value="${result.token }">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">权限描述:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="description1" name="description1" class="form-control" value="${result.description }">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">用户状态:</label>
+					    <div class="col-sm-10">
+					    	<input type="text" id="state1" class="form-control" value="${result.state }"/>
+					    </div>
+					    
+					  </div>
 				</form>
+				
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" 

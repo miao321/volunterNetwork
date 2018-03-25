@@ -33,6 +33,7 @@ public class UserServiceImpl implements IUserService {
 	public void saveOrUpdate(User user) {
 		userRepository.save(user);		
 	}
+	
 	//@SysLog(module="用户管理",methods="删除一条数据")
 	public void delete(User user) {
 		userRepository.delete(user);	

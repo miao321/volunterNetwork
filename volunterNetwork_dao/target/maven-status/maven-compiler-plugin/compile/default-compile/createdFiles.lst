@@ -1,0 +1,8 @@
+com\xxx\volunterNetwork\dao\PermissionRepository.class
+com\xxx\volunterNetwork\dao\RoleRepository.class
+com\xxx\volunterNetwork\dao\LogRepository.class
+com\xxx\volunterNetwork\dao\UserRepository.class
+com\xxx\volunterNetwork\dao\ModuleRepository.class
+com\xxx\volunterNetwork\dao\borad\BoradRepository.class
+com\xxx\volunterNetwork\dao\CollegeRepository.class
+com\xxx\volunterNetwork\dao\SqlDao.class

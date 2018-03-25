@@ -75,9 +75,9 @@ public class PermissionController {
 			if (permission != null) {
 				permissionService.delete(permission);
 			}
-			return "system/permission";
+			return "/WEB-INF/pages/system/permission";
 		} catch (Exception e) {
-			return "system/permission";
+			return "/WEB-INF/pages/system/permission";
 		}		
 	}
 	@RequestMapping("/deletePermissions")
@@ -103,7 +103,7 @@ public class PermissionController {
 		List<Permission> permissionLists = permissionService.findAll();
 		System.out.println("permission:"+permissionLists);
 		session.setAttribute("permissionLists", permissionLists);
-		return "system/permission";
+		return "/WEB-INF/pages/system/permission";
 	}
 	@RequestMapping("/findPage")
 	@SysControllerLog(module="部门管理",methods="查找多条数据并分页排序")
@@ -114,15 +114,15 @@ public class PermissionController {
 		session.setAttribute("pageSize", page.getSize());//当前页条数
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
-		return "system/permission";
+		return "/WEB-INF/pages/system/permission";
 	}
 	@RequestMapping("addPermission")
 	public String addPermission() {
-		return "system/addPermission";
+		return "/WEB-INF/pages/system/addPermission";
 	}
 	@RequestMapping("editPermission")
 	public String editPermission() {
-		return "system/editPermission";
+		return "/WEB-INF/pages/system/editPermission";
 	}
 	/*@RequestMapping("disablePermission")
 	public @ResponseBody Permission disablePermission(@RequestParam Long id) {

@@ -54,7 +54,7 @@ $('#identifier').carousel({
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
-        <li><a href="#">首页 <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">首页 </a></li>
         <li><a href="volunterPage.jsp">志愿活动</a></li>
         <li><a href="#">组织团体</a></li>
         <li><a href="#">亲子活动</a></li>
@@ -282,7 +282,7 @@ $('#identifier').carousel({
 						<a data-toggle="tab" href="#panel-22521">亲少年服务</a>
 					</li>
 					<li>
-						<a data-toggle="tab" href="#panel-22522">金老助残</a>
+						<a data-toggle="tab" href="#panel-22522">敬老助残</a>
 					</li>
 					<li>
 						<a data-toggle="tab" href="#panel-22523">扶贫帮困</a>
@@ -317,8 +317,8 @@ $('#identifier').carousel({
           						 	</a>
               						<div class="text_box">
 	              						<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="text_title">石排第43期孔明灯项目—交通文明劝导</a>
-						                <p class="txt oneLineOh">广东东莞市石排镇石排公园红绿灯</p>
-						                <p class="txt oneLineOh">2018-3-17</p>
+						                <p class="txt oneLineOh">地点：广东东莞市石排镇石排公园红绿灯</p>
+						                <p class="txt oneLineOh">时间：2018-3-17</p>
 					                </div>
 					             </li>
 					             <li class="item">

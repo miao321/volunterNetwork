@@ -18,6 +18,42 @@ import com.xxx.volunterNetwork.domain.Role;
  *
  */
 public class RoleQueryDTO {	
+	private Long id;
+	private Long roleId;
+	private Long permissionId;
+	private String permissionName;
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
+
+	public void setPermissionId(Long permissionId) {
+		this.permissionId = permissionId;
+	}
+
+	public void setPermissionName(String permissionName) {
+		this.permissionName = permissionName;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public Long getPermissionId() {
+		return permissionId;
+	}
+
+	public String getPermissionName() {
+		return permissionName;
+	}
 
 	//提供static的工具方法： 根据当前roleQueryDTO对象来组装动态查询条件
 	public static Specification<Role> getSpecification(RoleQueryDTO roleQueryDTO){

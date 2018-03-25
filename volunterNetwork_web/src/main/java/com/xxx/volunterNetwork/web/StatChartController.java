@@ -64,6 +64,8 @@ public class StatChartController extends BaseAction {
 	@RequestMapping("/marjor")
 	public String factorysale() throws Exception {
 		//1.执行sql语句，得到统计结果
+		//select factory_name,sum(amount) samount from contract_product_c group by factory_name order by samount desc、
+		//select t.collegeName sum(t.collegeName) samount from t_college t group by t.collegeName order by t.collegeName desc
 	    List<String> list = execSQL("select t.collegeName from t_college t");
 	    
 	    //2.组织符合要求的xml数据
@@ -71,16 +73,12 @@ public class StatChartController extends BaseAction {
 	    
 	    //3.将拼接好的字符串写入data.xml文件中
 	    writeXML("stat//chart//factorysale//data.xml",content);
-	    
-	   /* FileUtil fileUtil = new FileUtil();
-	    String sPath = ServletActionContext.getServletContext().getRealPath("/")+"stat\\chart\\factorysale";
-	    fileUtil.createTxt(sPath, "data.xml", content, "UTF-8");
-		*/
+
 		 //writeXML("stat\\chart\\factorysale\\data.xml",this.genPieDataSet(this.execSQL("select factory_name,sum(amount) samount from contract_product_c group by factory_name order by samount desc")));
 	    
 	    
 	    //4.返回结果
-		return "/WEB-INF/pages/stat/chart/jStat.jsp?forward=factorysale";
+		return "/stat/chart/factorysale/index";
 	}
 	/**
 	 * 产品销量的前15名
@@ -88,7 +86,8 @@ public class StatChartController extends BaseAction {
 	@RequestMapping("/marjorClass")
 	public String productsale() throws Exception {
 		//1.执行sql语句，得到统计结果
-		List<String> list = execSQL("select * from ( select product_no,sum(amount) samount from contract_product_c group by product_no order by samount desc ) b  limit 15");
+		//select * from ( select product_no,sum(amount) samount from contract_product_c group by product_no order by samount desc ) b  limit 15"
+		List<String> list = execSQL("select t.collegeName from t_college t");
 		
 		//2.组织符合要求的xml数据
 		String content = genBarDataSet(list);
@@ -97,7 +96,7 @@ public class StatChartController extends BaseAction {
 		writeXML("stat\\chart\\productsale\\data.xml",content);
 		
 		//4.返回结果
-		return "/WEB-INF/pages/stat/chart/jStat.jsp?forward=onlineinfo";
+		return "/stat/chart/productsale/index";
 	}
 	/**
 	 * 在线人数统计
@@ -116,7 +115,8 @@ public class StatChartController extends BaseAction {
 	@RequestMapping("/persure")
 	public String onlineinfo() throws Exception {
 		//1.执行sql语句，得到统计结果
-		List<String> list = execSQL("select a.a1, ifnull(b.c,0) from (select * from online_info_t) a left join (select date_format(login_time,'%k') a1, count(*) c from login_log_p group by  date_format(login_time,'%k') order by a1) b on (a.a1=b.a1) order by a.a1");
+		//select a.a1, ifnull(b.c,0) from (select * from online_info_t) a left join (select date_format(login_time,'%k') a1, count(*) c from login_log_p group by  date_format(login_time,'%k') order by a1) b on (a.a1=b.a1) order by a.a1
+		List<String> list = execSQL("select t.collegeName from t_college t");
 		
 		//2.组织符合要求的xml数据
 		String content = genBarDataSet(list);
@@ -128,7 +128,7 @@ public class StatChartController extends BaseAction {
 		
 		
 		//4.返回结果
-		return "/WEB-INF/pages/stat/chart/jStat.jsp?forward=productsale";
+		return "/stat/chart/onlineinfo/index";
 	}
 
 
@@ -170,7 +170,7 @@ public class StatChartController extends BaseAction {
 	    }
 	    
 	    sb.append("</graph></graphs>");
-	    sb.append("<labels><label lid=\"0\"><x>0</x><y>20</y><rotate></rotate><width></width><align>center</align><text_color></text_color><text_size></text_size><text><![CDATA[<b>JavaEE28期产品销量排名</b>]]></text></label></labels>");
+	    sb.append("<labels><label lid=\"0\"><x>0</x><y>20</y><rotate></rotate><width></width><align>center</align><text_color></text_color><text_size></text_size><text><![CDATA[<b>压力图</b>]]></text></label></labels>");
 	    sb.append("</chart>");
 		return sb.toString();
 	}
@@ -201,7 +201,8 @@ public class StatChartController extends BaseAction {
 	 */
 	private void writeXML(String fileName ,String content) throws FileNotFoundException {
 		FileUtil fileUtil = new FileUtil();
-	    String sPath = ServletActionContext.getServletContext().getRealPath("/");
+		String sPath = System.getProperty("evan.webapp");
+	    //String sPath = ServletActionContext.getServletContext().getRealPath("/");
 	    fileUtil.createTxt(sPath, fileName, content, "UTF-8");
 	}
 }

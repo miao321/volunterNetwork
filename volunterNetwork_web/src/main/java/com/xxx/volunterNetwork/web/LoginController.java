@@ -42,7 +42,7 @@ public class LoginController {
 	
 	@RequestMapping("/test")
 	public String Test() {
-		return "WEB-INF/pages/system/college";
+		return "WEB-INF/pages/college";
 	}
 	
 	@RequestMapping(value="/login")
@@ -57,10 +57,11 @@ public class LoginController {
 				session.setAttribute("result2", "用户名/密码错误");
 			} else{
 				//最终在异常处理器生成未知错误
-				throw new Exception();
+				//throw new Exception();
+				session.setAttribute("result3", "未知错误");
 			}
 		}
-		return "login";
+		return "WEB-INF/pages/login";
 	}
 	@RequestMapping(value="first")
 	@SysControllerLog(module="系统登录",methods="登录系统")
@@ -75,7 +76,7 @@ public class LoginController {
 		session.setAttribute("userName", user.getStudentNo());
 		session.setAttribute("userId", user.getId());
 		session.setAttribute("password", user.getPassword());
-		return "backstage";
+		return "WEB-INF/pages/backstage";
 	}	
 	//修改密码
 	@RequestMapping("/updatePassword")

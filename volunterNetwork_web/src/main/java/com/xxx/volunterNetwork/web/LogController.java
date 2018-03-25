@@ -73,6 +73,6 @@ public class LogController {
 		session.setAttribute("pageSize", page.getSize());//当前页条数
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
-		return "system/log";
+		return "/WEB-INF/pages/system/log";
 	}
 }

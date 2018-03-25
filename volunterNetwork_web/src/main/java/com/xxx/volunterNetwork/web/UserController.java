@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.xxx.volunterNetwork.domain.College;
+import com.xxx.volunterNetwork.domain.Role;
 import com.xxx.volunterNetwork.domain.User;
 import com.xxx.volunterNetwork.dto.UserQueryDTO;
 import com.xxx.volunterNetwork.service.ILoginService;
@@ -68,25 +69,24 @@ public class UserController {
 			return new ExtAjaxResponse(false, "操作失败");
 		}	
 	}	
-	/*@RequestMapping("/saveRole")
-	public @ResponseBody ExtAjaxResponse saveRole(UserQueryDTO userQueryDTO,@RequestParam String roleName) {
-		if (userQueryDTO.getRoles_id() != null) {
+	@RequestMapping("/saveRole")
+	public @ResponseBody ExtAjaxResponse saveRole(UserQueryDTO userQueryDTO,@RequestParam Long roleId,@RequestParam Long userId) {
+		//Role role = roleService.findOne(roleId);
+		
+		/*if (userQueryDTO.getRoleId() != null) {
 			return new ExtAjaxResponse(false, "该用户已经拥有此角色");
-		}
-		Role role3 = roleService.findRole(roleName);
-		permissionQueryDTO.setRole_id(role3.getId());
-		Role role = roleService.findOne(permissionQueryDTO.getRole_id());
-		Permission permission = permissionService.findOne(permissionQueryDTO.getPermission_id());		
-		permission.getRole().add(role);
-		Role role2 = new Role();
-		role2.getPermission().add(permission);
+		}*/
+		Role role = roleService.findOne(roleId);
+		User user = userService.findOne(userId);	
+		user.getRoles().add(role);
+		role.getUsers().add(user);
 		try {
-			permissionService.saveOrUpdate(permission);	
+			userService.saveOrUpdate(user);	
 			return new ExtAjaxResponse(true, "操作成功");
 		} catch (Exception e) {
 			return new ExtAjaxResponse(false, "操作失败");
 		}	
-	}	*/
+	}	
 	@RequestMapping("/update")
 	public @ResponseBody ExtAjaxResponse update(User user) {
 		User u = userService.findOne(user.getId());
@@ -118,8 +118,11 @@ public class UserController {
 //	@RequiresRoles("管理员")
 	@RequestMapping("/delete")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long id) {
+		
 		try {
 			User user = userService.findOne(id);
+			
+			//userService.delete(user.getRoles());
 			if (user != null) {
 				userService.delete(user);
 			}
@@ -162,7 +165,7 @@ public class UserController {
 		session.setAttribute("pageSize", page.getSize());//当前页条数
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
-		return "system/user";	
+		return "/WEB-INF/pages/system/user";	
 	}
 /*
 	@RequestMapping("/findUserRole")
@@ -202,6 +205,6 @@ public class UserController {
 	}
 	@RequestMapping("changeMessage")
 	public String changeMessage() {
-		return "system/changeMessage";
+		return "/WEB-INF/pages/system/changeMessage";
 	}
 }
