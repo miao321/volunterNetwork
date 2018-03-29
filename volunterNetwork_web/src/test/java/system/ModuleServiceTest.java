@@ -34,13 +34,13 @@ public class ModuleServiceTest {
 	@Test
 	@Rollback(value = false)
 	public void save() {
-		for(int i=1;i<=100;i++) {
+		/*for(int i=1;i<=100;i++) {
 			Module module = new Module();
 			module.setModuleName("用户管理"+i);
 			module.setState(1);
 			module.setBelong("系统管理"+i);
 			moduleService.saveOrUpdate(module);
-		}
+		}*/
 		
 
 	

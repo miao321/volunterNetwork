@@ -3,6 +3,7 @@ package com.xxx.volunterNetwork.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -30,4 +31,8 @@ public interface ModuleRepository extends PagingAndSortingRepository<Module, Lon
 	
 	@Query("from Module module where module.moduleName =?1")
 	public Module findModule(String moduleName);*/
+	
+	@Modifying
+	@Query("update Module module set module.state = ?2 where module.id = ?1")
+	public void updateState(Long id,Integer state);
 }

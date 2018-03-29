@@ -113,7 +113,7 @@
 					<li><span class="glyphicon glyphicon-film" aria-hidden="true" style="margin-left:18px;"><a class="a" href="javascript:void(0);"
 						onClick="openurl('banFront.jsp');">轮播图管理</a></span></li>
 					<li><span class="glyphicon glyphicon-indent-left" aria-hidden="true" style="margin-left:34px;"><a class="a" href="javascript:void(0);"
-						onClick="openurl('front/findPage');">活动发布管理</a></span></li>
+						onClick="openurl('acti/findPage');">活动发布管理</a></span></li>
 					<li><span class="glyphicon glyphicon-list" aria-hidden="true" style="margin-left:34px;"><a class="a" href="javascript:void(0);"
 						onClick="openurl('empty.html');">活动分类管理</a></span></li>
 					<li><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-left:34px;"><a class="a" href="javascript:void(0);"

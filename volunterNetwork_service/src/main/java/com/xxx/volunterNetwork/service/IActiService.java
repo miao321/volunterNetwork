@@ -21,7 +21,7 @@ public interface IActiService {
 	public void delete(List<Long> ids);
 	public Acti findOne(Long id);
 	public List<Acti> findAll();
-	
+	public void updateState(Long id,Integer state);
 	/*public Acti findActi(String actiName);*/
 	//动态条件查询
 	public Page<Acti> findAll(Specification<Acti> spec,Pageable pageable);

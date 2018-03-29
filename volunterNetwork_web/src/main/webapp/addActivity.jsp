@@ -14,6 +14,7 @@
 <script charset="utf-8" src="${pageContext.request.contextPath}/kindeditor/kindeditor-all-min.js"></script>
 <script charset="utf-8" src="${pageContext.request.contextPath}/kindeditor/lang/zh-CN.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/WdatePicker.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.uploadifive.min.js"></script>
  <script>
     var editor;
     KindEditor.ready(function(K) {
@@ -21,12 +22,87 @@
             allowFileManager : true
         });      
     });
+    $(document).ready(function() {
+		$('#img').uploadifive({
+			'uploadScript' : 'acti/uploadImg',
+			'queueID' : 'fileQueue',
+			'auto' : false,
+			'multi' : false,
+			'buttonText' : '选择图片',
+			'fileSizeLimit' : 500
+		});
+		$("#uploadImg").click(function() {
+			$('#img').uploadifive({
+				'uploadScript' : 'acti/uploadImg',
+				'queueID' : 'fileQueue',
+				'auto' : false,
+				'multi' : false,
+				'buttonText' : '选择图片',
+				'formData' : {
+					'title' : $("#title").val(),
+					'content' : $("#content").val(),
+					'fwyp' : $("#fwyq").val(),
+					'hdjj' : $("#hdjj").val(),
+					'xxdz' : $("#xxdz").val(),
+					'lxfs' : $("#lxfs").val(),
+					'hdsj' : $("#hdsj").val(),
+					'img' : $("#img").val(),
+					'hdlx' : $("#hdlx").val(),
+					'fbzz' : $("#fbzz").val(),
+					'fbtime' : $("#fbtime").val(),
+					'zmrs' : $("#zmrs").val(),
+					'state' : $('#state input[name="radio"]:checked ').val()
+				},
+				'fileSizeLimit' : 500
+			});
+			$('#img').uploadifive('upload');
+		});
+	});
+  /*  $(function(){
+    	$("#uploadImg").click(
+    			function() { 
+    		    	 var id = document.getElementById("id").value; 	
+    		    	 var title = document.getElementById("title").value;
+    		    	
+    		    	var content = document.getElementById("content").value;
+    		    	var fwyq = document.getElementById("fwyq").value;
+    		    	var hdjj = document.getElementById("hdjj").value;
+    		    	var xxdz = document.getElementById("xxdz").value;
+    		    	var lxfs = document.getElementById("lxfs").value;
+    		    	var hdsj = document.getElementById("hdsj").value;
+    		    	var img = document.getElementById("img").value;
+    		    	alert(img);
+    		    	var hdlx = document.getElementById("hdlx").value;	
+    		    	var fbzz = document.getElementById("fbzz").value;
+    		    	var fbtime = document.getElementById("fbtime").value;
+    		    	var zmrs = document.getElementById("zmrs").value;    
+    		    	
+    		    	var state = $('#state input[name="radio"]:checked ').val();
+    		  
+    		    	 $.ajax({			 
+    		    		 type : "POST",
+    		    		 url : "acti/uploadImg",           
+    		             dataType : "json",
+    		              data:{title:title,content:content,fwyq:fwyq,hdjj:hdjj,xxdz:xxdz,
+    		            	 lxfs:lxfs,hdsj:hdsj,img:img,hdlx:hdlx,fbzz:fbzz,fbtime:fbtime,
+    		            	 zmrs:zmrs,state:state}, 
+    		    		 data:$("#formId").serialize(),
+    		    		 //contentType:"application/x-www-form-urlencoded",
+    		             cache : false,
+    		    		 async : false,
+    		    		 success : function(data) {				
+    		    			location.reload();
+    		    		 }
+    		    	}); 
+    		    } );
+    }); 
+     */
 </script>
 </head>
 <body>
-<div class="row" style="align:center;margin-top: 50px;">
+<div class="row" style="align:center;">
 	<div style="width:800px;margin-top: 16px;margin-left: 40px;">
-		<form action="AddCourseServlet" method="post" class="form-horizontal" role="form" enctype="multipart/form-data" >
+		<form action="acti/uploadImg"  id="formId" class="form-horizontal" enctype="multipart/form-data" method="post">
 		  <div class="form-group"  style="margin-top: 16px;">
 		    <label for="inputEmail3" class="col-sm-2 control-label">标题:</label>
 		    <div class="col-sm-10">
@@ -36,7 +112,7 @@
 		  <div class="form-group">
 		    <label for="inputEmail3" class="col-sm-2 control-label">服务内容:</label>
 		    <div class="col-sm-10">
-		      <textarea name="content" style="width:662px;height:400px;visibility:hidden;display: block;resize: none;"></textarea>
+		      <textarea name="content" id="content" style="width:662px;height:400px;visibility:hidden;display: block;resize: none;"></textarea>
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -48,7 +124,13 @@
 		   <div class="form-group">
 		    <label for="inputEmail3" class="col-sm-2 control-label">活动简介:</label>
 		    <div class="col-sm-10">
-		      <input type="text" id="hdjj" name=""hdjj"" class="form-control" placeholder="请输入活动简介">
+		      <input type="text" id="hdjj" name="hdjj" class="form-control" placeholder="请输入活动简介">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-2 control-label">招募人数:</label>
+		    <div class="col-sm-10">
+		      <input type="text" id="zmrs" name="zmrs" class="form-control" placeholder="请输入招募人数">
 		    </div>
 		  </div>
 		   <div class="form-group">
@@ -73,6 +155,7 @@
 		    <label for="inputEmail3" class="col-sm-2 control-label">照片:</label>
 		    <div class="col-sm-10">
 		      <input type="file" id="img" name="img" class="form-control" placeholder="请输入照片">
+		      <div id="fileQueue"></div>
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -95,17 +178,16 @@
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="inputEmail3" class="col-sm-2 control-label">显示状态:</label>
-		    <div class="col-sm-10">			     
-			  <input type="radio" name="fbstate" value="启用" checked>启用
-			   <input type="radio" name="fbstate" value="停用">停用
-		    </div>
+		    <label for="inputEmail3" class="col-sm-4 control-label" id="state" >用户状态:&nbsp;&nbsp;
+		    	<input type="radio" name="radio" value="1" style="padding-left: 4px;"/> 启用					    	
+			 	<input type="radio" name="radio" value="0"/> 停用
+		    </label>
 		  </div>
 		  
 		 <div class="form-group" style="width:180px;height:40px;margin: 0 auto;">
 		  
 				<div class="col-sm-8">
-					<button type="submit" class="btn btn-primary" class="form-control" style="width:100%" >添加</button>
+					<button type="button" id="uploadImg" class="btn btn-primary" class="form-control" style="width:100%">添加</button>
 				</div>
 			</div>
 		</form>

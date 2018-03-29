@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.xxx.volunterNetwork.anno.SysControllerLog;
 import com.xxx.volunterNetwork.domain.College;
 import com.xxx.volunterNetwork.domain.Module;
+import com.xxx.volunterNetwork.domain.Permission;
 import com.xxx.volunterNetwork.dto.ModuleQueryDTO;
 import com.xxx.volunterNetwork.service.IModuleService;
 import com.xxx.volunterNetwork.util.ExtAjaxResponse;
@@ -105,5 +106,21 @@ public class ModuleController {
 		return "/WEB-INF/pages/system/module";	
 	}
 
+	@RequestMapping("disableModule")
+	public @ResponseBody Module disableModule(@RequestParam Long id) {
+		Module module = moduleService.findOne(id);
+		if (module.getState() != null) {
+			moduleService.updateState(id, 0);
+		}
+		return module;
+	}
+	@RequestMapping("enableModule")
+	public @ResponseBody Module enableModule(@RequestParam Long id) {
+		Module module = moduleService.findOne(id);
+		if (module.getState() != null) {
+			moduleService.updateState(id, 1);
+		}
+		return module;
+	}
 
 }

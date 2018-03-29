@@ -72,6 +72,7 @@ public class PermissionController {
 	public String delete(@RequestParam Long id) {
 		try {
 			Permission permission = permissionService.findOne(id);
+			permission.setRole(null);
 			if (permission != null) {
 				permissionService.delete(permission);
 			}
@@ -84,6 +85,9 @@ public class PermissionController {
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long ids[]) {
 		try {
 			List<Long> idsLists = Arrays.asList(ids);
+			for(Long id : idsLists) {
+				permissionService.findOne(id).setRole(null);
+			}
 			if (idsLists != null) {
 				permissionService.delete(idsLists);
 			}

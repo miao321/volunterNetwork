@@ -23,6 +23,51 @@ public class Acti {
 	private String fbzz;//发布组织
 	private Date fbtime;//发布时间
 	private Integer state;//状态
+	private Integer zmrs;//招募人数
+	private Integer zan;//点赞次数
+	private Integer attention;//关注
+	public Acti() {
+		super();		
+	}
+	public Acti(Long id, String title, String content, String fwyq, String hdjj, String xxdz, String lxfs, Date hdsj,
+			String img, String hdlx, String fbzz, Date fbtime, Integer state, Integer zmrs, Integer zan,
+			Integer attention) {
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.fwyq = fwyq;
+		this.hdjj = hdjj;
+		this.xxdz = xxdz;
+		this.lxfs = lxfs;
+		this.hdsj = hdsj;
+		this.img = img;
+		this.hdlx = hdlx;
+		this.fbzz = fbzz;
+		this.fbtime = fbtime;
+		this.state = state;
+		this.zmrs = zmrs;
+		this.zan = zan;
+		this.attention = attention;
+	}
+	public Acti(String title, String content, String fwyq, String hdjj, String xxdz, String lxfs, Date hdsj,
+			String img, String hdlx, String fbzz, Date fbtime, Integer state, Integer zmrs) {	
+		this.title = title;
+		this.content = content;
+		this.fwyq = fwyq;
+		this.hdjj = hdjj;
+		this.xxdz = xxdz;
+		this.lxfs = lxfs;
+		this.hdsj = hdsj;
+		this.img = img;
+		this.hdlx = hdlx;
+		this.fbzz = fbzz;
+		this.fbtime = fbtime;
+		this.state = state;
+		this.zmrs = zmrs;
+		this.zan = zan;
+		this.attention = attention;
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
@@ -64,6 +109,15 @@ public class Acti {
 	public Integer getState() {
 		return state;
 	}
+	public Integer getZmrs() {
+		return zmrs;
+	}
+	public Integer getZan() {
+		return zan;
+	}
+	public Integer getAttention() {
+		return attention;
+	}
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -102,6 +156,21 @@ public class Acti {
 	}
 	public void setState(Integer state) {
 		this.state = state;
+	}
+	public void setZmrs(Integer zmrs) {
+		this.zmrs = zmrs;
+	}
+	public void setZan(Integer zan) {
+		this.zan = zan;
+	}
+	public void setAttention(Integer attention) {
+		this.attention = attention;
+	}
+	@Override
+	public String toString() {
+		return "Acti [id=" + id + ", title=" + title + ", content=" + content + ", fwyq=" + fwyq + ", hdjj=" + hdjj
+				+ ", xxdz=" + xxdz + ", lxfs=" + lxfs + ", hdsj=" + hdsj + ", img=" + img + ", hdlx=" + hdlx + ", fbzz="
+				+ fbzz + ", fbtime=" + fbtime + ", state=" + state + "]";
 	}
 
 }

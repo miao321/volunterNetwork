@@ -1,6 +1,8 @@
 package com.xxx.volunterNetwork.dao;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -27,4 +29,8 @@ public interface ActiRepository extends PagingAndSortingRepository<Acti, Long>,J
 	
 	@Query("from Module module where module.moduleName =?1")
 	public Module findModule(String moduleName);*/
+	
+	@Modifying
+	@Query("update Acti acti set acti.state = ?2 where acti.id = ?1")
+	public void updateState(Long id,Integer state);
 }

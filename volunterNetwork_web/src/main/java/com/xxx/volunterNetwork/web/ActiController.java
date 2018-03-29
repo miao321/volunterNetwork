@@ -1,10 +1,27 @@
 package com.xxx.volunterNetwork.web;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.DiskFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +37,7 @@ import com.xxx.volunterNetwork.dto.ActiQueryDTO;
 import com.xxx.volunterNetwork.service.IActiService;
 import com.xxx.volunterNetwork.util.ExtAjaxResponse;
 import com.xxx.volunterNetwork.util.ExtPageable;
+import com.xxx.volunterNetwork.util.ResultMap;
 
 
 
@@ -29,6 +47,7 @@ public class ActiController {
 	private static final Logger logger = LoggerFactory.getLogger(ActiController.class);
 	@Autowired
 	private IActiService actiService;
+	
 	String sPath = System.getProperty("evan.webapp");
 	@RequestMapping("/saveOrUpdate")
 	public @ResponseBody ExtAjaxResponse saveOrUpdate(Acti acti) {
@@ -96,13 +115,153 @@ public class ActiController {
 	@SysControllerLog(module="模块管理",methods="查找所有数据并分页排序")
 	public String findPage(HttpSession session,ActiQueryDTO actiQueryDTO,ExtPageable extPageable){
 		Page<Acti> page = actiService.findAll(actiQueryDTO.getSpecification(actiQueryDTO), extPageable.getPageable());
+		System.out.println("actiLists:+++"+page.getContent());
 		session.setAttribute("actiLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页
 		session.setAttribute("pageSize", page.getSize());//当前页条数
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
-		return "/WEB-INF/pages/system/activityDetail";	
+		return "/WEB-INF/pages/front/activityDetail";	
 	}
-
-
+	
+	@RequestMapping("disableActi")
+	public @ResponseBody Acti disableActi(@RequestParam Long id) {
+		Acti acti = actiService.findOne(id);
+		if (acti.getState() != null) {
+			actiService.updateState(id, 0);
+		}
+		return acti;
+	}
+	@RequestMapping("enableActi")
+	public @ResponseBody Acti enableModule(@RequestParam Long id) {
+		Acti acti = actiService.findOne(id);
+		if (acti.getState() != null) {
+			actiService.updateState(id, 1);
+		}
+		return acti;
+	}
+	@RequestMapping("uploadImg")
+	public void upload(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		/*,@RequestParam String title,
+		@RequestParam String content,@RequestParam String fwyq,@RequestParam String hdjj,
+		@RequestParam String xxdz,@RequestParam String lxfs,@RequestParam Date hdsj,
+		@RequestParam String img,@RequestParam String hdlx,@RequestParam String fbzz,
+		@RequestParam Date fbtime,@RequestParam Integer zmrs,@RequestParam Integer state
+		System.out.println("++++title:"+title);
+		System.out.println("++++title:"+content);
+		System.out.println("++++title:"+fwyq);
+		System.out.println("++++title:"+hdjj);*/
+		/*String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String fwyq = request.getParameter("fwyq");
+		String hdjj = request.getParameter("hdjj");
+		String xxdz = request.getParameter("xxdz");
+		String lxfs = request.getParameter("lxfs");
+		String hdsj = request.getParameter("hdsj");*/
+		try {	
+			
+			String real_title = null;
+			String real_content = null;
+			String real_fwyq = null;
+			String real_hdjj = null;
+			String real_xxdz = null;
+			String real_lxfs = null;
+			Date real_hdsj = null;
+			String real_img = null;
+			String real_hdlx = null;
+			String real_fbzz = null;
+			Date real_fbtime = null;
+			Integer real_state = null;
+			Integer real_zmrs = null;
+			
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+			File f = new File("e:/target");
+			if (!f.exists()) {
+				f.mkdir();
+			}
+			factory.setRepository(f);
+			ServletFileUpload upload = new ServletFileUpload(factory);
+			System.out.println("upload:++++"+upload);
+			List<FileItem> fileitems = upload.parseRequest(request);
+			System.out.println("fileitems====:"+fileitems);
+			// 遍历
+			for (FileItem fileitem : fileitems) {
+				// 判断是文件还是字符串
+				if (fileitem.isFormField()) {
+					// 文件
+					String filename = fileitem.getFieldName();
+					String value = fileitem.getString("utf-8");
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+					if (filename.equalsIgnoreCase("title")) {
+						real_title = value;
+					} else if (filename.equalsIgnoreCase("content")) {
+						real_content = value;
+					} else if (filename.equalsIgnoreCase("fwyq")) {
+						real_fwyq = value;
+					} else if (filename.equalsIgnoreCase("hdjj")) {
+						real_hdjj = value;
+					}else if (filename.equalsIgnoreCase("xxdz")) {
+						real_xxdz = value;
+					}else if (filename.equalsIgnoreCase("lxfs")) {
+						real_lxfs = value;
+					}else if (filename.equalsIgnoreCase("hdsj")) {
+						real_hdsj = dateFormat.parse(value);
+					}else if (filename.equalsIgnoreCase("hdlx")) {
+						real_hdlx = value;
+					}else if (filename.equalsIgnoreCase("fbzz")) {
+						real_fbzz = value;
+					}else if (filename.equalsIgnoreCase("zmrs")) {
+						real_zmrs = Integer.valueOf(value);
+					}else if (filename.equalsIgnoreCase("state")) {
+						real_state = Integer.valueOf(value);
+					}
+				} else {
+					// 文件名
+					String filename = fileitem.getName();
+					filename = filename
+							.substring(filename.lastIndexOf("/") + 1);
+					// 随机编辑名称
+					filename = filename.substring(filename.lastIndexOf("."));
+					filename = UUID.randomUUID().toString() + filename;
+					// 获取完整的名称
+					String webpath = "/upload/";
+					String filepath = request.getServletContext().getRealPath(
+							webpath + filename);
+					real_img = webpath + filename;
+					// 创建文件
+					File file = new File(filepath);
+					file.getParentFile().mkdirs();
+					file.createNewFile();
+					// 获取图像文件
+					BufferedImage image = ImageIO.read(fileitem
+							.getInputStream());
+					// 获取输入流
+					InputStream in = fileitem.getInputStream();
+					// 获取输出流
+					OutputStream out = new FileOutputStream(file);
+					// 文件对拷
+					byte[] buffer = new byte[1024];
+					int len;
+					while ((len = in.read(buffer)) > 0) {
+						out.write(buffer, 0, len);
+					}
+					// 关闭流
+					in.close();
+					out.close();
+					// 删除缓存文件
+					fileitem.delete();
+				}
+			}
+			Acti bean = ResultMap.ReflectMap(real_title, real_content,
+					real_fwyq, real_hdjj, real_xxdz, real_lxfs,real_hdsj, real_img,
+					real_hdlx, real_fbzz, new Date(System.currentTimeMillis()), real_state, real_zmrs);
+			System.out.println("real_title:"+real_title+"real_content:"+real_content+new Date(System.currentTimeMillis())+"real_xxdz:"+real_xxdz+"real_hdjj:"+real_hdjj+"real_detail:"+real_zmrs);
+			actiService.saveOrUpdate(bean);
+			//dao.InsertBook(bean);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

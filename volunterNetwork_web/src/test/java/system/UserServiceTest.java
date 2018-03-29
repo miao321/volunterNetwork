@@ -41,7 +41,7 @@ public class UserServiceTest {
 			user.setState(1);
 			userService.saveOrUpdate(user);*/
 		
-		User user = new User();
+		/*User user = new User();
 		user.setStudentNo("201441402302");
 		user.setPassword("123");
 		user.setUserName("aaa");
@@ -60,7 +60,7 @@ public class UserServiceTest {
 		
 		userService.saveOrUpdate(user);
 	
-		
+		*/
 	}
 
 }

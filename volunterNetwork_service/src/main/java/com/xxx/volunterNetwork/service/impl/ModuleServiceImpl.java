@@ -66,5 +66,10 @@ public class ModuleServiceImpl implements IModuleService {
 	public Module findModule(String moduleName) {
 		return moduleRepository.findModule(moduleName);
 	}*/
+	@Override
+	public void updateState(Long id, Integer state) {
+		moduleRepository.updateState(id, state);
+		
+	}
 
 }

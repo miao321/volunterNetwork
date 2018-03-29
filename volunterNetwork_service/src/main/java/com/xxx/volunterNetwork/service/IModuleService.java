@@ -21,6 +21,7 @@ public interface IModuleService {
 	public void delete(List<Long> ids);
 	public Module findOne(Long id);
 	public List<Module> findAll();
+	public void updateState(Long id,Integer state);
 	
 	/*public Module findModule(String moduleName);*/
 	//动态条件查询

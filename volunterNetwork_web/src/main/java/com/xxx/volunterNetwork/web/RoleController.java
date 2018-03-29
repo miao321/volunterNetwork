@@ -116,7 +116,15 @@ public class RoleController {
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long id) {
 		try {
 			Role role = roleService.findOne(id);
+			
 			if (role != null) {
+				if (role.getUsers() != null) {
+					role.setUsers(null);
+				}
+				if (role.getPermission() != null) {
+					role.setPermission(null);
+				}
+				
 				roleService.delete(role);
 			}
 			return new ExtAjaxResponse(true, "操作成功");
@@ -130,6 +138,10 @@ public class RoleController {
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long[] ids) {
 		try {
 			List<Long> idsLists = Arrays.asList(ids);
+			for(Long id : idsLists) {
+				roleService.findOne(id).setUsers(null);
+				roleService.findOne(id).setPermission(null);
+			}
 			if (idsLists != null) {
 				roleService.delete(idsLists);
 			}

@@ -121,7 +121,7 @@ public class UserController {
 		
 		try {
 			User user = userService.findOne(id);
-			
+			user.setRoles(null);
 			//userService.delete(user.getRoles());
 			if (user != null) {
 				userService.delete(user);
@@ -137,6 +137,10 @@ public class UserController {
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long[] ids) {
 		try {
 			List<Long> idsLists = Arrays.asList(ids);
+			for(Long id : idsLists) {
+				User user = userService.findOne(id);
+				user.setRoles(null);
+			}
 			if (idsLists != null) {
 				userService.delete(idsLists);
 			}

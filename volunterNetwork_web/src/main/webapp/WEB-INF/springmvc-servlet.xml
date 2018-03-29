@@ -44,6 +44,14 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
 		<!-- <property name="prefix" value="/WEB-INF/pages/" /> -->
 		<property name="suffix" value=".jsp" />
 	</bean>
+	<!-- 上传文件 -->  
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+	    <property name="defaultEncoding" value="utf-8"/>  
+	    最大内存大小  
+	    <property name="maxInMemorySize" value="10240"/>  
+	    最大文件大小，-1为不限制大小  
+	    <property name="maxUploadSize" value="-1"/>  
+	</bean> -->  
 	 <!-- 创建jdbcTemplate，并且通过IOC的依赖注入的构造注入方式注入c3p0连接池对象，那么获取到jdbcTemplate后就能够直接使用 -->
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <constructor-arg name="dataSource" ref="dataSource"></constructor-arg>

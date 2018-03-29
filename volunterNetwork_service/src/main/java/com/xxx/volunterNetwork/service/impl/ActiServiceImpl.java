@@ -61,5 +61,10 @@ public class ActiServiceImpl implements IActiService {
 	public Acti findActi(String actiName) {
 		return actiRepository.findActi(actiName);
 	}*/
+	@Override
+	public void updateState(Long id, Integer state) {
+		actiRepository.updateState(id, state);
+		
+	}
 
 }

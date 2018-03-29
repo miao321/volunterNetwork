@@ -6,4 +6,11 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>volunterNetwork_utils</artifactId>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.xxx.volunterNetwork</groupId>
+  		<artifactId>volunterNetwork_domain</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>
