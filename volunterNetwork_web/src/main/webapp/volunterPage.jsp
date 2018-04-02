@@ -108,7 +108,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
-        <li><a href="#">首页 <span class="sr-only">(current)</span></a></li>
+        <li><a href="fontIndex.jsp">首页 <span class="sr-only">(current)</span></a></li>
         <li><a href="#">志愿活动</a></li>
         <li><a href="#">组织团体</a></li>
         <li><a href="#">亲子活动</a></li>

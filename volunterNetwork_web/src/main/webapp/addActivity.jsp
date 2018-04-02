@@ -19,7 +19,8 @@
     var editor;
     KindEditor.ready(function(K) {
         editor = K.create('textarea[name="content"]', {
-            allowFileManager : true
+            allowFileManager : true,
+            afterBlur: function () { this.sync(); }
         });      
     });
     $(document).ready(function() {
@@ -31,8 +32,10 @@
 			'buttonText' : '选择图片',
 			'fileSizeLimit' : 500
 		});
+		
 		$("#uploadImg").click(function() {
-			$('#img').uploadifive({
+			var content = document.getElementById("content").value;
+			$('#img').uploadifive({				
 				'uploadScript' : 'acti/uploadImg',
 				'queueID' : 'fileQueue',
 				'auto' : false,
@@ -53,50 +56,14 @@
 					'zmrs' : $("#zmrs").val(),
 					'state' : $('#state input[name="radio"]:checked ').val()
 				},
+				/* success : function(data) {				
+					location.reload();
+				}, */
 				'fileSizeLimit' : 500
 			});
 			$('#img').uploadifive('upload');
 		});
 	});
-  /*  $(function(){
-    	$("#uploadImg").click(
-    			function() { 
-    		    	 var id = document.getElementById("id").value; 	
-    		    	 var title = document.getElementById("title").value;
-    		    	
-    		    	var content = document.getElementById("content").value;
-    		    	var fwyq = document.getElementById("fwyq").value;
-    		    	var hdjj = document.getElementById("hdjj").value;
-    		    	var xxdz = document.getElementById("xxdz").value;
-    		    	var lxfs = document.getElementById("lxfs").value;
-    		    	var hdsj = document.getElementById("hdsj").value;
-    		    	var img = document.getElementById("img").value;
-    		    	alert(img);
-    		    	var hdlx = document.getElementById("hdlx").value;	
-    		    	var fbzz = document.getElementById("fbzz").value;
-    		    	var fbtime = document.getElementById("fbtime").value;
-    		    	var zmrs = document.getElementById("zmrs").value;    
-    		    	
-    		    	var state = $('#state input[name="radio"]:checked ').val();
-    		  
-    		    	 $.ajax({			 
-    		    		 type : "POST",
-    		    		 url : "acti/uploadImg",           
-    		             dataType : "json",
-    		              data:{title:title,content:content,fwyq:fwyq,hdjj:hdjj,xxdz:xxdz,
-    		            	 lxfs:lxfs,hdsj:hdsj,img:img,hdlx:hdlx,fbzz:fbzz,fbtime:fbtime,
-    		            	 zmrs:zmrs,state:state}, 
-    		    		 data:$("#formId").serialize(),
-    		    		 //contentType:"application/x-www-form-urlencoded",
-    		             cache : false,
-    		    		 async : false,
-    		    		 success : function(data) {				
-    		    			location.reload();
-    		    		 }
-    		    	}); 
-    		    } );
-    }); 
-     */
 </script>
 </head>
 <body>

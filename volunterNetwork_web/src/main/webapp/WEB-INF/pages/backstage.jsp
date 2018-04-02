@@ -78,16 +78,16 @@
 			</div>
 			<div class="div2">
 				<span class="glyphicon glyphicon-headphones" aria-hidden="true" style="font-size:18px; "></span>
-				茶楼管理
+				论坛管理
 			</div>
 			<div class="div3">
 				<ul>
 					<li><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><a class="a" href="javascript:void(0);"
-						onClick="openurl('SelectCourse2Servlet');">分享管理</a></li>
+						onClick="openurl('share/findPage');">分享管理</a></li>
 					<li><span class="glyphicon glyphicon-unchecked" aria-hidden="true"  style="margin-left:14px;"><a class="a" href="javascript:void(0);"
-						onClick="openurl('SelectCourse2Servlet');">我的留言板</a></span></li>
+						onClick="openurl('word/findPage');">我的留言板</a></span></li>
 					<li><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span><a class="a" href="javascript:void(0);"
-						onClick="openurl('SelectCourse2Servlet');">意见反馈</a></li>
+						onClick="openurl('opinion/findPage');">意见反馈</a></li>
 				</ul>
 			</div>
 			<div class="div2">
@@ -108,14 +108,14 @@
 			</div>
 			<div class="div3">
 				<ul>
-					<li><span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left:18px;"><a class="a" href="javascript:void(0);"
-						onClick="openurl('empty.html');">导航条管理</a></span></li>
+					<!-- <li><span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left:18px;"><a class="a" href="javascript:void(0);"
+						onClick="openurl('empty.html');">导航条管理</a></span></li> -->
 					<li><span class="glyphicon glyphicon-film" aria-hidden="true" style="margin-left:18px;"><a class="a" href="javascript:void(0);"
 						onClick="openurl('banFront.jsp');">轮播图管理</a></span></li>
 					<li><span class="glyphicon glyphicon-indent-left" aria-hidden="true" style="margin-left:34px;"><a class="a" href="javascript:void(0);"
 						onClick="openurl('acti/findPage');">活动发布管理</a></span></li>
-					<li><span class="glyphicon glyphicon-list" aria-hidden="true" style="margin-left:34px;"><a class="a" href="javascript:void(0);"
-						onClick="openurl('empty.html');">活动分类管理</a></span></li>
+					<!-- <li><span class="glyphicon glyphicon-list" aria-hidden="true" style="margin-left:34px;"><a class="a" href="javascript:void(0);"
+						onClick="openurl('empty.html');">活动分类管理</a></span></li> -->
 					<li><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-left:34px;"><a class="a" href="javascript:void(0);"
 						onClick="openurl('empty.html');">用户中心管理</a></span></li>
 				</ul>

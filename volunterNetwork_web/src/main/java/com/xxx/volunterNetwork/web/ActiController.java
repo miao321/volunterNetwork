@@ -140,25 +140,8 @@ public class ActiController {
 		return acti;
 	}
 	@RequestMapping("uploadImg")
-	public void upload(HttpServletRequest request, HttpServletResponse response)
+	public String upload(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		/*,@RequestParam String title,
-		@RequestParam String content,@RequestParam String fwyq,@RequestParam String hdjj,
-		@RequestParam String xxdz,@RequestParam String lxfs,@RequestParam Date hdsj,
-		@RequestParam String img,@RequestParam String hdlx,@RequestParam String fbzz,
-		@RequestParam Date fbtime,@RequestParam Integer zmrs,@RequestParam Integer state
-		System.out.println("++++title:"+title);
-		System.out.println("++++title:"+content);
-		System.out.println("++++title:"+fwyq);
-		System.out.println("++++title:"+hdjj);*/
-		/*String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		String fwyq = request.getParameter("fwyq");
-		String hdjj = request.getParameter("hdjj");
-		String xxdz = request.getParameter("xxdz");
-		String lxfs = request.getParameter("lxfs");
-		String hdsj = request.getParameter("hdsj");*/
 		try {	
 			
 			String real_title = null;
@@ -182,9 +165,7 @@ public class ActiController {
 			}
 			factory.setRepository(f);
 			ServletFileUpload upload = new ServletFileUpload(factory);
-			System.out.println("upload:++++"+upload);
 			List<FileItem> fileitems = upload.parseRequest(request);
-			System.out.println("fileitems====:"+fileitems);
 			// 遍历
 			for (FileItem fileitem : fileitems) {
 				// 判断是文件还是字符串
@@ -197,8 +178,10 @@ public class ActiController {
 						real_title = value;
 					} else if (filename.equalsIgnoreCase("content")) {
 						real_content = value;
-					} else if (filename.equalsIgnoreCase("fwyq")) {
+						System.out.println("real_content:"+real_content);
+					} else if (filename.equalsIgnoreCase("fwyp")) {
 						real_fwyq = value;
+						System.out.println("real_fwyq:"+real_fwyq);
 					} else if (filename.equalsIgnoreCase("hdjj")) {
 						real_hdjj = value;
 					}else if (filename.equalsIgnoreCase("xxdz")) {
@@ -211,6 +194,9 @@ public class ActiController {
 						real_hdlx = value;
 					}else if (filename.equalsIgnoreCase("fbzz")) {
 						real_fbzz = value;
+					}else if (filename.equalsIgnoreCase("fbtime")) {
+						real_fbtime = dateFormat.parse(value);
+						System.out.println("real_fbtime:"+real_fbtime);
 					}else if (filename.equalsIgnoreCase("zmrs")) {
 						real_zmrs = Integer.valueOf(value);
 					}else if (filename.equalsIgnoreCase("state")) {
@@ -256,9 +242,8 @@ public class ActiController {
 			Acti bean = ResultMap.ReflectMap(real_title, real_content,
 					real_fwyq, real_hdjj, real_xxdz, real_lxfs,real_hdsj, real_img,
 					real_hdlx, real_fbzz, new Date(System.currentTimeMillis()), real_state, real_zmrs);
-			System.out.println("real_title:"+real_title+"real_content:"+real_content+new Date(System.currentTimeMillis())+"real_xxdz:"+real_xxdz+"real_hdjj:"+real_hdjj+"real_detail:"+real_zmrs);
 			actiService.saveOrUpdate(bean);
-			//dao.InsertBook(bean);
+			return "/WEB-INF/pages/front/activityDetail";
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

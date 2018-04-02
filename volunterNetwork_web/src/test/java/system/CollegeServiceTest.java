@@ -1,4 +1,4 @@
-package system;
+/*package system;
 
 
 import org.junit.Test;
@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-/**
+*//**
  * 
  * @author miao
  * @date 2018年1月21日上午8:55:40
  *
- */
+ *//*
 
 import com.xxx.volunterNetwork.domain.College;
 import com.xxx.volunterNetwork.domain.Role;
@@ -46,3 +46,4 @@ public class CollegeServiceTest {
 	}
 
 }
+*/

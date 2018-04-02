@@ -56,18 +56,6 @@ public class RoleController {
 	}
 	@RequestMapping("/savePermission")
 	public @ResponseBody ExtAjaxResponse savePermission(PermissionQueryDTO permissionQueryDTO,@RequestParam Long permissionId,@RequestParam Long roleId) {
-		//Role role = roleService.findOne(roleId);
-		
-		/*if (roleQueryDTO.g != null) {
-			return new ExtAjaxResponse(false, "该用户已经拥有此角色");
-		}*/
-		/*if (permissionQueryDTO.getRole_id() != null) {
-			return new ExtAjaxResponse(false, "该角色已经拥有此权限");
-		}*/
-		/*Role role3 = roleService.findRole(roleName);
-		permissionQueryDTO.setRole_id(role3.getId());
-		System.out.println("role3:"+role3);*/
-		
 		Role role = roleService.findOne(roleId);
 		System.out.println(role+"+++++++");
 		Permission permission = permissionService.findOne(permissionId);		
@@ -75,12 +63,6 @@ public class RoleController {
 		Role role2 = new Role();
 		role2.getPermission().add(permission);
 		//role.getPermission().add(permission);
-		
-	/*	Role role = roleService.findOne(roleId);
-		Permission permission = PermissionService.findOne(permissionId);
-		role.getPermission().add(permission);
-		permission.getRole().add(role);*/
-		
 		try {
 			permissionService.saveOrUpdate(permission);	
 			return new ExtAjaxResponse(true, "操作成功");
@@ -118,8 +100,9 @@ public class RoleController {
 			Role role = roleService.findOne(id);
 			
 			if (role != null) {
-				if (role.getUsers() != null) {
+				if (role.getUsers() != null&&role.getPermission() != null) {
 					role.setUsers(null);
+					role.setPermission(null);
 				}
 				if (role.getPermission() != null) {
 					role.setPermission(null);

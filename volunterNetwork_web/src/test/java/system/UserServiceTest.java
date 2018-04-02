@@ -1,4 +1,4 @@
-package system;
+/*package system;
 
 
 import org.junit.Test;
@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-/**
+*//**
  * 
  * @author miao
  * @date 2018年1月21日上午8:55:40
  *
- */
+ *//*
 
 import com.xxx.volunterNetwork.domain.College;
 import com.xxx.volunterNetwork.domain.Role;
@@ -35,13 +35,7 @@ public class UserServiceTest {
 	@Rollback(value = false)
 	public void save() {
 		
-			/*User user = new User();
-			user.setUserName("aaa");
-			user.setStudentNo("123");
-			user.setState(1);
-			userService.saveOrUpdate(user);*/
-		
-		/*User user = new User();
+		User user = new User();
 		user.setStudentNo("201441402302");
 		user.setPassword("123");
 		user.setUserName("aaa");
@@ -60,7 +54,8 @@ public class UserServiceTest {
 		
 		userService.saveOrUpdate(user);
 	
-		*/
+		
 	}
 
 }
+*/

@@ -1,4 +1,4 @@
-package front;
+/*package front;
 
 import java.util.Date;
 
@@ -26,14 +26,15 @@ public class ActDetailServiceTest {
 	@Test
 	@Rollback(value = false)
 	public void save() {
-		/*for(int i=1;i<=100;i++) {
+		for(int i=1;i<=100;i++) {
 			Acti activity = new Acti();
 			activity.setTitle("312");
 			activity.setContent("333");
 			activity.setFbtime(new Date());
 			activity.setFbzz("000");
 			activityService.saveOrUpdate(activity);
-		}	*/
+		}	
 	}
 
 }
+*/

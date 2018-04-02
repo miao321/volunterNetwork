@@ -1,0 +1,137 @@
+package com.xxx.volunterNetwork.web;
+
+import java.util.Arrays;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.xxx.volunterNetwork.domain.Permission;
+import com.xxx.volunterNetwork.domain.Opinion;
+import com.xxx.volunterNetwork.dto.PermissionQueryDTO;
+import com.xxx.volunterNetwork.dto.OpinionQueryDTO;
+import com.xxx.volunterNetwork.service.IPermissionService;
+import com.xxx.volunterNetwork.service.IOpinionService;
+import com.xxx.volunterNetwork.util.ExtAjaxResponse;
+import com.xxx.volunterNetwork.util.ExtJsonResult;
+import com.xxx.volunterNetwork.util.ExtPageable;
+/**
+ * 
+ * @author miao
+ * @date 2018年1月20日上午11:09:18
+ *
+ */
+
+@Controller
+@RequestMapping("/opinion")
+public class OpinionController {
+	private static final Logger logger = LoggerFactory.getLogger(OpinionController.class);
+	@Autowired
+	private IOpinionService opinionService;
+	@Autowired
+	private IPermissionService permissionService;
+	
+	@RequestMapping("/saveOrUpdate")
+//	@RequiresPermissions("opinion/saveOrUpdate")
+//	@RequiresOpinions("管理员")
+	public @ResponseBody ExtAjaxResponse saveOrUpdate(Opinion opinion) {
+		
+		/*if (opinionService.findOpinion(opinion.getOpinionName()) != null) {
+			return new ExtAjaxResponse(false, "该角色已经存在不用再添加");
+		}*/
+		try {
+			opinionService.saveOrUpdate(opinion);
+			return new ExtAjaxResponse(true, "操作成功");
+		} catch (Exception e) {
+			return new ExtAjaxResponse(false, "操作失败");
+		}	
+	}
+	
+	@RequestMapping("/delete")
+//	@RequiresPermissions("opinion/delete")
+//	@RequiresOpinions("管理员")
+	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long id) {
+		Opinion opinion = opinionService.findOne(id);
+		try {			
+			opinionService.delete(opinion);			
+			return new ExtAjaxResponse(true, "操作成功");
+		} catch (Exception e) {
+			return new ExtAjaxResponse(false, "操作失败");
+		}		
+	}
+	@RequestMapping("/deleteOpinions")
+//	@RequiresPermissions("opinion/deleteOpinions")
+//	@RequiresOpinions("管理员")
+	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long[] ids) {
+		try {
+			List<Long> idsLists = Arrays.asList(ids);
+			if (idsLists != null) {
+				opinionService.delete(idsLists);
+			}
+			return new ExtAjaxResponse(true, "操作成功");
+		} catch (Exception e) {
+			return new ExtAjaxResponse(false, "操作失败");
+		}
+	}	
+	@RequestMapping("/findOne")
+	public @ResponseBody Opinion findOne(@RequestParam Long id) {
+		Opinion opinion = opinionService.findOne(id);
+		return opinion;
+	}	
+	
+	@RequestMapping("/findAll")
+	public @ResponseBody ExtJsonResult<Opinion> findAll(HttpSession session){
+		List<Opinion> opinionLists = opinionService.findAll();
+		session.setAttribute("opinionLists", opinionLists);
+		System.out.println("opinionLists:"+opinionLists);
+		return new ExtJsonResult<Opinion>(opinionLists);
+	}
+	@RequestMapping("/findPage")
+	public String findPage(HttpSession session,OpinionQueryDTO opinionQueryDTO,ExtPageable extPageable){
+		Page<Opinion> page = opinionService.findAll(opinionQueryDTO.getSpecification(opinionQueryDTO), extPageable.getPageable());
+		session.setAttribute("opinionLists", page.getContent());//内容
+		session.setAttribute("pageNumber", page.getNumber());//当前页
+		session.setAttribute("pageSize", page.getSize());//当前页条数
+		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
+		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
+		return "/WEB-INF/pages/blog/opinion";
+		
+	}
+	/*
+	@RequestMapping("/findOpinionPermission")
+	public @ResponseBody ExtJsonResult<OpinionPermissionQueryDTO> findOpinionPermission(){
+		List<OpinionPermissionQueryDTO> findOpinionPermission = opinionPermissionService.findOpinionPermission();
+		return new ExtJsonResult<OpinionPermissionQueryDTO>(findOpinionPermission);
+	}
+	@RequestMapping("/findPermission")
+	public @ResponseBody ExtJsonResult<OpinionPermissionQueryDTO> findPermission(){
+		List<OpinionPermissionQueryDTO> findPermission = opinionPermissionService.findPermission();
+		return new ExtJsonResult<OpinionPermissionQueryDTO>(findPermission);
+	}*/
+	
+	@RequestMapping("disableOpinion")
+	public @ResponseBody Opinion disableOpinion(@RequestParam Long id) {
+		Opinion opinion = opinionService.findOne(id);
+		if (opinion.getState() != null) {
+			opinionService.updateState(id, 0);
+		}
+		return opinion;
+	}
+	@RequestMapping("enableOpinion")
+	public @ResponseBody Opinion enableOpinion(@RequestParam Long id) {
+		Opinion opinion = opinionService.findOne(id);
+		if (opinion.getState() != null) {
+			opinionService.updateState(id, 1);
+		}
+		return opinion;
+	}
+
+}

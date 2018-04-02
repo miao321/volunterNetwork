@@ -1,0 +1,67 @@
+/* 璇︽儏椤电殑鍏辩敤鏍峰紡 -- 蹇楁効娲诲姩璇︽儏椤点�佸織鎰胯祫璁鎯呴〉 */
+
+/* 鏍囬鍏辩敤閮ㄥ垎 */
+.main_content_common .common_title_box{height:48px;line-height:48px;}
+.main_content_common .common_title{font-weight: bold;font-size:14px;color:#333;background-repeat:no-repeat;background-position:left center;}
+/* 鏂囩珷澶撮儴鏍囬浠ュ強鍒嗕韩閾炬帴 */
+.main_content{margin-top:84px;margin-bottom:30px;}
+.main_content .article_title{font-size:24px;line-height:37px;font-weight: bold;padding-right:320px;text-align: center;}
+.main_content .under_article_title{height:80px;}
+.main_content .sub_heading{width:880px;}
+.main_content .sub_heading_con{padding-top:28px;text-align: center;}
+.main_content .sub_heading_con .sub_heading_item{line-height:24px;margin-right:30px;}
+.main_content .sub_heading_con .sub_heading_item:last-child{margin-right:0;}
+.main_content .share_link_con{padding-top:20px;}
+.main_content .share_link_con .share_link_tit{padding-top:8px;line-height:24px;}
+.main_content .share_link_con .link{margin-left:10px;width:40px;height:40px;background-image: url(../../img/sprite2.png);background-repeat:no-repeat;}
+.main_content .share_link_con .link.sina{background-position:-107px -6px;}
+.main_content .share_link_con .link.qq{background-image:url(../../img/mission/wechat.png);background-repeat:no-repeat;background-position:0 0;}
+.main_content .share_link_con .link.douban{background-position:-187px -6px;}
+
+
+.content_one_left{width:880px;}
+.content_one_left .one_left_body{padding:45px 35px 35px;background-color: #fff;margin-bottom:8px;}
+.content_one_left .one_left_body .news_pic{padding:0 130px;margin-bottom:72px;}
+.content_one_left .one_left_body .news_pic img{width:100%;}
+.content_one_left .one_left_body .phase_item{margin-bottom:24px;}
+.content_one_left .one_left_body .phase_item img{max-width:800px;}
+.content_one_left .one_left_body .phase_item tr td{max-width:800px;}
+.content_one_left .one_left_body .phase_item .phase{line-height:24px;}
+.content_one_left .one_left_body .phase_item:last-child{margin-bottom:0;}
+.content_one_right{width:300px;}
+.content_one_right .one_right_operation{padding:40px 35px;height:210px;background: #fff;}
+.content_one_right .one_right_operation .progress_bar_box{margin-bottom:30px;}
+.content_one_right .one_right_operation .progress_bar_total{width:130px;height:10px;background-color: #ebebeb;border-radius:5px;position: absolute;left:60px;top:3px;}
+.content_one_right .one_right_operation .progress_bar_already{position: absolute;background-color: #ff8814;border-radius:5px;height:100%;}
+.content_one_right .one_right_operation .operate_btns{margin-bottom:30px;}
+.content_one_right .one_right_operation .operate_btns .btn{width:68px;height:98px;border:1px solid #ebebeb;color:#666;margin-right:10px;text-align: center;}
+.content_one_right .one_right_operation .operate_btns .btn:hover{background-color:#e5e5e5;}
+.content_one_right .one_right_operation .operate_btns .btn:last-child{margin-right:0;}
+.content_one_right .one_right_operation .operate_btns .btn_bg{display:block;height:48px;background-repeat:no-repeat;background-position:center center;}
+.content_one_right .one_right_operation .operate_btns .like .btn_bg{background-image: url(../../img/icost.png);}
+.content_one_right .one_right_operation .operate_btns .signup .btn_bg{background-image: url(../../img/iconst2.png);}
+.content_one_right .one_right_operation .operate_btns .attention .btn_bg{background-image: url(../../img/iconst3.png);}
+.content_one_right .one_right_operation .operate_btns .btn_txt{line-height:16px;color:#999;}
+.content_one_right .one_right_operation .operate_btns .btn_num{line-height:34px;font-size:16px;}
+.content_one_right .one_right_operation .operate_btns2{font-size:0;text-align: center;}
+.content_one_right .one_right_operation .operate_btns2 .btn{width:100px;height:35px;line-height:35px;border-radius:17.5px;color:#fff;font-weight: bold;font-size:14px;display:inline-block;}
+.content_one_right .one_right_operation .operate_btns2 .btn1{background-color: #fcc810;margin-right:15px;}
+.content_one_right .one_right_operation .operate_btns2 .btn2{background-color: #ff8814;}
+
+
+/* 鍜ㄨ璇勮 */
+.consult_comment_body{background-color: #fff;padding:30px;}
+.consult_comment_body .login_register{height:90px;background-color: #feec94;padding:0 30px;position: relative;margin-bottom:15px;}
+.consult_comment_body .login_register .askUToLogin{font-size:14px;font-weight: bold;line-height:90px;height:90px;}
+.consult_comment_body .login_register .login_Or_register{position: absolute;right:30px;top:50%;margin-top:-16px;}
+.consult_comment_body .login_Or_register .login{line-height:24px;padding-top:4px;margin-right:30px;text-decoration:underline;}
+.consult_comment_body .login_Or_register .reg{width:100px;height:32px;line-height:32px;color:#fff;font-size:14px;text-align: center;border-radius:16px;background-color: #ff8814;}
+.consult_comment_body .user_consult_list .item{margin-bottom:35px;}
+.consult_comment_body .user_consult_list .item:last-child{margin-bottom:0;}
+.consult_comment_body .user_consult_list .user_head_pic{width:50px;height:50px;overflow: hidden;}
+.consult_comment_body .user_consult_list .user_head_pic .pic{width:100%;height:100%;}
+.consult_comment_body .user_consult_list .right_txt{padding-left:80px;}
+.consult_comment_body .user_consult_list .right_txt1{line-height:23px;height:23px;margin-bottom:10px;}
+.consult_comment_body .user_consult_list .username{color:#ff8814;margin-right:8px;}
+.consult_comment_body .user_consult_list .user_publish_time{color:#999;}
+.consult_comment_body .user_consult_list .right_txt2{line-height:17px;}

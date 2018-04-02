@@ -40,7 +40,7 @@ public class Permission {
 	public Long getId() {
 		return id;
 	}
-    @ManyToMany(cascade = { CascadeType.PERSIST },targetEntity = Role.class,  fetch = FetchType.EAGER)  
+    @ManyToMany(cascade = { CascadeType.ALL },targetEntity = Role.class,  fetch = FetchType.EAGER)  
     @JoinTable(name = "t_permission_t_role", joinColumns = { @JoinColumn(name = "permission_id", updatable = true) }, inverseJoinColumns = { @JoinColumn(name = "role_id", updatable = true) })  
     @Cascade(value = { org.hibernate.annotations.CascadeType.SAVE_UPDATE })  
     @JsonIgnore

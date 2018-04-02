@@ -1,4 +1,4 @@
-package system;
+/*package system;
 
 
 import java.util.Date;
@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-/**
+*//**
  * 
  * @author miao
  * @date 2018年1月21日上午8:55:40
  *
- */
+ *//*
 
 import com.xxx.volunterNetwork.domain.College;
 import com.xxx.volunterNetwork.domain.Permission;
@@ -35,13 +35,13 @@ public class RoleServiceTest {
 	@Test
 	@Rollback(value = false)
 	public void save() {
-		/*for(int i=1;i<=100;i++) {
+		for(int i=1;i<=100;i++) {
 			Role role = new Role();
 			role.setRemark("备注"+i);
 			role.setRoleName("管理员"+i);
 			role.setCreateTime(new Date());
 			roleService.saveOrUpdate(role);
-		}*/
+		}
 		Permission permission = new Permission();
 		permission.setState(1);
 		permission.setUrl("332");
@@ -61,3 +61,5 @@ public class RoleServiceTest {
 	}
 
 }
+}
+*/

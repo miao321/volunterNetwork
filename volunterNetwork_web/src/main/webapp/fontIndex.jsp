@@ -6,17 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>莞工志愿</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
-
-<!-- <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css" /> -->
 <link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="css/index.css" rel="stylesheet" type="text/css" />
 <link href="css/index_animation.css" rel="stylesheet" type="text/css" />
 <link href="css/reset.css" rel="stylesheet" type="text/css" />
 <link href="css/common.css" rel="stylesheet" type="text/css" />
-<!-- <link href="css/izyz_tanchuang.css" rel="stylesheet" type="text/css" /> -->
-
-
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/hm.js"></script>
@@ -54,12 +49,14 @@ $('#identifier').carousel({
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
-        <li><a href="#">首页 </a></li>
+        <li><a href="fontIndex.jsp">首页 </a></li>
         <li><a href="volunterPage.jsp">志愿活动</a></li>
         <li><a href="#">组织团体</a></li>
         <li><a href="#">亲子活动</a></li>
         <li><a href="#">时长公示</a></li>
         <li><a href="#">志愿者证</a></li>
+        <li><a href="#">志愿者证</a></li>
+        <li><a href="#">茶楼</a></li>
         <li><a href="#">帮助中心</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
@@ -74,24 +71,19 @@ $('#identifier').carousel({
 
 <div id="div1">
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-           <!--  <ol class="carousel-indicators">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            </ol> -->
-
               <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="images/banner01.jpg" style="width:1600px;height: 500px;">
-                </div>
-                <div class="item">
-                    <img src="images/banner02.png" style="width:1600px;height: 500px;" >
-                </div>
-                <div class="item">
-                    <img src="images/banner06.jpg" style="width:1600px;height: 500px;" >
-                </div>
+            	<c:forEach items="${imgLists}" var="img" varStatus="status">
+	               <!--  <div class="item active">
+	                    <img src="images/banner01.jpg" style="width:1600px;height: 500px;">
+	                </div> -->
+	                <div class="item">
+	                    <img src="img.img" style="width:1600px;height: 500px;" >
+	                </div>
+	               <!--  <div class="item">
+	                    <img src="images/banner06.jpg" style="width:1600px;height: 500px;" >
+	                </div> -->
+                </c:forEach>
             </div>
 
             <!-- Controls -->
