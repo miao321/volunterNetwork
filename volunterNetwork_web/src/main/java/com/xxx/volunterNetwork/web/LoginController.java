@@ -73,7 +73,7 @@ public class LoginController {
 		session.setAttribute("userName", userName);
 		User user = loginService.findUser(userName);
 		session.setAttribute("user", user);
-		session.setAttribute("userName", user.getStudentNo());
+		session.setAttribute("userName", user.getUserName());
 		session.setAttribute("userId", user.getId());
 		session.setAttribute("password", user.getPassword());
 		return "WEB-INF/pages/backstage";

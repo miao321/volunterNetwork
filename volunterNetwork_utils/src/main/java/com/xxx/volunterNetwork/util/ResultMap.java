@@ -9,9 +9,9 @@ import com.xxx.volunterNetwork.domain.Img;
 
 public class ResultMap {
 	public static Acti ReflectMap(String title,String content,String fwyq,String hdjj,String xxdz,
-			String lxfs,Date hdsj,String img,String hdlx,String fbzz,Date fbtime,
+			String fbman,String lxfs,Date BeginTime,Date endTime,String img,String hdlx,String fbzz,Date fbtime,
 			Integer state,Integer zmrs) {
-		Acti bean = new Acti(title,content,fwyq,hdjj,xxdz,lxfs,hdsj,
+		Acti bean = new Acti(title,content,fwyq,hdjj,xxdz,fbman,lxfs,BeginTime,endTime,
 				img,hdlx,fbzz,fbtime,state,zmrs);
 		return bean;
 	}

@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name="t_acti")
 public class Acti {
@@ -16,8 +18,12 @@ public class Acti {
 	private String fwyq;//服务要求
 	private String hdjj;//活动简介
 	private String xxdz;//详细地址
+	private String fbman;//联系人
 	private String lxfs;//联系方式
-	private Date hdsj;//活动时间
+	@DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
+	private Date beginTime;//活动开始时间
+	@DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
+	private Date endTime;//活动结束时间
 	private String img;//图片
 	private String hdlx;//活动类型
 	private String fbzz;//发布组织
@@ -29,7 +35,7 @@ public class Acti {
 	public Acti() {
 		super();		
 	}
-	public Acti(Long id, String title, String content, String fwyq, String hdjj, String xxdz, String lxfs, Date hdsj,
+	public Acti(Long id, String title, String content, String fwyq, String hdjj, String xxdz,String fbman, String lxfs, Date beginTime,Date endTime,
 			String img, String hdlx, String fbzz, Date fbtime, Integer state, Integer zmrs, Integer zan,
 			Integer attention) {
 		this.id = id;
@@ -38,8 +44,10 @@ public class Acti {
 		this.fwyq = fwyq;
 		this.hdjj = hdjj;
 		this.xxdz = xxdz;
+		this.fbman = fbman;
 		this.lxfs = lxfs;
-		this.hdsj = hdsj;
+		this.beginTime = beginTime;
+		this.endTime = endTime;
 		this.img = img;
 		this.hdlx = hdlx;
 		this.fbzz = fbzz;
@@ -49,15 +57,17 @@ public class Acti {
 		this.zan = zan;
 		this.attention = attention;
 	}
-	public Acti(String title, String content, String fwyq, String hdjj, String xxdz, String lxfs, Date hdsj,
+	public Acti(String title, String content, String fwyq, String hdjj, String xxdz,String fbman, String lxfs, Date beginTime,Date endTime,
 			String img, String hdlx, String fbzz, Date fbtime, Integer state, Integer zmrs) {	
 		this.title = title;
 		this.content = content;
 		this.fwyq = fwyq;
 		this.hdjj = hdjj;
 		this.xxdz = xxdz;
+		this.fbman = fbman;
 		this.lxfs = lxfs;
-		this.hdsj = hdsj;
+		this.beginTime = beginTime;
+		this.endTime = endTime;
 		this.img = img;
 		this.hdlx = hdlx;
 		this.fbzz = fbzz;
@@ -91,8 +101,11 @@ public class Acti {
 	public String getLxfs() {
 		return lxfs;
 	}
-	public Date getHdsj() {
-		return hdsj;
+	public Date getBeginTime() {
+		return beginTime;
+	}
+	public Date getEndTime() {
+		return endTime;
 	}
 	public String getImg() {
 		return img;
@@ -139,8 +152,11 @@ public class Acti {
 	public void setLxfs(String lxfs) {
 		this.lxfs = lxfs;
 	}
-	public void setHdsj(Date hdsj) {
-		this.hdsj = hdsj;
+	public void setBeginTime(Date beginTime) {
+		this.beginTime = beginTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 	public void setImg(String img) {
 		this.img = img;
@@ -166,11 +182,12 @@ public class Acti {
 	public void setAttention(Integer attention) {
 		this.attention = attention;
 	}
-	@Override
-	public String toString() {
-		return "Acti [id=" + id + ", title=" + title + ", content=" + content + ", fwyq=" + fwyq + ", hdjj=" + hdjj
-				+ ", xxdz=" + xxdz + ", lxfs=" + lxfs + ", hdsj=" + hdsj + ", img=" + img + ", hdlx=" + hdlx + ", fbzz="
-				+ fbzz + ", fbtime=" + fbtime + ", state=" + state + "]";
+	public String getFbman() {
+		return fbman;
 	}
+	public void setFbman(String fbman) {
+		this.fbman = fbman;
+	}
+	
 
 }

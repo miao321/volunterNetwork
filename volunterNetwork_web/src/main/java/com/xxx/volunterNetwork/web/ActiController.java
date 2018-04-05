@@ -149,8 +149,10 @@ public class ActiController {
 			String real_fwyq = null;
 			String real_hdjj = null;
 			String real_xxdz = null;
+			String real_fbman = null;
 			String real_lxfs = null;
-			Date real_hdsj = null;
+			Date real_beginTime = null;
+			Date real_endTime = null;
 			String real_img = null;
 			String real_hdlx = null;
 			String real_fbzz = null;
@@ -186,10 +188,14 @@ public class ActiController {
 						real_hdjj = value;
 					}else if (filename.equalsIgnoreCase("xxdz")) {
 						real_xxdz = value;
+					}else if (filename.equalsIgnoreCase("fbman")) {
+						real_fbman = value;
 					}else if (filename.equalsIgnoreCase("lxfs")) {
 						real_lxfs = value;
-					}else if (filename.equalsIgnoreCase("hdsj")) {
-						real_hdsj = dateFormat.parse(value);
+					}else if (filename.equalsIgnoreCase("beginTime")) {
+						real_beginTime = dateFormat.parse(value);
+					}else if (filename.equalsIgnoreCase("endTime")) {
+						real_endTime = dateFormat.parse(value);
 					}else if (filename.equalsIgnoreCase("hdlx")) {
 						real_hdlx = value;
 					}else if (filename.equalsIgnoreCase("fbzz")) {
@@ -240,7 +246,7 @@ public class ActiController {
 				}
 			}
 			Acti bean = ResultMap.ReflectMap(real_title, real_content,
-					real_fwyq, real_hdjj, real_xxdz, real_lxfs,real_hdsj, real_img,
+					real_fwyq, real_hdjj, real_xxdz,real_fbman, real_lxfs,real_beginTime,real_endTime, real_img,
 					real_hdlx, real_fbzz, new Date(System.currentTimeMillis()), real_state, real_zmrs);
 			actiService.saveOrUpdate(bean);
 			return "/WEB-INF/pages/front/activityDetail";

@@ -22,7 +22,15 @@ public interface IActiService {
 	public Acti findOne(Long id);
 	public List<Acti> findAll();
 	public void updateState(Long id,Integer state);
-	/*public Acti findActi(String actiName);*/
+	public List<Acti> findActi();
+	public List<Acti> findActi2();
+	public List<Acti> findActi3();
+	public List<Acti> findActi4();
+	public List<Acti> findActi5();
+	public List<Acti> findActi6();
+	public List<Acti> findActi7();
+	public List<Acti> findActi8();
+	public List<Acti> findActi9();
 	//动态条件查询
 	public Page<Acti> findAll(Specification<Acti> spec,Pageable pageable);
 

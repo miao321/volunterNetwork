@@ -1,5 +1,10 @@
+<%@ page import="com.xxx.volunterNetwork.domain.*" %>
+<%@ page import="com.xxx.volunterNetwork.dao.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,11 +22,7 @@
 <script type="text/javascript" src="js/hm.js"></script>
 <script type="text/javascript" src="js/i.js"></script>
 <script type="text/javascript" src="js/crossdomain.js"></script>
-<script type="text/javascript">
-$('#identifier').carousel({
-    interval: 2000
-})
-</script>
+
 <style>
         #div1 {margin:0 auto;height:300px;margin-top:-20px;}
         .item{width:1600px;height: 500px;}
@@ -49,21 +50,27 @@ $('#identifier').carousel({
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
-        <li><a href="fontIndex.jsp">首页 </a></li>
-        <li><a href="volunterPage.jsp">志愿活动</a></li>
+        <li><a href="${pageContext.request.contextPath}/volunterNetwork">首页 </a></li>
+        <li><a href="${pageContext.request.contextPath}/pageDetail">志愿活动</a></li>
         <li><a href="#">组织团体</a></li>
         <li><a href="#">亲子活动</a></li>
         <li><a href="#">时长公示</a></li>
         <li><a href="#">志愿者证</a></li>
-        <li><a href="#">志愿者证</a></li>
-        <li><a href="#">茶楼</a></li>
+       
+        <li><a href="#">i&nbsp;论坛</a></li>
         <li><a href="#">帮助中心</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
         <li><a href="#">广东<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
         <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-        <li><a href="#">登录</a></li>
-        <li><a href="#">注册</a></li>
+        <c:if test="${userName == null || userName == '' }">
+        <li><a href="login.jsp">登录</a></li>
+        </c:if>
+        <c:if test="${userName !=null || userName != '' }">
+        	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
+        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
+        </c:if>
+        <!-- <li><a href="#">注册</a></li> -->
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -74,15 +81,19 @@ $('#identifier').carousel({
               <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
             	<c:forEach items="${imgLists}" var="img" varStatus="status">
-	               <!--  <div class="item active">
-	                    <img src="images/banner01.jpg" style="width:1600px;height: 500px;">
-	                </div> -->
-	                <div class="item">
-	                    <img src="img.img" style="width:1600px;height: 500px;" >
+            		<%-- <div class="item active">
+	                    <img src="${pageContext.request.contextPath}/${ img.img}" style="width:1600px;height: 500px;" >
+	                </div> --%>
+            		<c:if test="${status.first}">
+	                <div class="item active">
+	                    <img src="${pageContext.request.contextPath}/${ img.img}" style="width:1600px;height: 500px;" >
 	                </div>
-	               <!--  <div class="item">
-	                    <img src="images/banner06.jpg" style="width:1600px;height: 500px;" >
-	                </div> -->
+	             	</c:if>
+	               	<c:if test="${!status.first}">
+	                <div class="item">
+	                    <img src="${pageContext.request.contextPath}/${ img.img}" style="width:1600px;height: 500px;" >
+	                </div>
+	                </c:if>
                 </c:forEach>
             </div>
 
@@ -271,7 +282,7 @@ $('#identifier').carousel({
 						<a data-toggle="tab" style="background: red;">活动推荐</a>
 					</li>
 					<li class="active">
-						<a data-toggle="tab" href="#panel-22521">亲少年服务</a>
+						<a data-toggle="tab" href="#panel-22521">青少年服务</a>
 					</li>
 					<li>
 						<a data-toggle="tab" href="#panel-22522">敬老助残</a>
@@ -303,387 +314,181 @@ $('#identifier').carousel({
 					  <div class="main_content_1 mb_25" style="margin-top: 30px;">
 						<div class="content_box">
           					<ul class="content_box_ul clearfix" style="display: block;">
-          						 <li class="item">
-          						 	<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="pic_link">
-          						 		<img src="images/ban1.jpg" id="mission_logo787576" class="pic_link">
+          						<c:forEach items="${actiLists}" var="acti" varStatus="status">
+				            		<li class="item">
+          						 	<a target="_blank" href="detail?id=${acti.id}" class="pic_link">
+          						 		<img src="${pageContext.request.contextPath}/${acti.img }" id="mission_logo787576" class="pic_link">
           						 	</a>
               						<div class="text_box">
-	              						<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="text_title">石排第43期孔明灯项目—交通文明劝导</a>
-						                <p class="txt oneLineOh">地点：广东东莞市石排镇石排公园红绿灯</p>
-						                <p class="txt oneLineOh">时间：2018-3-17</p>
+	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
+						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
+						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
 					                </div>
-					             </li>
-					             <li class="item">
-          						 	<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="pic_link">
-          						 		<img src="images/ban1.jpg" id="mission_logo787576" class="pic_link">
-          						 	</a>
-              						<div class="text_box">
-	              						<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="text_title">石排第43期孔明灯项目—交通文明劝导</a>
-						                <p class="txt oneLineOh">广东东莞市石排镇石排公园红绿灯</p>
-						                <p class="txt oneLineOh">2018-3-17</p>
-					                </div>
-					             </li>
-					             <li class="item">
-          						 	<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="pic_link">
-          						 		<img src="images/ban1.jpg" id="mission_logo787576" class="pic_link">
-          						 	</a>
-              						<div class="text_box">
-	              						<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="text_title">石排第43期孔明灯项目—交通文明劝导</a>
-						                <p class="txt oneLineOh">广东东莞市石排镇石排公园红绿灯</p>
-						                <p class="txt oneLineOh">2018-3-17</p>
-					                </div>
-					             </li>
-					             <li class="item">
-          						 	<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="pic_link">
-          						 		<img src="images/ban1.jpg" id="mission_logo787576" class="pic_link">
-          						 	</a>
-              						<div class="text_box">
-	              						<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="text_title">石排第43期孔明灯项目—交通文明劝导</a>
-						                <p class="txt oneLineOh">广东东莞市石排镇石排公园红绿灯</p>
-						                <p class="txt oneLineOh">2018-3-17</p>
-					                </div>
-					             </li>
-					             <li class="item">
-          						 	<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="pic_link">
-          						 		<img src="images/ban1.jpg" id="mission_logo787576" class="pic_link">
-          						 	</a>
-              						<div class="text_box">
-	              						<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="text_title">石排第43期孔明灯项目—交通文明劝导</a>
-						                <p class="txt oneLineOh">广东东莞市石排镇石排公园红绿灯</p>
-						                <p class="txt oneLineOh">2018-3-17</p>
-					                </div>
-					             </li>
-            				</ul>
-            				<ul class="content_box_ul clearfix" style="display: block;">
-          						 <li class="item">
-          						 	<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="pic_link">
-          						 		<img src="images/ban1.jpg" id="mission_logo787576" class="pic_link">
-          						 	</a>
-              						<div class="text_box">
-	              						<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="text_title">石排第43期孔明灯项目—交通文明劝导</a>
-						                <p class="txt oneLineOh">广东东莞市石排镇石排公园红绿灯</p>
-						                <p class="txt oneLineOh">2018-3-17</p>
-					                </div>
-					             </li>
-					             <li class="item">
-          						 	<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="pic_link">
-          						 		<img src="images/ban1.jpg" id="mission_logo787576" class="pic_link">
-          						 	</a>
-              						<div class="text_box">
-	              						<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="text_title">石排第43期孔明灯项目—交通文明劝导</a>
-						                <p class="txt oneLineOh">广东东莞市石排镇石排公园红绿灯</p>
-						                <p class="txt oneLineOh">2018-3-17</p>
-					                </div>
-					             </li>
-					             <li class="item">
-          						 	<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="pic_link">
-          						 		<img src="images/ban1.jpg" id="mission_logo787576" class="pic_link">
-          						 	</a>
-              						<div class="text_box">
-	              						<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="text_title">石排第43期孔明灯项目—交通文明劝导</a>
-						                <p class="txt oneLineOh">广东东莞市石排镇石排公园红绿灯</p>
-						                <p class="txt oneLineOh">2018-3-17</p>
-					                </div>
-					             </li>
-					             <li class="item">
-          						 	<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="pic_link">
-          						 		<img src="images/ban1.jpg" id="mission_logo787576" class="pic_link">
-          						 	</a>
-              						<div class="text_box">
-	              						<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="text_title">石排第43期孔明灯项目—交通文明劝导</a>
-						                <p class="txt oneLineOh">广东东莞市石排镇石排公园红绿灯</p>
-						                <p class="txt oneLineOh">2018-3-17</p>
-					                </div>
-					             </li>
-					             <li class="item">
-          						 	<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="pic_link">
-          						 		<img src="images/ban1.jpg" id="mission_logo787576" class="pic_link">
-          						 	</a>
-              						<div class="text_box">
-	              						<a target="_blank" href="http://dg.izyz.org/mission/detail.do?missionId=787576" class="text_title">石排第43期孔明灯项目—交通文明劝导</a>
-						                <p class="txt oneLineOh">广东东莞市石排镇石排公园红绿灯</p>
-						                <p class="txt oneLineOh">2018-3-17</p>
-					                </div>
-					             </li>
+					             	</li>
+				                </c:forEach>          						
             				</ul>
             			</div>
             		  </div>
 					</div>
 					<div class="tab-pane" id="panel-22522">
-						<p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p>
+						<div class="main_content_1 mb_25" style="margin-top: 30px;">
+						<div class="content_box">
+          					<ul class="content_box_ul clearfix" style="display: block;">
+          						<c:forEach items="${actiLists2}" var="acti" varStatus="status">
+				            		<li class="item">
+          						 	<a target="_blank" href="detail?id=${acti.id}" class="pic_link">
+          						 		<img src="${pageContext.request.contextPath}/${acti.img }" id="mission_logo787576" class="pic_link">
+          						 	</a>
+              						<div class="text_box">
+	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
+						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
+						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+					                </div>
+					             	</li>
+				                </c:forEach>          						
+            				</ul>
+            			</div>
+            		  </div>
 					</div>
 					<div class="tab-pane" id="panel-22523">
-						<p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p><p>
-							第3部分内容.
-						</p>
+						<div class="main_content_1 mb_25" style="margin-top: 30px;">
+						<div class="content_box">
+          					<ul class="content_box_ul clearfix" style="display: block;">
+          						<c:forEach items="${actiLists3}" var="acti" varStatus="status">
+				            		<li class="item">
+          						 	<a target="_blank" href="detail?id=${acti.id}" class="pic_link">
+          						 		<img src="${pageContext.request.contextPath}/${acti.img }" id="mission_logo787576" class="pic_link">
+          						 	</a>
+              						<div class="text_box">
+	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
+						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
+						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+					                </div>
+					             	</li>
+				                </c:forEach>          						
+            				</ul>
+            			</div>
+            		  </div>
 					</div>
 					<div class="tab-pane" id="panel-22524">
-						<p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p>
+						<div class="main_content_1 mb_25" style="margin-top: 30px;">
+						<div class="content_box">
+          					<ul class="content_box_ul clearfix" style="display: block;">
+          						<c:forEach items="${actiLists4}" var="acti" varStatus="status">
+				            		<li class="item">
+          						 	<a target="_blank" href="detail?id=${acti.id}" class="pic_link">
+          						 		<img src="${pageContext.request.contextPath}/${acti.img }" id="mission_logo787576" class="pic_link">
+          						 	</a>
+              						<div class="text_box">
+	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
+						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
+						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+					                </div>
+					             	</li>
+				                </c:forEach>          						
+            				</ul>
+            			</div>
+            		  </div>
 					</div>
 					<div class="tab-pane" id="panel-22525">
-						<p>
-							第5部分内容.
-						</p><p>
-							第5部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p>
+						<div class="main_content_1 mb_25" style="margin-top: 30px;">
+						<div class="content_box">
+          					<ul class="content_box_ul clearfix" style="display: block;">
+          						<c:forEach items="${actiLists5}" var="acti" varStatus="status">
+				            		<li class="item">
+          						 	<a target="_blank" href="detail?id=${acti.id}" class="pic_link">
+          						 		<img src="${pageContext.request.contextPath}/${acti.img }" id="mission_logo787576" class="pic_link">
+          						 	</a>
+              						<div class="text_box">
+	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
+						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
+						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+					                </div>
+					             	</li>
+				                </c:forEach>          						
+            				</ul>
+            			</div>
+            		  </div>
 					</div>
 					<div class="tab-pane" id="panel-22526">
-						<p>
-							第6部分内容.
-						</p><p>
-							第6部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p>
+						<div class="main_content_1 mb_25" style="margin-top: 30px;">
+						<div class="content_box">
+          					<ul class="content_box_ul clearfix" style="display: block;">
+          						<c:forEach items="${actiLists6}" var="acti" varStatus="status">
+				            		<li class="item">
+          						 	<a target="_blank" href="detail?id=${acti.id}" class="pic_link">
+          						 		<img src="${pageContext.request.contextPath}/${acti.img }" id="mission_logo787576" class="pic_link">
+          						 	</a>
+              						<div class="text_box">
+	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
+						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
+						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+					                </div>
+					             	</li>
+				                </c:forEach>          						
+            				</ul>
+            			</div>
+            		  </div>
 					</div>
 					<div class="tab-pane" id="panel-22527">
-						<p>
-							第7部分内容.
-						</p><p>
-							第7部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p>
+						<div class="main_content_1 mb_25" style="margin-top: 30px;">
+						<div class="content_box">
+          					<ul class="content_box_ul clearfix" style="display: block;">
+          						<c:forEach items="${actiLists7}" var="acti" varStatus="status">
+				            		<li class="item">
+          						 	<a target="_blank" href="detail?id=${acti.id}" class="pic_link">
+          						 		<img src="${pageContext.request.contextPath}/${acti.img }" id="mission_logo787576" class="pic_link">
+          						 	</a>
+              						<div class="text_box">
+	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
+						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
+						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+					                </div>
+					             	</li>
+				                </c:forEach>          						
+            				</ul>
+            			</div>
+            		  </div>
 					</div>
 					<div class="tab-pane" id="panel-22528">
-						<p>
-							第8部分内容.
-						</p><p>
-							第8部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p>
+						<div class="main_content_1 mb_25" style="margin-top: 30px;">
+						<div class="content_box">
+          					<ul class="content_box_ul clearfix" style="display: block;">
+          						<c:forEach items="${actiLists8}" var="acti" varStatus="status">
+				            		<li class="item">
+          						 	<a target="_blank" href="detail?id=${acti.id}" class="pic_link">
+          						 		<img src="${pageContext.request.contextPath}/${acti.img }" id="mission_logo787576" class="pic_link">
+          						 	</a>
+              						<div class="text_box">
+	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
+						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
+						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+					                </div>
+					             	</li>
+				                </c:forEach>          						
+            				</ul>
+            			</div>
+            		  </div>
 					</div>
 					<div class="tab-pane" id="panel-22529">
-						<p>
-							第9部分内容.
-						</p><p>
-							第9部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p><p>
-							第4部分内容.
-						</p>
+						<div class="main_content_1 mb_25" style="margin-top: 30px;">
+						<div class="content_box">
+          					<ul class="content_box_ul clearfix" style="display: block;">
+          						<c:forEach items="${actiLists9}" var="acti" varStatus="status">
+				            		<li class="item">
+          						 	<a target="_blank" href="detail?id=${acti.id}" class="pic_link">
+          						 		<img src="${pageContext.request.contextPath}/${acti.img }" id="mission_logo787576" class="pic_link">
+          						 	</a>
+              						<div class="text_box">
+	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
+						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
+						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+					                </div>
+					             	</li>
+				                </c:forEach>          						
+            				</ul>
+            			</div>
+            		  </div>
 					</div>
 				</div>
 			</div>
@@ -694,148 +499,17 @@ $('#identifier').carousel({
             <a href="javascript:void(0);" class="seeMore fr">换一换</a></div>
 			<div class="act_volunteer">
             <ul class="vol_list clearfix">
+              <c:forEach items="${enrollLists}" var="enroll" varStatus="status">
               <li class="vol_item">
                 <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy1.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
+                  <div class="volunteer_pic fl"><a target="_blank"><img src="${pageContext.request.contextPath}/${enroll.img }" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
                   <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
+                    <p class="volunteer_name">${enroll.userName }</p>
+                    <p class="vol_duration">时长：${enroll.duration }</p>
                   </div>
                 </div>
               </li>
-               <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy2.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-               <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy3.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-               <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy4.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-               <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy5.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-              
-              </ul>
-              <ul class="vol_list clearfix">
-              <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy1.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-               <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy2.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-               <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy3.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-               <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy4.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-               <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy5.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-              
-              </ul>
-              <ul class="vol_list clearfix">
-              <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy1.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-               <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy2.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-               <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy3.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-               <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy4.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-               <li class="vol_item">
-                <div class="vol_item_con clearfix">
-                  <div class="volunteer_pic fl"><a target="_blank"><img src="images/headimgboy5.jpg" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
-                  <div class="volunteer_txt_info">
-                    <p class="volunteer_name">熊启明</p>
-                    <p class="vol_duration">时长：3127</p>
-                  </div>
-                </div>
-              </li>
-              
+              </c:forEach>
               </ul>
               </div>
               </div>
@@ -963,8 +637,11 @@ $('#identifier').carousel({
 	</div>
 	
 </div>
-<div style="background: #F00;margin: 0 auto;height:90px;margin-top: 20px;">
-	<p></p>
+<div style="background: #F00;margin: 0 auto;height:70px;margin-top: 20px;">
+	<div class="inner_box" style="margin: 0 auto;text-align: center;font-size: 16px;font-weight: bold;margin-top: 16px;">
+		<p class="inner_box_p" style="padding-top: 16px;">© Copyright 2015,idgut</p>
+		<p class="inner_box_p">Powered by miao, Theme idgut Created by gdzyz.cn</p>
+	</div>
 </div>
 </body>
 </html>

@@ -70,6 +70,7 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
 	<mvc:resources  mapping="/components/**" location="/components/" />
 	<mvc:resources  mapping="/stat/**" location="/stat/" />
 	<mvc:resources  mapping="/kindeditor/**" location="/kindeditor/" />
+	<mvc:resources  mapping="/upload/**" location="/upload/" />
 	
 	
 </beans>

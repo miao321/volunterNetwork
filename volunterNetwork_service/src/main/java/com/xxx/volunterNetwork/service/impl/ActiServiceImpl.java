@@ -66,5 +66,41 @@ public class ActiServiceImpl implements IActiService {
 		actiRepository.updateState(id, state);
 		
 	}
+	@Override
+	public List<Acti> findActi() {
+		return actiRepository.findActi();
+	}
+	@Override
+	public List<Acti> findActi2() {
+		return actiRepository.findActi2();
+	}
+	@Override
+	public List<Acti> findActi3() {
+		return actiRepository.findActi3();
+	}
+	@Override
+	public List<Acti> findActi4() {
+		return actiRepository.findActi4();
+	}
+	@Override
+	public List<Acti> findActi5() {
+		return actiRepository.findActi5();
+	}
+	@Override
+	public List<Acti> findActi6() {
+		return actiRepository.findActi6();
+	}
+	@Override
+	public List<Acti> findActi7() {
+		return actiRepository.findActi7();
+	}
+	@Override
+	public List<Acti> findActi8() {
+		return actiRepository.findActi8();
+	}
+	@Override
+	public List<Acti> findActi9() {
+		return actiRepository.findActi9();
+	}
 
 }

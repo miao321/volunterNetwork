@@ -80,7 +80,8 @@ function toView(){
 					$("#hdjj2").val(result.hdjj);
 					$("#xxdz2").val(result.xxdz);
 					$("#lxfs2").val(result.lxfs);
-					$("#hdsj2").val(result.hdsj);
+					$("#beginTime2").val(result.beginTime);
+					$("#endTime2").val(result.endTime);
 					$("#img2").val(result.img);
 					$("#hdlx2").val(result.hdlx);
 					$("#fbzz2").val(result.fbzz);
@@ -157,7 +158,8 @@ function editActi(id){
 				$("#hdjj1").val(result.hdjj);
 				$("#xxdz1").val(result.xxdz);
 				$("#lxfs1").val(result.lxfs);
-				$("#hdsj1").val(result.hdsj);
+				$("#beginTime1").val(result.beginTime);
+				$("#endTime1").val(result.endTime);
 				$("#img1").val(result.img);
 				$("#hdlx1").val(result.hdlx);
 				$("#fbzz1").val(result.fbzz);
@@ -240,7 +242,8 @@ function saveModule() {
 					'hdjj' : $("#hdjj").val(),
 					'xxdz' : $("#xxdz").val(),
 					'lxfs' : $("#lxfs").val(),
-					'hdsj' : $("#hdsj").val(),
+					'beginTime' : $("#beginTime").val(),
+					'endTime' : $("#endTime").val(),
 					'img' : $("#img").val(),
 					'hdlx' : $("#hdlx").val(),
 					'fbzz' : $("#fbzz").val(),
@@ -444,9 +447,15 @@ function enableActi(id){
 				    </div>
 				  </div>
 				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">活动时间:</label>
+				    <label for="inputEmail3" class="col-sm-2 control-label">活动开始时间:</label>
 				    <div class="col-sm-10">
-				       <input type="text" id="hdsj" name="hdsj" class="form-control Wdate" placeholder="请输入活动时间" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd'})" style="height:34px;">
+				       <input type="text" id="beginTime" name="beginTime" class="form-control Wdate" placeholder="请输入活动开始时间" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd'})" style="height:34px;">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">活动结束时间:</label>
+				    <div class="col-sm-10">
+				       <input type="text" id="endTime" name="endTime" class="form-control Wdate" placeholder="请输入活动结束时间" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd'})" style="height:34px;">
 				    </div>
 				  </div>
 				  <div class="form-group">
@@ -554,9 +563,15 @@ function enableActi(id){
 				    </div>
 				  </div>
 				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">活动时间:</label>
+				    <label for="inputEmail3" class="col-sm-2 control-label">活动开始时间:</label>
 				    <div class="col-sm-10">
-				       <input type="text" id="hdsj1" name="hdsj1" class="form-control Wdate" placeholder="请输入活动时间" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd'})" style="height:34px;">
+				       <input type="text" id="beginTime1" name="beginTime1" class="form-control Wdate" placeholder="请输入活动开始时间" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd'})" style="height:34px;">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">活动结束时间:</label>
+				    <div class="col-sm-10">
+				       <input type="text" id="endTime1" name="endTime1" class="form-control Wdate" placeholder="请输入活动结束时间" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd'})" style="height:34px;">
 				    </div>
 				  </div>
 				  <div class="form-group">
@@ -669,9 +684,15 @@ function enableActi(id){
 				    </div>
 				  </div>
 				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">活动时间:</label>
+				    <label for="inputEmail3" class="col-sm-2 control-label">活动开始时间:</label>
 				    <div class="col-sm-10">
-				       <input type="text" id="hdsj2" name="hdsj2" class="form-control Wdate" placeholder="请输入活动时间" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd'})" style="height:34px;">
+				       <input type="text" id="beginTime2" name="beginTime2" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd'})" style="height:34px;">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">活动结束时间:</label>
+				    <div class="col-sm-10">
+				       <input type="text" id="endTime2" name="endTime2" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd'})" style="height:34px;">
 				    </div>
 				  </div>
 				  <div class="form-group">

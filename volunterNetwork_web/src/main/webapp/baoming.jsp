@@ -68,13 +68,14 @@
 				
 				<div class="form-group">
 					<div class="col-sm-12">
-						<input type="text" id="phone" name="phone" class="form-control" placeholder="请输入手机号">
-						<input type="hidden" id="phone1" name="phone" class="form-control">
+					  性别：
+				      <input type="radio" name="sex" value="男"/> 男
+					  <input type="radio" name="sex" value="女"/> 女	
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-12">
-						<input type="text" id="email" name="email" class="form-control" placeholder="请输入邮箱">
+						<input type="text" id="email" name="email" class="form-control" placeholder="请输入身份证号">
 						<input type="hidden" id="email1" name="email" class="form-control">
 					</div>
 				</div>
