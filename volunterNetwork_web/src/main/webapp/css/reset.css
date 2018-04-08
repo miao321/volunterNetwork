@@ -7,13 +7,7 @@ em,i{ font-style:normal;}
 b{ font-weight:normal;}
 html, body{height:100%;}
 textarea { resize:none; border:0 none;outline-style: none;}
-select{
-    appearance:none;
--moz-appearance:none; /* Firefox */
--webkit-appearance:none; /* Safari 鍜� Chrome */
-border: none;font-family:"Microsoft Yahei";outline-style: none;
-}
-select::-ms-expand{display:none;}/*娓呴櫎ie鐨剆elect榛樿閫夋嫨妗嗘牱寮忔竻闄わ紝闅愯棌涓嬫媺绠ご*/
+
 body {font-size:12px; color:#333; background:#ededed; font-family:"Microsoft Yahei";}  /*姝ｆ枃鐨勫瓧浣撳ぇ灏忓拰棰滆壊*/
 .clearfix:after{content:''; height:0; line-height:0; visibility:hidden; display:block; clear:both;}
 .clearfix{zoom:1;} /*閽堝ie浣庣骇鐗堟湰鐨勬祻瑙堝櫒*/

@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>个人中心</title>
+<title>帮助中心</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
 <link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -102,9 +102,8 @@
 	<div class="div1">
 		<div class="div2">							
 			<div class="person" style="width:200px;height: 100px;background: #fff;margin-left: 70px;margin-top: -10px;">
-				<img src="images/headimgboy1.jpg" style="width: 58px;height: 58px;float: left;margin: 21px 0 21px 21px;"/>
-				<span style="float:right;margin-right: 50px;margin-top: 20px;">321</span>
-				<button style="float:right;width: 70px;height: 24px;margin-right: 30px;" type="button" class="btn btn-info"><h3 style="text-align: center;color: #fff;">设置头像</h3></button>
+				<h1 style="font-size: 16px; font-weight: bold;padding-top: 10px;">常见问题指引</h1>
+				<hr style="color: red;"/>
 			</div>
 		</div>
 		<div class="div2">
@@ -114,69 +113,57 @@
 			  <a class="a active" href="javascript:void(0);"
 						onClick="openurl('message.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
-	            <div class="item_con"><span class="glyphicon glyphicon-comment" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>我的消息</div>
+	            <div class="item_con"><span class="glyphicon glyphicon-comment" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>账号问题</div>
 	          </li>
 	          </a>
 	          <a class="a" href="javascript:void(0);"
 						onClick="openurl('data.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
-	            <div class="item_con"><span class="glyphicon glyphicon-edit" aria-hidden="true" style="padding-right: 4px;color: green;"></span>完善资料</div>
+	            <div class="item_con"><span class="glyphicon glyphicon-edit" aria-hidden="true" style="padding-right: 4px;color: green;"></span>活动问题</div>
 	          </li>
 	          </a>
 	          <a class="a" href="javascript:void(0);"
 						onClick="openurl('');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
-	            <div class="item_con"><span class="glyphicon glyphicon-stop" aria-hidden="true" style="padding-right: 4px;color:red;"></span>一号通中心</div>
+	            <div class="item_con"><span class="glyphicon glyphicon-stop" aria-hidden="true" style="padding-right: 4px;color:red;"></span>组织团队问题</div>
 	          </li>
 	          </a>
 	          <a class="a" href="javascript:void(0);"
 						onClick="openurl('protect.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
-	            <div class="item_con"><span class="glyphicon glyphicon-folder-close" aria-hidden="true" style="padding-right: 4px;color: orange;"></span>我的项目 </div>
+	            <div class="item_con"><span class="glyphicon glyphicon-folder-close" aria-hidden="true" style="padding-right: 4px;color: orange;"></span>志愿者证问题 </div>
 	          </li>
 	          </a>
+	         
+	         
 	          <a class="a" href="javascript:void(0);"
+						onClick="openurl('baoming.jsp');" style="text-align: left;">
+	          <li class="nav_block_item my_msg">
+	            <div class="item_con"><span class="glyphicon glyphicon-hourglass" aria-hidden="true" style="padding-right: 4px;color: orange;"></span>给我留言</div>
+	          </li>
+	          </a>
+	           <a class="a" href="javascript:void(0);"
+						onClick="openurl('baoming.jsp');" style="text-align: left;">
+	          <li class="nav_block_item my_msg">
+	            <div class="item_con"><span class="glyphicon glyphicon-film" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>意见反馈</div>
+	          </li>
+	          </a>
+	           <a class="a" href="javascript:void(0);"
 						onClick="openurl('record.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
-	            <div class="item_con"><span class="glyphicon glyphicon-th-list" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>服务记录</div>
+	            <div class="item_con"><span class="glyphicon glyphicon-th-list" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>其他问题</div>
 	          </li>
 	          </a>
-	          <a class="a" href="javascript:void(0);"
+	           <a class="a" href="javascript:void(0);"
 						onClick="openurl('baoming.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
-	            <div class="item_con"><span class="glyphicon glyphicon-user" aria-hidden="true" style="padding-right: 4px;color: green;"></span>申请志愿者证 </div>
+	            <div class="item_con"><span class="glyphicon glyphicon-user" aria-hidden="true" style="padding-right: 4px;color: green;"></span>联系我们 </div>
 	          </li>
 	          </a>
-	          <a class="a" href="javascript:void(0);"
-						onClick="openurl('baoming.jsp');" style="text-align: left;">
-	          <li class="nav_block_item my_msg">
-	            <div class="item_con"><span class="glyphicon glyphicon-hourglass" aria-hidden="true" style="padding-right: 4px;color: orange;"></span>志愿者证申请进度</div>
-	          </li>
-	          </a>
-	          
 	        </ul>
 	        </div>
 	        </div>
 	    </div>
-	     
-	    <div class="div2" style="display: visible!important;">
-			 <div class="left_nav_box fl" style="margin-left: 70px;width: 200px;margin-top: 10px;">
-			<div class="nav_block nav_block_one bgcWhite mb_10">
-			<ul class="nav_block_list">				
-	          <li class="nav_block_item my_msg" style="text-align: left;">
-	            <div class="item_con"><span class="glyphicon glyphicon-time" aria-hidden="true" style="padding-right: 4px;color: orange;"></span>志愿时长：321小时</div>
-	          </li>
-	          <li class="nav_block_item my_msg" style="text-align: left;">
-	            <div class="item_con"><span class="glyphicon glyphicon-film" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>培训时长：321小时</div>
-	          </li>
-	          <li class="nav_block_item my_msg" style="text-align: left;">
-	            <div class="item_con"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" style="padding-right: 4px;color: green;"></span>报名活动：23个</div>
-	          </li>	         
-	        </ul>
-	        </div>
-	        </div>
-	     </div>
-		
 	</div>
 </div>
 <div class="right" style="margin-left: 60px;margin-right: -60px;">	

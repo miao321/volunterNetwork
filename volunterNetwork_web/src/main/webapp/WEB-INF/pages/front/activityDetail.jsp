@@ -468,7 +468,17 @@ function enableActi(id){
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">活动类型:</label>
 				    <div class="col-sm-10">
-				      <input type="text" id="hdlx" name="hdlx" class="form-control" placeholder="请输入活动类型">
+				      <select type="text" id="hdlx" name="hdlx" class="form-control" placeholder="请输入活动类型">
+				      	<option>青少年服务</option>
+				      	<option>敬老助残</option>
+				      	<option>扶贫帮困</option>
+				      	<option>文明礼仪</option>
+				      	<option>平安守护</option>
+				      	<option>环境保护</option>
+				      	<option>文化体育</option>
+				      	<option>便民服务</option>
+				      	<option>其他</option>
+				      </select>
 				    </div>
 				  </div>
 				  <div class="form-group">

@@ -15,12 +15,9 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-default" style="background:#ededed;">
+ <nav class="navbar navbar-default" style="background:#ededed;">
  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    
-    <div class="navbar-header">
-    	
+    <div class="navbar-header">    	
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -28,26 +25,31 @@
         <span class="icon-bar"></span>
       </button>
       <img src="images/hand.png" style="float:left;vertical-align: middle;height: 40px;width: 40px;display: inline-block;marign-top:10px;"/>
-      <a class="navbar-brand" href="#">志愿莞工</a>
-      
+      <a class="navbar-brand" href="#">志愿莞工</a>     
     </div>
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
-        <li><a href="#">首页 </a></li>
-        <li><a href="volunterPage.jsp">志愿活动</a></li>
-        <li><a href="#">组织团体</a></li>
-        <li><a href="#">亲子活动</a></li>
-        <li><a href="#">时长公示</a></li>
-        <li><a href="#">志愿者证</a></li>
-        <li><a href="#">帮助中心</a></li>
+      <ul class="nav navbar-nav" id="menu" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
+        <li><a href="${pageContext.request.contextPath}/volunterNetwork">首页 </a></li>
+        <li><a href="${pageContext.request.contextPath}/pageDetail">志愿活动</a></li>
+        <li><a href="${pageContext.request.contextPath}/organization">组织团体</a></li>
+        <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li>
+        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>
+        <!-- <li><a href="#">志愿者证</a></li> -->      
+        <li><a href="${pageContext.request.contextPath}/blog">i&nbsp;论坛</a></li>
+        <li><a href="${pageContext.request.contextPath}/helpCenter">帮助中心</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
         <li><a href="#">广东<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
         <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-        <li><a href="#">登录</a></li>
-        <li><a href="#">注册</a></li>
+        <c:if test="${userName == null || userName == '' }">
+        <li><a href="login.jsp">登录</a></li>
+        </c:if>
+        <c:if test="${userName !=null || userName != '' }">
+        	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
+        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
+        </c:if>
+        <!-- <li><a href="#">注册</a></li> -->
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

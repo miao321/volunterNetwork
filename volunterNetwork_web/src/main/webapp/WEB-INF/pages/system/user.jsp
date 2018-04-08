@@ -416,31 +416,7 @@ function saveRole(){
 					<c:if test="${pageNumber>0 }">
 						<li><a
 							href="<c:url value="/user/findPage?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
-					</c:if>
-					<%-- <% int i = 1; %>
-					<% int current = 0; %>
-					<% String urlString1 = "/user/findPage";%>
-					<% String urlString2 = "/user/findPage";%>
-					<% String urlString3 = "/user/findPage";%>
-					<% String urlString4 = "/user/findPage";%>
-					<% String urlString5 = "/user/findPage";%> --%>
-
-					
-					<%-- <c:forEach begin="${pageNumber+1 }" end="${pageTotalPages}"
-						varStatus="loop">
-						<c:set var="active" value="${loop.index==page?'active':''}" />
-						<li class="${active}"><a
-							href="<c:url value="/user/findPage?page=${loop.index}"/>">${loop.index}</a>
-						</li>
-					</c:forEach> --%>
-					<%-- <% i = current; %>
-					<% urlString1 = "/user/findPage?page=" + i++;%> 
-					<% urlString2 = "/user/findPage?page=" + i++;%> 
-					<% urlString3 = "/user/findPage?page=" + i++;%> 
-					<% urlString4 = "/user/findPage?page=" + i++;%> 
-					<% urlString5 = "/user/findPage?page=" + i++;%>
-					<% i = current; %> --%>
-				
+					</c:if>		
 					<c:if test="${pageNumber-3 >= 1 }">
 						<li><a
 								href="<c:url value="/user/findPage?page=${pageNumber-3}"/>">${pageNumber-3}</a>
@@ -460,8 +436,7 @@ function saveRole(){
 						<li><a
 								href="<c:url value="/user/findPage?page=${pageNumber}"/>">${pageNumber}</a>
 							</li>
-					</c:if>
-					
+					</c:if>					
 					<c:if test="${pageNumber+1 <= pageTotalPages}">
 					<c:set var="active" value="${active}" />
 						<li class="${active}"><a

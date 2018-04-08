@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>志愿活动详情页</title>
+<title>志愿活动页</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
 <link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -149,7 +149,7 @@
 				  <option value="进行中" selected> 不限排序</option>
 				  <option value="进行中">开始时间先后</option>
 				  <option value="已结束">浏览人数最多</option>			  
-				</select>	
+				</select>
 			</form>
 			<form class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
 				<input class="input-medium search-query" type="text" placeholder="请输入关键字" style="height: 40px;"/>
@@ -160,7 +160,7 @@
 </div>
 <div class="content_left_main" style="margin-left: 80px;margin-right:80px;">
 	<ul class="common_main common_main1" style="display: block;">
-		<c:forEach items="${actiLists}" var="acti" varStatus="status">
+		<c:forEach items="${actiLists7}" var="acti" varStatus="status">
 		 <li class="main_item" style="background: #fff;padding-bottom: 20px;padding-left: 20px;">
 		     <div class="item_con clearfix">
 		      <a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="pic_link">
@@ -190,7 +190,71 @@
     
 	</ul>
 </div>
-
+<nav aria-label="Page navigation"
+	style="margin:0 auto;margin-top:-16px;">
+<ul class="pager pagination-lg">
+	<c:if test="${pageNumber>0 }">
+		<li><a
+			href="<c:url value="/user/findPage?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+	</c:if>		
+	<c:if test="${pageNumber-3 >= 1 }">
+		<li><a
+				href="<c:url value="/user/findPage?page=${pageNumber-3}"/>">${pageNumber-3}</a>
+			</li>
+	</c:if>
+	<c:if test="${pageNumber-2 >= 1 }">
+		<li><a
+				href="<c:url value="/user/findPage?page=${pageNumber-2}"/>">${pageNumber-2}</a>
+			</li>
+	</c:if>
+	<c:if test="${pageNumber-1 >= 1 }">
+		<li><a
+				href="<c:url value="/user/findPage?page=${pageNumber-1}"/>">${pageNumber-1}</a>
+			</li>
+	</c:if>
+	<c:if test="${pageNumber >= 1 }">
+		<li><a
+				href="<c:url value="/user/findPage?page=${pageNumber}"/>">${pageNumber}</a>
+			</li>
+	</c:if>					
+	<c:if test="${pageNumber+1 <= pageTotalPages}">
+	<c:set var="active" value="${active}" />
+		<li class="${active}"><a
+				href="<c:url value="/user/findPage?page=${pageNumber+1}"/>">${pageNumber+1}</a>
+			</li>
+	</c:if>
+	<c:if test="${pageNumber+2 <= pageTotalPages && !(pageNumber-3 >= 1)}">
+		<li><a
+				href="<c:url value="/user/findPage?page=${pageNumber+2}"/>">${pageNumber+2}</a>
+			</li>
+	</c:if>
+	<c:if test="${pageNumber+3 <= pageTotalPages && !(pageNumber-2 >= 1)}">
+		<li><a
+				href="<c:url value="/user/findPage?page=${pageNumber+3}"/>">${pageNumber+3}</a>
+			</li>
+	</c:if>
+	<c:if test="${pageNumber+4 <= pageTotalPages && !(pageNumber-1 >= 1)}">
+		<li><a
+				href="<c:url value="/user/findPage?page=${pageNumber+4}"/>">${pageNumber+4}</a>
+			</li>
+	</c:if>
+	<c:if test="${pageNumber+5 <= pageTotalPages && !(pageNumber >= 1)}">
+		<li><a
+				href="<c:url value="/user/findPage?page=${pageNumber+5}"/>">${pageNumber+5}</a>
+			</li>
+	</c:if>
+	
+	<c:if test="${pageNumber+1 < pageTotalPages }">
+	<li><a
+		href="<c:url value="/user/findPage?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
+	</li>
+	</c:if>
+</ul>
+<ul class="pager pagination-lg">
+	<li>共${pageTotalElements}条记录 共${pageTotalPages}页
+		当前第${pageNumber+1}页</li>
+</ul>
+</nav>
 	
 </body>
 </html>

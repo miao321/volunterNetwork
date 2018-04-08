@@ -149,7 +149,7 @@
 				  <option value="进行中" selected> 不限排序</option>
 				  <option value="进行中">开始时间先后</option>
 				  <option value="已结束">浏览人数最多</option>			  
-				</select>	
+				</select>
 			</form>
 			<form class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
 				<input class="input-medium search-query" type="text" placeholder="请输入关键字" style="height: 40px;"/>

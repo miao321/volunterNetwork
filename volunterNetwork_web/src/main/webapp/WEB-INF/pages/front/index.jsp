@@ -28,14 +28,37 @@
         .item{width:1600px;height: 500px;}
         .nav .navbar-nav a:hover{width: 80px;height:24px;background: red;}
  </style>
+<!-- <style type="text/css">
+.cur{ background:#D96C00; font-weight:bold;}
+
+#menu .a{
+	display: block;
+	width: 100%;
+	margin-left: 0px;
+}
+#menu .a.active{
+	background-color: #da4453;
+	color: #fff;
+}
+</style>
+<script type="text/javascript">
+  var urlstr = location.href;
+  var urlstatus=false;
+  $("#menu a").each(function () {
+    if ((urlstr + '/').indexOf($(this).attr('href')) > -1&&$(this).attr('href')!='') {
+      $(this).addClass('cur'); urlstatus = true;
+    } else {
+      $(this).removeClass('cur');
+    }
+  });
+  if (!urlstatus) {$("#menu a").eq(0).addClass('cur'); }
+ 
+</script> -->
 </head>
 <body>	
  <nav class="navbar navbar-default" style="background:#ededed;">
  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    
-    <div class="navbar-header">
-    	
+    <div class="navbar-header">    	
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -43,22 +66,19 @@
         <span class="icon-bar"></span>
       </button>
       <img src="images/hand.png" style="float:left;vertical-align: middle;height: 40px;width: 40px;display: inline-block;marign-top:10px;"/>
-      <a class="navbar-brand" href="#">志愿莞工</a>
-      
+      <a class="navbar-brand" href="#">志愿莞工</a>     
     </div>
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
+      <ul class="nav navbar-nav" id="menu" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
         <li><a href="${pageContext.request.contextPath}/volunterNetwork">首页 </a></li>
         <li><a href="${pageContext.request.contextPath}/pageDetail">志愿活动</a></li>
-        <li><a href="#">组织团体</a></li>
-        <li><a href="#">亲子活动</a></li>
-        <li><a href="#">时长公示</a></li>
-        <li><a href="#">志愿者证</a></li>
-       
-        <li><a href="#">i&nbsp;论坛</a></li>
-        <li><a href="#">帮助中心</a></li>
+        <li><a href="${pageContext.request.contextPath}/organization">组织团体</a></li>
+        <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li>
+        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>
+        <!-- <li><a href="#">志愿者证</a></li> -->      
+        <li><a href="${pageContext.request.contextPath}/blog">i&nbsp;论坛</a></li>
+        <li><a href="${pageContext.request.contextPath}/helpCenter">帮助中心</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
         <li><a href="#">广东<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
@@ -114,7 +134,8 @@
         <div class="img_txt_content w1200 clearfix po_r">
           <div class="img_txt_part img_txt_left fl">
             <ul class="list clearfix">
-              <li id="people" class="list_item people"><a href="javascript:;" class="item_con">
+              <li id="people" class="list_item people">
+              <a href="${pageContext.request.contextPath}/people" class="item_con">
                 <div class="symbol_box">
                 <div class="symbol_in">
                     <div class="symbol"></div>
@@ -124,7 +145,8 @@
                 <p class="txt1">青少年服务</p>
               </div>
                 </a></li>
-              <li id="oldman" class="list_item oldman"><a href="javascript:;" class="item_con">
+              <li id="oldman" class="list_item oldman">
+              <a href="${pageContext.request.contextPath}/oldman" class="item_con">
                 <div class="symbol_box">
                 <div class="symbol_in">
                     <div class="symbol"></div>
@@ -134,7 +156,8 @@
                 <p class="txt1">敬老助残</p>
               </div>
                 </a></li>
-              <li id="poor" class="list_item help_poor"><a href="javascript:;" class="item_con">
+              <li id="poor" class="list_item help_poor">
+              <a href="${pageContext.request.contextPath}/helpPoor" class="item_con">
                 <div class="symbol_box">
                 <div class="symbol_in">
                     <div class="symbol"></div>
@@ -144,7 +167,8 @@
                 <p class="txt1">扶贫帮困</p>
               </div>
                 </a></li>
-              <li id="civilization" class="list_item civilization"><a href="javascript:;" class="item_con">
+              <li id="civilization" class="list_item civilization">
+              <a href="${pageContext.request.contextPath}/civilization" class="item_con">
                 <div class="symbol_box">
                 <div class="symbol_in">
                     <div class="symbol"></div>
@@ -156,116 +180,122 @@
                 </a></li>
             </ul>
           </div>
-          <div class="img_txt_part img_txt_right fr">
-            <ul class="list clearfix">
-              <li id="safety" class="list_item safety"><a href="javascript:;" class="item_con">
-                <div class="symbol_box">
-                <div class="symbol_in">
-                    <div class="symbol"></div>
-                  </div>
-              </div>
-                <div class="txt_box">
-                <p class="txt1">平安守护</p>
-              </div>
-                </a></li>
-              <li id="tree" class="list_item tree"><a href="javascript:;" class="item_con">
-                <div class="symbol_box">
-                <div class="symbol_in">
-                    <div class="symbol"></div>
-                  </div>
-              </div>
-                <div class="txt_box">
-                <p class="txt1">环境保护</p>
-              </div>
-                </a></li>
-              <li id="sport" class="list_item sport"><a href="javascript:;" class="item_con">
-                <div class="symbol_box">
-                <div class="symbol_in">
-                    <div class="symbol"></div>
-                  </div>
-              </div>
-                <div class="txt_box">
-                <p class="txt1">文化体育</p>
-              </div>
-                </a></li>
-              <li id="service" class="list_item service"><a href="javascript:;" class="item_con">
-                <div class="symbol_box">
-                <div class="symbol_in">
-                    <div class="symbol"></div>
-                  </div>
-              </div>
-                <div class="txt_box">
-                <p class="txt1">便民服务</p>
-              </div>
-                </a></li>
-            </ul>
-          </div>
-          <div class="center_number_box">
+			<div class="img_txt_part img_txt_right fr">
+				<ul class="list clearfix">
+					<li id="safety" class="list_item safety">
+					<a href="${pageContext.request.contextPath}/safety" class="item_con">
+							<div class="symbol_box">
+								<div class="symbol_in">
+									<div class="symbol"></div>
+								</div>
+							</div>
+							<div class="txt_box">
+								<p class="txt1">平安守护</p>
+							</div>
+					</a></li>
+					<li id="tree" class="list_item tree">
+					<a href="${pageContext.request.contextPath}/tree"
+						class="item_con">
+							<div class="symbol_box">
+								<div class="symbol_in">
+									<div class="symbol"></div>
+								</div>
+							</div>
+							<div class="txt_box">
+								<p class="txt1">环境保护</p>
+							</div>
+					</a></li>
+					<li id="sport" class="list_item sport">
+					<a href="${pageContext.request.contextPath}/sport"
+						class="item_con">
+							<div class="symbol_box">
+								<div class="symbol_in">
+									<div class="symbol"></div>
+								</div>
+							</div>
+							<div class="txt_box">
+								<p class="txt1">文化体育</p>
+							</div>
+					</a></li>
+					<li id="service" class="list_item service">
+					<a href="${pageContext.request.contextPath}/service" class="item_con">
+							<div class="symbol_box">
+								<div class="symbol_in">
+									<div class="symbol"></div>
+								</div>
+							</div>
+							<div class="txt_box">
+								<p class="txt1">便民服务</p>
+							</div>
+					</a></li>
+				</ul>
+			</div>
+			<div class="center_number_box">
             <div class="num_content">
               <div class="num_item_box">
                 <h2 class="num_item_title">注册志愿者 (人)</h2>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">9</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">9</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">3</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">3</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">2</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">2</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">7</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">7</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">5</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">5</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">4</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">4</li>
                 </ol>
               </div>
               <div class="num_item_box">
                 <h2 class="num_item_title">志愿服务时长 (万小时)</h2>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">1</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">1</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">5</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">5</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">8</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">8</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">3</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">3</li>
                 </ol>
               </div>
               <div class="num_item_box">
                 <h2 class="num_item_title">志愿服务组织 (个)</h2>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">1</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">1</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">3</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">3</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">7</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">7</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">9</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">9</li>
                 </ol>
               </div>
               <div class="num_item_box">
                 <h2 class="num_item_title">志愿服务团体 (个)</h2>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">5</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">5</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">5</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">5</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">5</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">5</li>
                 </ol>
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;">0</li>
+                  <li class="num" style="margin-right: 0px;padding-top: 8px;">0</li>
                 </ol>
               </div>
             </div>
@@ -517,7 +547,7 @@
 		</div>
 		
 		<div class="row-fluid">
-				<div class="span8">
+				<div class="span7">
 					<div class="tabbable" id="tabs-780891">
 				<ul class="nav nav-tabs"  style="font-size: 14px;font-weight: bold;">
 					<li class="active">
@@ -613,20 +643,20 @@
 				</div>
 			</div>
 				</div>
-				<div class="span4">
+				<div class="span5">
 				<img alt="排行榜" src="images/crown.png" style="float: left;margin-top: 8px;">
 				<h3  style="font-size: 16px;font-weight: bold;margin-top: 12px;padding-left: 4px;">志愿排行</h3>
 					<div class="row-fluid">
 						<div class="span6">
 							<span style="font-size: 18px;font-weight: bold;float: left;margin-top: 20px;padding-left: 40px;">志愿者</span>
-							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: -90px;margin-top: 60px;color: #333">1 广州</span>
+							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: -100px;margin-top: 60px;color: #333">1 化学工程与能源技术学院</span>
 							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 20px;margin-top: 60px;">32123人</span>
 					 	</div>
 						<table style="height:60px;border-color:000000;border-left-style:solid;border-width:1px"><tr><td valign="top"></td></tr></table>						
 						 <div>
 							<span style="font-size: 18px;font-weight: bold;float: right;margin-top: -40px;margin-right: 40px;">志愿服务时长</span>
-							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: 20px;">广州</span>
-							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 10px;">32123小时</span> 
+							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: 10px;">化学工程与能源技术学院</span>
+							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 0px;">32123小时</span> 
 						</div>
 					</div>
 				</div>
@@ -643,5 +673,11 @@
 		<p class="inner_box_p">Powered by miao, Theme idgut Created by gdzyz.cn</p>
 	</div>
 </div>
+<!-- <script type="text/javascript">
+$("#menu .a").click(function(){
+	$("#menu .a").removeClass("active");
+	$(this).addClass("active");
+});
+</script> -->
 </body>
 </html>

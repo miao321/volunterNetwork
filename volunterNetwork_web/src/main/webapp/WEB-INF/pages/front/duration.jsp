@@ -133,19 +133,20 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<form class="btn_search" style="float: left;">
-				<select id="sid1" style="margin-left: 70px;margin-top: 8px;width: 84px;text-align: center;">				  
+				<select id="sid1" style="margin-left: 70px;margin-top: 8px;width: 80px;text-align: center;">
+				  
 				  <option value="进行中" selected>进行中</option>
 				  <option value="已结束">已结束</option>
-				 	  
+				  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>		  
 				</select>
 				
-				<select id="sid2" style="margin-left: 10px;margin-top: 8px;width: 84px;text-align: center;">
-				  <option value="进行中" selected >  不限时间</option>
+				<select id="sid2" style="margin-left: 10px;margin-top: 8px;width: 80px;text-align: center;">
+				  <option value="进行中" selected>  不限时间</option>
 				  <option value="进行中">最近一周</option>
 				  <option value="已结束">最近一个月</option>
 				  <option value="已结束">最近一个季度</option>			  
 				</select>
-				<select id="sid3" style="margin-left: 10px;margin-top: 8px;width: 84px;text-align: center;">
+				<select id="sid3" style="margin-left: 10px;margin-top: 8px;width: 80px;text-align: center;">
 				  <option value="进行中" selected> 不限排序</option>
 				  <option value="进行中">开始时间先后</option>
 				  <option value="已结束">浏览人数最多</option>			  
@@ -170,20 +171,10 @@
 		         <a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #000;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">${acti.title }</a>
 		         <p class="right_txt_p" style="margin-left: 190px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">地点:${acti.xxdz }</p>
 		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 归属组织:${acti.fbzz } </p>
-		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 报名截止:${acti.beginTime } </p>
+		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 报名人数:${acti.beginTime } </p>
 		       </div>     
 		     </div>
-		      <div class="box_vo box_l">
-		       	 <p val="592411" class="opion invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>感兴趣</em><strong class="goodNum">${acti.zan }</strong></a></p>
-		       </div>
-		       <div class="box_vo box_m">
-		       	 <p val="592411" class="opion opion2 invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>招募人数</em><strong class="goodNum">${acti.zmrs }</strong></a></p>
-		       </div>
-		       <div class="box_vo box_r">
-		       	 <p val="592411" class="opion opion3 invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>关注</em><strong class="goodNum">${acti.attention }</strong></a></p>
-		       </div>
-		       
-		       <a href="baoming.jsp" style="color:#fff;"><button type="button" class="btn btn-warning" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;">马上报名</button></a>
+		       <a href="baoming.jsp" style="color:#fff;"><button type="button" class="btn btn-warning" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;">查看详情</button></a>
 	    </li><hr/>
 	    </c:forEach>
     

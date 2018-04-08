@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>志愿活动详情页</title>
+<title>分享页</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
 <link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -17,6 +17,9 @@
 <link href="css/index_animation.css" rel="stylesheet" type="text/css" />
 <link href="css/reset.css" rel="stylesheet" type="text/css" />
 <link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/forum.css" rel="stylesheet" type="text/css" />
+<link href="css/core.css" rel="stylesheet" type="text/css" />
+<link href="css/style2.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/hm.js"></script>
@@ -129,65 +132,75 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div class="container-fluid">
+
+<div class="content_left_main" style="margin-left: 80px;margin-right:80px;">
+	
+	<div class="main_wrap thread_wrap">
+		<div class="main cc">
+			<div id="cloudwind_thread_top"></div>
+			<div class="gc09 main_body">
+				<div class="clpd1 main_content">
+					<div class="cc forum_info_box isthread covered"
+						id="J_forum_info_box"
+						style="background-image: url(images/blog.jpg);width: 1200px;">
+						<div class="cc forum_headline">
+							<div class="fl bread_crumb" id="bread_crumb">
+								<a href="#">推荐</a><em>&gt;</em>
+								<a href="#">i&nbsp;论坛</a>
+							</div>
+						</div>
+						<div class="cc forum_titleline">
+							<div class="clpd1 cc name">
+								<h3 class="fl" style="margin-top: -10px;">i&nbsp;论坛</h3>
+							</div>
+							<div class="notice_wrap">
+								<div class="ntcbg"></div>
+								<div class="ntc ntclt">
+									<span></span><em></em>
+								</div>
+								<div class="ntc ntcrb">
+									<span></span><em></em>
+								</div>
+								<div class="notice">
+									<span class="J_forum_intro">分享新鲜事、闲聊、扯淡、吐槽、晒照、爆料.....随意就行
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-			<form class="btn_search" style="float: left;">
-				<select id="sid1" style="margin-left: 70px;margin-top: 8px;width: 84px;text-align: center;">				  
-				  <option value="进行中" selected>进行中</option>
-				  <option value="已结束">已结束</option>
-				 	  
-				</select>
-				
-				<select id="sid2" style="margin-left: 10px;margin-top: 8px;width: 84px;text-align: center;">
-				  <option value="进行中" selected >  不限时间</option>
-				  <option value="进行中">最近一周</option>
-				  <option value="已结束">最近一个月</option>
-				  <option value="已结束">最近一个季度</option>			  
-				</select>
-				<select id="sid3" style="margin-left: 10px;margin-top: 8px;width: 84px;text-align: center;">
-				  <option value="进行中" selected> 不限排序</option>
-				  <option value="进行中">开始时间先后</option>
-				  <option value="已结束">浏览人数最多</option>			  
-				</select>	
-			</form>
+			
 			<form class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
-				<input class="input-medium search-query" type="text" placeholder="请输入关键字" style="height: 40px;"/>
-				<button type="submit" class="btn btn-info">查找</button>
+				<button type="submit" class="btn btn-info">最新发帖</button>
+				<button type="submit" class="btn btn-info">最后回复</button>
 			</form>
 		</div>
 	</div>
 </div>
-<div class="content_left_main" style="margin-left: 80px;margin-right:80px;">
+	
 	<ul class="common_main common_main1" style="display: block;">
 		<c:forEach items="${actiLists}" var="acti" varStatus="status">
 		 <li class="main_item" style="background: #fff;padding-bottom: 20px;padding-left: 20px;">
 		     <div class="item_con clearfix">
 		      <a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="pic_link">
-		      <img src="${pageContext.request.contextPath}/${acti.img }" id="article_logo999993431541" class="pic" style="width:170px;height: 110px;float: left;margin-top: 20px;marign-left:120px;">
+		      <img src="${pageContext.request.contextPath}/${acti.img }" alt="头像" class="img-circle pic" style="width:60px;height: 60px;float: left;margin-top: 20px;marign-left:120px;">
+		     
 		      </a>
 		       <div class="right_txt" style="margin-top: 26px;">
 		         <a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #000;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">${acti.title }</a>
-		         <p class="right_txt_p" style="margin-left: 190px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">地点:${acti.xxdz }</p>
-		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 归属组织:${acti.fbzz } </p>
-		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 报名截止:${acti.beginTime } </p>
-		       </div>     
-		     </div>
-		      <div class="box_vo box_l">
-		       	 <p val="592411" class="opion invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>感兴趣</em><strong class="goodNum">${acti.zan }</strong></a></p>
-		       </div>
-		       <div class="box_vo box_m">
-		       	 <p val="592411" class="opion opion2 invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>招募人数</em><strong class="goodNum">${acti.zmrs }</strong></a></p>
-		       </div>
-		       <div class="box_vo box_r">
-		       	 <p val="592411" class="opion opion3 invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>关注</em><strong class="goodNum">${acti.attention }</strong></a></p>
-		       </div>
+		         <p class="right_txt_p" style="margin-left:80px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">作者：aaa &nbsp;2018-4-6&nbsp;&nbsp;最后回应：bbb &nbsp;2018-4-6</p>
 		       
-		       <a href="baoming.jsp" style="color:#fff;"><button type="button" class="btn btn-warning" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;">马上报名</button></a>
+		       </div>     
+		     </div>		      
 	    </li><hr/>
 	    </c:forEach>
-    
-    
 	</ul>
 </div>
 
