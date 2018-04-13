@@ -17,6 +17,7 @@ public class Enroll {
 	private String sex;//性别
 	private String idCard;//身份证号
 	private String origazation;//组织
+	private String xjorigazation;//下级组织
 	private Integer duration;//时长
 	private String img;//头像
 	@Id
@@ -80,6 +81,12 @@ public class Enroll {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public String getXjorigazation() {
+		return xjorigazation;
+	}
+	public void setXjorigazation(String xjorigazation) {
+		this.xjorigazation = xjorigazation;
 	}
 	
 

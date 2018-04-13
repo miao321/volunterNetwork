@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/uploadifive.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
@@ -242,6 +243,7 @@ function saveModule() {
 					'hdjj' : $("#hdjj").val(),
 					'xxdz' : $("#xxdz").val(),
 					'lxfs' : $("#lxfs").val(),
+					'fbman' : $("#fbman").val(),
 					'beginTime' : $("#beginTime").val(),
 					'endTime' : $("#endTime").val(),
 					'img' : $("#img").val(),
@@ -336,7 +338,7 @@ function enableActi(id){
 								<td><input type="checkbox" id="id" name="id" value="${acti.id}" /></td>
 								<td>${status.index+1}</td>
 								<td>${acti.title}</td>
-								<td>${acti.content}</td>
+								<td style="max-width: 210px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${acti.content}</td>
 								
 								<td>${acti.fbtime}</td>
 								<td>${acti.fbzz}</td>								
@@ -441,6 +443,12 @@ function enableActi(id){
 				    </div>
 				  </div>
 				   <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">联系人:</label>
+				    <div class="col-sm-10">
+				      <input type="text" id="fbman" name="fbman" class="form-control" placeholder="请输入联系人">
+				    </div>
+				  </div>
+				   <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">联系方式:</label>
 				    <div class="col-sm-10">
 				      <input type="text" id="lxfs" name="lxfs" class="form-control" placeholder="请输入联系方式">
@@ -477,6 +485,7 @@ function enableActi(id){
 				      	<option>环境保护</option>
 				      	<option>文化体育</option>
 				      	<option>便民服务</option>
+				      	
 				      	<option>其他</option>
 				      </select>
 				    </div>
@@ -484,7 +493,24 @@ function enableActi(id){
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">发布组织:</label>
 				    <div class="col-sm-10">
-				      <input type="text" id="fbzz" name="fbzz" class="form-control" placeholder="请输入发布组织">
+				      <select type="text" id="fbzz" name="fbzz" class="form-control" placeholder="请输入发布组织">
+				      	<option>计算机与网络安全学院志愿服务站</option>
+				      	<option>电子工程与智能化学院志愿服务站</option>
+				      	<option>粤台产业科技学院志愿服务站</option>
+				      	<option>国际学院志愿服务站</option>
+				      	<option>生态环境与建筑工程学院志愿服务站</option>
+				      	<option>机械工程学院志愿服务站</option>
+				      	<option>经济与管理学院志愿服务站</option>
+				      	<option>文学与传媒学院志愿服务站</option>
+				      	<option>法律与社会工作学院志愿服务站</option>
+				      	<option>教育学院志愿服务站</option>
+				      	<option>化学工程与能源技术学院志愿服务站</option>
+				      	<option>中法联合学院志愿服务站</option>
+				      	<option>马克思主义学院志愿服务站</option>
+				      	<option>继续教育学院志愿服务站</option>
+				      	<option>校志愿中心</option>
+				      
+				      </select>
 				    </div>
 				  </div>
 				  <div class="form-group">

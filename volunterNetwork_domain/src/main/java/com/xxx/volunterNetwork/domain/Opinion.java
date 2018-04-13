@@ -18,7 +18,7 @@ public class Opinion {
 	private Long id;
 	private String content;//内容
 	private String author;//作者
-	private String img;//头像
+	private String title;//标题
 	@DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
 	private Date fbtime;//发布时间
 	private Integer state;
@@ -33,8 +33,9 @@ public class Opinion {
 	public String getAuthor() {
 		return author;
 	}
-	public String getImg() {
-		return img;
+	
+	public String getTitle() {
+		return title;
 	}
 	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")
 	public Date getFbtime() {
@@ -52,8 +53,8 @@ public class Opinion {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public void setImg(String img) {
-		this.img = img;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public void setFbtime(Date fbtime) {
 		this.fbtime = fbtime;

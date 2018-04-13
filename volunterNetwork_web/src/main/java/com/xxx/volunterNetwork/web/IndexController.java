@@ -11,14 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xxx.volunterNetwork.domain.Acti;
+import com.xxx.volunterNetwork.domain.Borad;
 import com.xxx.volunterNetwork.domain.Enroll;
 import com.xxx.volunterNetwork.domain.Img;
-import com.xxx.volunterNetwork.domain.User;
+import com.xxx.volunterNetwork.domain.Organization;
 import com.xxx.volunterNetwork.dto.ActiQueryDTO;
-import com.xxx.volunterNetwork.dto.UserQueryDTO;
 import com.xxx.volunterNetwork.service.IActiService;
+import com.xxx.volunterNetwork.service.IBoradService;
 import com.xxx.volunterNetwork.service.IEnrollService;
 import com.xxx.volunterNetwork.service.IImgService;
+import com.xxx.volunterNetwork.service.IOrganizationService;
+import com.xxx.volunterNetwork.service.impl.OrganizationServiceImpl;
 import com.xxx.volunterNetwork.util.ExtPageable;
 
 @Controller
@@ -29,6 +32,10 @@ public class IndexController {
 	private IActiService actiService;
 	@Autowired
 	private IEnrollService enrollService;
+	@Autowired
+	private IBoradService boradService;
+	@Autowired
+	private IOrganizationService organizationService;
 	@RequestMapping("/volunterNetwork")
 	public String index(HttpSession session) {
 		List<Img> imgs = imgService.findImg();
@@ -40,7 +47,10 @@ public class IndexController {
 		List<Acti> actis6 = actiService.findActi6();
 		List<Acti> actis7 = actiService.findActi7();
 		List<Acti> actis8 = actiService.findActi8();
-		List<Acti> actis9 = actiService.findActi9();		
+		List<Acti> actis9 = actiService.findActi9();
+		List<Borad> borads = boradService.findInfo();
+		List<Borad> borads2 = boradService.findCulture();
+		List<Borad> borads3 = boradService.findMessage();
 		List<Enroll> enrolls = enrollService.findEnroll();
 		
 		session.setAttribute("imgLists", imgs);
@@ -53,9 +63,24 @@ public class IndexController {
 		session.setAttribute("actiLists7", actis7);
 		session.setAttribute("actiLists8", actis8);
 		session.setAttribute("actiLists9", actis9);
+		session.setAttribute("boradLists", borads);
+		session.setAttribute("boradLists2", borads2);
+		session.setAttribute("boradLists3", borads3);
 		session.setAttribute("enrollLists", enrolls);
 		return "/WEB-INF/pages/front/index";
 	}
+	@RequestMapping("/organization")
+	public String organization(HttpSession session) {
+		List<Organization> organizationLists = organizationService.findAll();
+		session.setAttribute("organizationLists", organizationLists);
+		return "WEB-INF/pages/front/organization";
+	}
+	@RequestMapping("/xjorganization")
+	public String xjorganization(@RequestParam Long id,HttpSession session) {
+		Organization organization = organizationService.findOne(id);
+		session.setAttribute("organization", organization);
+		return "/WEB-INF/pages/front/xjorganization";
+	}	
 	@RequestMapping("/people")
 	public String people(HttpSession session,ActiQueryDTO actiQueryDTO,ExtPageable extPageable) {
 		List<Img> imgs = imgService.findImg();
@@ -213,6 +238,31 @@ public class IndexController {
 		System.out.println("actis:++"+actis);
 		session.setAttribute("actiLists", actis);
 		return "/WEB-INF/pages/front/volunterPage";
+	}
+	
+	@RequestMapping("/voluntaryInfo")
+	public String voluntaryInfo(@RequestParam Long id,HttpSession session) {
+		Borad borad = boradService.findOne(id);
+		List<Borad> borads = boradService.findInfo();
+		session.setAttribute("boradLists", borads);
+		session.setAttribute("borad", borad);
+		return "/WEB-INF/pages/borad/voluntaryInfo";
+	}
+	@RequestMapping("/voluntaryCulture")
+	public String voluntaryCulture(@RequestParam Long id,HttpSession session) {
+		Borad borad1 = boradService.findOne(id);
+		List<Borad> borads2 = boradService.findCulture();
+		session.setAttribute("borad1", borad1);
+		session.setAttribute("boradLists2", borads2);
+		return "/WEB-INF/pages/borad/voluntaryCulture";
+	}
+	@RequestMapping("/messageBlog")
+	public String messageBlog(@RequestParam Long id,HttpSession session) {
+		Borad borad2 = boradService.findOne(id);
+		List<Borad> borads3 = boradService.findMessage();
+		session.setAttribute("borad2", borad2);
+		session.setAttribute("boradLists3", borads3);
+		return "/WEB-INF/pages/borad/messageBlog";
 	}
 	
 }

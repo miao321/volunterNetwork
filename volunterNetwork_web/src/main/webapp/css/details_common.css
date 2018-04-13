@@ -29,7 +29,7 @@
 .content_one_left .one_left_body .phase_item .phase{line-height:24px;}
 .content_one_left .one_left_body .phase_item:last-child{margin-bottom:0;}
 .content_one_right{width:300px;}
-.content_one_right .one_right_operation{padding:40px 35px;height:210px;background: #fff;}
+.content_one_right .one_right_operation{padding:40px 35px;height:100%;background: #fff;}
 .content_one_right .one_right_operation .progress_bar_box{margin-bottom:30px;}
 .content_one_right .one_right_operation .progress_bar_total{width:130px;height:10px;background-color: #ebebeb;border-radius:5px;position: absolute;left:60px;top:3px;}
 .content_one_right .one_right_operation .progress_bar_already{position: absolute;background-color: #ff8814;border-radius:5px;height:100%;}

@@ -97,9 +97,9 @@
                         <p class="phase">${acti.beginTime } 至 ${acti.endTime }</p>
                     </div>
                     <div class="phase_item">
-                        <p class="phase">【联系方式】</p>
-                        <p class="phase">联系人： ${acti.fbman }</p>
-                        <p class="phase">联系电话： ${acti.lxfs }</p>
+                      
+                        <p class="phase">【联系人】： ${acti.fbman }</p>
+                        <p class="phase">【联系方式】： ${acti.lxfs }</p>
                     </div>
                     <div class="phase_item">
                         <p class="phase">【详细地址】</p>                       

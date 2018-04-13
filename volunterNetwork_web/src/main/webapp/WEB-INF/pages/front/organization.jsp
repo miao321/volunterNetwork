@@ -77,18 +77,21 @@
 							<div class="main_content_1 mb_25" style="margin-top: 30px;">
 								<div class="content_box">
 									<ul class="content_box_ul clearfix" style="display: block;">
-										<c:forEach items="${actiLists}" var="acti" varStatus="status">
+										<c:forEach items="${organizationLists}" var="organization" varStatus="status">
 											<li class="item" style="height: auto;">
-											<a target="_blank" href="detail?id=${acti.id}" class="pic_link"> 
-											<img src="${pageContext.request.contextPath}/${acti.img }"
+											<a target="_blank" href="xjorganization?id=${organization.id}" class="pic_link"> 
+											<img src="${pageContext.request.contextPath}/${organization.img }"
 													id="mission_logo787576" class="pic_link">
 											</a>
 												<div class="text_box">
-													<a target="_blank" href="detail?id=${acti.id}"
-														class="text_title">${acti.title }</a>
-													<p class="txt oneLineOh">志愿者人数：${acti.xxdz }</p>
-													<p class="txt oneLineOh">项目数：${acti.beginTime }</p>
+													<a target="_blank" href="xjorganization?id=${organization.id}"
+														class="text_title">${organization.organization }</a>
+													<p class="txt oneLineOh">志愿者人数：<%-- ${organization.xxdz } --%></p>
+													<p class="txt oneLineOh">项目数：<%-- ${organization.beginTime } --%></p>
+													<a href="xjorganization?id=${organization.id}"
+														class="text_title">
 													<button type="button" class="btn btn-default" style="width:88px;margin:10px 0;margin-left: 48px;">下属组织</button>
+													</a>
 												</div>
 											</li>
 										</c:forEach>

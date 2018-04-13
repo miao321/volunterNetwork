@@ -56,7 +56,8 @@ function toView(){
 				if (result.state != 0) {
 					$('#seeCollege').modal('show');
 					$("#collegeName1").val(result.collegeName);
-					$("#major1").val(result.major);
+					$("#organization1").val(result.organization);
+					$("#xjorganization1").val(result.xjorganization);
 					if(result.state == 1){
 						$("#state1").val("启用");
 					}else{
@@ -122,7 +123,8 @@ function editCollege(id){
 				$('#editCollege').modal('show');
 				$("#id").val(result.id);			
 				$("#collegeName").val(result.collegeName);
-				$("#major").val(result.major);
+				$("#organization").val(result.organization);
+				$("#xjorganization").val(result.xjorganization);
 				if(result.state == 1){
 					$("#state").val("启用");
 				}else{
@@ -138,7 +140,8 @@ function editCollege(id){
 function saveCollege() {
 	var id = document.getElementById("id").value;
 	var collegeName = document.getElementById("collegeName").value;
-	var major = document.getElementById("major").value;
+	var organization = document.getElementById("organization").value;
+	var xjorganization = document.getElementById("xjorganization").value;
 	var state = document.getElementById("state").value;
 	if(state == "启用"){
 		state = 1;
@@ -149,7 +152,7 @@ function saveCollege() {
 		 type : "POST",
 		 url : "update",    
          dataType : "json",
-         data:{id:id,collegeName:collegeName,major:major,state:state},
+         data:{id:id,collegeName:collegeName,organization:organization,xjorganization:xjorganization,state:state},
 		 cache : false,
 		 async : true,
 		 success : function(data) {		
@@ -160,13 +163,14 @@ function saveCollege() {
 //添加数据
 function addCollege(){
 	var collegeName = document.getElementById("collegeName2").value;
-	var major = document.getElementById("major2").value;
+	var organization = document.getElementById("organization2").value;
+	var xjorganization = document.getElementById("xjorganization2").value;
     var state = $('#state2 input[name="radio"]:checked ').val(); 
 	 $.ajax({			 
 		 type : "POST",
 		 url : "saveOrUpdate",           
          dataType : "json",
-         data:{collegeName:collegeName,major:major,state:state},
+         data:{collegeName:collegeName,organization:organization,xjorganization:xjorganization,state:state},
 		 cache : false,
 		 async : true,
 		 success : function(data) {				
@@ -174,6 +178,7 @@ function addCollege(){
 		 }
 	}); 
 }
+
 //禁用数据
 function disableCollege(id){
 	$.ajax({			 
@@ -222,7 +227,7 @@ function enableCollege(id){
 			<div class="span12">
 				<button class="btn btn-info" data-toggle="modal" data-target="#addCollege" style="margin: 6px 0;" type="button">
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加
-				</button>				
+				</button>								
 				<button  type="button" class="btn btn-info" onclick="toView()" style="margin: 6px 0;">					
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-edit" aria-hidden="true"></span> 查看					
 				</button>
@@ -237,7 +242,8 @@ function enableCollege(id){
 							<!-- <th data-checkbox="true"></th> -->
 							<th>编号</th>
 							<th>学院名称</th>
-							<th>专业名称</th>
+							<th>组织名称</th>
+							<th>下属组织</th>
 							<th>状态</th>
 							<th>操作</th>
 						</tr>
@@ -248,8 +254,8 @@ function enableCollege(id){
 								<td><input type="checkbox" id="id" name="id" value="${c.id}" /></td>
 								<td>${status.index+1}</td>
 								<td>${c.collegeName}</td>
-								<td>${c.major}</td>
-								
+								<td>${c.organization}</td>
+								<td>${c.xjorganization}</td>
 								<c:if test="${c.state ==1}">
 								<td id="sta">启用</td>
 								</c:if>
@@ -317,14 +323,15 @@ function enableCollege(id){
 						aria-hidden="true">×
 				</button>
 				<h4 class="modal-title" id="myModalLabel">
-					添加学院信息
+					添加组织信息
 				</h4>
 			</div>
 			<div class="modal-body">
 				<form class="form-inline">
 					<fieldset>
 						 <label>学院名字:</label><input type="text" id="collegeName2"/><br/>
-						 <label>专业名字:</label><input type="text" id="major2"/><br/>
+						 <label>组织名字:</label><input type="text" id="organization2"/><br/>
+						 <label>下属组织:</label><input type="text" id="xjorganization2"/><br/>
 						 <label id="state2">学院状态:
 						 	<input type="radio" name="radio" value="1"/> 启用
 						 	<input type="radio" name="radio" value="0"/> 停用
@@ -346,6 +353,7 @@ function enableCollege(id){
 <script>
    $(function () { $('#addCollege').modal('hide')});
 </script>
+
 <!-- eidtCollege -->
 <div class="modal fade" id="editCollege" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
 	<div class="modal-dialog">
@@ -355,7 +363,7 @@ function enableCollege(id){
 						aria-hidden="true">×
 				</button>
 				<h4 class="modal-title" id="myModalLabel">
-					编辑学院信息
+					编辑组织信息
 				</h4>
 			</div>
 			<div class="modal-body">
@@ -363,7 +371,8 @@ function enableCollege(id){
 					<fieldset>
 						 <input type="hidden" id="id">
 						 <label>学院名字:</label><input type="text" id="collegeName"/><br/>
-						 <label>专业名字:</label><input type="text" id="major"/><br/>
+						 <label>组织名字:</label><input type="text" id="organization"/><br/>
+						 <label>下属组织:</label><input type="text" id="xjorganization"/><br/>
 						 <label>学院状态:</label><input type="text" id="state" readonly="true"/><br/>
 					</fieldset>
 				</form>
@@ -388,14 +397,15 @@ function enableCollege(id){
 						aria-hidden="true">×
 				</button>
 				<h4 class="modal-title" id="myModalLabel">
-					学院信息
+					组织信息
 				</h4>
 			</div>
 			<div class="modal-body">
 				<form class="form-inline">
 					<fieldset>					
 						 <label>学院名字:</label><input type="text" id="collegeName1" value="${result.collegeName }" style="padding-left: 4px;"/><br/>
-						 <label>专业名字:</label><input type="text" id="major1" value="${result.major }" style="padding-left: 4px;"/><br/>
+						 <label>组织名字:</label><input type="text" id="organization1" value="${result.organization }" style="padding-left: 4px;"/><br/>
+						 <label>下属组织:</label><input type="text" id="xjorganization1" value="${result.xjorganization }" style="padding-left: 4px;"/><br/>						 
 						 <label>学院状态:</label><input type="text" id="state1" value="${result.state }" style="padding-left: 4px;"/><br/>						
 					</fieldset>
 				</form>

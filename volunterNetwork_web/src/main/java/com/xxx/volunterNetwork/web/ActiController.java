@@ -132,7 +132,7 @@ public class ActiController {
 		return acti;
 	}
 	@RequestMapping("enableActi")
-	public @ResponseBody Acti enableModule(@RequestParam Long id) {
+	public @ResponseBody Acti enableActi(@RequestParam Long id) {
 		Acti acti = actiService.findOne(id);
 		if (acti.getState() != null) {
 			actiService.updateState(id, 1);
@@ -151,6 +151,7 @@ public class ActiController {
 			String real_xxdz = null;
 			String real_fbman = null;
 			String real_lxfs = null;
+			
 			Date real_beginTime = null;
 			Date real_endTime = null;
 			String real_img = null;

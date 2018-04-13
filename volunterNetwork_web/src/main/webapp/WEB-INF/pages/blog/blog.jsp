@@ -186,20 +186,20 @@
 </div>
 	
 	<ul class="common_main common_main1" style="display: block;">
-		<c:forEach items="${actiLists}" var="acti" varStatus="status">
+		<c:forEach items="${shareLists}" var="share" varStatus="status">
 		 <li class="main_item" style="background: #fff;padding-bottom: 20px;padding-left: 20px;">
 		     <div class="item_con clearfix">
-		      <a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="pic_link">
-		      <img src="${pageContext.request.contextPath}/${acti.img }" alt="头像" class="img-circle pic" style="width:60px;height: 60px;float: left;margin-top: 20px;marign-left:120px;">
+		      <a target="_blank" href="blogDetail/?id=${share.id }" class="pic_link">
+		      <img src="${pageContext.request.contextPath}/${share.img }" alt="头像" class="img-circle pic" style="width:60px;height: 60px;float: left;margin-top: 20px;marign-left:120px;">
 		     
 		      </a>
 		       <div class="right_txt" style="margin-top: 26px;">
-		         <a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #000;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">${acti.title }</a>
-		         <p class="right_txt_p" style="margin-left:80px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">作者：aaa &nbsp;2018-4-6&nbsp;&nbsp;最后回应：bbb &nbsp;2018-4-6</p>
+		         <a target="_blank" href="blogDetail/?id=${share.id }" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #000;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">${share.title }</a>
+		         <p class="right_txt_p" style="margin-left:80px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">作者：${share.author } &nbsp;<fmt:formatDate value="${share.fbtime }" type="both"/>&nbsp;&nbsp;最后回应：${share.endResp } &nbsp;<fmt:formatDate value="${share.fbtime }" type="both"/></p>
 		       
 		       </div>     
 		     </div>		      
-	    </li><hr/>
+	    </li><hr style="margin-top: 20px;margin-bottom: 0;"/>
 	    </c:forEach>
 	</ul>
 </div>

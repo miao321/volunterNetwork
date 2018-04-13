@@ -27,7 +27,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class College implements Serializable {
 	private Long id;
 	private String collegeName;  //学院名字
-	private String major;        //专业名字
+	/*private String major;        //专业名字
+*/	private String organization;//组织
+	private String xjorganization;//下级组织
+	private String img;//组织标识图片
 	private Integer state;       //1启用  0停用
 	private User user;//用户跟学院是一对多关系	
 	@Id
@@ -44,34 +47,50 @@ public class College implements Serializable {
 	public String getCollegeName() {
 		return collegeName;
 	}
-
-	public String getMajor() {
+	/*public String getMajor() {
 		return major;
-	}
+	}*/
 	public Integer getState() {
 		return state;
+	}	
+	public String getOrganization() {
+		return organization;
 	}
-	
+	public String getXjorganization() {
+		return xjorganization;
+	}
+	public String getImg() {
+		return img;
+	}
 	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setCollegeName(String collegeName) {
 		this.collegeName = collegeName;
 	}
-	public void setMajor(String major) {
+	/*public void setMajor(String major) {
 		this.major = major;
-	}
+	}*/
 	public void setState(Integer state) {
 		this.state = state;
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}	
+	public void setOrganization(String organization) {
+		this.organization = organization;
 	}
-	@Override
+	public void setXjorganization(String xjorganization) {
+		this.xjorganization = xjorganization;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	/*@Override
 	public String toString() {
 		return "College [id=" + id + ", collegeName=" + collegeName + ", major=" + major + ", state=" + state
 				+ ", user=" + user + "]";
-	}
+	}*/
 	
 	
 }

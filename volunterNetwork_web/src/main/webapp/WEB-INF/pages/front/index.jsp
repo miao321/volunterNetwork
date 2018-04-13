@@ -28,32 +28,7 @@
         .item{width:1600px;height: 500px;}
         .nav .navbar-nav a:hover{width: 80px;height:24px;background: red;}
  </style>
-<!-- <style type="text/css">
-.cur{ background:#D96C00; font-weight:bold;}
 
-#menu .a{
-	display: block;
-	width: 100%;
-	margin-left: 0px;
-}
-#menu .a.active{
-	background-color: #da4453;
-	color: #fff;
-}
-</style>
-<script type="text/javascript">
-  var urlstr = location.href;
-  var urlstatus=false;
-  $("#menu a").each(function () {
-    if ((urlstr + '/').indexOf($(this).attr('href')) > -1&&$(this).attr('href')!='') {
-      $(this).addClass('cur'); urlstatus = true;
-    } else {
-      $(this).removeClass('cur');
-    }
-  });
-  if (!urlstatus) {$("#menu a").eq(0).addClass('cur'); }
- 
-</script> -->
 </head>
 <body>	
  <nav class="navbar navbar-default" style="background:#ededed;">
@@ -74,9 +49,8 @@
         <li><a href="${pageContext.request.contextPath}/volunterNetwork">首页 </a></li>
         <li><a href="${pageContext.request.contextPath}/pageDetail">志愿活动</a></li>
         <li><a href="${pageContext.request.contextPath}/organization">组织团体</a></li>
-        <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li>
-        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>
-        <!-- <li><a href="#">志愿者证</a></li> -->      
+        <%-- <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li> --%>
+        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>     
         <li><a href="${pageContext.request.contextPath}/blog">i&nbsp;论坛</a></li>
         <li><a href="${pageContext.request.contextPath}/helpCenter">帮助中心</a></li>
       </ul>
@@ -352,7 +326,7 @@
               						<div class="text_box">
 	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
 						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
-						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+						                <p class="txt oneLineOh">时间：<fmt:formatDate value="${acti.beginTime }" type="date"/></p>
 					                </div>
 					             	</li>
 				                </c:forEach>          						
@@ -372,7 +346,7 @@
               						<div class="text_box">
 	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
 						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
-						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+						                <p class="txt oneLineOh">时间：<fmt:formatDate value="${acti.beginTime }" type="date"/></p>
 					                </div>
 					             	</li>
 				                </c:forEach>          						
@@ -392,7 +366,7 @@
               						<div class="text_box">
 	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
 						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
-						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+						                <p class="txt oneLineOh">时间：<fmt:formatDate value="${acti.beginTime }" type="date"/></p>
 					                </div>
 					             	</li>
 				                </c:forEach>          						
@@ -412,7 +386,7 @@
               						<div class="text_box">
 	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
 						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
-						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+						                <p class="txt oneLineOh">时间：<fmt:formatDate value="${acti.beginTime }" type="date"/></p>
 					                </div>
 					             	</li>
 				                </c:forEach>          						
@@ -432,7 +406,7 @@
               						<div class="text_box">
 	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
 						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
-						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+						                <p class="txt oneLineOh">时间：<fmt:formatDate value="${acti.beginTime }" type="date"/></p>
 					                </div>
 					             	</li>
 				                </c:forEach>          						
@@ -452,7 +426,7 @@
               						<div class="text_box">
 	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
 						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
-						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+						                <p class="txt oneLineOh">时间：<fmt:formatDate value="${acti.beginTime }" type="date"/></p>
 					                </div>
 					             	</li>
 				                </c:forEach>          						
@@ -472,7 +446,7 @@
               						<div class="text_box">
 	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
 						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
-						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+						                <p class="txt oneLineOh">时间：<fmt:formatDate value="${acti.beginTime }" type="date"/></p>
 					                </div>
 					             	</li>
 				                </c:forEach>          						
@@ -492,7 +466,7 @@
               						<div class="text_box">
 	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
 						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
-						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+						                <p class="txt oneLineOh">时间：<fmt:formatDate value="${acti.beginTime }" type="date"/></p>
 					                </div>
 					             	</li>
 				                </c:forEach>          						
@@ -512,7 +486,7 @@
               						<div class="text_box">
 	              						<a target="_blank" href="detail?id=${acti.id}" class="text_title">${acti.title }</a>
 						                <p class="txt oneLineOh">地点：${acti.xxdz }</p>
-						                <p class="txt oneLineOh">时间：${acti.beginTime }</p>
+						                <p class="txt oneLineOh">时间：<fmt:formatDate value="${acti.beginTime }" type="date"/></p>
 					                </div>
 					             	</li>
 				                </c:forEach>          						
@@ -551,7 +525,7 @@
 					<div class="tabbable" id="tabs-780891">
 				<ul class="nav nav-tabs"  style="font-size: 14px;font-weight: bold;">
 					<li class="active">
-						<a href="#panel-45201" data-toggle="tab">志愿咨询</a>
+						<a href="#panel-45201" data-toggle="tab">志愿资讯</a>
 					</li>
 					<li>
 						<a href="#panel-45202" data-toggle="tab">信息公告</a>
@@ -570,75 +544,124 @@
 					<div class="tab-pane active" id="panel-45201">
 						<div class="content_left_main">
               				<ul class="common_main common_main1" style="display: block;">
+              					 <c:forEach items="${boradLists}" var="borad" varStatus="status">
               					 <li class="main_item">
 				                  <div class="item_con clearfix">
-					                  <a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="pic_link">
-					                  <img src="images/login.jpg" id="article_logo999993431541" class="pic" style="width:170px;height: 110px;float: left;margin-top: 26px;marign-left:120px;">
+					                  <a target="_blank" href="voluntaryInfo?id=${borad.id}" class="pic_link">
+					                  <img src="${pageContext.request.contextPath }/${borad.img }" id="article_logo999993431541" class="pic" style="width:170px;height: 110px;float: left;margin-top: 26px;marign-left:120px;">
 					                  </a>
 				                    <div class="right_txt" style="margin-top: 26px;">
-				                      <a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #000;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">【东莞】东坑镇残联积极开展宣传活动，为残疾人送爱心</a>
-				                      <p class="right_txt_p" style="margin-left: 190px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">5月22日上午，镇残联举办2017年“全国助残日”宣传活动，通过多种宣传方式，倡导扶残助残的良好社会风尚，营造良好社会氛围。 在人流密集的桥头街，镇残联现场搭设宣传台，通过发放宣传手册，引导市民对残疾人的广泛关注，积极倡导扶残助残良好社会风尚，营造良好的社会氛围。 &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;随后，镇残联还在东坑敬老院集中为全镇82名残疾人派发残疾人专用摩托车以及轮椅、洗澡椅等助残器械，切实把关爱和温暖送到残疾</p>
-				                      <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 2017-5-23 </p>
+				                      
+				                      <a target="_blank" href="voluntaryInfo?id=${borad.id}" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #000;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">${borad.title }</a>
+				                      <p class="right_txt_p" style="margin-left: 190px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${borad.content }</p>
+				                      <p class="right_txt_time" style="margin-left: 190px;padding-top: 38px;"> <fmt:formatDate value="${borad.fbtime }" type="date"/> </p>
+				                    </div>
+				                  </div>
+				                 </li>
+				                 <hr/>
+				                 </c:forEach>				                
+              				</ul>
+              			</div>
+					</div>
+					<div class="tab-pane" id="panel-45202">
+						<div class="content_left_main">
+              				<ul class="common_main common_main1" style="display: block;">
+              					 <c:forEach items="${boradLists2}" var="borad" varStatus="status">
+              					 <li class="main_item">
+				                  <div class="item_con clearfix">			            
+				                    <div class="right_txt" style="margin-top: 26px;">
+				                      <span style="float: left;margin-top: -10px;margin-left: 10px;"><img src="images/hot.png"/></span>
+				                      <a target="_blank" href="voluntaryCulture?id=${borad.id}" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #000;padding-left: -2px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">${borad.title }</a>
+				                      <p class="right_txt_p" style="margin-left:-140px;padding-top: 8px;color:#999;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${borad.content }</p>
+				                      <p class="right_txt_time" style="margin-left:0px;padding-top: 8px;"> <fmt:formatDate value="${borad.fbtime }" type="date"/> </p>
+				                    </div>
+				                  </div>
+				                 </li>
+				                 <hr/>
+				                 </c:forEach>				                
+              				</ul>
+              			</div>
+					</div>
+					<div class="tab-pane" id="panel-45203">
+						<div class="content_left_main">
+              				<ol class="common_main common_main1" style="display: block;margin-top: 20px;">
+              					 <c:forEach items="${boradLists3}" var="borad" varStatus="status">
+              					 <li class="main_item">
+				                  <div class="item_con clearfix">			            
+				                    <div class="right_txt">
+				                      <a target="_blank" href="messageBlog?id=${borad.id}" class="right_txt_title oneLineOh" 
+				                      style="font-size: 16px;font-weight: bold;color: #333;padding-left: 20px; ">·&nbsp;${borad.title }</a>
+										
+				                    </div>
+				                  </div>
+				                 </li>
+				                 <hr/>
+				                 </c:forEach>				               
+              				</ol>
+              			</div>
+					</div>
+					<div class="tab-pane" id="panel-45204">
+						<div class="content_left_main">
+              				<ol class="common_main common_main1" style="display: block;">
+              					 <li class="main_item">
+				                  <div class="item_con clearfix">			            
+				                    <div class="right_txt" style="margin-top: 26px;">
+				                      <a target="_blank" href="http://www.gdzyz.cn/policyLaw/detail.do?pageno=15" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #333;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">·&nbsp;《中国青年志愿者协会章程》</a>
+		
 				                    </div>
 				                  </div>
 				                 </li>
 				                 <hr/>
 				                 <li class="main_item">
 				                  <div class="item_con clearfix">
-					                  <a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="pic_link">
-					                  <img src="images/login.jpg" id="article_logo999993431541" class="pic" style="width:170px;height: 110px;float: left;marign-left:120px;">
-					                  </a>
+					                  
 				                    <div class="right_txt">
-				                      <a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #000;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">【东莞】东坑镇残联积极开展宣传活动，为残疾人送爱心</a>
-				                      <p class="right_txt_p" style="margin-left: 190px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">5月22日上午，镇残联举办2017年“全国助残日”宣传活动，通过多种宣传方式，倡导扶残助残的良好社会风尚，营造良好社会氛围。 在人流密集的桥头街，镇残联现场搭设宣传台，通过发放宣传手册，引导市民对残疾人的广泛关注，积极倡导扶残助残良好社会风尚，营造良好的社会氛围。 &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;随后，镇残联还在东坑敬老院集中为全镇82名残疾人派发残疾人专用摩托车以及轮椅、洗澡椅等助残器械，切实把关爱和温暖送到残疾</p>
-				                      <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 2017-5-23 </p>
+				                      <a target="_blank" href="http://www.gdzyz.cn/policyLaw/detail.do?pageno=16" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #333;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">·&nbsp;《中国注册志愿者管理办法》</a>
+				                      
 				                    </div>
 				                  </div>
 				                 </li>
-              				</ul>
+				                 <hr/>
+				                 <li class="main_item">
+				                  <div class="item_con clearfix">			            
+				                    <div class="right_txt">
+				                      <a target="_blank" href="http://www.gdzyz.cn/policyLaw/detail.do?pageno=17" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #333;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">·&nbsp;《广东省志愿服务条例》</a>
+		
+				                    </div>
+				                  </div>
+				                 </li>
+				                 <hr/>
+				                 <li class="main_item">
+				                  <div class="item_con clearfix">
+					                  
+				                    <div class="right_txt">
+				                      <a target="_blank" href="http://www.gdzyz.cn/policyLaw/detail.do?pageno=18" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #333;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">·&nbsp;《广东省青少年保护条例》</a>
+				                      
+				                    </div>
+				                  </div>
+				                 </li>
+				                 <hr/>
+				                 <li class="main_item">
+				                  <div class="item_con clearfix">			            
+				                    <div class="right_txt">
+				                      <a target="_blank" href="http://www.gdzyz.cn/policyLaw/detail.do?pageno=28" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #333;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">·&nbsp;《志愿服务条例》</a>
+		
+				                    </div>
+				                  </div>
+				                 </li>
+				                 <hr/>
+				                 <li class="main_item">
+				                  <div class="item_con clearfix">
+					                  
+				                    <div class="right_txt">
+				                      <a target="_blank" href="http://www.gdzyz.cn/policyLaw/detail.do?pageno=29" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #333;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">·&nbsp;《志愿服务条例》</a>
+				                      
+				                    </div>
+				                  </div>
+				                 </li>
+				                 <hr/>
+              				</ol>
               			</div>
-					</div>
-					<div class="tab-pane" id="panel-45202">
-						<p>
-							第二部分内容.
-						</p>
-						<p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p>
-					</div>
-					<div class="tab-pane" id="panel-45203">
-						<p>
-							第3部分内容.
-						</p>
-						<p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p>
-					</div>
-					<div class="tab-pane" id="panel-45204">
-						<p>
-							第4部分内容.
-						</p>
-						<p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p><p>
-							第二部分内容.
-						</p>
 					</div>
 				</div>
 			</div>
@@ -649,13 +672,13 @@
 					<div class="row-fluid">
 						<div class="span6">
 							<span style="font-size: 18px;font-weight: bold;float: left;margin-top: 20px;padding-left: 40px;">志愿者</span>
-							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: -100px;margin-top: 60px;color: #333">1 化学工程与能源技术学院</span>
+							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: -100px;margin-top: 60px;color: #999">1 化学工程与能源技术学院</span>
 							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 20px;margin-top: 60px;">32123人</span>
 					 	</div>
 						<table style="height:60px;border-color:000000;border-left-style:solid;border-width:1px"><tr><td valign="top"></td></tr></table>						
 						 <div>
 							<span style="font-size: 18px;font-weight: bold;float: right;margin-top: -40px;margin-right: 40px;">志愿服务时长</span>
-							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: 10px;">化学工程与能源技术学院</span>
+							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: 10px;color: #999">化学工程与能源技术学院</span>
 							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 0px;">32123小时</span> 
 						</div>
 					</div>
@@ -667,7 +690,7 @@
 	</div>
 	
 </div>
-<div style="background: #F00;margin: 0 auto;height:70px;margin-top: 20px;">
+<div style="background: #e9573f;margin: 0 auto;height:70px;margin-top: 20px;">
 	<div class="inner_box" style="margin: 0 auto;text-align: center;font-size: 16px;font-weight: bold;margin-top: 16px;">
 		<p class="inner_box_p" style="padding-top: 16px;">© Copyright 2015,idgut</p>
 		<p class="inner_box_p">Powered by miao, Theme idgut Created by gdzyz.cn</p>

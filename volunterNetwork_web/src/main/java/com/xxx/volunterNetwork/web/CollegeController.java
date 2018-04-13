@@ -57,7 +57,8 @@ public class CollegeController {
 		}*/
 		College coll = collegeService.findOne(college.getId());
 		coll.setCollegeName(college.getCollegeName());
-		coll.setMajor(college.getMajor());
+		coll.setOrganization(college.getOrganization());
+		coll.setXjorganization(college.getXjorganization());	
 		coll.setState(college.getState());		
 		try {
 			collegeService.saveOrUpdate(coll);

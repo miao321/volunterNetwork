@@ -111,53 +111,59 @@
 			<div class="nav_block nav_block_one bgcWhite mb_10">
 			<ul class="nav_block_list" id="menu">
 			  <a class="a active" href="javascript:void(0);"
-						onClick="openurl('message.jsp');" style="text-align: left;">
+						onClick="openurl('accountPro.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
 	            <div class="item_con"><span class="glyphicon glyphicon-comment" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>账号问题</div>
 	          </li>
 	          </a>
 	          <a class="a" href="javascript:void(0);"
-						onClick="openurl('data.jsp');" style="text-align: left;">
+						onClick="openurl('activityPro.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
 	            <div class="item_con"><span class="glyphicon glyphicon-edit" aria-hidden="true" style="padding-right: 4px;color: green;"></span>活动问题</div>
 	          </li>
 	          </a>
 	          <a class="a" href="javascript:void(0);"
-						onClick="openurl('');" style="text-align: left;">
+						onClick="openurl('organizationPro.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
 	            <div class="item_con"><span class="glyphicon glyphicon-stop" aria-hidden="true" style="padding-right: 4px;color:red;"></span>组织团队问题</div>
 	          </li>
 	          </a>
-	          <a class="a" href="javascript:void(0);"
+	          <!-- <a class="a" href="javascript:void(0);"
 						onClick="openurl('protect.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
 	            <div class="item_con"><span class="glyphicon glyphicon-folder-close" aria-hidden="true" style="padding-right: 4px;color: orange;"></span>志愿者证问题 </div>
 	          </li>
-	          </a>
+	          </a> -->
 	         
 	         
-	          <a class="a" href="javascript:void(0);"
+	          <!-- <a class="a" href="javascript:void(0);"
 						onClick="openurl('baoming.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
 	            <div class="item_con"><span class="glyphicon glyphicon-hourglass" aria-hidden="true" style="padding-right: 4px;color: orange;"></span>给我留言</div>
 	          </li>
-	          </a>
-	           <a class="a" href="javascript:void(0);"
+	          </a> -->
+	           <!-- <a class="a" href="javascript:void(0);"
 						onClick="openurl('baoming.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
 	            <div class="item_con"><span class="glyphicon glyphicon-film" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>意见反馈</div>
 	          </li>
-	          </a>
+	          </a> -->
 	           <a class="a" href="javascript:void(0);"
-						onClick="openurl('record.jsp');" style="text-align: left;">
+						onClick="openurl('otherPro.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
 	            <div class="item_con"><span class="glyphicon glyphicon-th-list" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>其他问题</div>
 	          </li>
 	          </a>
 	           <a class="a" href="javascript:void(0);"
-						onClick="openurl('baoming.jsp');" style="text-align: left;">
+						onClick="openurl('contactUs.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
 	            <div class="item_con"><span class="glyphicon glyphicon-user" aria-hidden="true" style="padding-right: 4px;color: green;"></span>联系我们 </div>
+	          </li>
+	          </a>
+	          <a class="a" href="javascript:void(0);"
+						onClick="openurl('opinionPro.jsp');" style="text-align: left;">
+	          <li class="nav_block_item my_msg">
+	            <div class="item_con"><span class="glyphicon glyphicon-film" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>意见反馈</div>
 	          </li>
 	          </a>
 	        </ul>
@@ -168,7 +174,7 @@
 </div>
 <div class="right" style="margin-left: 60px;margin-right: -60px;">	
 	<iframe id="rightFrame" name="rightFrame" width="100%" height="100%"
-		scrolling="auto" marginheight="0" marginwidth="0" align="center" src="message.jsp"
+		scrolling="auto" marginheight="0" marginwidth="0" align="center" src="accountPro.jsp"
 		style="border: 0px solid #CCC; margin: 0; padding: 0;">
     </iframe>
 </div>

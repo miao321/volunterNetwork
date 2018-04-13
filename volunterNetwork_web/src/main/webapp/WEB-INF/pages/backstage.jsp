@@ -51,7 +51,7 @@
 					<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a class="a" href="javascript:void(0);"
 						onClick="openurl('user/findPage');">用户管理</a></li>					
 					<li><span class="glyphicon glyphicon-education" aria-hidden="true"></span><a class="a" href="javascript:void(0);"
-						onClick="openurl('college/findPage');">学院管理</a></li>
+						onClick="openurl('college/findPage');">组织管理</a></li>
 					<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a class="a" href="javascript:void(0);"
 						onClick="openurl('role/findPage');">角色管理</a></li>
 					<li><span class="glyphicon glyphicon-heart" aria-hidden="true"></span><a class="a" href="javascript:void(0);"

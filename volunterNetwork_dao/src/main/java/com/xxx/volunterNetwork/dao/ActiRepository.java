@@ -19,23 +19,23 @@ import com.xxx.volunterNetwork.domain.Img;
 
 @Repository
 public interface ActiRepository extends PagingAndSortingRepository<Acti, Long>,JpaSpecificationExecutor<Acti> {
-	@Query(value="select * from t_acti where state = 1 and hdlx=\"青少年服务\" ORDER BY id desc limit 15",nativeQuery=true)
+	@Query(value="select * from t_acti where state = 1 and hdlx=\"青少年服务\" ORDER BY id desc limit 10",nativeQuery=true)
 	public List<Acti> findActi();
-	@Query(value="select * from t_acti where state = 1 and hdlx=\"敬老助残\" ORDER BY id desc limit 15",nativeQuery=true)
+	@Query(value="select * from t_acti where state = 1 and hdlx=\"敬老助残\" ORDER BY id desc limit 10",nativeQuery=true)
 	public List<Acti> findActi2();
-	@Query(value="select * from t_acti where state = 1 and hdlx=\"扶贫帮困\" ORDER BY id desc limit 15",nativeQuery=true)
+	@Query(value="select * from t_acti where state = 1 and hdlx=\"扶贫帮困\" ORDER BY id desc limit 10",nativeQuery=true)
 	public List<Acti> findActi3();
-	@Query(value="select * from t_acti where state = 1 and hdlx=\"文明礼仪\" ORDER BY id desc limit 15",nativeQuery=true)
+	@Query(value="select * from t_acti where state = 1 and hdlx=\"文明礼仪\" ORDER BY id desc limit 10",nativeQuery=true)
 	public List<Acti> findActi4();
-	@Query(value="select * from t_acti where state = 1 and hdlx=\"平安守护\" ORDER BY id desc limit 15",nativeQuery=true)
+	@Query(value="select * from t_acti where state = 1 and hdlx=\"平安守护\" ORDER BY id desc limit 10",nativeQuery=true)
 	public List<Acti> findActi5();
-	@Query(value="select * from t_acti where state = 1 and hdlx=\"环境保护\" ORDER BY id desc limit 15",nativeQuery=true)
+	@Query(value="select * from t_acti where state = 1 and hdlx=\"环境保护\" ORDER BY id desc limit 10",nativeQuery=true)
 	public List<Acti> findActi6();
-	@Query(value="select * from t_acti where state = 1 and hdlx=\"文化体育\" ORDER BY id desc limit 15",nativeQuery=true)
+	@Query(value="select * from t_acti where state = 1 and hdlx=\"文化体育\" ORDER BY id desc limit 10",nativeQuery=true)
 	public List<Acti> findActi7();
-	@Query(value="select * from t_acti where state = 1 and hdlx=\"便民服务\" ORDER BY id desc limit 15",nativeQuery=true)
+	@Query(value="select * from t_acti where state = 1 and hdlx=\"便民服务\" ORDER BY id desc limit 10",nativeQuery=true)
 	public List<Acti> findActi8();
-	@Query(value="select * from t_acti where state = 1 and hdlx=\"其他\" ORDER BY id desc limit 15",nativeQuery=true)
+	@Query(value="select * from t_acti where state = 1 and hdlx=\"其他\" ORDER BY id desc limit 10",nativeQuery=true)
 	public List<Acti> findActi9();
 	
 	@Modifying

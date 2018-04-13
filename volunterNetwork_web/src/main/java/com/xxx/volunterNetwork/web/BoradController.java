@@ -1,10 +1,26 @@
 package com.xxx.volunterNetwork.web;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -13,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xxx.volunterNetwork.anno.SysControllerLog;
+import com.xxx.volunterNetwork.domain.Acti;
 import com.xxx.volunterNetwork.domain.Borad;
 import com.xxx.volunterNetwork.domain.Module;
 import com.xxx.volunterNetwork.dto.BoradQueryDTO;
@@ -20,6 +37,7 @@ import com.xxx.volunterNetwork.dto.ModuleQueryDTO;
 import com.xxx.volunterNetwork.service.IBoradService;
 import com.xxx.volunterNetwork.util.ExtAjaxResponse;
 import com.xxx.volunterNetwork.util.ExtPageable;
+import com.xxx.volunterNetwork.util.ResultMap;
 @Controller
 @RequestMapping("/borad")
 public class BoradController {
@@ -29,7 +47,7 @@ public class BoradController {
 	@RequestMapping("/saveOrUpdate")
 	public String saveOrUpdate(Borad borad) {		
 		try {		
-			boradService.saveOrUpdate(borad);
+			//boradService.saveOrUpdate(borad);
 			//return new ExtAjaxResponse(true, "操作成功");
 			return "/WEB-INF/pages/borad/addBorad";
 		} catch (Exception e) {
@@ -63,7 +81,7 @@ public class BoradController {
 			return new ExtAjaxResponse(false, "操作失败");
 		}		
 	}
-	@RequestMapping("/deleteBorads")
+	@RequestMapping("/deleteborads")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long[] ids) {
 		try {
 			List<Long> idsLists = Arrays.asList(ids);
@@ -96,6 +114,111 @@ public class BoradController {
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
 		return "/WEB-INF/pages/borad/seeBorad";	
+	}
+	
+	@RequestMapping("disableborad")
+	public @ResponseBody Borad disableBorad(@RequestParam Long id) {
+		Borad borad = boradService.findOne(id);
+		if (borad.getState() != null) {
+			boradService.updateState(id, 0);
+		}
+		return borad;
+	}
+	@RequestMapping("enableborad")
+	public @ResponseBody Borad enableBorad(@RequestParam Long id) {
+		Borad borad = boradService.findOne(id);
+		if (borad.getState() != null) {
+			boradService.updateState(id, 1);
+		}
+		return borad;
+	}
+	
+	@RequestMapping("uploadImg")
+	public String upload(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {				
+			String real_title = null;
+			String real_content = null;			
+			String real_fbman = null;			
+			String real_img = null;			
+			Date real_fbtime = null;
+			String real_fblx = null;	
+			Integer real_state = null;
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+			File f = new File("e:/target");
+			if (!f.exists()) {
+				f.mkdir();
+			}
+			factory.setRepository(f);
+			ServletFileUpload upload = new ServletFileUpload(factory);
+			List<FileItem> fileitems = upload.parseRequest(request);
+			// 遍历
+			for (FileItem fileitem : fileitems) {
+				// 判断是文件还是字符串
+				if (fileitem.isFormField()) {
+					// 文件
+					String filename = fileitem.getFieldName();
+					String value = fileitem.getString("utf-8");
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+					if (filename.equalsIgnoreCase("title")) {
+						real_title = value;
+					} else if (filename.equalsIgnoreCase("content")) {
+						real_content = value;	
+						System.out.println("content:"+real_content);
+					}else if (filename.equalsIgnoreCase("fbman")) {
+						real_fbman = value;
+					}else if (filename.equalsIgnoreCase("fbtime")) {
+						real_fbtime = dateFormat.parse(value);
+					}else if (filename.equalsIgnoreCase("fblx")) {
+						real_fblx = value;
+					}else if (filename.equalsIgnoreCase("state")) {
+						real_state = Integer.valueOf(value);
+					}
+				} else {
+					// 文件名
+					String filename = fileitem.getName();
+					filename = filename
+							.substring(filename.lastIndexOf("/") + 1);
+					// 随机编辑名称
+					filename = filename.substring(filename.lastIndexOf("."));
+					filename = UUID.randomUUID().toString() + filename;
+					// 获取完整的名称
+					String webpath = "/upload/";
+					String filepath = request.getServletContext().getRealPath(
+							webpath + filename);
+					real_img = webpath + filename;
+					// 创建文件
+					File file = new File(filepath);
+					file.getParentFile().mkdirs();
+					file.createNewFile();
+					// 获取图像文件
+					BufferedImage image = ImageIO.read(fileitem
+							.getInputStream());
+					// 获取输入流
+					InputStream in = fileitem.getInputStream();
+					// 获取输出流
+					OutputStream out = new FileOutputStream(file);
+					// 文件对拷
+					byte[] buffer = new byte[1024];
+					int len;
+					while ((len = in.read(buffer)) > 0) {
+						out.write(buffer, 0, len);
+					}
+					// 关闭流
+					in.close();
+					out.close();
+					// 删除缓存文件
+					fileitem.delete();
+				}
+			}
+			Borad bean = ResultMap.ReflectMap3(real_title, real_content,
+					real_fbman,  real_img,
+					 new Date(System.currentTimeMillis()),real_fblx, real_state);
+			boradService.saveOrUpdate(bean);
+			return "/WEB-INF/pages/borad/seeBorad";
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }

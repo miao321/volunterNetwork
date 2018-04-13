@@ -1,5 +1,6 @@
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\impl\UserServiceImpl.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\impl\ActiServiceImpl.java
+F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\IOrganizationService.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\impl\PermissionServiceImpl.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\aop\SysLogAop.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\impl\WordServiceImpl.java
@@ -20,6 +21,7 @@ F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterN
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\impl\OpinionServiceImpl.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\IWordService.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\IEnrollService.java
+F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\impl\OrganizationServiceImpl.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\impl\RoleServiceImpl.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\IRoleService.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\IUserService.java

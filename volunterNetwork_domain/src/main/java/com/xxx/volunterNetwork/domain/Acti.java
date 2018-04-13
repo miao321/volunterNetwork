@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name="t_acti")
 public class Acti {
@@ -20,13 +22,14 @@ public class Acti {
 	private String xxdz;//详细地址
 	private String fbman;//联系人
 	private String lxfs;//联系方式
-	@DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy/MM/dd")
 	private Date beginTime;//活动开始时间
-	@DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy/MM/dd")
 	private Date endTime;//活动结束时间
 	private String img;//图片
 	private String hdlx;//活动类型
 	private String fbzz;//发布组织
+	@DateTimeFormat(pattern="yyyy/MM/dd")
 	private Date fbtime;//发布时间
 	private Integer state;//状态
 	private Integer zmrs;//招募人数
@@ -101,9 +104,11 @@ public class Acti {
 	public String getLxfs() {
 		return lxfs;
 	}
+	@JsonFormat(pattern = "yyyy/MM/dd",timezone = "GMT+8")
 	public Date getBeginTime() {
 		return beginTime;
 	}
+	@JsonFormat(pattern = "yyyy/MM/dd",timezone = "GMT+8")
 	public Date getEndTime() {
 		return endTime;
 	}
@@ -116,6 +121,7 @@ public class Acti {
 	public String getFbzz() {
 		return fbzz;
 	}
+	@JsonFormat(pattern = "yyyy/MM/dd",timezone = "GMT+8")
 	public Date getFbtime() {
 		return fbtime;
 	}

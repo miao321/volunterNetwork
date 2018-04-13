@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name="t_share")
 public class Share {
 	private Long id;
+	private Long shareId;   //分享id
 	private String title;  //标题
 	private String author;//作者
 	private String endResp;//最后回复

@@ -3,6 +3,7 @@ package com.xxx.volunterNetwork.util;
 import java.util.Date;
 
 import com.xxx.volunterNetwork.domain.Acti;
+import com.xxx.volunterNetwork.domain.Borad;
 import com.xxx.volunterNetwork.domain.Img;
 
 
@@ -17,6 +18,10 @@ public class ResultMap {
 	}
 	public static Img ReflectMap2(String img,Integer state) {
 		Img bean = new Img(img,state);
+		return bean;
+	}
+	public static Borad ReflectMap3(String title, String content, String fbman, String img, Date fbtime,String fblx, Integer state) {
+		Borad bean = new Borad(title, content, fbman, img, fbtime,fblx, state);
 		return bean;
 	}
 }

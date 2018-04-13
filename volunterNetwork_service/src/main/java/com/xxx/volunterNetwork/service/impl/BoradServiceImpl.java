@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xxx.volunterNetwork.anno.SysLog;
 import com.xxx.volunterNetwork.dao.BoradRepository;
+import com.xxx.volunterNetwork.domain.Acti;
 import com.xxx.volunterNetwork.domain.Borad;
 import com.xxx.volunterNetwork.service.IBoradService;
 
@@ -66,5 +67,25 @@ public class BoradServiceImpl implements IBoradService {
 	public Borad findBorad(String boradName) {
 		return boradRepository.findBorad(boradName);
 	}*/
+	@Override
+	public void updateState(Long id, Integer state) {
+		boradRepository.updateState(id, state);
+		
+	}
+	@Override
+	public List<Borad> findInfo() {
+		// TODO Auto-generated method stub
+		return boradRepository.findInfo();
+	}
+	@Override
+	public List<Borad> findCulture() {
+		// TODO Auto-generated method stub
+		return boradRepository.findCulture();
+	}
+	@Override
+	public List<Borad> findMessage() {
+		// TODO Auto-generated method stub
+		return boradRepository.findMessage();
+	}
 
 }
