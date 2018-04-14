@@ -22,11 +22,11 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.12.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.flexText.js"></script>
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
---%>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
+<script type="text/javascript">
+	var $2 = $.noConflict(true);
+</script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.qqFace.js"></script>
- <%-- <script type="text/javascript" src="${pageContext.request.contextPath }/js/flexText.js"></script>
- --%>
  <style type="text/css">
 	.box_vo{
 		width: 68px;
@@ -91,7 +91,7 @@
 	    text-align: center;
 	    display: block;
 	    color: #333;
-	}
+
 </style>
 </head>
 <body>
@@ -165,18 +165,14 @@
 <div id="show"></div>	
 <div class="commentAll" style="width:1011px;background: #fff;margin-left:190px; ">
     <div class="reviewArea clearfix">
-        <textarea style="height: 80px;" id="saytext" class="content comment-input saytext" placeholder="请输入你想说的&hellip;" onkeyup="keyUP(this)"></textarea>
-        <!-- <p>
-      <input type="button" class="plBtn" style="margin-top: 50px;" value="提交">
-      <span class="emotion">表情</span></p> -->
-        <span class="emotion"  style="background:#000;color:#fff;margin-top: 350px;">表情</span>
-        w54544554
-        <a href="javascript:;" class="plBtn" style="margin-top: 50px;">评论</a>
-        
+        <textarea style="height: 80px;" id="saytext" class="content comment-input saytext" placeholder="请输入你想说的&hellip;" onkeyup="keyUP(this)"></textarea>      
+        <span class="emotion" style="margin-top:50px;text-align: center;display: block;float: left;color: #FFFFFF;margin-left: 12px;
+        "><img src="${pageContext.request.contextPath }/images/face.png" alt="表情"></span>
+        <a href="javascript:;" class="plBtn" style="margin-top: 50px;">评论</a>       
     </div>
     <div class="comment-show">
         <div class="comment-show-con clearfix">
-            <div class="comment-show-con-img pull-left"><img src="images/header-img-comment_03.png" alt=""></div>
+            <div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath }/images/headimgboy5.jpg" alt="" style="width: 50px;height: 50px;"></div>
             <div class="comment-show-con-list pull-left clearfix">
                 <div class="pl-text clearfix">
                     <a href="#" class="comment-size-name">张三 : </a>
@@ -202,10 +198,6 @@
 	
 </body>
 <script type="text/javascript">
-<!--textarea高度自适应-->
-$(function () {
-    $('.content').flexText();
-});
 <!--textarea限制字数-->
 function keyUP(t){
     var len = $(t).val().length;
@@ -339,15 +331,15 @@ $('.comment-show').on('click','.date-dz-z',function(){
     }
 })
 <!--下面的是表情js-->
-/* $(function(){
+$2(function(){
 	$('.emotion').qqFace({
 		id : 'facebox', 
 		assign:'saytext', 
-		path:'arclist/'	//表情存放的路径
+		path:'${pageContext.request.contextPath }/arclist/'	//表情存放的路径
 	});
 	$(".plBtn").click(function(){
 		var str = $("#saytext").val();
-		$("#show").html(replace_em(str));
+		$("#saytext").html(replace_em(str));
 	});
 });
 //查看结果
@@ -355,9 +347,9 @@ function replace_em(str){
 	str = str.replace(/\</g,'&lt;');
 	str = str.replace(/\>/g,'&gt;');
 	str = str.replace(/\n/g,'<br/>');
-	str = str.replace(/\[em_([0-9]*)\]/g,'<img src="arclist/$1.gif" border="0" />');
+	str = str.replace(/\[em_([0-9]*)\]/g,'<img src="${pageContext.request.contextPath }/arclist/$1.gif" border="0" />');
 	return str;
-} */
+} 
 </script>
 
 </html>

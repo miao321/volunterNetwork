@@ -143,7 +143,7 @@ $(function(){
 	});
 	$(".plBtn").click(function(){
 		var str = $("#saytext").val();
-		$("#show").html(replace_em(str));
+		$("#saytext").html(replace_em(str));
 	});
 });
 //查看结果

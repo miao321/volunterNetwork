@@ -22,7 +22,7 @@
 			var strFace, labFace;
 			if($('#'+id).length<=0){
 				strFace = '<div id="'+id+'" style="position:absolute;display:none;z-index:1000;" class="qqFace">' +
-							  '<table border="0" cellspacing="0" cellpadding="0"><tr>';
+							  '<table border="0" cellspacing="0" cellpadding="0" style="border:1px solid #adadad;margin-top:54px;margin-left:20px;"><tr>';
 				for(var i=1; i<=75; i++){
 					labFace = '['+tip+i+']';
 					strFace += '<td><img src="'+path+i+'.gif" onclick="$(\'#'+option.assign+'\').setCaret();$(\'#'+option.assign+'\').insertAtCaret(\'' + labFace + '\');" /></td>';
@@ -75,7 +75,7 @@ jQuery.fn.extend({
 	}, 
 
 	setCaret: function(){ 
-		if(!$.browser.msie) return; 
+		if(!$.browser) return; 
 		var initSetCaret = function(){ 
 			var textObj = $(this).get(0); 
 			textObj.caretPos = document.selection.createRange().duplicate(); 

@@ -286,40 +286,11 @@ ie6固定弹窗滚动hack
 .pages strong,
 .design_mode_edit/*模块管理按钮*/,
 #back_top/*返回顶部*/,
-.pop_showmsg/*无操作提示*/{
-	background:url(../../images/common/core_bg.png);
-}
 
-/*
 ===================
 核心图标整合
 ===================
 */
-.btn .add,
-.btn_error .add,
-.btn_success .add,
-.btn_submit .add,
-.pop_close/*弹窗关闭*/,
-.pop_deep .hd .close/*重口味弹窗关闭*/,
-.pop_card .unfollow/*名片已关注*/,
-.pImg_close/*幻灯关闭*/,
-.bcr1,
-.bcr2,
-.bcr3,
-.bcr4/*幻灯外结构*/,
-.man_ol,
-.women_ol,
-.man_unol,
-.women_unol/*在线状态*/,
-.icon_edit,
-.icon_del/*编辑和删除小图标*/,
-.color_pick/*颜色选择*/,
-.user_select_input .input_down/*私信用户选择*/,
-.pop_help_punch .select_box dd,
-.pop_help_punch .select_box dt/*打卡弹窗*/,
-.design_layout_search button span/*搜索放大镜*/{
-	background:url(../../images/common/core_icon.png) no-repeat;
-}
 
 
 .pagerRead .pagerTurner .btn_prev span,
@@ -697,7 +668,7 @@ loading加载
 .tips_icon_error,
 .tips_icon_success,
 .tips_icon_help{
-	background:url(../../images/tips/small.png) 0 -60px no-repeat;
+	
 	padding:0 10px 0 20px;
 	display:inline-block;
 	vertical-align:middle;
@@ -1015,7 +986,7 @@ loading加载
 	line-height:36px;
 	height:35px;
 	color:#666;
-	background:url(../../images/tips/middle.png) -85px -39px no-repeat;
+	
 }
 .pop_showmsg span.warning{
 	background-position:15px -139px;
@@ -1077,7 +1048,7 @@ loading加载
 	padding-top:180px;
 	text-align:center;
 	height:100px;
-	background:url(../../images/tips/gray_big.png) center 60px no-repeat;
+	
 	font-size:22px;
 	color:#757575;
 	font-family: "OpenSans", "Microsoft Yahei UI Light", "Microsoft Yahei";
@@ -1095,7 +1066,7 @@ loading加载
 	display:inline-block;
 	width:32px;
 	height:32px;
-	background:url(../../images/tips/gray_middle.png) no-repeat;
+
 	vertical-align:middle;
 	margin-right:10px;
 }
@@ -1344,7 +1315,7 @@ loading加载
 }
 .pick_list a.current{
 	border-color:#ff5500;
-	background:#fff url(../../images/common/radio_disabled.png) right bottom no-repeat;
+	
 }
 
 /*
@@ -1553,7 +1524,7 @@ div.pop_show_mini{
 .aPre,
 .aNext{
 	position:absolute;
-	background:url(../../images/common/blank.gif);
+	
 	width:45%;
 	padding-bottom:5000px;
 	margin-bottom:-5000px;
@@ -1827,7 +1798,7 @@ div.pop_show_mini{
 	height:20px;
 	width:34px;
 	display:inline-block;
-	background:url(../../../../../res/images/transparent.png);
+	
 }
 .color_pick.color_big{
 	background-image:none;
@@ -2531,7 +2502,6 @@ div.pop_show_mini{
 }
 .design_tmode_h2,
 .design_layout_hd{
-	background:url(../../images/design/mode_h_bg.png) 999em 999em;
 	font-size:12px;
 	font-weight:100;
 	padding:5px 10px 0;
@@ -2749,11 +2719,11 @@ div.pop_show_mini{
 /*无序*/
 .tmode_list_light li a{
 	padding-left:10px;
-	background:url(../../images/design/light.png) 0 6px no-repeat;
+	
 }
 /*有序*/
 .tmode_list_sort ul{
-	background:url(../../images/design/sort.png) 0 8px no-repeat;
+	
 }
 .tmode_list_sort ul li{
 	padding-left:18px;
@@ -2901,9 +2871,7 @@ div.pop_show_mini{
 门户-【系统】用户列表[带头像]
 ===================
 */
-.tmode_faceList{
-	background:url(../../images/design/li_bg_50.png);
-}
+
 .tmode_faceList ul{
 }
 .tmode_faceList li{
@@ -2928,10 +2896,7 @@ div.pop_show_mini{
 .tmode_faceList li.li_bg .time{
 	background:#fff;
 }
-/*有序*/
-.tmode_faceList_sort ul{
-	background:url(../../images/design/sort_50.png) 10px 15px no-repeat;
-}
+
 .tmode_faceList_sort ul li{
 	padding-left:30px;
 }
@@ -3502,7 +3467,6 @@ ul.at_user_list{
 	height:16px !important;
 	display:inline-block !important;
 	vertical-align:-2px !important;
-	background:url(../../images/common/hook.png) no-repeat !important;
 	position:relative !important;
 	margin:0 !important;
 	padding:0 !important;
