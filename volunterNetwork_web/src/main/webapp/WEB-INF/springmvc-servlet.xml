@@ -72,6 +72,7 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
 	<mvc:resources  mapping="/kindeditor/**" location="/kindeditor/" />
 	<mvc:resources  mapping="/upload/**" location="/upload/" />
 	<mvc:resources  mapping="/arclist/**" location="/arclist/" />
+	<mvc:resources  mapping="/json/**" location="/json/" />
 	
 	
 </beans>

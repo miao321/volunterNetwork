@@ -21,7 +21,7 @@
 <link href="${pageContext.request.contextPath }/css/style2.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.flexText.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/flexText.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
 <script type="text/javascript">
 	var $2 = $.noConflict(true);
@@ -91,7 +91,6 @@
 	    text-align: center;
 	    display: block;
 	    color: #333;
-
 </style>
 </head>
 <body>
@@ -193,8 +192,6 @@
     </div>
 </div>	
 </div>
-
-
 	
 </body>
 <script type="text/javascript">
@@ -221,8 +218,11 @@ $('.commentAll').on('click','.plBtn',function(){
     if(s<10) s = '0' + s;
     var now=year+'-'+month+"-"+date+" "+h+':'+m+":"+s;
     //获取输入内容
-    var oSize = $(this).siblings('.flex-text-wrap').find('.comment-input').val();
+    var oSize = $('.comment-input').val();
     console.log(oSize);
+    
+    //ajax将评论存到数据库
+    
     //动态创建评论模块
     oHtml = '<div class="comment-show-con clearfix"><div class="comment-show-con-img pull-left"><img src="images/header-img-comment_03.png" alt=""></div> <div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"> <a href="#" class="comment-size-name">David Beckham : </a> <span class="my-pl-con">&nbsp;'+ oSize +'</span> </div> <div class="date-dz"> <span class="date-dz-left pull-left comment-time">'+now+'</span> <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
     if(oSize.replace(/(^\s*)|(\s*$)/g, "") != ''){
@@ -242,7 +242,7 @@ $('.comment-show').on('click','.pl-hf',function(){
     if($(this).is('.hf-con-block')){
         $(this).parents('.date-dz-right').parents('.date-dz').append(fhHtml);
         $(this).removeClass('hf-con-block');
-        $('.content').flexText();
+       // $('.content').flexText();
         $(this).parents('.date-dz-right').siblings('.hf-con').find('.pre').css('padding','6px 15px');
         //console.log($(this).parents('.date-dz-right').siblings('.hf-con').find('.pre'))
         //input框自动聚焦
@@ -269,13 +269,13 @@ $('.comment-show').on('click','.hf-pl',function(){
     if(s<10) s = '0' + s;
     var now=year+'-'+month+"-"+date+" "+h+':'+m+":"+s;
     //获取输入内容
-    var oHfVal = $(this).siblings('.flex-text-wrap').find('.hf-input').val();
+    var oHfVal = $('.hf-input').val();
     console.log(oHfVal)
     var oHfName = $(this).parents('.hf-con').parents('.date-dz').siblings('.pl-text').find('.comment-size-name').html();
     var oAllVal = '回复@'+oHfName;
     if(oHfVal.replace(/^ +| +$/g,'') == '' || oHfVal == oAllVal){
     }else {
-        $.getJSON("json/pl.json",function(data){
+        $.getJSON("${pageContext.request.contextPath }/json/pl.json",function(data){
             var oAt = '';
             var oHf = '';
             $.each(data,function(n,v){
@@ -351,5 +351,4 @@ function replace_em(str){
 	return str;
 } 
 </script>
-
 </html>

@@ -1,6 +1,6 @@
 <!--textarea高度自适应-->
 $(function () {
-    $('.content').flexText();
+//    $('.content').flexText();
 });
 <!--textarea限制字数-->
 function keyUP(t){
@@ -46,7 +46,7 @@ $('.comment-show').on('click','.pl-hf',function(){
     if($(this).is('.hf-con-block')){
         $(this).parents('.date-dz-right').parents('.date-dz').append(fhHtml);
         $(this).removeClass('hf-con-block');
-        $('.content').flexText();
+//        $('.content').flexText();
         $(this).parents('.date-dz-right').siblings('.hf-con').find('.pre').css('padding','6px 15px');
         //console.log($(this).parents('.date-dz-right').siblings('.hf-con').find('.pre'))
         //input框自动聚焦
