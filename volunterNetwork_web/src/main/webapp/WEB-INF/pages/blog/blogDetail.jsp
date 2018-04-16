@@ -5,6 +5,11 @@
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%     
+  String path = request.getContextPath();     
+  String basePath = request.getScheme()+"://" +request.getServerName()+":" +request.getServerPort()+path+"/" ;     
+%> 
+ <base href="<%=basePath%>" >     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,79 +24,15 @@
 <link href="${pageContext.request.contextPath }/css/forum.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath }/css/core.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath }/css/style2.css" rel="stylesheet" type="text/css" />
-
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.12.0.min.js"></script>
+<link href="${pageContext.request.contextPath }/css/blogDetail.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/flexText.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
 <script type="text/javascript">
 	var $2 = $.noConflict(true);
 </script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.qqFace.js"></script>
- <style type="text/css">
-	.box_vo{
-		width: 68px;
-	    height: 98px;
-	    border: 1px solid #e7e7e7;
-	    border-radius: 2px;
-	    color: #666;
-	    -moz-border-radius: 2px;
-	    margin-left: 10px;
-	    margin-top:-110px;
-	    float: right;
-	}
-	.box_l{
-		
-		margin-right: 500px;
-	}
-	.box_m{
-		
-		margin-right: 420px;
-	}
-	.box_r{
-		
-		margin-right: 340px;
-	}
-	.opion a i{
-		width: 68px;
-	    height: 48px;
-	    background-image: url(images/iconst1.png);
-	    color: #666;
-	    background-position: center 17px;
-	    display: block;
-	    background-repeat: no-repeat;
-	}
-	.opion2 a i{
-		width: 68px;
-	    height: 48px;
-	    background-image: url(images/iconst2.png);
-	    color: #666;
-	    background-position: center 17px;
-	    display: block;
-	    background-repeat: no-repeat;
-	}
-	.opion3 a i{
-		width: 68px;
-	    height: 48px;
-	    background-image: url(images/iconst3.png);
-	    color: #666;
-	    background-position: center 17px;
-	    display: block;
-	    background-repeat: no-repeat;
-	}
-	.opion a em{
-		line-height: 20px;
-	    display: block;
-	    text-align: center;
-	    color: #666;
-	}
-	.opion a strong {
-		font-size: 16px;
-	    line-height: 24px;
-	    font-weight: normal;
-	    text-align: center;
-	    display: block;
-	    color: #333;
-</style>
+ 
 </head>
 <body>
  <nav class="navbar navbar-default" style="background:#ededed;">
@@ -103,7 +44,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <img src="${pageContext.request.contextPath }/images/hand.png" style="float:left;vertical-align: middle;height: 40px;width: 40px;display: inline-block;marign-top:10px;"/>
+      <img src="images/hand.png" style="float:left;vertical-align: middle;height: 40px;width: 40px;display: inline-block;marign-top:10px;"/>
       <a class="navbar-brand" href="#">志愿莞工</a>     
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -112,9 +53,8 @@
         <li><a href="${pageContext.request.contextPath}/volunterNetwork">首页 </a></li>
         <li><a href="${pageContext.request.contextPath}/pageDetail">志愿活动</a></li>
         <li><a href="${pageContext.request.contextPath}/organization">组织团体</a></li>
-        <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li>
-        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>
-        <!-- <li><a href="#">志愿者证</a></li> -->      
+        <%-- <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li> --%>
+        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>     
         <li><a href="${pageContext.request.contextPath}/blog">i&nbsp;论坛</a></li>
         <li><a href="${pageContext.request.contextPath}/helpCenter">帮助中心</a></li>
       </ul>
@@ -150,12 +90,13 @@
         
          <p class="right_txt_p" style="margin-left:190px;padding-top: 8px;display: block;float: left;">作者：${share.author } &nbsp;<fmt:formatDate value="${share.fbtime }" type="date"/>&nbsp;&nbsp;最后回应：${share.endResp } &nbsp;<fmt:formatDate value="${share.fbtime }" type="date"/></p>
        	 <div style="float: left;display: block;margin-left: -500px;margin-top: 20px;">
-       	 <button  type="button" class="btn btn-default" onclick="toView()" style="margin: 26px 0;margin-left: 190px;">					
+       	<!--  <button  type="button" class="btn btn-default" onclick="toView()" style="margin: 26px 0;">					
 			<span style="margin: 0px 4px;" class="glyphicon glyphicon-comment" aria-hidden="true" style="color:red;"></span> 回复				
-		</button>
-		<button class="btn btn-default" onclick="deleteUsers()" style="margin: 26px 0;" type="button">
+		</button> -->
+		<!-- <button class="btn btn-default" onclick="deleteUsers()" style="margin: 26px 0;margin-left: 190px;" type="button">
 			<span style="margin: 0px 4px;" class="glyphicon glyphicon-heart-empty" aria-hidden="true" style="color:red;"></span> 喜欢
-		</button>
+		</button> -->
+		<a href="javascript:;" class="date-dz-z pull-left" style="margin: 26px 0;margin-left: 190px;"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a>
 		
 		</div>
        </div>     
@@ -169,27 +110,32 @@
         "><img src="${pageContext.request.contextPath }/images/face.png" alt="表情"></span>
         <a href="javascript:;" class="plBtn" style="margin-top: 50px;">评论</a>       
     </div>
+  
+    <c:forEach items="${commentList}" var="comment" varStatus="status">
+    
     <div class="comment-show">
         <div class="comment-show-con clearfix">
             <div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath }/images/headimgboy5.jpg" alt="" style="width: 50px;height: 50px;"></div>
             <div class="comment-show-con-list pull-left clearfix">
                 <div class="pl-text clearfix">
-                    <a href="#" class="comment-size-name">张三 : </a>
-                    <span class="my-pl-con">&nbsp;来啊 造作啊!</span>
+                    <a href="#" class="comment-size-name">${comment.userName } :</a>
+                    <span class="my-pl-con">&nbsp;${comment.content }</span>
                 </div>
                 <div class="date-dz">
-                    <span class="date-dz-left pull-left comment-time">2017-5-2 11:11:39</span>
+                    <span class="date-dz-left pull-left comment-time"><fmt:formatDate value="${comment.respTime }" type="both"/></span>
                     <div class="date-dz-right pull-right comment-pl-block">
                         <a href="javascript:;" class="removeBlock">删除</a>
-                        <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a>
+                        <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left" onclick="commentShow(${comment.id},this)" data-id="${comment.id}">回复</a>
                         <span class="pull-left date-dz-line">|</span>
                         <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a>
                     </div>
                 </div>
-                <div class="hf-list-con"></div>
+                <div class="hf-list-con" id="con${comment.id}"></div>
             </div>
         </div>
     </div>
+    
+    </c:forEach>
 </div>	
 </div>
 	
@@ -204,6 +150,7 @@ function keyUP(t){
 }
 <!--点击评论创建评论条-->
 $('.commentAll').on('click','.plBtn',function(){
+	var obj=this;
     var myDate = new Date();
     //获取当前年
     var year=myDate.getFullYear();
@@ -219,20 +166,31 @@ $('.commentAll').on('click','.plBtn',function(){
     var now=year+'-'+month+"-"+date+" "+h+':'+m+":"+s;
     //获取输入内容
     var oSize = $('.comment-input').val();
-    console.log(oSize);
-    
+    console.log(oSize);    
     //ajax将评论存到数据库
-    
-    //动态创建评论模块
-    oHtml = '<div class="comment-show-con clearfix"><div class="comment-show-con-img pull-left"><img src="images/header-img-comment_03.png" alt=""></div> <div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"> <a href="#" class="comment-size-name">David Beckham : </a> <span class="my-pl-con">&nbsp;'+ oSize +'</span> </div> <div class="date-dz"> <span class="date-dz-left pull-left comment-time">'+now+'</span> <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
-    if(oSize.replace(/(^\s*)|(\s*$)/g, "") != ''){
-        $(this).parents('.reviewArea ').siblings('.comment-show').prepend(oHtml);
-        $(this).siblings('.flex-text-wrap').find('.comment-input').prop('value','').siblings('pre').find('span').text('');
-    }
+    $.ajax({			 
+		 type : "POST",
+		 url : "comment/saveOrUpdate",
+		 data : {content:oSize},
+		 cache : false,
+		 async : true,
+		 success : function(result) {
+			 alert(result.userId);
+			oHtml = '<div class="comment-show-con clearfix"><div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath }/images/headimgboy5.jpg" alt=""></div> <div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"> <a href="#" class="comment-size-name">${userName} : </a> <span class="my-pl-con">&nbsp;'+ oSize +'</span> </div> <div class="date-dz"> <span class="date-dz-left pull-left comment-time">'+now+'</span> <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
+		    if(oSize.replace(/(^\s*)|(\s*$)/g, "") != ''){
+		        $(obj).parents('.reviewArea ').siblings('.comment-show').prepend(oHtml);
+		        $(obj).siblings('.flex-text-wrap').find('.comment-input').prop('value','').siblings('pre').find('span').text('');
+		    }
+				
+		 },
+		 error:function(result){
+		        alert("添加数据失败");
+		       }
+    }); 	       
 });
 <!--点击回复动态创建回复块-->
-$('.comment-show').on('click','.pl-hf',function(){
-    //获取回复人的名字
+/* function addComment(id){
+	//获取回复人的名字
     var fhName = $(this).parents('.date-dz-right').parents('.date-dz').siblings('.pl-text').find('.comment-size-name').html();
     //回复@
     var fhN = '回复@'+fhName;
@@ -251,9 +209,100 @@ $('.comment-show').on('click','.pl-hf',function(){
         $(this).addClass('hf-con-block');
         $(this).parents('.date-dz-right').siblings('.hf-con').remove();
     }
-});
+} */
+//$('.comment-show').on('click','.pl-hf',function(obj){
+function commentShow(id,obj){
+	//var id = $("#comment2").attr('data-id');
+	
+    //获取回复人的名字
+    var fhName = $(obj).parents('.date-dz-right').parents('.date-dz').siblings('.pl-text').find('.comment-size-name').html();
+    //回复@
+    var fhN = '回复@'+fhName;
+    //var oInput = $(this).parents('.date-dz-right').parents('.date-dz').siblings('.hf-con');
+    var fhHtml = '<div class="hf-con pull-left"> <textarea class="content comment-input hf-input" placeholder="" onkeyup="keyUP(this)"></textarea> <a href="javascript:;" class="hf-pl" onclick="addComment('+id+',this)">评论</a></div>';
+    //显示回复
+    if($(obj).is('.hf-con-block')){
+        $(obj).parents('.date-dz-right').parents('.date-dz').append(fhHtml);
+        $(obj).removeClass('hf-con-block');
+       // $('.content').flexText();
+        $(obj).parents('.date-dz-right').siblings('.hf-con').find('.pre').css('padding','6px 15px');
+        //console.log($(this).parents('.date-dz-right').siblings('.hf-con').find('.pre'))
+        //input框自动聚焦
+        $(obj).parents('.date-dz-right').siblings('.hf-con').find('.hf-input').val('').focus().val(fhN);
+    }else {
+        $(obj).addClass('hf-con-block');
+        $(obj).parents('.date-dz-right').siblings('.hf-con').remove();
+    }
+}
 <!--评论回复块创建-->
-$('.comment-show').on('click','.hf-pl',function(){
+function addComment(id,obj){
+	var oThis = $('#con'+id);
+    var myDate = new Date();
+    //获取当前年
+    var year=myDate.getFullYear();
+    //获取当前月
+    var month=myDate.getMonth()+1;
+    //获取当前日
+    var date=myDate.getDate();
+    var h=myDate.getHours();       //获取当前小时数(0-23)
+    var m=myDate.getMinutes();     //获取当前分钟数(0-59)
+    if(m<10) m = '0' + m;
+    var s=myDate.getSeconds();
+    if(s<10) s = '0' + s;
+    var now=year+'-'+month+"-"+date+" "+h+':'+m+":"+s;
+    //获取输入内容
+    var oHfVal = $('.hf-input').val();
+    
+    var oHfName = $('.comment-size-name').html();
+    var oAllVal = '回复@'+oHfName;
+    if(oHfVal.replace(/^ +| +$/g,'') == '' || oHfVal == oAllVal){
+    }else {
+        $.getJSON("${pageContext.request.contextPath }/json/pl.json",function(data){
+            var oAt = '';
+            var oHf = '';
+            $.each(data,function(n,v){
+                delete v.hfContent;
+                delete v.atName;
+                var arr;
+                var ohfNameArr;
+                if(oHfVal.indexOf("@") == -1){
+                    data['atName'] = '';
+                    data['hfContent'] = oHfVal;
+                }else {
+                    arr = oHfVal.split(':');
+                    ohfNameArr = arr[0].split('@');
+                    data['hfContent'] = arr[1];
+                    data['atName'] = ohfNameArr[1];
+                }
+                if(data.atName == ''){
+                    oAt = data.hfContent;
+                }else {
+                    oAt = '回复<a href="#" class="atName">@'+data.atName+'</a> : '+data.hfContent;
+                }
+                oHf = data.hfName;
+            });
+          //ajax将评论存到数据库
+            $.ajax({			 
+        		 type : "POST",
+        		 url : "comment/save",
+        		 data : {content:oHfVal,parentId:id},
+        		 cache : false,
+        		 async : true,
+        		 success : function(result) {
+        			 var oHtml = '<div class="all-pl-con"><div class="pl-text hfpl-text clearfix"><a href="#" class="comment-size-name">${userName} : </a><span class="my-pl-con">'+oAt+'</span></div><div class="date-dz"> <span class="date-dz-left pull-left comment-time">'+now+'</span> <div class="date-dz-right pull-right comment-pl-block"></div> </div></div>';
+        	            oThis.html(oHtml);
+        				//$('.hf-con').css('display','none');
+        				$('.hf-con').remove();
+        		 },
+        		 error:function(result){
+        		        alert("添加数据失败");
+        		       }
+            }); 	           
+			//oThis.parents('.hf-con').parents('.comment-show-con-list').find('.hf-list-con').css('display','block').prepend(oHtml) && oThis.parents('.hf-con').siblings('.date-dz-right').find('.pl-hf').addClass('hf-con-block') && oThis.parents('.hf-con').remove();
+        });
+    }
+}
+/* $('.comment-show').on('click','.hf-pl',function(){
     var oThis = $(this);
     var myDate = new Date();
     //获取当前年
@@ -303,7 +352,7 @@ $('.comment-show').on('click','.hf-pl',function(){
             oThis.parents('.hf-con').parents('.comment-show-con-list').find('.hf-list-con').css('display','block').prepend(oHtml) && oThis.parents('.hf-con').siblings('.date-dz-right').find('.pl-hf').addClass('hf-con-block') && oThis.parents('.hf-con').remove();
         });
     }
-});
+}); */
 <!--删除评论块-->
 $('.commentAll').on('click','.removeBlock',function(){
     var oT = $(this).parents('.date-dz-right').parents('.date-dz').parents('.all-pl-con');
@@ -314,7 +363,7 @@ $('.commentAll').on('click','.removeBlock',function(){
         oT.remove();
     }
     $(this).parents('.date-dz-right').parents('.date-dz').parents('.comment-show-con-list').parents('.comment-show-con').remove();
-})
+});
 <!--点赞-->
 $('.comment-show').on('click','.date-dz-z',function(){
     var zNum = $(this).find('.z-num').html();
@@ -329,13 +378,13 @@ $('.comment-show').on('click','.date-dz-z',function(){
         $(this).find('.z-num').html(zNum);
         $(this).find('.date-dz-z-click-red').addClass('red');
     }
-})
+});
 <!--下面的是表情js-->
 $2(function(){
 	$('.emotion').qqFace({
 		id : 'facebox', 
 		assign:'saytext', 
-		path:'${pageContext.request.contextPath }/arclist/'	//表情存放的路径
+		path:'${pageContext.request.contextPath}/arclist/'	//表情存放的路径
 	});
 	$(".plBtn").click(function(){
 		var str = $("#saytext").val();
@@ -347,7 +396,7 @@ function replace_em(str){
 	str = str.replace(/\</g,'&lt;');
 	str = str.replace(/\>/g,'&gt;');
 	str = str.replace(/\n/g,'<br/>');
-	str = str.replace(/\[em_([0-9]*)\]/g,'<img src="${pageContext.request.contextPath }/arclist/$1.gif" border="0" />');
+	str = str.replace(/\[em_([0-9]*)\]/g,'<img src="${pageContext.request.contextPath}/arclist/$1.gif" border="0" />');
 	return str;
 } 
 </script>

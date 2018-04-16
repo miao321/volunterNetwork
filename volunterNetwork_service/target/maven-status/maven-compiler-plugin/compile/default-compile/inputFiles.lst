@@ -7,6 +7,7 @@ F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterN
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\IImgService.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\ILoginService.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\impl\ModuleServiceImpl.java
+F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\impl\CommentServiceImpl.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\anno\SysLog.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\IActiService.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\IShareService.java
@@ -14,6 +15,7 @@ F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterN
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\ICollegeService.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\impl\BoradServiceImpl.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\IModuleService.java
+F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\ICommentService.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\ILogService.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\impl\CollegeServiceImpl.java
 F:\shixun\soft\eclipse\shixun\eclipse-workspace\volunterNetwork_parent\volunterNetwork_service\src\main\java\com\xxx\volunterNetwork\service\impl\ShareServiceImpl.java

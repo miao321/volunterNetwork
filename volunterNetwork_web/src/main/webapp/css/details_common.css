@@ -4,7 +4,7 @@
 .main_content_common .common_title_box{height:48px;line-height:48px;}
 .main_content_common .common_title{font-weight: bold;font-size:14px;color:#333;background-repeat:no-repeat;background-position:left center;}
 /* 鏂囩珷澶撮儴鏍囬浠ュ強鍒嗕韩閾炬帴 */
-.main_content{margin-top:84px;margin-bottom:30px;}
+.main_content{margin-bottom:30px;}
 .main_content .article_title{font-size:24px;line-height:37px;font-weight: bold;padding-right:320px;text-align: center;}
 .main_content .under_article_title{height:80px;}
 .main_content .sub_heading{width:880px;}
@@ -38,13 +38,13 @@
 .content_one_right .one_right_operation .operate_btns .btn:hover{background-color:#e5e5e5;}
 .content_one_right .one_right_operation .operate_btns .btn:last-child{margin-right:0;}
 .content_one_right .one_right_operation .operate_btns .btn_bg{display:block;height:48px;background-repeat:no-repeat;background-position:center center;}
-.content_one_right .one_right_operation .operate_btns .like .btn_bg{background-image: url(../../img/icost.png);}
-.content_one_right .one_right_operation .operate_btns .signup .btn_bg{background-image: url(../../img/iconst2.png);}
-.content_one_right .one_right_operation .operate_btns .attention .btn_bg{background-image: url(../../img/iconst3.png);}
+.content_one_right .one_right_operation .operate_btns .like .btn_bg{background-image: url(../images/iconst1.png);}
+.content_one_right .one_right_operation .operate_btns .signup .btn_bg{background-image: url(../images/iconst2.png);}
+.content_one_right .one_right_operation .operate_btns .attention .btn_bg{background-image: url(../images/iconst3.png);}
 .content_one_right .one_right_operation .operate_btns .btn_txt{line-height:16px;color:#999;}
 .content_one_right .one_right_operation .operate_btns .btn_num{line-height:34px;font-size:16px;}
 .content_one_right .one_right_operation .operate_btns2{font-size:0;text-align: center;}
-.content_one_right .one_right_operation .operate_btns2 .btn{width:100px;height:35px;line-height:35px;border-radius:17.5px;color:#fff;font-weight: bold;font-size:14px;display:inline-block;}
+.content_one_right .one_right_operation .operate_btns2 .btn{width:100px;height:35px;border-radius:17.5px;color:#fff;font-weight: bold;font-size:14px;display:inline-block;}
 .content_one_right .one_right_operation .operate_btns2 .btn1{background-color: #fcc810;margin-right:15px;}
 .content_one_right .one_right_operation .operate_btns2 .btn2{background-color: #ff8814;}
 

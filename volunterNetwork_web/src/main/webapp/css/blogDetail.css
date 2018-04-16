@@ -1,0 +1,63 @@
+.box_vo{
+	width: 68px;
+    height: 98px;
+    border: 1px solid #e7e7e7;
+    border-radius: 2px;
+    color: #666;
+    -moz-border-radius: 2px;
+    margin-left: 10px;
+    margin-top:-110px;
+    float: right;
+}
+.box_l{
+	
+	margin-right: 500px;
+}
+.box_m{
+	
+	margin-right: 420px;
+}
+.box_r{
+	
+	margin-right: 340px;
+}
+.opion a i{
+	width: 68px;
+    height: 48px;
+    background-image: url(../images/iconst1.png);
+    color: #666;
+    background-position: center 17px;
+    display: block;
+    background-repeat: no-repeat;
+}
+.opion2 a i{
+	width: 68px;
+    height: 48px;
+    background-image: url(../images/iconst2.png);
+    color: #666;
+    background-position: center 17px;
+    display: block;
+    background-repeat: no-repeat;
+}
+.opion3 a i{
+	width: 68px;
+    height: 48px;
+    background-image: url(../images/iconst3.png);
+    color: #666;
+    background-position: center 17px;
+    display: block;
+    background-repeat: no-repeat;
+}
+.opion a em{
+	line-height: 20px;
+    display: block;
+    text-align: center;
+    color: #666;
+}
+.opion a strong {
+	font-size: 16px;
+    line-height: 24px;
+    font-weight: normal;
+    text-align: center;
+    display: block;
+    color: #333;

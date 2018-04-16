@@ -1,18 +1,43 @@
+<%@ page import="com.xxx.volunterNetwork.domain.*" %>
+<%@ page import="com.xxx.volunterNetwork.dao.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%     
+  String path = request.getContextPath();     
+  String basePath = request.getScheme()+"://" +request.getServerName()+":" +request.getServerPort()+path+"/" ;     
+%> 
+ <base href="<%=basePath%>" >   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>详情页</title>
+<title>活动详情页</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
 <link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="css/reset2.css" rel="stylesheet" type="text/css" />
 <link href="css/details_common.css" rel="stylesheet" type="text/css" />
 <link href="css/common.css" rel="stylesheet" type="text/css" />
+
+<!-- <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
+<link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="css/index_animation.css" rel="stylesheet" type="text/css" />
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" /> -->
+
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<style>
+#div1 {margin:0 auto;height:300px;margin-top:-20px;}
+.item{width:1600px;height: 500px;}
+.nav .navbar-nav a:hover{width: 80px;height:24px;background: red;}
+
+ </style>
 </head>
 <body>
  <nav class="navbar navbar-default" style="background:#ededed;">
@@ -33,9 +58,8 @@
         <li><a href="${pageContext.request.contextPath}/volunterNetwork">首页 </a></li>
         <li><a href="${pageContext.request.contextPath}/pageDetail">志愿活动</a></li>
         <li><a href="${pageContext.request.contextPath}/organization">组织团体</a></li>
-        <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li>
-        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>
-        <!-- <li><a href="#">志愿者证</a></li> -->      
+        <%-- <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li> --%>
+        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>     
         <li><a href="${pageContext.request.contextPath}/blog">i&nbsp;论坛</a></li>
         <li><a href="${pageContext.request.contextPath}/helpCenter">帮助中心</a></li>
       </ul>
@@ -64,26 +88,10 @@
                 <div class="sub_heading fl">
                     <div class="sub_heading_con">
                         <span class="sub_heading_item" title="公共文明">分类：${acti.hdlx }</span>
-                        <span class="sub_heading_item">发布时间：${acti.fbtime }</span>
+                        <span class="sub_heading_item">发布时间：<fmt:formatDate value="${acti.fbtime }" type="both"/></span>
                         <span class="sub_heading_item">发布组织： ${acti.fbzz }</span>
-
-						<!-- <span style="float: right;font-weight: bold;">
-							<a href="javascript:void(0)" style="vertical-align: middle;" onclick="javascript:preComplaint(&#39;659842&#39;,&#39;&#39;);">
-								举报<img alt="活动举报" src="./志愿活动-详情页_files/report.png" style="float: left;">
-							</a>
-						</span> -->
                     </div>
-                </div>
-                <!-- <div class="right_share_link fr">
-                    <div class="share_link_con clearfix">
-                        <span class="share_link_tit fl">分享：</span>
-                        <ol class="share_link_list clearfix fl">
-                            <a href="javascript:;" class="jiathis_button_tsina link sina fl" title="分享到微博"><span class="jiathis_txt jtico jtico_tsina"></span></a>
-                            <a href="javascript:;" class="jiathis_button_weixin link qq fl" title="分享到微信"><span class="jiathis_txt jtico jtico_weixin"></span></a>
-                            <a href="javascript:;" class="jiathis_button_douban link douban fl" title="分享到豆瓣"><span class="jiathis_txt jtico jtico_douban"></span></a>
-                        </ol>
-                    </div>
-                </div> -->
+                </div>     
             </div>
         </div>
         <div class="main_content_one w1200 clearfix" style="margin-bottom:8px;">        
@@ -126,7 +134,7 @@
                 </div>
                 <div class="consult_comment main_content_common">
                     <div class="common_title_box clearfix">
-                        <h1 class="common_title fl">咨询评论</h1>
+                        <h1 class="common_title fl">志愿详情页</h1>
                     </div>
                     <div class="consult_comment_body">
                     	<form action="http://www.gdzyz.cn/mission/comment" method="post" id="pinglunform">
@@ -136,7 +144,7 @@
 	                        <div class="login_register">
 	                            <p class="fl askUToLogin">别默默的看，快登录点评一下吧！</p>
 	                            <div class="login_Or_register clearfix">
-	                                <a href="http://www.gdzyz.cn/register/index.do" class="login fl">注册</a>
+	                               
 	                                <a href="http://www.gdzyz.cn/login/index.do" class="reg fl">登录</a> 
 	                            </div>
 	                        </div>
@@ -144,28 +152,7 @@
                         <ul class="user_consult_list">
                         	<!-- 暂无评论，静态评论屏蔽 -->
                         </ul>
-                    <div class="pages ser-pages">
-                    	<div class="pages-infos">
-                    		<div class="mod-pages" style="line-height:28px;height:28px;">
-                    		<span style="float:left;line-height:40px;">每页显示:</span>
-                    		<select onchange="window.location.href=(&#39;/mission/detail?missionId=659842&amp;pageIndex=1&amp;pageSize=&#39; + this.options[this.options.selectedIndex].value);" style="width:60px;float:left;display:inline;background-color:#fff;height:40px;line-height:40px;padding:0 2px;border:1px #e6e6e6 solid;margin-right:4px;" name="dynamic_length">
-                    		<option value="5">5</option>
-                    		<option value="10" selected="selected">10</option>
-                    		<option value="20">20</option><option value="50">50</option>
-                    		<option value="100">100</option>
-                    		</select>
-                    		<a href="javascript:;" style="width:90px;color: #999999;cursor: not-allowed;background-color: #ffffff;border-color: #dddddd;">&lt; 上页</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=1" class="cur">1</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=2">2</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=3">3</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=4">4</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=5">5</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=6">6</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=7">7</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=2" style="width:90px;">下一页 &gt;</a>
-                    		</div>
-                    	</div>
-                    </div>
+                  
                     </div>
                 </div>
             </div>
@@ -196,7 +183,7 @@
                         </a>
                     </div>
                     <div class="operate_btns2 clearfix">
-                        <a href="javascript:;" class="btn btn1" style="text-align: center">时长公示</a>
+                        <a href="javascript:;" class="btn btn1" style="text-align: center;padding-top: -14px;">时长公示</a>
 <!--                         <a href="javascript:;" class="btn btn2">我要报名</a> -->
                            <div class="btn btn2" style="background-color: rgb(153, 153, 153);">报名结束</div>
                     </div>
@@ -204,12 +191,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="main_content_two main_content_common main_content_1">
-            <div class="common_title_box clearfix w1200">
-                <h1 class="common_title fl">猜你喜欢</h1>
-                <a href="javascript:;" class="seeMore fr" onclick="changeMissions();" style="cursor:pointer;font-size:12px;">换一换</a>
-            </div>            
-        </div> -->
     </section>	
 </body>
 </html>

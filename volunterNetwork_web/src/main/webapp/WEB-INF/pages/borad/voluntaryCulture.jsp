@@ -40,9 +40,8 @@
         <li><a href="${pageContext.request.contextPath}/volunterNetwork">首页 </a></li>
         <li><a href="${pageContext.request.contextPath}/pageDetail">志愿活动</a></li>
         <li><a href="${pageContext.request.contextPath}/organization">组织团体</a></li>
-        <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li>
-        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>
-        <!-- <li><a href="#">志愿者证</a></li> -->      
+        <%-- <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li> --%>
+        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>     
         <li><a href="${pageContext.request.contextPath}/blog">i&nbsp;论坛</a></li>
         <li><a href="${pageContext.request.contextPath}/helpCenter">帮助中心</a></li>
       </ul>
@@ -88,7 +87,7 @@
                 </div>
                 <div class="consult_comment main_content_common">
                     <div class="common_title_box clearfix">
-                        <h1 class="common_title fl">咨询评论</h1>
+                        <h1 class="common_title fl">信息公告</h1>
                     </div>
                     <div class="consult_comment_body">
                     	<form action="http://www.gdzyz.cn/mission/comment" method="post" id="pinglunform">
@@ -98,7 +97,7 @@
 	                        <div class="login_register">
 	                            <p class="fl askUToLogin">别默默的看，快登录点评一下吧！</p>
 	                            <div class="login_Or_register clearfix">
-	                                <a href="http://www.gdzyz.cn/register/index.do" class="login fl">注册</a>
+	                 
 	                                <a href="http://www.gdzyz.cn/login/index.do" class="reg fl">登录</a> 
 	                            </div>
 	                        </div>
@@ -106,7 +105,7 @@
                         <ul class="user_consult_list">
                         	<!-- 暂无评论，静态评论屏蔽 -->
                         </ul>
-                    <div class="pages ser-pages">
+                    <!-- <div class="pages ser-pages">
                     	<div class="pages-infos">
                     		<div class="mod-pages" style="line-height:28px;height:28px;">
                     		<span style="float:left;line-height:40px;">每页显示:</span>
@@ -127,7 +126,7 @@
                     		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=2" style="width:90px;">下一页 &gt;</a>
                     		</div>
                     	</div>
-                    </div>
+                    </div> -->
                     </div>
                 </div>
             </div>

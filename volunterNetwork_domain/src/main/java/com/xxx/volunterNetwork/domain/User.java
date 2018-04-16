@@ -37,6 +37,7 @@ public class User implements Serializable {
 	private String studentNo;   //学号
 	private String userName;    //姓名
 	private String password;
+	private String img;//头像
 	private Integer state;       //状态  1启用  0停用
 	private String createBy; //创建者id
 	private String createCollege;  //创建者学院
@@ -216,6 +217,12 @@ public class User implements Serializable {
 				+ email + ", remark=" + remark + ", ancestor=" + ancestor + ", politicalStatus=" + politicalStatus
 				+ ", roles=" + roles + ", college=" + college + "]";
 	}*/
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	
 	
 	

@@ -19,6 +19,7 @@
 <link href="css/index_animation.css" rel="stylesheet" type="text/css" />
 <link href="css/reset.css" rel="stylesheet" type="text/css" />
 <link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <style>
@@ -47,9 +48,8 @@
         <li><a href="${pageContext.request.contextPath}/volunterNetwork">首页 </a></li>
         <li><a href="${pageContext.request.contextPath}/pageDetail">志愿活动</a></li>
         <li><a href="${pageContext.request.contextPath}/organization">组织团体</a></li>
-        <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li>
-        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>
-        <!-- <li><a href="#">志愿者证</a></li> -->      
+        <%-- <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li> --%>
+        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>     
         <li><a href="${pageContext.request.contextPath}/blog">i&nbsp;论坛</a></li>
         <li><a href="${pageContext.request.contextPath}/helpCenter">帮助中心</a></li>
       </ul>

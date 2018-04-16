@@ -11,17 +11,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>帮助中心</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
-<link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
+<!-- <link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/personalCenter.css" rel="stylesheet" type="text/css" />
 <link href="css/background.css" rel="stylesheet" type="text/css" />
 <link href="css/index.css" rel="stylesheet" type="text/css" />
 <link href="css/index_animation.css" rel="stylesheet" type="text/css" />
 <link href="css/reset.css" rel="stylesheet" type="text/css" />
-<link href="css/common.css" rel="stylesheet" type="text/css" />
-<link href="css/layui.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" /> -->
+
+<!-- <link href="css/layui.css" rel="stylesheet" type="text/css" /> -->
+<link href="css/background.css" rel="stylesheet" type="text/css" />
 <link href="css/personalCenter.css" rel="stylesheet" type="text/css" />
-
-
+<link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="css/index_animation.css" rel="stylesheet" type="text/css" />
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -40,6 +47,71 @@
 	background-color: #da4453;
 	color: #fff;
 }
+	.box_vo{
+		width: 68px;
+	    height: 98px;
+	    border: 1px solid #e7e7e7;
+	    border-radius: 2px;
+	    color: #666;
+	    -moz-border-radius: 2px;
+	    margin-left: 10px;
+	    margin-top:-110px;
+	    float: right;
+	}
+	.box_l{
+		
+		margin-right: 500px;
+	}
+	.box_m{
+		
+		margin-right: 420px;
+	}
+	.box_r{
+		
+		margin-right: 340px;
+	}
+	.opion a i{
+		width: 68px;
+	    height: 48px;
+	    background-image: url(images/iconst1.png);
+	    color: #666;
+	    background-position: center 17px;
+	    display: block;
+	    background-repeat: no-repeat;
+	}
+	.opion2 a i{
+		width: 68px;
+	    height: 48px;
+	    background-image: url(images/iconst2.png);
+	    color: #666;
+	    background-position: center 17px;
+	    display: block;
+	    background-repeat: no-repeat;
+	}
+	.opion3 a i{
+		width: 68px;
+	    height: 48px;
+	    background-image: url(images/iconst3.png);
+	    color: #666;
+	    background-position: center 17px;
+	    display: block;
+	    background-repeat: no-repeat;
+	}
+	.opion a em{
+		line-height: 20px;
+	    display: block;
+	    text-align: center;
+	    color: #666;
+	}
+	.opion a strong {
+		font-size: 16px;
+	    line-height: 24px;
+	    font-weight: normal;
+	    text-align: center;
+	    display: block;
+	    color: #333;
+	}
+
 </style>
 <script type="text/javascript">
   var urlstr = location.href;
@@ -77,9 +149,8 @@
         <li><a href="${pageContext.request.contextPath}/volunterNetwork">首页 </a></li>
         <li><a href="${pageContext.request.contextPath}/pageDetail">志愿活动</a></li>
         <li><a href="${pageContext.request.contextPath}/organization">组织团体</a></li>
-        <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li>
-        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>
-        <!-- <li><a href="#">志愿者证</a></li> -->      
+        <%-- <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li> --%>
+        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>     
         <li><a href="${pageContext.request.contextPath}/blog">i&nbsp;论坛</a></li>
         <li><a href="${pageContext.request.contextPath}/helpCenter">帮助中心</a></li>
       </ul>

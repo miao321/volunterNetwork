@@ -17,77 +17,41 @@
 <link href="css/index_animation.css" rel="stylesheet" type="text/css" />
 <link href="css/reset.css" rel="stylesheet" type="text/css" />
 <link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/blogDetail.css" rel="stylesheet" type="text/css" />
+
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/hm.js"></script>
 <script type="text/javascript" src="js/i.js"></script>
 <script type="text/javascript" src="js/crossdomain.js"></script>
 <style type="text/css">
-	.box_vo{
-		width: 68px;
-	    height: 98px;
-	    border: 1px solid #e7e7e7;
-	    border-radius: 2px;
-	    color: #666;
-	    -moz-border-radius: 2px;
-	    margin-left: 10px;
-	    margin-top:-110px;
-	    float: right;
-	}
-	.box_l{
-		
-		margin-right: 500px;
-	}
-	.box_m{
-		
-		margin-right: 420px;
-	}
-	.box_r{
-		
-		margin-right: 340px;
-	}
-	.opion a i{
-		width: 68px;
-	    height: 48px;
-	    background-image: url(images/iconst1.png);
-	    color: #666;
-	    background-position: center 17px;
-	    display: block;
-	    background-repeat: no-repeat;
-	}
-	.opion2 a i{
-		width: 68px;
-	    height: 48px;
-	    background-image: url(images/iconst2.png);
-	    color: #666;
-	    background-position: center 17px;
-	    display: block;
-	    background-repeat: no-repeat;
-	}
-	.opion3 a i{
-		width: 68px;
-	    height: 48px;
-	    background-image: url(images/iconst3.png);
-	    color: #666;
-	    background-position: center 17px;
-	    display: block;
-	    background-repeat: no-repeat;
-	}
-	.opion a em{
-		line-height: 20px;
-	    display: block;
-	    text-align: center;
-	    color: #666;
-	}
-	.opion a strong {
-		font-size: 16px;
-	    line-height: 24px;
-	    font-weight: normal;
-	    text-align: center;
-	    display: block;
-	    color: #333;
-	}
+select,input[type="file"]{height:30px;*margin-top:4px;line-height:30px;}
+select{width:220px;border:1px solid #cccccc;background-color:#ffffff;}
 </style>
+<script type="text/javascript">
+//添加数据
+function addUser(){
+	var userName = document.getElementById("userName").value;
+	var studentNo = document.getElementById("studentNo").value;	
+	var sex = $('#sex input[name="sex"]:checked ').val();
+	var phone = document.getElementById("phone").value;
+	var phone = document.getElementById("college").value;
+	var phone = document.getElementById("major").value;
+	var phone = document.getElementById("idCard").value;
+	 $.ajax({			 
+		 type : "POST",
+		 url : "saveOrUpdate",           
+         dataType : "json",
+         data:{userName:userName,studentNo:studentNo,
+        	 sex:sex,phone:phone,college:college,major:major,idCard:idCard},
+		 cache : false,
+		 async : true,
+		 success : function(data) {				
+			location.reload();
+		 }
+	}); 
+}
+</script>
 </head>
 <body>
  <nav class="navbar navbar-default" style="background:#ededed;">
@@ -108,9 +72,8 @@
         <li><a href="${pageContext.request.contextPath}/volunterNetwork">首页 </a></li>
         <li><a href="${pageContext.request.contextPath}/pageDetail">志愿活动</a></li>
         <li><a href="${pageContext.request.contextPath}/organization">组织团体</a></li>
-        <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li>
-        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>
-        <!-- <li><a href="#">志愿者证</a></li> -->      
+        <%-- <li><a href="${pageContext.request.contextPath}/relative">亲子活动</a></li> --%>
+        <li><a href="${pageContext.request.contextPath}/duration">时长公示</a></li>     
         <li><a href="${pageContext.request.contextPath}/blog">i&nbsp;论坛</a></li>
         <li><a href="${pageContext.request.contextPath}/helpCenter">帮助中心</a></li>
       </ul>
@@ -152,7 +115,7 @@
 				</select>	
 			</form>
 			<form class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
-				<input class="input-medium search-query" type="text" placeholder="请输入关键字" style="height: 40px;"/>
+				<input class="input-medium search-query" type="text" placeholder="请输入关键字" style="height: 36px;"/>
 				<button type="submit" class="btn btn-info">查找</button>
 			</form>
 		</div>
@@ -168,9 +131,9 @@
 		      </a>
 		       <div class="right_txt" style="margin-top: 26px;">
 		         <a target="_blank" href="detail?id=${acti.id}" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #000;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">${acti.title }</a>
-		         <p class="right_txt_p" style="margin-left: 190px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">地点:${acti.xxdz }</p>
-		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 归属组织:${acti.fbzz } </p>
-		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 报名截止:${acti.beginTime } </p>
+		         <p class="right_txt_p" style="margin-left: 190px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">地点：${acti.xxdz }</p>
+		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 归属组织：${acti.fbzz } </p>
+		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 报名截止：<fmt:formatDate value="${acti.beginTime }" type="date"/> </p>
 		       </div>     
 		     </div>
 		      <div class="box_vo box_l">
@@ -182,15 +145,90 @@
 		       <div class="box_vo box_r">
 		       	 <p val="592411" class="opion opion3 invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>关注</em><strong class="goodNum">${acti.attention }</strong></a></p>
 		       </div>
-		       
-		       <a href="baoming.jsp" style="color:#fff;"><button type="button" class="btn btn-warning" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;">马上报名</button></a>
+
+		       <button class="btn btn-warning" data-toggle="modal" data-target="#baoming" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;" type="button">
+					马上报名
+			   </button>
+			   <!-- <button class="btn btn-info" data-toggle="modal" data-target="#addUser" style="margin: 6px 0;" type="button">
+					<span style="margin: 0px 4px;" class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加
+				</button> -->	
 	    </li><hr style="margin-top: 20px;margin-bottom: 0;"/>
 	    </c:forEach>
-    
-    
 	</ul>
 </div>
-
+<!-- baoming -->
+<div class="modal fade" id="baoming" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" 
+						aria-hidden="true">×
+				</button>
+				<h4 class="modal-title" id="myModalLabel" style="font-size: 18px;font-weight: 600;">
+					马上报名
+				</h4>
+			</div>
+			<div class="modal-body">
+				<!-- <form class="form-inline"> -->
+				<form method="post" class="form-horizontal" role="form" >
+					 <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">姓名:</label>
+					    <div class="col-sm-10" >
+					      <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入姓名" style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">学号:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="studentNo" name="studentNo" class="form-control" placeholder="请输入学号" style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>
+					  <div class="form-group" >
+					    <label for="inputEmail3" class="col-sm-4 control-label" id="sex">性别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					      <input type="radio" name="sex" value="男"/> 男
+						  <input type="radio" name="sex" value="女"/> 女	
+						</label>				      
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">手机号:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="phone" name="phone" class="form-control" placeholder="请输入手机号"  style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">学院:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="college" name="college" class="form-control" placeholder="请输入学院"  style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">专业:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="major" name="major" class="form-control" placeholder="请输入专业"  style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>	
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">身份证号:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="idCard" name="idCard" class="form-control" placeholder="请输入身份证号"  style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>				 
+				</form>					
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" 
+						data-dismiss="modal">取消
+				</button>
+				<button type="button" class="btn btn-primary" onclick="baoming()">
+					保存
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+   $(function () { $('#baoming').modal('hide')});
+</script>
 	
 </body>
 </html>

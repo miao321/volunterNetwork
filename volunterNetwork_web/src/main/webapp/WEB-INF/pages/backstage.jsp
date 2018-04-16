@@ -132,7 +132,7 @@
 	
 		<iframe id="rightFrame" name="rightFrame" width="100%" height="100%"
 			scrolling="auto" marginheight="0" marginwidth="0" align="center"
-			style="border: 0px solid #CCC; margin: 0; padding: 0;">
+			style="border: 0px solid #CCC; margin: 0; padding: 0;" src="welcome.jsp">
 	    </iframe>
 	</div>
 </body>

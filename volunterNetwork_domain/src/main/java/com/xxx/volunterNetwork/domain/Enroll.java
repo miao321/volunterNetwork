@@ -15,6 +15,7 @@ public class Enroll {
 	private String college;//学院
 	private String major;//专业
 	private String sex;//性别
+	private String phone; //手机号
 	private String idCard;//身份证号
 	private String origazation;//组织
 	private String xjorigazation;//下级组织
@@ -87,6 +88,12 @@ public class Enroll {
 	}
 	public void setXjorigazation(String xjorigazation) {
 		this.xjorigazation = xjorigazation;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 
