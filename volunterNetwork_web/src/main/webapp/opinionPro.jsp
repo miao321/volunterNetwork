@@ -27,46 +27,32 @@
         });      
     });    
 //添加数据 	
-    $(document).ready(function() {
-		$('#img').uploadifive({
-			//'uploadScript' : 'uploadImg',
-			'queueID' : 'fileQueue',
-			'auto' : false,
-			'multi' : false,
-			'buttonText' : '选择图片',
-			'fileSizeLimit' : 500
-		});		
-		$("#uploadImg").click(function() {
-			$('#img').uploadifive({				
-				'uploadScript' : 'uploadImg',
-				'queueID' : 'fileQueue',
-				'auto' : false,
-				'multi' : false,
-				'buttonText' : '选择图片',
-				'formData' : {
-					'title' : $("#title").val(),
-					'content' : $("#content").val(),
-					'fbman' : $("#fbman").val(),					
-					'img' : $("#img").val(),					
-					'fbtime' : $("#fbtime").val(),
-					'fblx' : $("#fblx").val(),
-					'state' : $('#state input[name="radio"]:checked ').val()
-				},
-				/* success : function(data) {				
-					location.reload();
-				}, */
-				'fileSizeLimit' : 500
-			});
-			$('#img').uploadifive('upload');
-		});
+function addOpinion(){
+	var title = document.getElementById("title").value;
+	var content = $("#content").val();
+	$.ajax({
+		type:"POST",
+		url:"opinion/saveOrUpdate",
+		dataType:"json",
+		data:{title:title,content:content},
+		cache:false,
+		asnyc:true,
+		success:function(data){			
+		 if(confirm("您的意见反馈成功，请等待管理员回复"))
+		 {
+			 location.reload();
+		 }	
+		}
 	});
+	
+} 		
 </script>
 </head>
 <body>
 
 <div class="row" style="align:center;">
 	<div style="width:800px;margin-top: 16px;margin-left: 40px;">
-		<form action="#"  id="formId" class="form-horizontal" enctype="multipart/form-data" method="post">
+		<form action="#"  id="formId" class="form-horizontal" method="post">
 		  <div class="form-group"  style="margin-top: 16px;">
 		    <label for="inputEmail3" class="col-sm-2 control-label">标题:</label>
 		    <div class="col-sm-10">
@@ -78,29 +64,10 @@
 		    <div class="col-sm-10">
 		      <textarea name="content" id="content" style="width:662px;height:400px;visibility:hidden;display: block;resize: none;"></textarea>
 		    </div>
-		  </div>
-		   
-		  <!-- <div class="form-group">
-		    <label for="inputEmail3" class="col-sm-2 control-label">发布人:</label>
-		    <div class="col-sm-10">
-		      <input type="text" id="fbman" name="fbman" class="form-control" placeholder="请输入发布人">
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="inputEmail3" class="col-sm-2 control-label">发布时间:</label>		   
-		    <div class="col-sm-10">
-		      <input type="text" id="fbtime" name="fbtime" class="form-control Wdate" placeholder="请输入发布时间" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" style="height:34px;">
-		    </div>
-		  </div>	 -->	  
-		 <!-- <div class="form-group">
-		    <label for="inputEmail3" class="col-sm-4 control-label" id="state" >用户状态:&nbsp;&nbsp;
-		    	<input type="radio" name="radio" value="1" style="padding-left: 4px;"/> 启用					    	
-			 	<input type="radio" name="radio" value="0"/> 停用
-		    </label>
-		  </div> -->		  
+		  </div>			  
 		 <div class="form-group" style="width:180px;height:40px;margin: 0 auto;">				  
 			<div class="col-sm-8">
-				<button type="button" id="uploadImg" class="btn btn-primary" class="form-control" style="width:100%">添加</button>
+				<button type="button" class="btn btn-primary" class="form-control" style="width:100%" onclick="addOpinion()">添加</button>
 			</div>
 		</div>
 		</form>

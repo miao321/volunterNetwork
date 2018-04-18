@@ -17,8 +17,8 @@ public class Enroll {
 	private String sex;//性别
 	private String phone; //手机号
 	private String idCard;//身份证号
-	private String origazation;//组织
-	private String xjorigazation;//下级组织
+	private String organization;//组织
+	private String xjorganization;//下级组织
 	private Integer duration;//时长
 	private String img;//头像
 	@Id
@@ -44,8 +44,11 @@ public class Enroll {
 	public String getIdCard() {
 		return idCard;
 	}
-	public String getOrigazation() {
-		return origazation;
+	public String getOrganization() {
+		return organization;
+	}
+	public String getXjorganization() {
+		return xjorganization;
 	}
 	public Integer getDuration() {
 		return duration;
@@ -74,20 +77,17 @@ public class Enroll {
 	public void setIdCard(String idCard) {
 		this.idCard = idCard;
 	}
-	public void setOrigazation(String origazation) {
-		this.origazation = origazation;
-	}
 	public void setDuration(Integer duration) {
 		this.duration = duration;
 	}
 	public void setImg(String img) {
 		this.img = img;
 	}
-	public String getXjorigazation() {
-		return xjorigazation;
+	public void setOrganization(String organization) {
+		this.organization = organization;
 	}
-	public void setXjorigazation(String xjorigazation) {
-		this.xjorigazation = xjorigazation;
+	public void setXjorganization(String xjorganization) {
+		this.xjorganization = xjorganization;
 	}
 	public String getPhone() {
 		return phone;

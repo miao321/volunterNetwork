@@ -22,6 +22,7 @@ public class Opinion {
 	@DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
 	private Date fbtime;//发布时间
 	private Integer state;
+	private String remark;//备注
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
@@ -61,6 +62,12 @@ public class Opinion {
 	}
 	public void setState(Integer state) {
 		this.state = state;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 

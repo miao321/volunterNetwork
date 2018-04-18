@@ -22,6 +22,30 @@
 <script type="text/javascript" src="js/hm.js"></script>
 <script type="text/javascript" src="js/i.js"></script>
 <script type="text/javascript" src="js/crossdomain.js"></script>
+<script type="text/javascript">
+//添加数据
+function baoming(){
+	var userName = document.getElementById("userName").value;
+	var studentNo = document.getElementById("studentNo").value;	
+	var sex = $('#sex input[name="sex"]:checked ').val();
+	var phone = document.getElementById("phone").value;
+	var phone = document.getElementById("college").value;
+	var phone = document.getElementById("major").value;
+	var phone = document.getElementById("idCard").value;
+	 $.ajax({			 
+		 type : "POST",
+		 url : "saveOrUpdate",           
+         dataType : "json",
+         data:{userName:userName,studentNo:studentNo,
+        	 sex:sex,phone:phone,college:college,major:major,idCard:idCard},
+		 cache : false,
+		 async : true,
+		 success : function(data) {				
+			location.reload();
+		 }
+	}); 
+}
+</script>
 <style type="text/css">
 	.box_vo{
 		width: 68px;
@@ -182,7 +206,9 @@
 		       	 <p val="592411" class="opion opion3 invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>关注</em><strong class="goodNum">${acti.attention }</strong></a></p>
 		       </div>
 		       
-		       <a href="baoming.jsp" style="color:#fff;"><button type="button" class="btn btn-warning" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;">马上报名</button></a>
+		       <button class="btn btn-warning" data-toggle="modal" data-target="#baoming" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;" type="button">
+					马上报名
+			   </button>
 	    </li><hr style="margin-top: 20px;margin-bottom: 0;"/>
 	    </c:forEach>
     
@@ -254,6 +280,78 @@
 		当前第${pageNumber+1}页</li>
 </ul>
 </nav>
-	
+<!-- baoming -->
+<div class="modal fade" id="baoming" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" 
+						aria-hidden="true">×
+				</button>
+				<h4 class="modal-title" id="myModalLabel" style="font-size: 18px;font-weight: 600;">
+					马上报名
+				</h4>
+			</div>
+			<div class="modal-body">
+				<!-- <form class="form-inline"> -->
+				<form method="post" class="form-horizontal" role="form" >
+					 <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">姓名:</label>
+					    <div class="col-sm-10" >
+					      <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入姓名" style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">学号:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="studentNo" name="studentNo" class="form-control" placeholder="请输入学号" style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>
+					  <div class="form-group" >
+					    <label for="inputEmail3" class="col-sm-4 control-label" id="sex">性别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					      <input type="radio" name="sex" value="男"/> 男
+						  <input type="radio" name="sex" value="女"/> 女	
+						</label>				      
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">手机号:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="phone" name="phone" class="form-control" placeholder="请输入手机号"  style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">学院:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="college" name="college" class="form-control" placeholder="请输入学院"  style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">专业:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="major" name="major" class="form-control" placeholder="请输入专业"  style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>	
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">身份证号:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="idCard" name="idCard" class="form-control" placeholder="请输入身份证号"  style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>				 
+				</form>					
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" 
+						data-dismiss="modal">取消
+				</button>
+				<button type="button" class="btn btn-primary" onclick="baoming()">
+					保存
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+   $(function () { $('#baoming').modal('hide')});
+</script>	
 </body>
 </html>

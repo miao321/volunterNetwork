@@ -20,7 +20,7 @@
 				<div class="tabbable" id="tabs-157696" style="width: 100%;">
 					<ul class="nav nav-tabs"
 						style="font-size: 14px; font-weight: bold; width: 90px; margin: 0 auto;">
-						<li class="active"><a data-toggle="tab" href="#panel-22521">系统消息</a>
+						<li class="active"><a data-toggle="tab" href="#panel-22521">我的项目</a>
 						</li>
 					</ul>
 					<div class="tab-content">

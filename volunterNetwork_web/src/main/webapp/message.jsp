@@ -1,5 +1,10 @@
+<%@ page import="com.xxx.volunterNetwork.domain.*" %>
+<%@ page import="com.xxx.volunterNetwork.dao.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -59,13 +64,15 @@
           					<div id="message" style="width: 800px;height: auto;margin: 0 auto;">
           					<a style="color: #000;">
           						<span class="glyphicon glyphicon-volume-up" aria-hidden="true" style="font-size: 24px;margin-left: -36px;"></span>
-          						<span style="margin-left: 10px;">志愿者福利</span>
+          						<span style="margin-left: 10px;">组织消息</span>
           						<p style="margin-top: 0 auto;">
-       								查无结果
+       								
           						</p>
           						
           					</a>
-          					<div style="width:300px;margin: 0 auto;">查无结果</div>
+          					<c:forEach items="${opinions}" var="opinion" varStatus="status">
+          					<div style="width:300px;margin: 0 auto;">${opinion.remark }</div>
+          					</c:forEach>
           					</div>
             			</div>
             		  </div>
@@ -76,9 +83,9 @@
           					<div id="message" style="width: 800px;height: auto;margin: 0 auto;">
           					<a style="color: #000;">
           						<span class="glyphicon glyphicon-volume-up" aria-hidden="true" style="font-size: 24px;margin-left: -36px;"></span>
-          						<span style="margin-left: 10px;">志愿者福利</span>
+          						<span style="margin-left: 10px;">活动消息</span>
           						<p style="margin-top: 0 auto;">
-       								查无结果
+       								
           						</p>
           						
           					</a>
@@ -93,13 +100,16 @@
           					<div id="message" style="width: 800px;height: auto;margin: 0 auto;">
           					<a style="color: #000;">
           						<span class="glyphicon glyphicon-volume-up" aria-hidden="true" style="font-size: 24px;margin-left: -36px;"></span>
-          						<span style="margin-left: 10px;">志愿者福利</span>
+          						<span style="margin-left: 10px;">@我相关</span>
           						<p style="margin-top: 0 auto;">
-       								查无结果
+       								
           						</p>
           						
           					</a>
-          					<div style="width:300px;margin: 0 auto;">查无结果</div>
+          					<c:forEach items="${opinions}" var="opinion" varStatus="status">
+          					
+          					<div style="width:300px;margin: 0 auto;">${opinion.remark }</div><hr style="margin-top: 0;"/>
+          					</c:forEach>
           					</div>
             			</div>
             		  </div>

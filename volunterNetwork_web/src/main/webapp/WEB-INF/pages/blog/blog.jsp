@@ -25,6 +25,38 @@
 <script type="text/javascript" src="js/hm.js"></script>
 <script type="text/javascript" src="js/i.js"></script>
 <script type="text/javascript" src="js/crossdomain.js"></script>
+<script charset="utf-8" src="${pageContext.request.contextPath}/kindeditor/kindeditor-all-min.js"></script>
+<script charset="utf-8" src="${pageContext.request.contextPath}/kindeditor/lang/zh-CN.js"></script>
+
+<script type="text/javascript">
+var editor;
+KindEditor.ready(function(K) {
+    editor = K.create('textarea[name="content"]', {
+        allowFileManager : true,
+        allowImageUpload:false,
+        resizeType : 1,
+        width:"100%",
+        height:"400px",
+        afterBlur: function () { this.sync(); }
+    });      
+});
+//添加数据
+function baoming(){
+	var title = document.getElementById("title").value;
+	var content = $("#content").val();
+	 $.ajax({			 
+		 type : "POST",
+		 url : "saveOrUpdate",           
+         dataType : "json",
+         data:{title:title,content:contents},
+		 cache : false,
+		 async : true,
+		 success : function(data) {				
+			location.reload();
+		 }
+	}); 
+}
+</script>
 <style type="text/css">
 	.box_vo{
 		width: 68px;
@@ -176,6 +208,9 @@
 		<div class="span12">
 			
 			<form class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
+				<button class="btn btn-warning" data-toggle="modal" data-target="#baoming" style="margin-left:10px;width:80px;float:right;background: #ff8814;" type="button">
+					发帖
+			    </button>
 				<button type="submit" class="btn btn-info">最新发帖</button>
 				<button type="submit" class="btn btn-info">最后回复</button>
 			</form>
@@ -201,7 +236,49 @@
 	    </c:forEach>
 	</ul>
 </div>
-
+<!-- baoming -->
+<div class="modal fade" id="baoming" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" 
+						aria-hidden="true">×
+				</button>
+				<h4 class="modal-title" id="myModalLabel" style="font-size: 18px;font-weight: 600;">
+					发帖
+				</h4>
+			</div>
+			<div class="modal-body">
+				<!-- <form class="form-inline"> -->
+				<form method="post" class="form-horizontal" role="form" >
+					 <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">标题:</label>
+					    <div class="col-sm-10" >
+					      <input type="text" id="title" name="title" class="form-control" placeholder="请输入标题" style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">内容:</label>
+					    <div class="col-sm-10">
+					      <textarea name="content" id="content" style="width:362px;height:400px;visibility:hidden;display: block;resize: none;"></textarea>
+					    </div>
+					  </div>
+				</form>					
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" 
+						data-dismiss="modal">取消
+				</button>
+				<button type="button" class="btn btn-primary" onclick="baoming()">
+					保存
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+   $(function () { $('#baoming').modal('hide')});
+</script>
 	
 </body>
 </html>

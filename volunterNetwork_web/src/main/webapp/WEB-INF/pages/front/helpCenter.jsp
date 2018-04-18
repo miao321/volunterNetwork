@@ -11,16 +11,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>帮助中心</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
-<!-- <link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
-<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="css/personalCenter.css" rel="stylesheet" type="text/css" />
-<link href="css/background.css" rel="stylesheet" type="text/css" />
-<link href="css/index.css" rel="stylesheet" type="text/css" />
-<link href="css/index_animation.css" rel="stylesheet" type="text/css" />
-<link href="css/reset.css" rel="stylesheet" type="text/css" />
-<link href="css/common.css" rel="stylesheet" type="text/css" /> -->
-
-<!-- <link href="css/layui.css" rel="stylesheet" type="text/css" /> -->
 <link href="css/background.css" rel="stylesheet" type="text/css" />
 <link href="css/personalCenter.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
@@ -169,6 +159,12 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<!-- <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+		</div>
+	</div>
+</div> -->
 <div class="left" style="background: #ededed;width:260px;">
 	<div class="div1">
 		<div class="div2">							

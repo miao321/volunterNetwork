@@ -53,26 +53,12 @@ function toView(){
 			 data : {id:id},
 			 cache : false,
 			 async : true,
-			 success : function(result) {
-				if (result.state != 0) {
-					$('#seeRole').modal('show');
-					$("#roleName1").val(result.roleName);
-					$("#remark1").val(result.remark);
-					$("#orderNo1").val(result.orderNo);
-					$("#createBy1").val(result.createBy);
-					$("#createCollege1").val(result.createCollege);
-					$("#createTime1").val(result.createTime);
-					$("#updateBy1").val(result.updateBy);
-					$("#updateTime1").val(result.updateTime);
-					if(result.state == 1){
-						$("#state1").val("启用");
-					}else{
-						$("#state1").val("停用");
-					}	
-				}else{
-					alert("该数据是禁用状态无法查看!");
-				}
-					
+			 success : function(result) {				
+				$('#seeOpinion').modal('show');
+				$("#title").val(result.title);
+				$("#content").val(result.content);
+				$("#author").val(result.author);
+				$("#fbtime").val(result.fbtime);
 			 }}); 
 		 
 	 }else{
@@ -80,7 +66,7 @@ function toView(){
 	 }
 }  	
 //删除单条数据
-function deleteRole(id){
+function deleteOpinion(id){
 	 $.ajax({			 
 		 type : "POST",
 		 url : "delete",
@@ -97,7 +83,7 @@ function deleteRole(id){
 	}); 	
 }
 //删除多条数据
-function deleteRoles(){
+function deleteOpinions(){
 	 var checkbox = document.getElementsByName("id"); 
      var strIds =[];  
      for ( var i = 0; i < checkbox.length; i++) {  
@@ -108,7 +94,7 @@ function deleteRoles(){
 	 $.ajax({			 
 		 type : "POST",	
          dataType : "json",
-		 url : "deleteRoles",
+		 url : "deleteOpinions",
 		 data : {ids:strIds.toString()},
 		 cache : false,
 		 async : true,
@@ -119,31 +105,11 @@ function deleteRoles(){
 		 }
 	}); 	
 }
-//禁用数据
-function disableRole(id){
-	$.ajax({			 
-		 type : "POST",
-		 url : "disableRole",           
-         dataType : "json",
-         data:{id:id},
-		 cache : false,
-		 async : true,
-		 success : function(data) {				
-			 //$("#sta").val(0);
-			 if (data.state != 0) {
-				 location.reload();
-			}else{
-				alert("该数据已经被禁用无需重复操作!");
-			}
-			 
-		 }
-	}); 
-}
 //启用数据
-function enableRole(id){
+function enableOpinion(id){
 	$.ajax({			 
 		 type : "POST",
-		 url : "enableRole",           
+		 url : "enableOpinion",           
          dataType : "json",
          data:{id:id},
 		 cache : false,
@@ -169,7 +135,7 @@ function enableRole(id){
 				<button  type="button" class="btn btn-info" onclick="toView()" style="margin: 6px 0;">					
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-edit" aria-hidden="true"></span> 查看					
 				</button>
-				<button class="btn btn-info" onclick="deleteRoles()" style="margin: 6px 0;" type="button">
+				<button class="btn btn-info" onclick="deleteOpinions()" style="margin: 6px 0;" type="button">
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-trash" aria-hidden="true"></span> 批量删除
 				</button>
 				<table class="table" id="table">
@@ -179,10 +145,11 @@ function enableRole(id){
 								onclick="checkAll('id',this)"></th>
 							<!-- <th data-checkbox="true"></th> -->
 							<th>编号</th>
-							<th>头像</th>
+							<th>标题</th>							
 							<th>内容</th>
 							<th>作者</th>
 							<th>发布时间</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -190,24 +157,22 @@ function enableRole(id){
 							<tr id="tr_${r.id }">
 								<td><input type="checkbox" id="id" name="id" value="${r.id}" /></td>
 								<td>${status.index+1}</td>
-								<td>${r.img}</td>
+								<td>${r.title}</td>
 								<td>${r.content}</td>
 								<td>${r.author}</td>
-								<td><fmt:formatDate value="${r.fbtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-							<%-- 	<c:if test="${c.state ==1}">
-								<td id="sta">启用</td>
-								</c:if>
-								<c:if test="${c.state ==0}">
-								<td id="sta">停用</td>
-								</c:if> --%>
+								<td><fmt:formatDate value="${r.fbtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>							
 								<td>
-									<a onclick="deleteRole(${r.id})" id="id"><span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-trash" aria-hidden="true"
+									<a onclick="deleteOpinion(${r.id})" id="id"><span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-trash" aria-hidden="true"
 									data-toggle="tooltip" data-placement="top" title="删除" >										
 									</span></a>
-									<span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-ban-circle" aria-hidden="true"
-									data-toggle="tooltip" data-placement="top" title="禁用" onclick="disableRole(${r.id})"></span>
 									<span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-ok-circle" aria-hidden="true"
-									data-toggle="tooltip" data-placement="top" title="启用" onclick="enableRole(${r.id})"></span>
+									data-toggle="tooltip" data-placement="top" title="查看" onclick="enableOpinion(${r.id})"></span>
+									<c:if test="${r.state ==1}">
+									<span>已读</span>
+									</c:if>
+									<c:if test="${r.state ==0}">
+									<span>未读</span>
+									</c:if>
 								</td>
 								<c:if test="${pageNumber+1 > pageTotalPages }">
 									该页还没有内容
@@ -221,18 +186,18 @@ function enableRole(id){
 				<ul class="pager pagination-lg">
 					<c:if test="${pageNumber>0 }">
 						<li><a
-							href="<c:url value="/role/findPage?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+							href="<c:url value="/opinion/findPage?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
 					</c:if>
 					
 					<c:forEach begin="${pageNumber+1 }" end="${pageTotalPages }"
 						varStatus="loop">
 						<c:set var="active" value="${loop.index==page?'active':''}" />
 						<li class="${active}"><a
-							href="<c:url value="/role/findPage?page=${loop.index}"/>">${loop.index}</a>
+							href="<c:url value="/opinion/findPage?page=${loop.index}"/>">${loop.index}</a>
 						</li>
 					</c:forEach>
 					<li><a
-						href="<c:url value="/role/findPage?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
+						href="<c:url value="/opinion/findPage?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
 					</li>
 				</ul>
 				<ul class="pager pagination-lg">
@@ -246,7 +211,7 @@ function enableRole(id){
 </form>	
 
 <!-- seeCollege -->
-<div class="modal fade" id="seeRole" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="seeOpinion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -254,70 +219,37 @@ function enableRole(id){
 						aria-hidden="true">×
 				</button>
 				<h4 class="modal-title" id="myModalLabel">
-					角色信息
+					反馈意见
 				</h4>
 			</div>
 			<div class="modal-body">
 				<form method="post" class="form-horizontal" role="form" >
 					<input type="hidden" id="id">
 					 <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">角色名字:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">标题:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="roleName1" name="roleName1" class="form-control" placeholder="请输入角色名字"  value="${result.roleName }">
+					      <input type="text" id="title" name="title" class="form-control" placeholder="请输入标题"  value="${result.title }">
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">备注:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">内容:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="remark1" name="remark1" class="form-control" placeholder="请输入备注" value="${result.remark }">
+					      <input type="text" id="content" name="content" class="form-control" placeholder="请输入内容" value="${result.content }">
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">编号:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">作者:</label>
 					    <div class="col-sm-10">
-					      <input  type="text" id="orderNo1" name="orderNo1" class="form-control" placeholder="请输入编号" value="${result.orderNo }">
+					      <input  type="text" id="author" name="author" class="form-control" placeholder="请输入作者" value="${result.author }">
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">创建者:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">发布时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="createBy1" name="createBy1" class="form-control" placeholder="请输入创建者" value="${result.createBy }">
+					      <input type="text" id="fbtime" name="fbtime" class="form-control" placeholder="请输入发布时间" value="${result.fbtime }">
 					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">创建者学院:</label>
-					    <div class="col-sm-10">
-					      <input type="text" id="createCollege1" name="createCollege1" class="form-control" placeholder="请输入创建者学院" value="${result.createCollege }">
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">创建时间:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime1" name="createTime1" placeholder="请输入创建时间" style="height:34px;" value="${result.createTime }">
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">修改者:</label>
-					    <div class="col-sm-10">
-					      <input type="text" id="updateBy1" name="updateBy1" class="form-control" placeholder="请输入修改者" value="${result.updateBy }">
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">修改时间:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime1" name="updateTime1" placeholder="请输入修改时间" style="height:34px;" value="${result.updateTime }">
-					    </div>
-					  </div>
-					   <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">用户状态:</label>
-					    <div class="col-sm-10">
-					    	<input type="text" id="state1" class="form-control" value="${result.state }"/>
-					    </div>
-					    
-					  </div>
-				
-				</form>
-				
+					  </div>				
+				</form>				
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" 

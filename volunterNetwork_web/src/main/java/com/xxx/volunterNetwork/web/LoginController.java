@@ -63,7 +63,7 @@ public class LoginController {
 		}
 		return "WEB-INF/pages/login";
 	}
-	@RequestMapping(value="first")
+	@RequestMapping(value="backstage")
 	@SysControllerLog(module="系统登录",methods="登录系统")
    public String first(HttpSession session)throws Exception{	
 		//从shiro的session中取User
@@ -76,7 +76,13 @@ public class LoginController {
 		session.setAttribute("userName", user.getUserName());
 		session.setAttribute("userId", user.getId());
 		session.setAttribute("password", user.getPassword());
-		return "WEB-INF/pages/backstage";
+		
+		/*if(user.getStudentNo() == "2014") {*/
+			return "WEB-INF/pages/backstage";
+		/*}else{
+			return "front";
+		}*/
+		
 	}	
 	//修改密码
 	@RequestMapping("/updatePassword")

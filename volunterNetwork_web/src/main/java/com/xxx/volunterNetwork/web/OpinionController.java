@@ -1,6 +1,7 @@
 package com.xxx.volunterNetwork.web;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,12 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.xxx.volunterNetwork.domain.Permission;
 import com.xxx.volunterNetwork.domain.Opinion;
-import com.xxx.volunterNetwork.dto.PermissionQueryDTO;
 import com.xxx.volunterNetwork.dto.OpinionQueryDTO;
-import com.xxx.volunterNetwork.service.IPermissionService;
 import com.xxx.volunterNetwork.service.IOpinionService;
+import com.xxx.volunterNetwork.service.IPermissionService;
 import com.xxx.volunterNetwork.util.ExtAjaxResponse;
 import com.xxx.volunterNetwork.util.ExtJsonResult;
 import com.xxx.volunterNetwork.util.ExtPageable;
@@ -42,11 +41,14 @@ public class OpinionController {
 	@RequestMapping("/saveOrUpdate")
 //	@RequiresPermissions("opinion/saveOrUpdate")
 //	@RequiresOpinions("管理员")
-	public @ResponseBody ExtAjaxResponse saveOrUpdate(Opinion opinion) {
+	public @ResponseBody ExtAjaxResponse saveOrUpdate(Opinion opinion,HttpSession session) {
 		
 		/*if (opinionService.findOpinion(opinion.getOpinionName()) != null) {
 			return new ExtAjaxResponse(false, "该角色已经存在不用再添加");
 		}*/
+		String userName = (String) session.getAttribute("userName");
+		opinion.setAuthor(userName);
+		opinion.setFbtime(new Date(System.currentTimeMillis()));
 		try {
 			opinionService.saveOrUpdate(opinion);
 			return new ExtAjaxResponse(true, "操作成功");

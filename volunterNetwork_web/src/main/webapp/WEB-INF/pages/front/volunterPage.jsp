@@ -30,7 +30,7 @@ select{width:220px;border:1px solid #cccccc;background-color:#ffffff;}
 </style>
 <script type="text/javascript">
 //添加数据
-function addUser(){
+function baoming(){
 	var userName = document.getElementById("userName").value;
 	var studentNo = document.getElementById("studentNo").value;	
 	var sex = $('#sex input[name="sex"]:checked ').val();

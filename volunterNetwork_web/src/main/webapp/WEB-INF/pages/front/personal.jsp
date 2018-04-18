@@ -121,13 +121,7 @@
 	          <li class="nav_block_item my_msg">
 	            <div class="item_con"><span class="glyphicon glyphicon-edit" aria-hidden="true" style="padding-right: 4px;color: green;"></span>完善资料</div>
 	          </li>
-	          </a>
-	          <!-- <a class="a" href="javascript:void(0);"
-						onClick="openurl('');" style="text-align: left;">
-	          <li class="nav_block_item my_msg">
-	            <div class="item_con"><span class="glyphicon glyphicon-stop" aria-hidden="true" style="padding-right: 4px;color:red;"></span>一号通中心</div>
-	          </li>
-	          </a> -->
+	          </a>	        
 	          <a class="a" href="javascript:void(0);"
 						onClick="openurl('protect.jsp');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
@@ -140,19 +134,6 @@
 	            <div class="item_con"><span class="glyphicon glyphicon-th-list" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>服务记录</div>
 	          </li>
 	          </a>
-	         <!--  <a class="a" href="javascript:void(0);"
-						onClick="openurl('baoming.jsp');" style="text-align: left;">
-	          <li class="nav_block_item my_msg">
-	            <div class="item_con"><span class="glyphicon glyphicon-user" aria-hidden="true" style="padding-right: 4px;color: green;"></span>申请志愿者证 </div>
-	          </li>
-	          </a> -->
-	          <!-- <a class="a" href="javascript:void(0);"
-						onClick="openurl('baoming.jsp');" style="text-align: left;">
-	          <li class="nav_block_item my_msg">
-	            <div class="item_con"><span class="glyphicon glyphicon-hourglass" aria-hidden="true" style="padding-right: 4px;color: orange;"></span>志愿者证申请进度</div>
-	          </li>
-	          </a> -->
-	          
 	        </ul>
 	        </div>
 	        </div>
