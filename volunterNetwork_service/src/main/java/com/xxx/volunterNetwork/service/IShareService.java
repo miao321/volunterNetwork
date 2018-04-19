@@ -23,7 +23,7 @@ public interface IShareService {
 	public List<Share> findAll();
 	public void updateState(Long id,Integer state);
 	
-	/*public Share findShare(String shareName);*/
+	public List<Share> findShare();
 	//动态条件查询
 	public Page<Share> findAll(Specification<Share> spec,Pageable pageable);
 

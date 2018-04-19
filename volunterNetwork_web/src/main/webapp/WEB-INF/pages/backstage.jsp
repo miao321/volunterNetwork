@@ -118,6 +118,8 @@
 						onClick="openurl('empty.html');">活动分类管理</a></span></li> -->
 					<li><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-left:34px;"><a class="a" href="javascript:void(0);"
 						onClick="openurl('empty.html');">用户中心管理</a></span></li>
+					<li><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-left:6px;"><a class="a" href="javascript:void(0);"
+						onClick="openurl('enroll/findPage');">报名管理</a></span></li>
 				</ul>
 			</div>
 			<a class="a1" href="login.jsp">

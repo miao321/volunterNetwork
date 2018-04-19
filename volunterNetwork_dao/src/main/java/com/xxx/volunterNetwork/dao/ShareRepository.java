@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import com.xxx.volunterNetwork.domain.Acti;
 import com.xxx.volunterNetwork.domain.Share;
 /**
  * 
@@ -35,4 +36,6 @@ public interface ShareRepository extends PagingAndSortingRepository<Share, Long>
 	@Modifying
 	@Query("update Share share set share.state = ?2 where share.id = ?1")
 	public void updateState(Long id,Integer state);
+	@Query(value="select * from t_share where state = 1 ORDER BY id desc",nativeQuery=true)
+	public List<Share> findShare();
 }

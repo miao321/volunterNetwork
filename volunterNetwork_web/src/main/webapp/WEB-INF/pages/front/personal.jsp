@@ -13,7 +13,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
 <link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="css/background.css" rel="stylesheet" type="text/css" />
+<link href="css/personal.css" rel="stylesheet" type="text/css" />
 <link href="css/index.css" rel="stylesheet" type="text/css" />
 <link href="css/index_animation.css" rel="stylesheet" type="text/css" />
 <link href="css/reset.css" rel="stylesheet" type="text/css" />
@@ -102,7 +102,7 @@
 		<div class="div2">							
 			<div class="person" style="width:200px;height: 100px;background: #fff;margin-left: 70px;margin-top: -10px;">
 				<img src="images/headimgboy1.jpg" style="width: 58px;height: 58px;float: left;margin: 21px 0 21px 21px;"/>
-				<span style="float:right;margin-right: 50px;margin-top: 20px;">321</span>
+				<span style="float:right;margin-right: 50px;margin-top: 20px;">${userName }</span>
 				<button style="float:right;width: 70px;height: 24px;margin-right: 30px;" type="button" class="btn btn-info"><h3 style="text-align: center;color: #fff;">设置头像</h3></button>
 			</div>
 		</div>
@@ -144,13 +144,13 @@
 			<div class="nav_block nav_block_one bgcWhite mb_10">
 			<ul class="nav_block_list">				
 	          <li class="nav_block_item my_msg" style="text-align: left;">
-	            <div class="item_con" style="font-size: 15px;"><span class="glyphicon glyphicon-time" aria-hidden="true" style="padding-right: 4px;color: orange;"></span>志愿时长：321小时</div>
+	            <div class="item_con" style="font-size: 15px;"><span class="glyphicon glyphicon-time" aria-hidden="true" style="padding-right: 4px;color: orange;"></span>志愿时长：${duration }小时</div>
 	          </li>
 	          <li class="nav_block_item my_msg" style="text-align: left;">
-	            <div class="item_con" style="font-size: 15px;"><span class="glyphicon glyphicon-film" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>培训时长：321小时</div>
+	            <div class="item_con" style="font-size: 15px;"><span class="glyphicon glyphicon-film" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>培训时长：${pxTime }小时</div>
 	          </li>
 	          <li class="nav_block_item my_msg" style="text-align: left;">
-	            <div class="item_con" style="font-size: 15px;"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" style="padding-right: 4px;color: green;"></span>报名活动：23个</div>
+	            <div class="item_con" style="font-size: 15px;"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" style="padding-right: 4px;color: green;"></span>报名活动：${enrollCount }个</div>
 	          </li>	         
 	        </ul>
 	        </div>

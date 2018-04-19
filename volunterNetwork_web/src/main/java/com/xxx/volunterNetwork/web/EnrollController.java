@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xxx.volunterNetwork.anno.SysControllerLog;
 import com.xxx.volunterNetwork.domain.Enroll;
+import com.xxx.volunterNetwork.domain.User;
 import com.xxx.volunterNetwork.dto.EnrollQueryDTO;
 import com.xxx.volunterNetwork.service.IEnrollService;
 import com.xxx.volunterNetwork.util.ExtAjaxResponse;
@@ -120,6 +121,23 @@ public class EnrollController {
 		session.setAttribute("pageSize", page.getSize());//当前页条数
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
-		return "/WEB-INF/pages/front/enrollvityDetail";	
-	}	
+		return "/WEB-INF/pages/system/enroll";	
+	}
+	
+	@RequestMapping("disableEnroll")
+	public @ResponseBody Enroll disableEnroll(@RequestParam Long id) {
+		Enroll enroll = enrollService.findOne(id);
+		if (enroll.getState() != null) {
+			enrollService.updateState(id, 0);
+		}
+		return enroll;
+	}
+	@RequestMapping("enableEnroll")
+	public @ResponseBody Enroll enableEnroll(@RequestParam Long id) {
+		Enroll enroll = enrollService.findOne(id);
+		if (enroll.getState() != null) {
+			enrollService.updateState(id, 1);
+		}
+		return enroll;
+	}
 }

@@ -16,8 +16,24 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/WdatePicker.js"></script>
-
-
+<script>
+function changePassword(){
+	var password3 = document.getElementById("password3").value;
+	var password1 = document.getElementById("password1").value;
+	var password2 = document.getElementById("password2").value;
+	$.ajax({
+		type:"POST",
+		url:"changePassword",
+		dataType:"json",
+		data:{password3:password3,password1:password1,password2:password2},
+		cache:false,
+		async:true,
+		success:function(data){
+			alert(data.msg);
+		}
+	});
+}
+</script>
 
 </head>
 <body>
@@ -35,40 +51,45 @@
 					<li>
 						<a data-toggle="tab" href="#panel-22523">修改密码</a>
 					</li>
-					
-					
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="panel-22521">
 					  <form method="post" class="form-horizontal" role="form" style="margin-top: 30px;"  >
-					   <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">用户名:</label>
-					    <div class="col-sm-3">
-					      <input type="text" id="userName2" name="userName2" class="form-control" placeholder="请输入用户名">
-					    </div>
-					  </div>
+					   
 					  <div class="form-group" style="margin-top: 20px;">
 					    <label for="inputEmail3" class="col-sm-2 control-label"><span style="padding-right: 8px;color: red;" >*</span>姓名:</label>
 					    <div class="col-sm-3">
-					      <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入姓名">
+					      <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入姓名" value="${user.userName }">
 					    </div>
 					  </div>
 					  <div class="form-group">			  	
 					    <label for="inputEmail3" class="col-sm-2 control-label"><span style="padding-right: 8px;color: red;" >*</span>学号:</label>
 					    <div class="col-sm-3">
-					      <input type="text" id="studentNo2" name="studentNo2" class="form-control" placeholder="请输入学号">
+					      <input type="text" id="studentNo" name="studentNo" class="form-control" placeholder="请输入学号" value="${user.studentNo }">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">用户密码:</label>
 					    <div class="col-sm-3">
-					      <input type="password" id="password2" name="password2" class="form-control" placeholder="请输入标题">
+					      <input type="password" id="password" name="password" class="form-control" placeholder="请输入用户密码" value="${user.password }" readonly="true">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">学院:</label>
+					    <div class="col-sm-3">
+					      <input type="password" id="college" name="college" class="form-control" placeholder="请输入学院">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">专业:</label>
+					    <div class="col-sm-3">
+					      <input type="password" id="major" name="major" class="form-control" placeholder="请输入专业">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">入学时间:</label>
 					    <div class="col-sm-3">
-					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="inTake2" name="inTake2" class="form-control Wdate" placeholder="请输入入学时间" style="height:34px;">
+					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="inTake2" name="inTake2" class="form-control Wdate" placeholder="请输入入学时间" style="height:34px;" value="${user.inTake }">
 					    </div>
 					  </div>
 					  <div class="form-group">
@@ -79,8 +100,14 @@
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-3 control-label" id="sex2">性别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					      <input type="radio" name="sex" value="男"/> 男
-						  <input type="radio" name="sex" value="女"/> 女	
+					      <c:if test="${user.sex == '男' }">
+					      <input type="radio" name="sex" value="${user.sex }" checked/> ${user.sex }
+					      <input type="radio" name="sex" value="女"/>女
+						  </c:if>
+						  <c:if test="${user.sex == '女' }">
+					      <input type="radio" name="sex" value="男" /> 男
+					      <input type="radio" name="sex" value="${user.sex }" checked/>${user.sex }
+						  </c:if>
 						</label>				      
 					  </div>
 					  <div class="form-group">
@@ -118,23 +145,24 @@
 					    <button type="button" class="btn btn-primary" onclick="addUser()">
 						保存
 						</div>
-				</button>
+						</button>
 					  </div>
-				</form>			
+					</form>			
 					</div>
+					
 					<div class="tab-pane" id="panel-22522">
 						<form method="post" class="form-horizontal" role="form" style="margin-top: 30px;" >
 							<div class="form-group" >
 							    <label for="inputEmail3" class="col-sm-2 control-label"><span style="padding-right: 8px;color: red;" >*</span>归属组织:
-							    	<button class="btn btn-info" data-toggle="modal" data-target="#addUser"type="button" style="height: 34px;margin-left: 4px;">
+							    	<!-- <button class="btn btn-info" data-toggle="modal" data-target="#addUser"type="button" style="height: 34px;margin-left: 4px;">
 										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-									</button>
+									</button> -->
 							    </label>							    	
-							    <div class="col-sm-3" style="margin-top: 8px;">
+							    <div class="col-sm-3" style="margin-top: 4px;">
 							     <input type="text" id="remark2" name="remark2" class="form-control" placeholder="请选择归属组织">
 						 	     
 							     </div>
-							     <div class="col-sm-3" style="margin-top: 16px;">
+							     <div class="col-sm-3" style="margin-top: 10px;">
 							     <span style="margin-top: 20px;margin-left: 10px;" >审核通过</span>
 							     </div>
 							     
@@ -147,29 +175,29 @@
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">旧密码:</label>
 					    <div class="col-sm-3">
-					      <input type="password" id="password" name="password" class="form-control" placeholder="请输入标题">
+					      <input type="password" id="password3" name="password3" class="form-control" placeholder="请输入旧密码">
 					    </div>
 					  </div>
 					   <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">新密码:</label>
 					    <div class="col-sm-3">
-					      <input type="password" id="password1" name="password1" class="form-control" placeholder="请输入标题">
+					      <input type="password" id="password1" name="password1" class="form-control" placeholder="请输入新密码">
 					    </div>
 					  </div>
 					   <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">确认新密码:</label>
 					    <div class="col-sm-3">
-					      <input type="password" id="password2" name="password2" class="form-control" placeholder="请输入标题">
+					      <input type="password" id="password2" name="password2" class="form-control" placeholder="请输入再次新密码">
 					    </div>
 					  </div>
 					 <div class="form-group" style="margin-left: 200px;margin-top: 20px;">
 					 	<div class="col-sm-3">
-					    <button type="button" class="btn btn-primary" onclick="addUser()">
+					    <button type="button" class="btn btn-primary" onclick="changePassword()">
 						保存
 						</div>
-				</button>
+						</button>
 					  </div>
-				</form>			
+					</form>			
 					</div>					
 				</div>
 			</div>

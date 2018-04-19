@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>帮助中心</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
-<link href="css/background.css" rel="stylesheet" type="text/css" />
+<link href="css/personal.css" rel="stylesheet" type="text/css" />
 <link href="css/personalCenter.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />

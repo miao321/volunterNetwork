@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import com.xxx.volunterNetwork.domain.Img;
 import com.xxx.volunterNetwork.domain.Share;
 import com.xxx.volunterNetwork.domain.User;
 import com.xxx.volunterNetwork.dto.CommentQueryDTO;
+import com.xxx.volunterNetwork.dto.ShareQueryDTO;
 import com.xxx.volunterNetwork.service.IActiService;
 import com.xxx.volunterNetwork.service.ICommentService;
 import com.xxx.volunterNetwork.service.IEnrollService;
@@ -26,6 +28,7 @@ import com.xxx.volunterNetwork.service.IShareService;
 import com.xxx.volunterNetwork.service.IUserService;
 import com.xxx.volunterNetwork.service.impl.CommentServiceImpl;
 import com.xxx.volunterNetwork.util.ExtAjaxResponse;
+import com.xxx.volunterNetwork.util.ExtPageable;
 
 @Controller
 public class BlogController {
@@ -47,7 +50,7 @@ public class BlogController {
 		String author = (String) session.getAttribute("userName");
 		Long userId = (Long) session.getAttribute("userId");
 		User user = userService.findOne(userId);
-		
+		share.setState(0);
 		share.setAuthor(author);
 		share.setImg(user.getImg());
 		share.setFbtime(new Date(System.currentTimeMillis()));
@@ -60,10 +63,16 @@ public class BlogController {
 		}	
 	}
 	@RequestMapping("/blog")
-	public String index(HttpSession session) {
-		
-		List<Share> shareLists = shareService.findAll();
-		session.setAttribute("shareLists", shareLists);
+	public String index(HttpSession session,ShareQueryDTO shareQueryDTO,ExtPageable extPageable) {
+		Page<Share> page = shareService.findAll(shareQueryDTO.getSpecification(shareQueryDTO), extPageable.getPageable());
+		List<Share> shareLists = shareService.findShare();
+		session.setAttribute("shareLists", shareLists);//内容
+		session.setAttribute("pageNumber", page.getNumber());//当前页
+		session.setAttribute("pageSize", page.getSize());//当前页条数
+		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
+		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
+		/*List<Share> shareLists = shareService.findAll();
+		session.setAttribute("shareLists", shareLists);*/
 		return "/WEB-INF/pages/blog/blog";
 	}
 	@RequestMapping("/blogDetail")

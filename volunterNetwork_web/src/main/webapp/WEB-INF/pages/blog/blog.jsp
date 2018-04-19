@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>分享页</title>
+<title>i 论坛</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
 <link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -48,7 +48,7 @@ function baoming(){
 		 type : "POST",
 		 url : "saveOrUpdate",           
          dataType : "json",
-         data:{title:title,content:contents},
+         data:{title:title,content:content},
 		 cache : false,
 		 async : true,
 		 success : function(data) {				
@@ -228,13 +228,79 @@ function baoming(){
 		      </a>
 		       <div class="right_txt" style="margin-top: 26px;">
 		         <a target="_blank" href="blogDetail/?id=${share.id }" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #000;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">${share.title }</a>
-		         <p class="right_txt_p" style="margin-left:80px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">作者：${share.author } &nbsp;<fmt:formatDate value="${share.fbtime }" type="both"/>&nbsp;&nbsp;最后回应：${share.endResp } &nbsp;<fmt:formatDate value="${share.fbtime }" type="both"/></p>
+		         <p class="right_txt_p" style="margin-left:80px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">作者：${share.author } &nbsp;<fmt:formatDate value="${share.fbtime }" type="both"/>
+		         <%-- &nbsp;&nbsp;最后回应：${share.endResp } &nbsp;<fmt:formatDate value="${share.fbtime }" type="both"/> --%></p>
 		       
 		       </div>     
 		     </div>		      
 	    </li><hr style="margin-top: 20px;margin-bottom: 0;"/>
 	    </c:forEach>
 	</ul>
+	<nav aria-label="Page navigation"
+					style="margin:0 auto;margin-top:-16px;">
+				<ul class="pager pagination-lg">
+					<c:if test="${pageNumber>0 }">
+						<li><a
+							href="<c:url value="/blog?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+					</c:if>		
+					<c:if test="${pageNumber-3 >= 1 }">
+						<li><a
+								href="<c:url value="/blog?page=${pageNumber-3}"/>">${pageNumber-3}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber-2 >= 1 }">
+						<li><a
+								href="<c:url value="/blog?page=${pageNumber-2}"/>">${pageNumber-2}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber-1 >= 1 }">
+						<li><a
+								href="<c:url value="/blog?page=${pageNumber-1}"/>">${pageNumber-1}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber >= 1 }">
+						<li><a
+								href="<c:url value="/blog?page=${pageNumber}"/>">${pageNumber}</a>
+							</li>
+					</c:if>					
+					<c:if test="${pageNumber+1 <= pageTotalPages}">
+					<c:set var="active" value="${active}" />
+						<li class="${active}"><a
+								href="<c:url value="/user/findPage?page=${pageNumber+1}"/>">${pageNumber+1}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+2 <= pageTotalPages && !(pageNumber-3 >= 1)}">
+						<li><a
+								href="<c:url value="/blog?page=${pageNumber+2}"/>">${pageNumber+2}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+3 <= pageTotalPages && !(pageNumber-2 >= 1)}">
+						<li><a
+								href="<c:url value="/user/findPage?page=${pageNumber+3}"/>">${pageNumber+3}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+4 <= pageTotalPages && !(pageNumber-1 >= 1)}">
+						<li><a
+								href="<c:url value="/blog?page=${pageNumber+4}"/>">${pageNumber+4}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+5 <= pageTotalPages && !(pageNumber >= 1)}">
+						<li><a
+								href="<c:url value="/blog?page=${pageNumber+5}"/>">${pageNumber+5}</a>
+							</li>
+					</c:if>
+					
+					<c:if test="${pageNumber+1 < pageTotalPages }">
+					<li><a
+						href="<c:url value="/blog?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
+					</li>
+					</c:if>
+				</ul>
+				<ul class="pager pagination-lg">
+					<li>共${pageTotalElements}条记录 共${pageTotalPages}页
+						当前第${pageNumber+1}页</li>
+				</ul>
+				</nav>
 </div>
 <!-- baoming -->
 <div class="modal fade" id="baoming" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">

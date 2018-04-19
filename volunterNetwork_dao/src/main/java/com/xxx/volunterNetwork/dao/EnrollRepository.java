@@ -22,8 +22,8 @@ public interface EnrollRepository extends PagingAndSortingRepository<Enroll, Lon
 	@Query(value="select * from t_enroll ORDER BY duration desc limit 15",nativeQuery=true)
 	public List<Enroll> findEnroll();
 	
-	/*
+	
 	@Modifying
 	@Query("update Enroll enroll set enroll.state = ?2 where enroll.id = ?1")
-	public void updateState(Long id,Integer state);*/
+	public void updateState(Long id,Integer state);
 }

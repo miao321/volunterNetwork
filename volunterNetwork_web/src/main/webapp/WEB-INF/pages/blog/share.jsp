@@ -55,7 +55,7 @@ function toView(){
 			 async : true,
 			 success : function(result) {
 				if (result.state != 0) {
-					$('#seeRole').modal('show');
+					$('#seeShare').modal('show');
 					$("#roleName1").val(result.roleName);
 					$("#remark1").val(result.remark);
 					$("#orderNo1").val(result.orderNo);
@@ -80,7 +80,7 @@ function toView(){
 	 }
 }  	
 //删除单条数据
-function deleteRole(id){
+function deleteShare(id){
 	 $.ajax({			 
 		 type : "POST",
 		 url : "delete",
@@ -97,7 +97,7 @@ function deleteRole(id){
 	}); 	
 }
 //删除多条数据
-function deleteRoles(){
+function deleteShares(){
 	 var checkbox = document.getElementsByName("id"); 
      var strIds =[];  
      for ( var i = 0; i < checkbox.length; i++) {  
@@ -108,7 +108,7 @@ function deleteRoles(){
 	 $.ajax({			 
 		 type : "POST",	
          dataType : "json",
-		 url : "deleteRoles",
+		 url : "deleteShares",
 		 data : {ids:strIds.toString()},
 		 cache : false,
 		 async : true,
@@ -121,10 +121,10 @@ function deleteRoles(){
 }
 
 //禁用数据
-function disableRole(id){
+function disableShare(id){
 	$.ajax({			 
 		 type : "POST",
-		 url : "disableRole",           
+		 url : "disableShare",           
          dataType : "json",
          data:{id:id},
 		 cache : false,
@@ -141,10 +141,10 @@ function disableRole(id){
 	}); 
 }
 //启用数据
-function enableRole(id){
+function enableShare(id){
 	$.ajax({			 
 		 type : "POST",
-		 url : "enableRole",           
+		 url : "enableShare",           
          dataType : "json",
          data:{id:id},
 		 cache : false,
@@ -170,7 +170,7 @@ function enableRole(id){
 				<button  type="button" class="btn btn-info" onclick="toView()" style="margin: 6px 0;">					
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-edit" aria-hidden="true"></span> 查看					
 				</button>
-				<button class="btn btn-info" onclick="deleteRoles()" style="margin: 6px 0;" type="button">
+				<button class="btn btn-info" onclick="deleteShares()" style="margin: 6px 0;" type="button">
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-trash" aria-hidden="true"></span> 批量删除
 				</button>
 				<table class="table" id="table">
@@ -184,6 +184,8 @@ function enableRole(id){
 							<th>内容</th>
 							<th>作者</th>
 							<th>发布时间</th>
+							<th>状态</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -195,20 +197,20 @@ function enableRole(id){
 								<td>${r.content}</td>
 								<td>${r.author}</td>
 								<td><fmt:formatDate value="${r.fbtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-							<%-- 	<c:if test="${c.state ==1}">
-								<td id="sta">启用</td>
+								<c:if test="${r.state ==1}">
+								<td id="sta">已审核</td>
 								</c:if>
-								<c:if test="${c.state ==0}">
-								<td id="sta">停用</td>
-								</c:if> --%>
+								<c:if test="${r.state ==0}">
+								<td id="sta">未审核</td>
+								</c:if>
 								<td>
-									<a onclick="deleteRole(${r.id})" id="id"><span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-trash" aria-hidden="true"
+									<a onclick="deleteShare(${r.id})" id="id"><span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-trash" aria-hidden="true"
 									data-toggle="tooltip" data-placement="top" title="删除" >										
 									</span></a>
 									<span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-ban-circle" aria-hidden="true"
-									data-toggle="tooltip" data-placement="top" title="禁用" onclick="disableRole(${r.id})"></span>
+									data-toggle="tooltip" data-placement="top" title="未审核" onclick="disableShare(${r.id})"></span>
 									<span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-ok-circle" aria-hidden="true"
-									data-toggle="tooltip" data-placement="top" title="启用" onclick="enableRole(${r.id})"></span>
+									data-toggle="tooltip" data-placement="top" title="已审核" onclick="enableShare(${r.id})"></span>
 								</td>
 								<c:if test="${pageNumber+1 > pageTotalPages }">
 									该页还没有内容
@@ -247,7 +249,7 @@ function enableRole(id){
 </form>	
 
 <!-- seeCollege -->
-<div class="modal fade" id="seeRole" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="seeShare" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">

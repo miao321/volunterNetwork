@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import com.xxx.volunterNetwork.anno.SysLog;
 import com.xxx.volunterNetwork.dao.PersonalRepository;
+import com.xxx.volunterNetwork.domain.Borad;
+import com.xxx.volunterNetwork.domain.Enroll;
 import com.xxx.volunterNetwork.domain.Opinion;
 
 import com.xxx.volunterNetwork.service.IPersonalService;
@@ -36,6 +38,30 @@ public class PersonalServiceImpl implements IPersonalService {
 	@Override
 	public List<Opinion> findOpinion(String userName) {		
 		return personalRepository.findOpinion(userName);
+	}
+	@Override
+	public List<Enroll> findEnroll(String userName) {
+		return personalRepository.findEnroll(userName);
+	}
+	@Override
+	public List<Borad> findBorad() {
+		return personalRepository.findBorad();
+	}
+	@Override
+	public List<Enroll> findRecord(String userName) {		
+		return personalRepository.findRecord(userName);
+	}
+	@Override
+	public Integer findDuration(String userName) {
+		return personalRepository.findDuration(userName);
+	}
+	@Override
+	public Integer findpxTime(String userName) {
+		return personalRepository.findpxTime(userName);
+	}
+	@Override
+	public Integer findCount(String userName) {
+		return personalRepository.findCount(userName);
 	}
 	
 	

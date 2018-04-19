@@ -31,11 +31,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${userLists}" var="user" varStatus="status">
-								<tr id="tr_${user.id }">
-									<td>${user.userName}</td>
-									<td>${user.studentNo}</td>
-									<td>${user.studentNo}</td>
+							<c:forEach items="${enrollLists}" var="enroll" varStatus="status">
+								<tr id="tr_${enroll.id }">
+									<td>${enroll.hdName}</td>
+									<td><fmt:formatDate value="${enroll.hdTime}" type="date"/></td>
+									<td>${enroll.duration}</td>
 								</tr>
 							</c:forEach>
 						</tbody>

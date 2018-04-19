@@ -64,5 +64,9 @@ public class ShareServiceImpl implements IShareService {
 		shareRepository.updateState(id, state);
 		
 	}
-
+	@Override
+	public List<Share> findShare() {		
+		return shareRepository.findShare();
+	}
+	
 }

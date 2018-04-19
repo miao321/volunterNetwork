@@ -21,7 +21,7 @@ public interface IEnrollService {
 	public void delete(List<Long> ids);
 	public Enroll findOne(Long id);
 	public List<Enroll> findAll();
-/*	public void updateState(Long id,Integer state);*/
+	public void updateState(Long id,Integer state);
 	public List<Enroll> findEnroll();
 	//动态条件查询
 	public Page<Enroll> findAll(Specification<Enroll> spec,Pageable pageable);

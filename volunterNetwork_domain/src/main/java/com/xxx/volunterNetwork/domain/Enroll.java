@@ -1,10 +1,16 @@
 package com.xxx.volunterNetwork.domain;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="t_enroll")
@@ -21,6 +27,13 @@ public class Enroll {
 	private String xjorganization;//下级组织
 	private Integer duration;//时长
 	private String img;//头像
+	private Integer state;//状态
+	private String remark;//备注
+	private String hdName;//活动名字
+	@DateTimeFormat(pattern="yyyy/MM/dd")
+	private Date hdTime;//活动开始时间 
+	private String hdType;//活动类别
+	private Integer pxTime;//培训时长
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
@@ -55,6 +68,10 @@ public class Enroll {
 	}
 	public String getImg() {
 		return img;
+	}
+	@JsonFormat(pattern = "yyyy/MM/dd",timezone = "GMT+8")
+	public Date getHdTime() {
+		return hdTime;
 	}
 	public void setId(Long id) {
 		this.id = id;
@@ -94,6 +111,39 @@ public class Enroll {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public Integer getState() {
+		return state;
+	}
+	public void setState(Integer state) {
+		this.state = state;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getHdName() {
+		return hdName;
+	}
+	public void setHdName(String hdName) {
+		this.hdName = hdName;
+	}
+	public void setHdTime(Date hdTime) {
+		this.hdTime = hdTime;
+	}
+	public String getHdType() {
+		return hdType;
+	}
+	public void setHdType(String hdType) {
+		this.hdType = hdType;
+	}
+	public Integer getPxTime() {
+		return pxTime;
+	}
+	public void setPxTime(Integer pxTime) {
+		this.pxTime = pxTime;
 	}
 	
 

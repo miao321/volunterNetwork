@@ -61,11 +61,11 @@ public class EnrollServiceImpl implements IEnrollService {
 	public Enroll findEnroll(String enrollName) {
 		return enrollRepository.findEnroll(enrollName);
 	}*/
-	/*@Override
+	@Override
 	public void updateState(Long id, Integer state) {
 		enrollRepository.updateState(id, state);
 		
-	}*/
+	}
 	@Override
 	public List<Enroll> findEnroll() {
 		return enrollRepository.findEnroll();

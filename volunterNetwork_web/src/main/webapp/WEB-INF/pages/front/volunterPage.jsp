@@ -31,18 +31,19 @@ select{width:220px;border:1px solid #cccccc;background-color:#ffffff;}
 <script type="text/javascript">
 //添加数据
 function baoming(){
+	var id = document.getElementById("bao").value;
 	var userName = document.getElementById("userName").value;
 	var studentNo = document.getElementById("studentNo").value;	
 	var sex = $('#sex input[name="sex"]:checked ').val();
 	var phone = document.getElementById("phone").value;
-	var phone = document.getElementById("college").value;
-	var phone = document.getElementById("major").value;
-	var phone = document.getElementById("idCard").value;
+	var college = document.getElementById("college").value;
+	var major = document.getElementById("major").value;
+	var idCard = document.getElementById("idCard").value;
 	 $.ajax({			 
 		 type : "POST",
-		 url : "saveOrUpdate",           
+		 url : "baoming/saveOrUpdate",           
          dataType : "json",
-         data:{userName:userName,studentNo:studentNo,
+         data:{id:id,userName:userName,studentNo:studentNo,
         	 sex:sex,phone:phone,college:college,major:major,idCard:idCard},
 		 cache : false,
 		 async : true,
@@ -98,10 +99,8 @@ function baoming(){
 			<form class="btn_search" style="float: left;">
 				<select id="sid1" style="margin-left: 70px;margin-top: 8px;width: 84px;text-align: center;">				  
 				  <option value="进行中" selected>进行中</option>
-				  <option value="已结束">已结束</option>
-				 	  
-				</select>
-				
+				  <option value="已结束">已结束</option>				 	  
+				</select>				
 				<select id="sid2" style="margin-left: 10px;margin-top: 8px;width: 84px;text-align: center;">
 				  <option value="进行中" selected >  不限时间</option>
 				  <option value="进行中">最近一周</option>
@@ -147,6 +146,7 @@ function baoming(){
 		       </div>
 
 		       <button class="btn btn-warning" data-toggle="modal" data-target="#baoming" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;" type="button">
+					<input type="hidden" id="bao" value="${acti.id }">
 					马上报名
 			   </button>
 			   <!-- <button class="btn btn-info" data-toggle="modal" data-target="#addUser" style="margin: 6px 0;" type="button">

@@ -1,5 +1,6 @@
 package com.xxx.volunterNetwork.web;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -7,11 +8,21 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xxx.volunterNetwork.anno.SysControllerLog;
+import com.xxx.volunterNetwork.domain.Borad;
+import com.xxx.volunterNetwork.domain.Enroll;
 import com.xxx.volunterNetwork.domain.Opinion;
+import com.xxx.volunterNetwork.domain.User;
 import com.xxx.volunterNetwork.service.IActiService;
+import com.xxx.volunterNetwork.service.IBoradService;
 import com.xxx.volunterNetwork.service.IEnrollService;
+import com.xxx.volunterNetwork.service.ILoginService;
 import com.xxx.volunterNetwork.service.IPersonalService;
+import com.xxx.volunterNetwork.service.IUserService;
+import com.xxx.volunterNetwork.util.ExtAjaxResponse;
 
 @Controller
 public class PersonalController {
@@ -21,24 +32,55 @@ public class PersonalController {
 	private IActiService actiService;
 	@Autowired
 	private IEnrollService enrollService;
+	@Autowired
+	private IBoradService boradService;
+	@Autowired
+	private IUserService userService;
+	@Autowired
+	private ILoginService loginService;
 	@RequestMapping("/personal")
 	public String index(HttpSession session) {
 		String userName = (String) session.getAttribute("userName");
+		Long id = (Long) session.getAttribute("userId");
 		List<Opinion> opinions = personalService.findOpinion(userName);
+		List<Enroll> enrolls = personalService.findEnroll(userName);
+		List<Borad> borads = boradService.findCulture();
+		List<Enroll> enrollLists = personalService.findRecord(userName);
+		Integer duration = personalService.findDuration(userName);
+		Integer pxTime = personalService.findpxTime(userName);
+		Integer enrollCount = personalService.findCount(userName);
+		User user = userService.findOne(id);
 		session.setAttribute("opinions", opinions);
+		session.setAttribute("enrolls", enrolls);
+		session.setAttribute("borads", borads);
+		session.setAttribute("enrollLists", enrollLists);
+		session.setAttribute("duration", duration);
+		session.setAttribute("pxTime", pxTime);
+		session.setAttribute("enrollCount", enrollCount);
+		session.setAttribute("user", user);
 		return "/WEB-INF/pages/front/personal";
 	}
-	/*@RequestMapping("/detail")
-	public String findOne(@RequestParam Long id,HttpSession session) {
-		Acti acti = actiService.findOne(id);
-		session.setAttribute("acti", acti);
-		return "/WEB-INF/pages/front/detail";
-	}		
-	@RequestMapping("/pageDetail")
-	public String pageDetail(HttpSession session) {
-		List<Acti> actis = actiService.findActi();
-		System.out.println("actis:++"+actis);
-		session.setAttribute("actiLists", actis);
-		return "/WEB-INF/pages/front/volunterPage";
-	}	*/
+	//修改密码
+	@RequestMapping("/changePassword")
+	@SysControllerLog(module="用户管理",methods="修改密码")
+	public @ResponseBody ExtAjaxResponse changePassword(@RequestParam String password3,@RequestParam String password1,@RequestParam String password2,HttpSession session) throws NoSuchAlgorithmException {		
+		System.out.println(password3);
+		System.out.println("pass:"+session.getAttribute("password"));
+		String confirPassword = (String) session.getAttribute("password");
+		Long id = (Long) session.getAttribute("userId");
+		if (!password3.equals(confirPassword)) {
+			return new ExtAjaxResponse(false, "旧密码错误，请重新输入");
+		}else if (!password1.equals(password2)) {
+			return new ExtAjaxResponse(false, "两次密码不一致，请重新输入");
+		}else if(password1 ==null ||password1 =="") {
+			return new ExtAjaxResponse(false, "密码不能为空，请重新输入");
+		}
+		try {
+			loginService.changePassword(id,password3, password1);			
+			return new ExtAjaxResponse(true, "密码修改成功");
+		} catch (Exception e) {
+			return new ExtAjaxResponse(false, "密码修改失败");			
+		}
+	}
+	
 }

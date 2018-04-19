@@ -9,25 +9,30 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xxx.volunterNetwork.domain.Acti;
 import com.xxx.volunterNetwork.domain.Borad;
 import com.xxx.volunterNetwork.domain.Enroll;
 import com.xxx.volunterNetwork.domain.Img;
 import com.xxx.volunterNetwork.domain.Organization;
+import com.xxx.volunterNetwork.domain.User;
 import com.xxx.volunterNetwork.dto.ActiQueryDTO;
 import com.xxx.volunterNetwork.service.IActiService;
 import com.xxx.volunterNetwork.service.IBoradService;
 import com.xxx.volunterNetwork.service.IEnrollService;
 import com.xxx.volunterNetwork.service.IImgService;
 import com.xxx.volunterNetwork.service.IOrganizationService;
-import com.xxx.volunterNetwork.service.impl.OrganizationServiceImpl;
+import com.xxx.volunterNetwork.service.IUserService;
+import com.xxx.volunterNetwork.util.ExtAjaxResponse;
 import com.xxx.volunterNetwork.util.ExtPageable;
 
 @Controller
 public class IndexController {
 	@Autowired
 	private IImgService imgService;
+	@Autowired
+	private IUserService userService;
 	@Autowired
 	private IActiService actiService;
 	@Autowired
@@ -36,6 +41,22 @@ public class IndexController {
 	private IBoradService boradService;
 	@Autowired
 	private IOrganizationService organizationService;
+	@RequestMapping("/baoming/saveOrUpdate")
+	public @ResponseBody ExtAjaxResponse saveOrUpdate(@RequestParam Long id,Enroll enroll,HttpSession session) {		
+		Acti acti = actiService.findOne(id);
+		enroll.setImg(acti.getImg());
+		enroll.setHdName(acti.getTitle());
+		enroll.setHdType(acti.getHdlx());
+		enroll.setHdTime(acti.getBeginTime());
+		enroll.setState(0);
+		enroll.setOrganization(acti.getFbzz());
+		try {		
+			enrollService.saveOrUpdate(enroll);
+			return new ExtAjaxResponse(true, "添加数据成功");
+		} catch (Exception e) {
+			return new ExtAjaxResponse(false, "添加数据失败");
+		}	
+	}
 	@RequestMapping("/volunterNetwork")
 	public String index(HttpSession session) {
 		List<Img> imgs = imgService.findImg();
@@ -237,6 +258,7 @@ public class IndexController {
 		List<Acti> actis = actiService.findActi();
 		System.out.println("actis:++"+actis);
 		session.setAttribute("actiLists", actis);
+		
 		return "/WEB-INF/pages/front/volunterPage";
 	}
 	
