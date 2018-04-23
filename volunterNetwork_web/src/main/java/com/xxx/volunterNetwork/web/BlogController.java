@@ -66,7 +66,7 @@ public class BlogController {
 	public String index(HttpSession session,ShareQueryDTO shareQueryDTO,ExtPageable extPageable) {
 		Page<Share> page = shareService.findAll(shareQueryDTO.getSpecification(shareQueryDTO), extPageable.getPageable());
 		List<Share> shareLists = shareService.findShare();
-		session.setAttribute("shareLists", shareLists);//内容
+		session.setAttribute("shareLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页
 		session.setAttribute("pageSize", page.getSize());//当前页条数
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页

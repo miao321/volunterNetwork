@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>志愿活动详情页</title>
+<title>志愿时长详情页</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
 <link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -133,13 +133,11 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<form class="btn_search" style="float: left;">
-				<select id="sid1" style="margin-left: 70px;margin-top: 8px;width: 80px;text-align: center;">
-				  
+				<select id="sid1" style="margin-left: 70px;margin-top: 8px;width: 80px;text-align: center;">				  
 				  <option value="进行中" selected>进行中</option>
 				  <option value="已结束">已结束</option>
 				  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>		  
-				</select>
-				
+				</select>				
 				<select id="sid2" style="margin-left: 10px;margin-top: 8px;width: 80px;text-align: center;">
 				  <option value="进行中" selected>  不限时间</option>
 				  <option value="进行中">最近一周</option>
@@ -175,13 +173,9 @@
 		       </div>     
 		     </div>
 		       <a href="baoming.jsp" style="color:#fff;"><button type="button" class="btn btn-warning" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;">查看详情</button></a>
-	    </li><hr/>
+	    </li><hr/ style="margin-bottom: 0px;">
 	    </c:forEach>
-    
-    
 	</ul>
-</div>
-
-	
+</div>	
 </body>
 </html>

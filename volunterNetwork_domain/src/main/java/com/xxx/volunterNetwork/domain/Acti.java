@@ -35,6 +35,7 @@ public class Acti {
 	private Integer zmrs;//招募人数
 	private Integer zan;//点赞次数
 	private Integer attention;//关注
+	private String attentionName;//关注人名字
 	public Acti() {
 		super();		
 	}
@@ -193,6 +194,12 @@ public class Acti {
 	}
 	public void setFbman(String fbman) {
 		this.fbman = fbman;
+	}
+	public String getAttentionName() {
+		return attentionName;
+	}
+	public void setAttentionName(String attentionName) {
+		this.attentionName = attentionName;
 	}
 	
 

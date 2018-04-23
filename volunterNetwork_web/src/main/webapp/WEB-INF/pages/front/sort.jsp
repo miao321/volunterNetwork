@@ -43,7 +43,22 @@ function baoming(){
 		 success : function(data) {				
 			location.reload();
 		 }
-	}); 
+	});
+}
+function searchActi(){
+	var query = document.getElementById("searchActi").value;
+	window.location.href="search?query="+query;
+	/*  $.ajax({			 
+		 type : "POST",
+		 url : "search",           
+         dataType : "json",
+         data:{query:query},
+		 cache : false,
+		 async : true,
+		 success : function(data) {				
+			
+		 }
+	}); */
 }
 </script>
 <style type="text/css">
@@ -172,28 +187,28 @@ function baoming(){
 				  <option value="进行中" selected> 不限排序</option>
 				  <option value="进行中">开始时间先后</option>
 				  <option value="已结束">浏览人数最多</option>			  
-				</select>
+				</select>	
 			</form>
 			<form class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
-				<input class="input-medium search-query" type="text" placeholder="请输入关键字" style="height: 40px;"/>
-				<button type="submit" class="btn btn-info">查找</button>
+				<input class="input-medium search-query" id="searchActi" type="text" placeholder="请输入关键字" style="height: 40px;"/>
+				<button type="submit" class="btn btn-info" onclick="searchActi()">查找</button>
 			</form>
 		</div>
 	</div>
 </div>
 <div class="content_left_main" style="margin-left: 80px;margin-right:80px;">
 	<ul class="common_main common_main1" style="display: block;">
-		<c:forEach items="${actiLists3}" var="acti" varStatus="status">
+		<c:forEach items="${actiLists}" var="acti" varStatus="status">
 		 <li class="main_item" style="background: #fff;padding-bottom: 20px;padding-left: 20px;">
 		     <div class="item_con clearfix">
-		      <a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="pic_link">
+		      <a target="_blank" href="detail?id=${acti.id}" class="pic_link">
 		      <img src="${pageContext.request.contextPath}/${acti.img }" id="article_logo999993431541" class="pic" style="width:170px;height: 110px;float: left;margin-top: 20px;marign-left:120px;">
 		      </a>
 		       <div class="right_txt" style="margin-top: 26px;">
-		         <a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #000;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">${acti.title }</a>
-		         <p class="right_txt_p" style="margin-left: 190px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">地点:${acti.xxdz }</p>
-		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 归属组织:${acti.fbzz } </p>
-		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 报名截止:${acti.beginTime } </p>
+		         <a href="detail?id=${acti.id}" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #000;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">${acti.title }</a>
+		         <p class="right_txt_p" style="margin-left: 190px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">地点：${acti.xxdz }</p>
+		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 归属组织：${acti.fbzz } </p>
+		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 报名截止：<fmt:formatDate value="${acti.endTime }" type="date"/> </p>
 		       </div>     
 		     </div>
 		      <div class="box_vo box_l">
@@ -205,10 +220,19 @@ function baoming(){
 		       <div class="box_vo box_r">
 		       	 <p val="592411" class="opion opion3 invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>关注</em><strong class="goodNum">${acti.attention }</strong></a></p>
 		       </div>
-		       
-		        <button class="btn btn-warning" data-toggle="modal" data-target="#baoming" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;" type="button">
+		        <c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set> 		       
+				<c:if test="${nowDate-acti.endTime.getTime()>0}"> 
+		       <button class="btn btn-default" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background:#999999; " type="button">
+					<input type="hidden" id="bao" value="${acti.id }">
+					报名截止
+			   </button>
+			   </c:if>
+			   <c:if test="${nowDate-acti.endTime.getTime()<0}"> 
+		       <button class="btn btn-warning" data-toggle="modal" data-target="#baoming" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;color:#fff;" type="button">
+					<input type="hidden" id="bao" value="${acti.id }">
 					马上报名
 			   </button>
+			   </c:if>
 	    </li><hr style="margin-top: 20px;margin-bottom: 0;"/>
 	    </c:forEach>
     
@@ -220,58 +244,58 @@ function baoming(){
 <ul class="pager pagination-lg">
 	<c:if test="${pageNumber>0 }">
 		<li><a
-			href="<c:url value="/user/findPage?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+			href="<c:url value="/people?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
 	</c:if>		
 	<c:if test="${pageNumber-3 >= 1 }">
 		<li><a
-				href="<c:url value="/user/findPage?page=${pageNumber-3}"/>">${pageNumber-3}</a>
+				href="<c:url value="/people?page=${pageNumber-3}"/>">${pageNumber-3}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber-2 >= 1 }">
 		<li><a
-				href="<c:url value="/user/findPage?page=${pageNumber-2}"/>">${pageNumber-2}</a>
+				href="<c:url value="/people?page=${pageNumber-2}"/>">${pageNumber-2}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber-1 >= 1 }">
 		<li><a
-				href="<c:url value="/user/findPage?page=${pageNumber-1}"/>">${pageNumber-1}</a>
+				href="<c:url value="/people?page=${pageNumber-1}"/>">${pageNumber-1}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber >= 1 }">
 		<li><a
-				href="<c:url value="/user/findPage?page=${pageNumber}"/>">${pageNumber}</a>
+				href="<c:url value="/people?page=${pageNumber}"/>">${pageNumber}</a>
 			</li>
 	</c:if>					
 	<c:if test="${pageNumber+1 <= pageTotalPages}">
 	<c:set var="active" value="${active}" />
 		<li class="${active}"><a
-				href="<c:url value="/user/findPage?page=${pageNumber+1}"/>">${pageNumber+1}</a>
+				href="<c:url value="/people?page=${pageNumber+1}"/>">${pageNumber+1}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber+2 <= pageTotalPages && !(pageNumber-3 >= 1)}">
 		<li><a
-				href="<c:url value="/user/findPage?page=${pageNumber+2}"/>">${pageNumber+2}</a>
+				href="<c:url value="/people?page=${pageNumber+2}"/>">${pageNumber+2}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber+3 <= pageTotalPages && !(pageNumber-2 >= 1)}">
 		<li><a
-				href="<c:url value="/user/findPage?page=${pageNumber+3}"/>">${pageNumber+3}</a>
+				href="<c:url value="/people?page=${pageNumber+3}"/>">${pageNumber+3}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber+4 <= pageTotalPages && !(pageNumber-1 >= 1)}">
 		<li><a
-				href="<c:url value="/user/findPage?page=${pageNumber+4}"/>">${pageNumber+4}</a>
+				href="<c:url value="/people?page=${pageNumber+4}"/>">${pageNumber+4}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber+5 <= pageTotalPages && !(pageNumber >= 1)}">
 		<li><a
-				href="<c:url value="/user/findPage?page=${pageNumber+5}"/>">${pageNumber+5}</a>
+				href="<c:url value="/people?page=${pageNumber+5}"/>">${pageNumber+5}</a>
 			</li>
 	</c:if>
 	
 	<c:if test="${pageNumber+1 < pageTotalPages }">
 	<li><a
-		href="<c:url value="/user/findPage?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
+		href="<c:url value="/people?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
 	</li>
 	</c:if>
 </ul>

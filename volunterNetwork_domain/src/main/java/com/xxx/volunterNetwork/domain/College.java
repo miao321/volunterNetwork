@@ -32,6 +32,7 @@ public class College implements Serializable {
 	private String xjorganization;//下级组织
 	private String img;//组织标识图片
 	private Integer state;       //1启用  0停用
+	private Integer menNum;
 	private User user;//用户跟学院是一对多关系	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -91,6 +92,12 @@ public class College implements Serializable {
 		return "College [id=" + id + ", collegeName=" + collegeName + ", major=" + major + ", state=" + state
 				+ ", user=" + user + "]";
 	}*/
+	public Integer getMenNum() {
+		return menNum;
+	}
+	public void setMenNum(Integer menNum) {
+		this.menNum = menNum;
+	}
 	
 	
 }

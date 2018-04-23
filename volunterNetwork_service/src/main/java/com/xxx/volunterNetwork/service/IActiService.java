@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.xxx.volunterNetwork.domain.Acti;
+import com.xxx.volunterNetwork.util.ExtPageable;
 
 /**
  * 
@@ -22,6 +23,7 @@ public interface IActiService {
 	public Acti findOne(Long id);
 	public List<Acti> findAll();
 	public void updateState(Long id,Integer state);
+	
 	public List<Acti> findActi();
 	public List<Acti> findActi2();
 	public List<Acti> findActi3();
@@ -31,7 +33,9 @@ public interface IActiService {
 	public List<Acti> findActi7();
 	public List<Acti> findActi8();
 	public List<Acti> findActi9();
+	public List<Acti> findActi0();
 	//动态条件查询
+	Page<Acti> findSearch(String query, Pageable pageable);
 	public Page<Acti> findAll(Specification<Acti> spec,Pageable pageable);
 
 

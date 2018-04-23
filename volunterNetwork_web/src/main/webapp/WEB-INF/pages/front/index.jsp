@@ -22,7 +22,12 @@
 <script type="text/javascript" src="js/hm.js"></script>
 <script type="text/javascript" src="js/i.js"></script>
 <script type="text/javascript" src="js/crossdomain.js"></script>
+<script type="text/javascript">
+function detail(hdlx){
+	window.location.href="sort?hdlx="+hdlx;	
+}
 
+</script>
 <style>
         #div1 {margin:0 auto;height:300px;margin-top:-20px;}
         .item{width:1600px;height: 500px;}
@@ -107,49 +112,49 @@
        <div class="img_txt_nav" style="margin-top: 240px;">
         <div class="img_txt_content w1200 clearfix po_r">
           <div class="img_txt_part img_txt_left fl">
-            <ul class="list clearfix">
+            <ul class="list clearfix" id="txtSort">
               <li id="people" class="list_item people">
-              <a href="${pageContext.request.contextPath}/people" class="item_con">
+              <a href="javascript:;"  onclick="detail('青少年服务')" class="item_con">
                 <div class="symbol_box">
                 <div class="symbol_in">
                     <div class="symbol"></div>
                   </div>
               </div>
                 <div class="txt_box">
-                <p class="txt1">青少年服务</p>
+                <p class="txt1" id="txt1">青少年服务</p>
               </div>
                 </a></li>
               <li id="oldman" class="list_item oldman">
-              <a href="${pageContext.request.contextPath}/oldman" class="item_con">
+              <a href="javascript:;" class="item_con" onclick="detail('敬老助残')">
                 <div class="symbol_box">
                 <div class="symbol_in">
                     <div class="symbol"></div>
                   </div>
               </div>
                 <div class="txt_box">
-                <p class="txt1">敬老助残</p>
+                <p class="txt1" id="txt1">敬老助残</p>
               </div>
                 </a></li>
               <li id="poor" class="list_item help_poor">
-              <a href="${pageContext.request.contextPath}/helpPoor" class="item_con">
+              <a href="javascript:;" class="item_con" onclick="detail('扶贫帮困')">
                 <div class="symbol_box">
                 <div class="symbol_in">
                     <div class="symbol"></div>
                   </div>
               </div>
                 <div class="txt_box">
-                <p class="txt1">扶贫帮困</p>
+                <p class="txt1" id="txt1">扶贫帮困</p>
               </div>
                 </a></li>
               <li id="civilization" class="list_item civilization">
-              <a href="${pageContext.request.contextPath}/civilization" class="item_con">
+              <a href="javascript:;" class="item_con" onclick="detail('文明礼仪')">
                 <div class="symbol_box">
                 <div class="symbol_in">
                     <div class="symbol"></div>
                   </div>
               </div>
                 <div class="txt_box">
-                <p class="txt1">文明礼仪</p>
+                <p class="txt1" id="txt1">文明礼仪</p>
               </div>
                 </a></li>
             </ul>
@@ -157,49 +162,47 @@
 			<div class="img_txt_part img_txt_right fr">
 				<ul class="list clearfix">
 					<li id="safety" class="list_item safety">
-					<a href="${pageContext.request.contextPath}/safety" class="item_con">
+					<a href="javascript:;" class="item_con" onclick="detail('平安守护')">
 							<div class="symbol_box">
 								<div class="symbol_in">
 									<div class="symbol"></div>
 								</div>
 							</div>
 							<div class="txt_box">
-								<p class="txt1">平安守护</p>
+								<p class="txt1" id="txt1">平安守护</p>
 							</div>
 					</a></li>
 					<li id="tree" class="list_item tree">
-					<a href="${pageContext.request.contextPath}/tree"
-						class="item_con">
+					<a href="javascript:;" class="item_con" onclick="detail('环境保护')">
 							<div class="symbol_box">
 								<div class="symbol_in">
 									<div class="symbol"></div>
 								</div>
 							</div>
 							<div class="txt_box">
-								<p class="txt1">环境保护</p>
+								<p class="txt1" id="txt1">环境保护</p>
 							</div>
 					</a></li>
 					<li id="sport" class="list_item sport">
-					<a href="${pageContext.request.contextPath}/sport"
-						class="item_con">
+					<a href="javascript:;" class="item_con" onclick="detail('文化体育')">
 							<div class="symbol_box">
 								<div class="symbol_in">
 									<div class="symbol"></div>
 								</div>
 							</div>
 							<div class="txt_box">
-								<p class="txt1">文化体育</p>
+								<p class="txt1" id="txt1">文化体育</p>
 							</div>
 					</a></li>
 					<li id="service" class="list_item service">
-					<a href="${pageContext.request.contextPath}/service" class="item_con">
+					<a href="javascript:;" class="item_con" onclick="detail('便民服务')">
 							<div class="symbol_box">
 								<div class="symbol_in">
 									<div class="symbol"></div>
 								</div>
 							</div>
 							<div class="txt_box">
-								<p class="txt1">便民服务</p>
+								<p class="txt1" id="txt1">便民服务</p>
 							</div>
 					</a></li>
 				</ul>

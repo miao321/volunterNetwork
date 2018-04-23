@@ -11,6 +11,7 @@ public class ExtPageable
 {
 	private int  page  = 1;	//pageNumber
 	private int  limit = 20;//pageSize
+	private int limit2 = 10;//pageSize2
 	private String sort ="id";
 	private String dir ="DESC";
 	
@@ -28,13 +29,22 @@ public class ExtPageable
 		this.dir = dir;
 	}
 	
+	public void setLimit2(int limit2) {
+		this.limit2 = limit2;
+	}
 	public Pageable getPageable() {
-		System.out.println(this.page);
 		Sort sort = new Sort(Direction.ASC, this.sort);
 		
 		if(this.dir.equals("DESC")) {
 			sort = new Sort(Direction.DESC, this.sort);
 		}
 		return new PageRequest(this.page-1, this.limit, sort);
+	}
+	public Pageable getPageable2() {
+		Sort sort = new Sort(Direction.ASC, this.sort);		
+		if(this.dir.equals("DESC")) {
+			sort = new Sort(Direction.DESC, this.sort);
+		}
+		return new PageRequest(this.page-1, this.limit2, sort);
 	}
 }

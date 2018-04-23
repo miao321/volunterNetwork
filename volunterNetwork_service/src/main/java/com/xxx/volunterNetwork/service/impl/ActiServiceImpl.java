@@ -15,6 +15,7 @@ import com.xxx.volunterNetwork.anno.SysLog;
 import com.xxx.volunterNetwork.dao.ActiRepository;
 import com.xxx.volunterNetwork.domain.Acti;
 import com.xxx.volunterNetwork.service.IActiService;
+import com.xxx.volunterNetwork.util.ExtPageable;
 
 
 /**
@@ -29,6 +30,7 @@ public class ActiServiceImpl implements IActiService {
 	private static final Logger logger = LoggerFactory.getLogger(ActiServiceImpl.class);
 	@Autowired
 	private ActiRepository actiRepository;
+	
 	@SysLog(module="模块管理",methods="保存或者更新数据")
 	public void saveOrUpdate(Acti acti) {
 		actiRepository.save(acti);
@@ -102,5 +104,15 @@ public class ActiServiceImpl implements IActiService {
 	public List<Acti> findActi9() {
 		return actiRepository.findActi9();
 	}
+	@Override
+	public List<Acti> findActi0() {
+		return actiRepository.findActi0();
+	}
+	@Override
+	public Page<Acti> findSearch(String query, Pageable pageable) {
+		return actiRepository.findSearch(query, pageable);
+	}
+	
+	
 
 }

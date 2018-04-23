@@ -255,4 +255,16 @@ public class ActiController {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	@RequestMapping(value="/search")
+	public String search(@RequestParam String query,HttpSession session,ExtPageable pageable) {
+		System.out.println(32131);
+		Page<Acti> page = actiService.findSearch(query, pageable.getPageable2());
+		session.setAttribute("actiLists", page.getContent());//内容
+		session.setAttribute("pageNumber", page.getNumber());//当前页
+		session.setAttribute("pageSize", page.getSize());//当前页条数
+		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
+		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
+		return "test";
+	}
 }

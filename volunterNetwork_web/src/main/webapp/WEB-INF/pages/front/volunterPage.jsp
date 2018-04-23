@@ -52,6 +52,32 @@ function baoming(){
 		 }
 	}); 
 }
+function addZan(id){
+	$.ajax({
+		type:"POST",
+		url:"addZan",
+		dataType:"json",
+		data:{id:id},
+		cache:false,
+		async:true,
+		success:function(data){
+			location.reload();
+		}
+	});
+}
+function addAttention(id){
+	$.ajax({
+		type:"POST",
+		url:"addAttention",
+		dataType:"json",
+		data:{id:id},
+		cache:false,
+		async:true,
+		success:function(data){
+			location.reload();
+		}
+	});
+}
 </script>
 </head>
 <body>
@@ -102,15 +128,15 @@ function baoming(){
 				  <option value="已结束">已结束</option>				 	  
 				</select>				
 				<select id="sid2" style="margin-left: 10px;margin-top: 8px;width: 84px;text-align: center;">
-				  <option value="进行中" selected >  不限时间</option>
-				  <option value="进行中">最近一周</option>
-				  <option value="已结束">最近一个月</option>
-				  <option value="已结束">最近一个季度</option>			  
+				  <option value="不限时间" selected >  不限时间</option>
+				  <option value="最近一周">最近一周</option>
+				  <option value="最近一个月">最近一个月</option>
+				  <option value="最近一个季度">最近一个季度</option>			  
 				</select>
 				<select id="sid3" style="margin-left: 10px;margin-top: 8px;width: 84px;text-align: center;">
-				  <option value="进行中" selected> 不限排序</option>
-				  <option value="进行中">开始时间先后</option>
-				  <option value="已结束">浏览人数最多</option>			  
+				  <option value="不限排序" selected> 不限排序</option>
+				  <option value="开始时间先后">开始时间先后</option>
+				  <option value="浏览人数最多">浏览人数最多</option>			  
 				</select>	
 			</form>
 			<form class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
@@ -132,29 +158,101 @@ function baoming(){
 		         <a target="_blank" href="detail?id=${acti.id}" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #000;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">${acti.title }</a>
 		         <p class="right_txt_p" style="margin-left: 190px;padding-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">地点：${acti.xxdz }</p>
 		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 归属组织：${acti.fbzz } </p>
-		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 报名截止：<fmt:formatDate value="${acti.beginTime }" type="date"/> </p>
+		         <p class="right_txt_time" style="margin-left: 190px;padding-top: 8px;"> 报名截止：<fmt:formatDate value="${acti.endTime }" type="date"/> </p>
 		       </div>     
 		     </div>
 		      <div class="box_vo box_l">
-		       	 <p val="592411" class="opion invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>感兴趣</em><strong class="goodNum">${acti.zan }</strong></a></p>
+		       	 <p val="592411" class="opion invite"><a href="javascript:;" onclick="addZan(${acti.id})" id="parise789749" style="cursor: pointer;text-decoration: none;"><i></i><em>感兴趣</em><strong class="goodNum">${acti.zan }</strong></a></p>
 		       </div>
 		       <div class="box_vo box_m">
-		       	 <p val="592411" class="opion opion2 invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>招募人数</em><strong class="goodNum">${acti.zmrs }</strong></a></p>
+		       		
+		       	 <p val="592411" class="opion opion2 invite"><a href="javascript:;" id="parise789749" style="cursor: pointer;text-decoration: none;"><i></i><em>招募人数</em><strong class="goodNum">${acti.zmrs }</strong></a></p>
 		       </div>
 		       <div class="box_vo box_r">
-		       	 <p val="592411" class="opion opion3 invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>关注</em><strong class="goodNum">${acti.attention }</strong></a></p>
+		       	 
+		       	 <p val="592411" class="opion opion3 invite"><a href="javascript:;" onclick="addAttention(${acti.id})" id="parise789749" style="cursor: pointer;text-decoration: none;"><i></i><em>关注</em><strong class="goodNum">${acti.attention }</strong></a></p>
 		       </div>
-
-		       <button class="btn btn-warning" data-toggle="modal" data-target="#baoming" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;" type="button">
+		       <c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set> 		       
+				<c:if test="${nowDate-acti.endTime.getTime()>0}"> 
+		       <button class="btn btn-default" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background:#999999; " type="button">
+					<input type="hidden" id="bao" value="${acti.id }">
+					报名截止
+			   </button>
+			   </c:if>
+			   <c:if test="${nowDate-acti.endTime.getTime()<0}"> 
+		       <button class="btn btn-warning" data-toggle="modal" data-target="#baoming" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;color:#fff;" type="button">
 					<input type="hidden" id="bao" value="${acti.id }">
 					马上报名
 			   </button>
-			   <!-- <button class="btn btn-info" data-toggle="modal" data-target="#addUser" style="margin: 6px 0;" type="button">
-					<span style="margin: 0px 4px;" class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加
-				</button> -->	
+			   </c:if>
 	    </li><hr style="margin-top: 20px;margin-bottom: 0;"/>
 	    </c:forEach>
 	</ul>
+	<nav aria-label="Page navigation"
+					style="margin:0 auto;margin-top:-16px;">
+				<ul class="pager pagination-lg">
+					<c:if test="${pageNumber>0 }">
+						<li><a
+							href="<c:url value="/pageDetail?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+					</c:if>		
+					<c:if test="${pageNumber-3 >= 1 }">
+						<li><a
+								href="<c:url value="/pageDetail?page=${pageNumber-3}"/>">${pageNumber-3}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber-2 >= 1 }">
+						<li><a
+								href="<c:url value="/pageDetail?page=${pageNumber-2}"/>">${pageNumber-2}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber-1 >= 1 }">
+						<li><a
+								href="<c:url value="/pageDetail?page=${pageNumber-1}"/>">${pageNumber-1}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber >= 1 }">
+						<li><a
+								href="<c:url value="/pageDetail?page=${pageNumber}"/>">${pageNumber}</a>
+							</li>
+					</c:if>					
+					<c:if test="${pageNumber+1 <= pageTotalPages}">
+					<c:set var="active" value="${active}" />
+						<li class="${active}"><a
+								href="<c:url value="/pageDetail?page=${pageNumber+1}"/>">${pageNumber+1}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+2 <= pageTotalPages && !(pageNumber-3 >= 1)}">
+						<li><a
+								href="<c:url value="/pageDetail?page=${pageNumber+2}"/>">${pageNumber+2}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+3 <= pageTotalPages && !(pageNumber-2 >= 1)}">
+						<li><a
+								href="<c:url value="/pageDetail?page=${pageNumber+3}"/>">${pageNumber+3}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+4 <= pageTotalPages && !(pageNumber-1 >= 1)}">
+						<li><a
+								href="<c:url value="/pageDetail?page=${pageNumber+4}"/>">${pageNumber+4}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+5 <= pageTotalPages && !(pageNumber >= 1)}">
+						<li><a
+								href="<c:url value="/pageDetail?page=${pageNumber+5}"/>">${pageNumber+5}</a>
+							</li>
+					</c:if>
+					
+					<c:if test="${pageNumber+1 < pageTotalPages }">
+					<li><a
+						href="<c:url value="/pageDetail?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
+					</li>
+					</c:if>
+				</ul>
+				<ul class="pager pagination-lg">
+					<li>共${pageTotalElements}条记录 共${pageTotalPages}页
+						当前第${pageNumber+1}页</li>
+				</ul>
+				</nav>
 </div>
 <!-- baoming -->
 <div class="modal fade" id="baoming" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
