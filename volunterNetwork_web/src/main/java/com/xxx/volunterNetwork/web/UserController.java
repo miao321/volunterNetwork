@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-import com.xxx.volunterNetwork.domain.College;
+import com.xxx.volunterNetwork.domain.Organization;
 import com.xxx.volunterNetwork.domain.Role;
 import com.xxx.volunterNetwork.domain.User;
 import com.xxx.volunterNetwork.dto.UserQueryDTO;

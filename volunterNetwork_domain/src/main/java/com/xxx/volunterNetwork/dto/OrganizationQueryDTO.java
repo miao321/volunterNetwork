@@ -19,6 +19,20 @@ import com.xxx.volunterNetwork.domain.Organization;
  *
  */
 public class OrganizationQueryDTO {	
+	private String fbzz;
+	private String menNum;
+	public String getFbzz() {
+		return fbzz;
+	}
+	public void setFbzz(String fbzz) {
+		this.fbzz = fbzz;
+	}
+	public String getMenNum() {
+		return menNum;
+	}
+	public void setMenNum(String menNum) {
+		this.menNum = menNum;
+	}
 
 	//提供static的工具方法： 根据当前OrganizationQueryDTO对象来组装动态查询条件
 	public static Specification<Organization> getSpecification(OrganizationQueryDTO organizationQueryDTO){

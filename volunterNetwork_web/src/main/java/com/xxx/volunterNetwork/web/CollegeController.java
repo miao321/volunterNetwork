@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.xxx.volunterNetwork.anno.SysControllerLog;
-import com.xxx.volunterNetwork.domain.College;
+import com.xxx.volunterNetwork.domain.Organization;
 import com.xxx.volunterNetwork.dto.CollegeQueryDTO;
 import com.xxx.volunterNetwork.service.ICollegeService;
 import com.xxx.volunterNetwork.util.ExtAjaxResponse;
@@ -39,7 +39,7 @@ public class CollegeController {
 	@Autowired
 	private ICollegeService collegeService;
 	@RequestMapping("/saveOrUpdate")
-	public @ResponseBody ExtAjaxResponse saveOrUpdate(College college) {
+	public @ResponseBody ExtAjaxResponse saveOrUpdate(Organization college) {
 		/*if (collegeService.findCollege(college.getCollegeName()) != null) {
 			return new ExtAjaxResponse(false, "该部门已经存在 不用再添加");
 		}*/
@@ -51,11 +51,11 @@ public class CollegeController {
 		}	
 	}
 	@RequestMapping("/update")
-	public @ResponseBody ExtAjaxResponse update(College college) {
+	public @ResponseBody ExtAjaxResponse update(Organization college) {
 		/*if (collegeService.findCollege(college.getCollegeName()) != null) {
 			return new ExtAjaxResponse(false, "该部门已经存在 不用再添加");
 		}*/
-		College coll = collegeService.findOne(college.getId());
+		Organization coll = collegeService.findOne(college.getId());
 		coll.setCollegeName(college.getCollegeName());
 		coll.setOrganization(college.getOrganization());
 		coll.setXjorganization(college.getXjorganization());	
@@ -70,7 +70,7 @@ public class CollegeController {
 	@RequestMapping("/delete")
 	public String delete(@RequestParam Long id) {
 		try {
-			College college = collegeService.findOne(id);
+			Organization college = collegeService.findOne(id);
 			if (college != null) {
 				collegeService.delete(college);
 			}
@@ -92,22 +92,22 @@ public class CollegeController {
 		}
 	}	
 	@RequestMapping("/findOne")
-	public @ResponseBody College findOne(@RequestParam Long id,HttpSession session) {		
-		College college = collegeService.findOne(id);
+	public @ResponseBody Organization findOne(@RequestParam Long id,HttpSession session) {		
+		Organization college = collegeService.findOne(id);
 		session.setAttribute("college", college);
 		System.out.println("college:"+college);
 		return college;
 	}	
 	@RequestMapping("/findAll")
-	public @ResponseBody College findAll(HttpSession session){
-		List<College> collegeLists = collegeService.findAll();
+	public @ResponseBody Organization findAll(HttpSession session){
+		List<Organization> collegeLists = collegeService.findAll();
 		session.setAttribute("collegeLists", collegeLists);
-		return (College) collegeLists;
+		return (Organization) collegeLists;
 	}
 	@RequestMapping("/findPage")
 	@SysControllerLog(module="部门管理",methods="查找多条数据并分页排序")
 	public String findPage(HttpSession session,CollegeQueryDTO collegeQueryDTO,ExtPageable extPageable){
-		Page<College> page = collegeService.findAll(collegeQueryDTO.getSpecification(collegeQueryDTO), extPageable.getPageable());	
+		Page<Organization> page = collegeService.findAll(collegeQueryDTO.getSpecification(collegeQueryDTO), extPageable.getPageable());	
 		session.setAttribute("collegeLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页
 		session.setAttribute("pageSize", page.getSize());//当前页条数
@@ -117,16 +117,16 @@ public class CollegeController {
 	}
 
 	@RequestMapping("disableCollege")
-	public @ResponseBody College disableCollege(@RequestParam Long id) {
-		College college = collegeService.findOne(id);
+	public @ResponseBody Organization disableCollege(@RequestParam Long id) {
+		Organization college = collegeService.findOne(id);
 		if (college.getState() != null) {
 			collegeService.updateState(id, 0);
 		}
 		return college;
 	}
 	@RequestMapping("enableCollege")
-	public @ResponseBody College enableCollege(@RequestParam Long id) {
-		College college = collegeService.findOne(id);
+	public @ResponseBody Organization enableCollege(@RequestParam Long id) {
+		Organization college = collegeService.findOne(id);
 		if (college.getState() != null) {
 			collegeService.updateState(id, 1);
 		}

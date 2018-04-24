@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xxx.volunterNetwork.anno.SysControllerLog;
-import com.xxx.volunterNetwork.domain.College;
+import com.xxx.volunterNetwork.domain.Organization;
 import com.xxx.volunterNetwork.domain.Log;
 import com.xxx.volunterNetwork.dto.LogQueryDTO;
 import com.xxx.volunterNetwork.service.ILogService;

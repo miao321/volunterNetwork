@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.xxx.volunterNetwork.domain.Organization;
+import com.xxx.volunterNetwork.dto.OrganizationQueryDTO;
 
 /**
  * 
@@ -23,6 +24,21 @@ public interface IOrganizationService {
 	public List<Organization> findAll();
 	public void updateState(Long id,Integer state);
 	
+	public List<OrganizationQueryDTO> findOrganization1();
+	public List<OrganizationQueryDTO> findOrganization2();
+	public List<OrganizationQueryDTO> findOrganization3();
+	public List<OrganizationQueryDTO> findOrganization4();
+	public List<OrganizationQueryDTO> findOrganization5();
+	public List<OrganizationQueryDTO> findOrganization6();
+	public List<OrganizationQueryDTO> findOrganization7();
+	public List<OrganizationQueryDTO> findOrganization8();
+	public List<OrganizationQueryDTO> findOrganization9();
+	public List<OrganizationQueryDTO> findOrganization10();
+	public List<OrganizationQueryDTO> findOrganization11();
+	public List<OrganizationQueryDTO> findOrganization12();
+	public List<OrganizationQueryDTO> findOrganization13();
+	public List<OrganizationQueryDTO> findOrganization14();
+	public List<OrganizationQueryDTO> findOrganization15();
 	//动态条件查询
 	public Page<Organization> findAll(Specification<Organization> spec,Pageable pageable);
 

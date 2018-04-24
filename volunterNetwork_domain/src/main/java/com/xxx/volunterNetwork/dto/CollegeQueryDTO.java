@@ -10,7 +10,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.xxx.volunterNetwork.domain.College;
+import com.xxx.volunterNetwork.domain.Organization;
 /**
  * 
  * @author miao
@@ -20,9 +20,9 @@ import com.xxx.volunterNetwork.domain.College;
 public class CollegeQueryDTO {	
 
 	//提供static的工具方法： 根据当前collegeQueryDTO对象来组装动态查询条件
-	public static Specification<College> getSpecification(CollegeQueryDTO collegeQueryDTO){
-		Specification<College> spec = new Specification<College>() {
-			public Predicate toPredicate(Root<College> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+	public static Specification<Organization> getSpecification(CollegeQueryDTO collegeQueryDTO){
+		Specification<Organization> spec = new Specification<Organization>() {
+			public Predicate toPredicate(Root<Organization> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				//1.Predicate查询条件集合
 				List<Predicate> list = new ArrayList<Predicate>();				
 				//2.根据QueryDTO数据字段的值进行判断以及条件的组装				

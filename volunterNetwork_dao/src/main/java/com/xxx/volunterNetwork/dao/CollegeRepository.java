@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import com.xxx.volunterNetwork.domain.College;
+import com.xxx.volunterNetwork.domain.Organization;
 /**
  * 
  * @author miao
@@ -17,7 +17,7 @@ import com.xxx.volunterNetwork.domain.College;
  */
 
 @Repository
-public interface CollegeRepository extends PagingAndSortingRepository<College, Long>,JpaSpecificationExecutor<College> {
+public interface CollegeRepository extends PagingAndSortingRepository<Organization, Long>,JpaSpecificationExecutor<Organization> {
 	/**
 	 * 查询根节点
 	 */
@@ -30,7 +30,7 @@ public interface CollegeRepository extends PagingAndSortingRepository<College, L
 	public List<College> findChildNodes(Long parentId);//null
 	*/
 	@Query("from College college where college.collegeName =?1")
-	public College findCollege(String collegeName);
+	public Organization findCollege(String collegeName);
 	@Modifying
 	@Query("update College college set college.state = ?2 where college.id = ?1")
 	public void updateState(Long id,Integer state);

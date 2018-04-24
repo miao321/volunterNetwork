@@ -47,7 +47,7 @@ function baoming(){
 }
 function searchActi(){
 	var query = document.getElementById("searchActi").value;
-	window.location.href="search?query="+query;
+	window.location.replace="search?query="+query;
 	/*  $.ajax({			 
 		 type : "POST",
 		 url : "search",           

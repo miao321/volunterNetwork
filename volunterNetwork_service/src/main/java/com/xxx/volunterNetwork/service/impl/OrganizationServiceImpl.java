@@ -1,5 +1,6 @@
 package com.xxx.volunterNetwork.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Service;
 import com.xxx.volunterNetwork.anno.SysLog;
 import com.xxx.volunterNetwork.dao.OrganizationRepository;
 import com.xxx.volunterNetwork.domain.Organization;
+import com.xxx.volunterNetwork.dto.OrganizationQueryDTO;
 import com.xxx.volunterNetwork.service.IOrganizationService;
+import com.xxx.volunterNetwork.util.DateUtil;
 
 
 /**
@@ -67,7 +70,199 @@ public class OrganizationServiceImpl implements IOrganizationService {
 		organizationRepository.updateState(id, state);
 		
 	}
-	
-	
-
+	@Override
+	public List<OrganizationQueryDTO> findOrganization1() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization1();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization2() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization2();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization3() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization3();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization4() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization4();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization5() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization5();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization6() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization6();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization7() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization7();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization8() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization8();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization9() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization9();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization10() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization10();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization11() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization11();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization12() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization12();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization13() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization13();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization14() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization14();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
+	@Override
+	public List<OrganizationQueryDTO> findOrganization15() {
+		List<OrganizationQueryDTO>  list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findOrganization15();
+		System.out.println("organization++++:"+organization);
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setFbzz(obj[0]+"");
+			dto.setMenNum(obj[1]+"");
+			list.add(dto);
+		}
+		return list;		
+	}
 }

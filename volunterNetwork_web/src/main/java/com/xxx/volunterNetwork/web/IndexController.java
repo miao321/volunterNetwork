@@ -19,6 +19,7 @@ import com.xxx.volunterNetwork.domain.Enroll;
 import com.xxx.volunterNetwork.domain.Img;
 import com.xxx.volunterNetwork.domain.Organization;
 import com.xxx.volunterNetwork.dto.ActiQueryDTO;
+import com.xxx.volunterNetwork.dto.OrganizationQueryDTO;
 import com.xxx.volunterNetwork.service.IActiService;
 import com.xxx.volunterNetwork.service.IBoradService;
 import com.xxx.volunterNetwork.service.IEnrollService;
@@ -96,6 +97,8 @@ public class IndexController {
 	@RequestMapping("/organization")
 	public String organization(HttpSession session) {
 		List<Organization> organizationLists = organizationService.findAll();
+		List<OrganizationQueryDTO> organization = organizationService.findOrganization1();
+		session.setAttribute("organization", organization);
 		session.setAttribute("organizationLists", organizationLists);
 		return "WEB-INF/pages/front/organization";
 	}

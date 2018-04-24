@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
-import com.xxx.volunterNetwork.domain.College;
+import com.xxx.volunterNetwork.domain.Organization;
 /**
  * 
  * @author miao
@@ -15,16 +15,16 @@ import com.xxx.volunterNetwork.domain.College;
  */
 
 public interface ICollegeService {
-	public void saveOrUpdate(College college);
-	public void delete(College college);
+	public void saveOrUpdate(Organization college);
+	public void delete(Organization college);
 	public void delete(List<Long> ids);
-	public College findOne(Long id);
-	public List<College> findAll();
+	public Organization findOne(Long id);
+	public List<Organization> findAll();
 	
-	public College findCollege(String collegeName);
+	public Organization findCollege(String collegeName);
 	public void updateState(Long id,Integer state);
 	//动态条件查询
-	public Page<College> findAll(Specification<College> spec,Pageable pageable);
+	public Page<Organization> findAll(Specification<Organization> spec,Pageable pageable);
 
 
 }
