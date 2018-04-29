@@ -27,7 +27,7 @@
 		<div class="title">
 			<h3>莞工志愿者网管理后台</h3>
 		</div>
-		<button style="margin-top:24px;margin-left:210px;" class="btn btn-info" onclick="addRole()" style="margin: 6px 0;" type="button">
+		<button style="margin-top:24px;margin-right:-510px;" class="btn btn-info" onclick="addRole()" style="margin: 6px 0;" type="button">
 			<span style="margin: 0px 4px;" class="glyphicon glyphicon-plus" aria-hidden="true"></span> 修改密码
 		</button>
 		<div class="fr top-link">
@@ -51,7 +51,7 @@
 					<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a class="a" href="javascript:void(0);"
 						onClick="openurl('user/findPage');">用户管理</a></li>					
 					<li><span class="glyphicon glyphicon-education" aria-hidden="true"></span><a class="a" href="javascript:void(0);"
-						onClick="openurl('college/findPage');">组织管理</a></li>
+						onClick="openurl('organization/findPage');">组织管理</a></li>
 					<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a class="a" href="javascript:void(0);"
 						onClick="openurl('role/findPage');">角色管理</a></li>
 					<li><span class="glyphicon glyphicon-heart" aria-hidden="true"></span><a class="a" href="javascript:void(0);"
@@ -84,8 +84,8 @@
 				<ul>
 					<li><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><a class="a" href="javascript:void(0);"
 						onClick="openurl('share/findPage');">分享管理</a></li>
-					<li><span class="glyphicon glyphicon-unchecked" aria-hidden="true"  style="margin-left:14px;"><a class="a" href="javascript:void(0);"
-						onClick="openurl('word/findPage');">我的留言板</a></span></li>
+					<!-- <li><span class="glyphicon glyphicon-unchecked" aria-hidden="true"  style="margin-left:14px;"><a class="a" href="javascript:void(0);"
+						onClick="openurl('word/findPage');">我的留言板</a></span></li> -->
 					<li><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span><a class="a" href="javascript:void(0);"
 						onClick="openurl('opinion/findPage');">意见反馈</a></li>
 				</ul>
@@ -111,7 +111,7 @@
 					<!-- <li><span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left:18px;"><a class="a" href="javascript:void(0);"
 						onClick="openurl('empty.html');">导航条管理</a></span></li> -->
 					<li><span class="glyphicon glyphicon-film" aria-hidden="true" style="margin-left:18px;"><a class="a" href="javascript:void(0);"
-						onClick="openurl('banFront.jsp');">轮播图管理</a></span></li>
+						onClick="openurl('img/findImg');">轮播图管理</a></span></li>
 					<li><span class="glyphicon glyphicon-indent-left" aria-hidden="true" style="margin-left:34px;"><a class="a" href="javascript:void(0);"
 						onClick="openurl('acti/findPage');">活动发布管理</a></span></li>
 					<!-- <li><span class="glyphicon glyphicon-list" aria-hidden="true" style="margin-left:34px;"><a class="a" href="javascript:void(0);"

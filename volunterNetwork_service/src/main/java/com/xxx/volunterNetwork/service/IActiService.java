@@ -34,6 +34,7 @@ public interface IActiService {
 	public List<Acti> findActi8();
 	public List<Acti> findActi9();
 	public List<Acti> findActi0();
+	public Acti findByHdlx(String hdlx);
 	//动态条件查询
 	Page<Acti> findSearch(String query, Pageable pageable);
 	public Page<Acti> findAll(Specification<Acti> spec,Pageable pageable);

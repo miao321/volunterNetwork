@@ -69,5 +69,9 @@ public class ImgServiceImpl implements IImgService {
 		return imgRepository.findImg();
 		
 	}
+	@Override
+	public List<Img> findImg2() {
+		return imgRepository.findImg2();
+	}
 
 }

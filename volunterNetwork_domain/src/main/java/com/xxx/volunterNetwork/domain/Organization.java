@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 @Entity
-@Table(name="t_college")
+@Table(name="t_organization")
 public class Organization implements Serializable {
 	private Long id;
 	private String collegeName;  //学院名字

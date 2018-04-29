@@ -2,6 +2,13 @@ package com.xxx.volunterNetwork.service.impl;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +22,6 @@ import com.xxx.volunterNetwork.anno.SysLog;
 import com.xxx.volunterNetwork.dao.ActiRepository;
 import com.xxx.volunterNetwork.domain.Acti;
 import com.xxx.volunterNetwork.service.IActiService;
-import com.xxx.volunterNetwork.util.ExtPageable;
 
 
 /**
@@ -59,10 +65,7 @@ public class ActiServiceImpl implements IActiService {
 	public Page<Acti> findAll(Specification<Acti> spec, Pageable pageable) {
 		return actiRepository.findAll(spec, pageable);
 	}
-/*	@Override
-	public Acti findActi(String actiName) {
-		return actiRepository.findActi(actiName);
-	}*/
+	
 	@Override
 	public void updateState(Long id, Integer state) {
 		actiRepository.updateState(id, state);
@@ -111,6 +114,10 @@ public class ActiServiceImpl implements IActiService {
 	@Override
 	public Page<Acti> findSearch(String query, Pageable pageable) {
 		return actiRepository.findSearch(query, pageable);
+	}
+	@Override
+	public Acti findByHdlx(String hdlx) {
+		return actiRepository.findByHdlx(hdlx);
 	}
 	
 	

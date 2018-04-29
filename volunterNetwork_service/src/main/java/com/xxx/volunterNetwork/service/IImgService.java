@@ -23,7 +23,7 @@ public interface IImgService {
 	public List<Img> findAll();
 	public void updateState(Long id,Integer state);
 	public List<Img> findImg();
-	
+	public List<Img> findImg2();
 	/*public Img findImg(String imgName);*/
 	//动态条件查询
 	public Page<Img> findAll(Specification<Img> spec,Pageable pageable);

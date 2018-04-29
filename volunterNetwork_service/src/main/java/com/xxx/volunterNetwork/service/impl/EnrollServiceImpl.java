@@ -70,5 +70,9 @@ public class EnrollServiceImpl implements IEnrollService {
 	public List<Enroll> findEnroll() {
 		return enrollRepository.findEnroll();
 	}
+	@Override
+	public List<Enroll> findEnroll(Long id) {	
+		return enrollRepository.findEnroll(id);
+	}
 	
 }

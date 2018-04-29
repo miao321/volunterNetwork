@@ -185,6 +185,29 @@ function saveModule() {
 	var updateBy = document.getElementById("updateBy").value;
 	var updateTime = document.getElementById("updateTime").value;
 	var state = document.getElementById("state").value;
+	var parentName1 = /^[\u4e00-\u9fa5]+$/;
+    var moduleName1 = /^[\u4e00-\u9fa5]+$/;
+    var state1 = /^[1|0]$/ ;
+    if (parentName == '') {
+		alert("父模块名不能为空");
+		return false;
+	}
+    if (!parentName1.test(parentName)) {
+		alert("父模块名只能为中文");
+		return false;
+	}
+    if (moduleName == '') {
+		alert("模块名不能为空");
+		return false;
+	}
+    if (!moduleName1.test(moduleName)) {
+		alert("模块名只能为中文");
+		return false;
+	}
+    if (!state1.test(state)) {
+		alert("状态不能为空");
+		return false;
+	}
 	if(state == "启用"){
 		state = 1;
 	}else{
@@ -223,6 +246,29 @@ function addModule(){
 	var updateBy = document.getElementById("updateBy2").value;
 	var updateTime = document.getElementById("updateTime2").value;
     var state = $('#state2 input[name="radio"]:checked ').val(); 
+    var parentName1 = /^[\u4e00-\u9fa5]+$/;
+    var moduleName1 = /^[\u4e00-\u9fa5]+$/;
+    var state1 = /^[1|0]$/ ;
+    if (parentName == '') {
+		alert("父模块名不能为空");
+		return false;
+	}
+    if (!parentName1.test(parentName)) {
+		alert("父模块名只能为中文");
+		return false;
+	}
+    if (moduleName == '') {
+		alert("模块名不能为空");
+		return false;
+	}
+    if (!moduleName1.test(moduleName)) {
+		alert("模块名只能为中文");
+		return false;
+	}
+    if (!state1.test(state)) {
+		alert("状态不能为空");
+		return false;
+	}
 	 $.ajax({			 
 		 type : "POST",
 		 url : "saveOrUpdate",           
@@ -310,7 +356,7 @@ function enableModule(id){
 							<tr id="tr_${module.id }">
 								<td><input type="checkbox" id="id" name="id" value="${module.id}" /></td>
 								<td>${status.index+1}</td>
-								<td>${module.belong}</td>
+								<td>${module.parentName}</td>
 								<td>${module.moduleName}</td>								
 								<c:if test="${module.state ==1}">
 								<td id="sta">启用</td>
@@ -376,6 +422,7 @@ function enableModule(id){
 			</div>
 			<div class="modal-body">
 				<form method="post" class="form-horizontal" role="form" >
+					<c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set>
 					<input type="hidden" id="id">
 					 <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">父模块名字:</label>
@@ -458,7 +505,7 @@ function enableModule(id){
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">创建时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime2" name="createTime2" placeholder="请输入创建时间" style="height:34px;">
+					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',dateFmt:'yyyy/MM/dd HH:mm:ss',minDate:${nowDate}})" id="createTime2" name="createTime2" placeholder="请输入创建时间" style="height:34px;">
 					    </div>
 					  </div>
 					  <div class="form-group">
@@ -470,7 +517,7 @@ function enableModule(id){
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">修改时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime2" name="updateTime2" placeholder="请输入修改时间" style="height:34px;">
+					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',dateFmt:'yyyy/MM/dd HH:mm:ss',minDate:${nowDate}})" id="updateTime2" name="updateTime2" placeholder="请输入修改时间" style="height:34px;">
 					    </div>
 					  </div>
 					  <div class="form-group">

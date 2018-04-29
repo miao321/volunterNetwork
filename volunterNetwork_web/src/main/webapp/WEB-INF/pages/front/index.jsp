@@ -60,9 +60,9 @@ function detail(hdlx){
         <li><a href="${pageContext.request.contextPath}/helpCenter">帮助中心</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
-        <li><a href="#">广东<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
-        <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-        <c:if test="${userName == null || userName == '' }">
+        <li><a href="#">莞工<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
+<!--         <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
+ -->        <c:if test="${userName == null || userName == '' }">
         <li><a href="login.jsp">登录</a></li>
         </c:if>
         <c:if test="${userName !=null || userName != '' }">
@@ -672,19 +672,43 @@ function detail(hdlx){
 				<div class="span5">
 				<img alt="排行榜" src="images/crown.png" style="float: left;margin-top: 8px;">
 				<h3  style="font-size: 16px;font-weight: bold;margin-top: 12px;padding-left: 4px;">志愿排行</h3>
-					<div class="row-fluid">
-						<div class="span6">
+					<div class="paihang" style="width: 530px;margin-top: 10px;">
+						<div class="a1" style="float: left;width:260px;background: #e3e3e3;">
+							<span style="font-size: 18px;font-weight: bold;float: left;margin: 20px 0 10px 0;padding-left: 100px;">志愿者</span>
+							<c:forEach items="${volunterLists}" var="volunter" varStatus="status">			
+							<span style="width:190px;font-size: 14px;font-weight: bold;float: left;margin-top:10px;color: #999;display: block;padding-left: 6px;">${status.index+1 } ${volunter.collegeName }</span>
+							<span style="width:70px;font-size: 14px;font-weight: bold;float: right;margin-top:10px;display: block;">${volunter.menNum }人</span>
+							</c:forEach>
+							
+						</div>
+						<div class="a2" style="float: right;width:260px;background: #e3e3e3;">
+							<span style="font-size: 18px;font-weight: bold;float: left;margin: 20px 0 10px 0;padding-left: 80px;">志愿服务时长</span>
+							<c:forEach items="${enroll2Lists}" var="enroll" varStatus="status">			
+							<span style="width:190px;font-size: 14px;font-weight: bold;float: left;margin-top:10px;color: #999;display: block;padding-left: 6px;">${status.index+1 } ${enroll.college }</span>
+							<span style="width:70px;font-size: 14px;font-weight: bold;float: right;margin-top:10px;display: block;">${enroll.duration } 小时</span>
+							</c:forEach>
+							
+						</div>
+					</div>
+					<!-- <div class="row-fluid">
+						<div class="span6" style="float: left;width: 265px;margin-left: -20px">
 							<span style="font-size: 18px;font-weight: bold;float: left;margin-top: 20px;padding-left: 40px;">志愿者</span>
-							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: -100px;margin-top: 60px;color: #999">1 化学工程与能源技术学院</span>
+							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: -120px;margin-top: 60px;color: #999">1 化学工程与能源技术学院</span>
+							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 20px;margin-top: 60px;">32123人</span>
+							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: -120px;margin-top: 60px;color: #999">1 化学工程与能源技术学院</span>
 							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 20px;margin-top: 60px;">32123人</span>
 					 	</div>
 						<table style="height:60px;border-color:000000;border-left-style:solid;border-width:1px"><tr><td valign="top"></td></tr></table>						
-						 <div>
-							<span style="font-size: 18px;font-weight: bold;float: right;margin-top: -40px;margin-right: 40px;">志愿服务时长</span>
-							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: 10px;color: #999">化学工程与能源技术学院</span>
-							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 0px;">32123小时</span> 
+						 <div class="span6" style="float: right;width: 265px;">
+							<span style="font-size: 18px;font-weight: bold;float: right;margin-top: -60px;margin-right: 40px;">志愿服务时长</span>
+							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: 10px;margin-top:-20px;color: #999">化学工程与能源技术学院</span>
+							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 0px;margin-top:-20px;">32123小时</span> 
+							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: 10px;margin-top:-20px;color: #999">化学工程与能源技术学院</span>
+							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 0px;margin-top:-20px;">32123小时</span> 
+							
 						</div>
-					</div>
+						
+					</div> -->
 				</div>
 			</div>
 		

@@ -197,6 +197,71 @@ function saveUser() {
 	var updateBy = document.getElementById("updateBy").value;
 	var updateTime = document.getElementById("updateTime").value;
 	var state = document.getElementById("state").value;
+	var userName1 = /^[\u4e00-\u9fa5]+$/;
+    var createBy1 = /^[\u4e00-\u9fa5]+$/;
+    var createCollege1 = /^[\u4e00-\u9fa5]+$/;
+    var studentNo1 = /^[0-9]*$/ ;
+    var password1 = /^[a-zA-Z]\w{5,17}$/;
+    var phone1 = /^1\d{10}$/;
+    var sex1 = /^['男'|'女']$/ ;
+    var state1 = /^[1|0]$/ ;
+    if (userName == '') {
+		alert("用户名不能为空");
+		return false;
+	}
+    if (!userName1.test(userName)) {
+		alert("用户名只能为中文");
+		return false;
+	}
+    if (studentNo == '') {
+		alert("学号不能为空");
+		return false;
+	}
+    if (!studentNo1.test(studentNo)) {
+		alert("学号只能为数字");
+		return false;
+	}
+    if (password == '') {
+		alert("密码不能为空");
+		return false;
+	}
+    if (!password1.test(password)) {
+		alert("密码以字母开头，长度在6-18之间，只能包含字符、数字和下划线");
+		return false;
+	}
+    if (inTake == '') {
+		alert("入学时间不能为空");
+		return false;
+	}
+    if (!sex1.test(sex)) {
+		alert("性别不能为空");
+		return false;
+	}
+    
+    if (!phone1.test(phone)) {
+		alert("手机号不符合要求！");
+		return false;
+	}
+    if (createBy == '') {
+		alert("所属学院不能为空");
+		return false;
+	}
+    if (!createBy1.test(createBy)) {
+		alert("学院只能为中文");
+		return false;
+	}
+    if (createCollege == '') {
+		alert("所属专业不能为空");
+		return false;
+	}
+    if (!createCollege1.test(createCollege)) {
+		alert("专业只能为中文");
+		return false;
+	}
+    if (!state1.test(state)) {
+		alert("状态不能为空");
+		return false;
+	}
 	if(state == "启用"){
 		state = 1;
 	}else{
@@ -236,6 +301,71 @@ function addUser(){
 	var updateBy = document.getElementById("updateBy2").value;
 	var updateTime = document.getElementById("updateTime2").value;
     var state = $('#state2 input[name="radio"]:checked ').val(); 
+    var userName1 = /^[\u4e00-\u9fa5]+$/;
+    var createBy1 = /^[\u4e00-\u9fa5]+$/;
+    var createCollege1 = /^[\u4e00-\u9fa5]+$/;
+    var studentNo1 = /^[0-9]*$/ ;
+    var password1 = /^[a-zA-Z]\w{5,17}$/;
+    var phone1 = /^1\d{10}$/;
+    var sex1 = /^['男'|'女']$/ ;
+    var state1 = /^[1|0]$/ ;
+    if (userName == '') {
+		alert("用户名不能为空");
+		return false;
+	}
+    if (!userName1.test(userName)) {
+		alert("用户名只能为中文");
+		return false;
+	}
+    if (studentNo == '') {
+		alert("学号不能为空");
+		return false;
+	}
+    if (!studentNo1.test(studentNo)) {
+		alert("学号只能为数字");
+		return false;
+	}
+    if (password == '') {
+		alert("密码不能为空");
+		return false;
+	}
+    if (!password1.test(password)) {
+		alert("密码以字母开头，长度在6-18之间，只能包含字符、数字和下划线");
+		return false;
+	}
+    if (inTake == '') {
+		alert("入学时间不能为空");
+		return false;
+	}
+    if (!sex1.test(sex)) {
+		alert("性别不能为空");
+		return false;
+	}
+    
+    if (!phone1.test(phone)) {
+		alert("手机号不符合要求！");
+		return false;
+	}
+    if (createBy == '') {
+		alert("所属学院不能为空");
+		return false;
+	}
+    if (!createBy1.test(createBy)) {
+		alert("学院只能为中文");
+		return false;
+	}
+    if (createCollege == '') {
+		alert("所属专业不能为空");
+		return false;
+	}
+    if (!createCollege1.test(createCollege)) {
+		alert("专业只能为中文");
+		return false;
+	}
+    if (!state1.test(state)) {
+		alert("状态不能为空");
+		return false;
+	}
 	 $.ajax({			 
 		 type : "POST",
 		 url : "saveOrUpdate",           
@@ -494,6 +624,7 @@ function saveRole(){
 			<div class="modal-body">
 				<!-- <form class="form-inline"> -->
 				<form method="post" class="form-horizontal" role="form" >
+				<c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set>
 					 <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">用户名:</label>
 					    <div class="col-sm-10">
@@ -509,13 +640,13 @@ function saveRole(){
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">用户密码:</label>
 					    <div class="col-sm-10">
-					      <input type="password" id="password2" name="password2" class="form-control" placeholder="请输入标题">
+					      <input type="password" id="password2" name="password2" class="form-control" placeholder="请输入密码">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">入学时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="inTake2" name="inTake2" class="form-control Wdate" placeholder="请输入入学时间" style="height:34px;">
+					      <input type="text" onClick="WdatePicker({lang:'zh-cn',dateFmt:'yyyy/MM/dd HH:mm:ss',minDate:${nowDate}})" id="inTake2" name="inTake2" class="form-control Wdate" placeholder="请输入入学时间" style="height:34px;">
 					    </div>
 					  </div>
 					  <div class="form-group">
@@ -561,21 +692,21 @@ function saveRole(){
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">创建者:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">所属学院:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="createBy2" name="createBy2" class="form-control" placeholder="请输入创建者">
+					      <input type="text" id="createBy2" name="createBy2" class="form-control" placeholder="请输入所属学院">
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">创建者学院:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">所属专业:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="createCollege2" name="createCollege2" class="form-control" placeholder="请输入创建者学院">
+					      <input type="text" id="createCollege2" name="createCollege2" class="form-control" placeholder="请输入所属专业">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">创建时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime2" name="createTime2" class="form-control Wdate" placeholder="请输入创建时间" style="height:34px;">
+					      <input type="text" onClick="WdatePicker({lang:'zh-cn',dateFmt:'yyyy/MM/dd HH:mm:ss',minDate:${nowDate}})" id="createTime2" name="createTime2" class="form-control Wdate" placeholder="请输入创建时间" style="height:34px;">
 					    </div>
 					  </div>
 					  <div class="form-group">
@@ -587,7 +718,7 @@ function saveRole(){
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">修改时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime2" name="updateTime2" class="form-control Wdate" placeholder="请输入修改时间" style="height:34px;">
+					      <input type="text" onClick="WdatePicker({lang:'zh-cn',dateFmt:'yyyy/MM/dd HH:mm:ss',minDate:${nowDate}})" id="updateTime2" name="updateTime2" class="form-control Wdate" placeholder="请输入修改时间" style="height:34px;">
 					    </div>
 					  </div>
 					  <div class="form-group">

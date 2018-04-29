@@ -83,9 +83,9 @@
         <li><a href="${pageContext.request.contextPath}/helpCenter">帮助中心</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
-        <li><a href="#">广东<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
-        <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-        <c:if test="${userName == null || userName == '' }">
+        <li><a href="#">莞工<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
+<!--         <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
+ -->        <c:if test="${userName == null || userName == '' }">
         <li><a href="login.jsp">登录</a></li>
         </c:if>
         <c:if test="${userName !=null || userName != '' }">
@@ -129,7 +129,7 @@
 	          </li>
 	          </a>
 	          <a class="a" href="javascript:void(0);"
-						onClick="openurl('record.jsp');" style="text-align: left;">
+						onClick="openurl('record');" style="text-align: left;">
 	          <li class="nav_block_item my_msg">
 	            <div class="item_con"><span class="glyphicon glyphicon-th-list" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>服务记录</div>
 	          </li>

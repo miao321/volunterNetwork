@@ -162,6 +162,24 @@ function saveRole() {
 	var updateBy = document.getElementById("updateBy").value;
 	var updateTime = document.getElementById("updateTime").value;
 	var state = document.getElementById("state").value;
+	var roleName1 = /^[\u4e00-\u9fa5]+$/;
+    var state1 = /^[1|0]$/ ;
+    if (roleName == '') {
+		alert("角色名不能为空");
+		return false;
+	}
+    if (!roleName1.test(roleName)) {
+		alert("角色名只能为中文");
+		return false;
+	}
+    if (createBy == '') {
+		alert("创建者不能为空");
+		return false;
+	}
+    if (!state1.test(state)) {
+		alert("状态不能为空");
+		return false;
+	}
 	if(state == "启用"){
 		state = 1;
 	}else{
@@ -191,6 +209,24 @@ function addRole(){
 	var updateBy = document.getElementById("updateBy2").value;
 	var updateTime = document.getElementById("updateTime2").value;
     var state = $('#state2 input[name="radio"]:checked ').val(); 
+    var roleName1 = /^[\u4e00-\u9fa5]+$/;
+    var state1 = /^[1|0]$/ ;
+    if (roleName == '') {
+		alert("角色名不能为空");
+		return false;
+	}
+    if (!roleName1.test(roleName)) {
+		alert("角色名只能为中文");
+		return false;
+	}
+    if (createBy == '') {
+		alert("创建者不能为空");
+		return false;
+	}
+    if (!state1.test(state)) {
+		alert("状态不能为空");
+		return false;
+	}
 	 $.ajax({			 
 		 type : "POST",
 		 url : "saveOrUpdate",           
@@ -398,6 +434,7 @@ function savePermission(){
 			</div>
 			<div class="modal-body">
 				<form method="post" class="form-horizontal" role="form" >
+					<c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set>
 					 <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">角色名字:</label>
 					    <div class="col-sm-10">
@@ -431,7 +468,7 @@ function savePermission(){
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">创建时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime2" name="createTime2" placeholder="请输入创建时间" style="height:34px;">
+					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',dateFmt:'yyyy/MM/dd HH:mm:ss',minDate:${nowDate}})" id="createTime2" name="createTime2" placeholder="请输入创建时间" style="height:34px;">
 					    </div>
 					  </div>
 					  <div class="form-group">
@@ -443,7 +480,7 @@ function savePermission(){
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">修改时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime2" name="updateTime2" placeholder="请输入修改时间" style="height:34px;">
+					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',dateFmt:'yyyy/MM/dd HH:mm:ss',minDate:${nowDate}})" id="updateTime2" name="updateTime2" placeholder="请输入修改时间" style="height:34px;">
 					    </div>
 					  </div>
 					   <div class="form-group">

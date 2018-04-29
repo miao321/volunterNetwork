@@ -219,6 +219,7 @@ function saveModule() {
 //添加数据
  	
     $(document).ready(function() {
+    	var state1 = /^[1|0]$/ ;
 		$('#img').uploadifive({
 			'uploadScript' : 'uploadImg',
 			'queueID' : 'fileQueue',
@@ -253,11 +254,65 @@ function saveModule() {
 					'zmrs' : $("#zmrs").val(),
 					'state' : $('#state input[name="radio"]:checked ').val()
 				},
-				/* success : function(data) {				
-					location.reload();
-				}, */
 				'fileSizeLimit' : 500
 			});
+			if ($("#title").val() == '') {
+				alert("标题不能为空");
+				return false;
+			}
+		    if ($("#content").val() == '') {
+				alert("内容不能为空");
+				return false;
+			}
+		    if ($("#fwyq").val() == '') {
+				alert("服务要求不能为空");
+				return false;
+			}		    
+		    if ($("#hdjj").val() == '') {
+				alert("活动简介不能为空");
+				return false;
+			}
+		    if ($("#zmrs").val() == '') {
+				alert("招募人数不能为空");
+				return false;
+			}
+		    if ($("#xxdz").val() == '') {
+				alert("详细地址不能为空");
+				return false;
+			}
+		    if ($("#fbman").val() == '') {
+				alert("联系人不能为空")
+				return false;
+			}
+		    if ($("#lxfs").val() == '') {
+				alert("联系方式不能为空");
+				return false;
+			}
+		    if ($("#beginTime").val() == '') {
+				alert("活动开始时间不能为空");
+				return false;
+			}
+		    if ($("#endTime").val() == '') {
+				alert("活动结束时间不能为空");
+				return false;
+			}
+		    if ($("#hdlx").val() == '') {
+				alert("活动类型不能为空");
+				return false
+			}
+		    if ($("#fbzz").val() == '') {
+				alert("发布组织不能为空");
+				return false;
+			}
+		    if ($("#fbtime").val() == '') {
+				alert("发布时间不能为空");
+				return false;
+			}
+		    if (!state1.test($('#state input[name="radio"]:checked ').val())) {
+				alert("状态不能为空");
+				return false;
+			}
+		    
 			$('#img').uploadifive('upload');
 		});
 	});
@@ -337,10 +392,10 @@ function enableActi(id){
 							<tr id="tr_${acti.id }">
 								<td><input type="checkbox" id="id" name="id" value="${acti.id}" /></td>
 								<td>${status.index+1}</td>
-								<td>${acti.title}</td>
+								<td style="max-width: 180px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${acti.title}</td>
 								<td style="max-width: 210px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${acti.content}</td>
 								
-								<td>${acti.fbtime}</td>
+								<td><fmt:formatDate value="${acti.fbtime}" type="both"/></td>
 								<td>${acti.fbzz}</td>								
 								<c:if test="${acti.state ==1}">
 								<td id="sta">启用</td>
@@ -406,6 +461,7 @@ function enableActi(id){
 			</div>
 			<div class="modal-body">				
 				<form action="acti/uploadImg"  id="formId" class="form-horizontal" enctype="multipart/form-data" method="post">
+				  <c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set>
 				  <div class="form-group"  style="margin-top: 16px;">
 				    <label for="inputEmail3" class="col-sm-2 control-label">标题:</label>
 				    <div class="col-sm-10">
@@ -457,13 +513,13 @@ function enableActi(id){
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">活动开始时间:</label>
 				    <div class="col-sm-10">
-				       <input type="text" id="beginTime" name="beginTime" class="form-control Wdate" placeholder="请输入活动开始时间" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd'})" style="height:34px;">
+				       <input type="text" id="beginTime" name="beginTime" class="form-control Wdate" placeholder="请输入活动开始时间" onClick="WdatePicker({lang:'zh-cn',dateFmt:'yyyy/MM/dd HH:mm:ss',minDate:${nowDate}})" style="height:34px;">
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">活动结束时间:</label>
 				    <div class="col-sm-10">
-				       <input type="text" id="endTime" name="endTime" class="form-control Wdate" placeholder="请输入活动结束时间" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd'})" style="height:34px;">
+				       <input type="text" id="endTime" name="endTime" class="form-control Wdate" placeholder="请输入活动结束时间" onClick="WdatePicker({lang:'zh-cn',dateFmt:'yyyy/MM/dd HH:mm:ss',minDate:${nowDate}})" style="height:34px;">
 				    </div>
 				  </div>
 				  <div class="form-group">
@@ -513,11 +569,12 @@ function enableActi(id){
 				      </select>
 				    </div>
 				  </div>
+				  
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">发布时间:</label>
 				   
-				    <div class="col-sm-10">
-				      <input type="text" id="fbtime" name="fbtime" class="form-control Wdate" placeholder="请输入发布时间" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" style="height:34px;">
+				    <div class="col-sm-10">                                                                                    
+				      <input type="text" id="fbtime" name="fbtime" class="form-control Wdate" placeholder="请输入发布时间" onClick="WdatePicker({lang:'zh-cn',dateFmt:'yyyy/MM/dd HH:mm:ss',minDate:${nowDate}})" style="height:34px;">
 				    </div>
 				  </div>
 				  <div class="form-group">

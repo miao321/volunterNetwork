@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>组织团体</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico"
 	media="screen" />
 <link href="css/bootstrap-combined.min.css" rel="stylesheet"
@@ -30,7 +30,7 @@
 
 </head>
 <body>
- <nav class="navbar navbar-default" style="background:#ededed;">
+<nav class="navbar navbar-default" style="background:#ededed;">
  <div class="container-fluid">
     <div class="navbar-header">    	
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -54,9 +54,9 @@
         <li><a href="${pageContext.request.contextPath}/helpCenter">帮助中心</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
-        <li><a href="#">广东<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
-        <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-        <c:if test="${userName == null || userName == '' }">
+        <li><a href="#">莞工<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
+<!--         <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
+ -->        <c:if test="${userName == null || userName == '' }">
         <li><a href="login.jsp">登录</a></li>
         </c:if>
         <c:if test="${userName !=null || userName != '' }">
@@ -86,8 +86,8 @@
 												<div class="text_box">
 													<a target="_blank" href="xjorganization?id=${organization.id}"
 														class="text_title">${organization.organization }</a>
-													<p class="txt oneLineOh">志愿者人数：<%-- ${organization.xxdz } --%></p>
-													<p class="txt oneLineOh">项目数：<%-- ${organization.beginTime } --%></p>
+													<p class="txt oneLineOh">志愿者人数：${organization.menNum }</p>
+													<p class="txt oneLineOh">项目数：${organization.oNum }</p>
 													<a href="xjorganization?id=${organization.id}"
 														class="text_title">
 													<button type="button" class="btn btn-default" style="width:88px;margin:10px 0;margin-left: 48px;">下属组织</button>

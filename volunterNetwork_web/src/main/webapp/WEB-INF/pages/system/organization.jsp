@@ -55,8 +55,8 @@ function toView(){
 			 success : function(result) {
 				if (result.state != 0) {
 					$('#seeOrganization').modal('show');
-					$("#organization3").val(result.organizationName);
-					$("#xjorganization3").val(result.major);
+					$("#organization3").val(result.organization);
+					$("#xjorganization3").val(result.xjorganization);
 					if(result.state == 1){
 						$("#state3").val("启用");
 					}else{
@@ -121,8 +121,8 @@ function editOrganization(id){
 			if (result.state !== 0) {
 				$('#editOrganization').modal('show');
 				$("#id").val(result.id);			
-				$("#organization2").val(result.organizationName);
-				$("#xjorganization2").val(result.major);
+				$("#organization2").val(result.organization);
+				$("#xjorganization2").val(result.xjorganization);
 				if(result.state == 1){
 					$("#state2").val("启用");
 				}else{
@@ -140,6 +140,20 @@ function saveOrganization() {
 	var organization = document.getElementById("organization2").value;
 	var major = document.getElementById("xjorganization2").value;
 	var state = document.getElementById("state2").value;
+	 var organization1 = /^[\u4e00-\u9fa5]+$/;
+	    var state1 = /^[1|0]$/ ;
+	    if (organization == '') {
+			alert("组织不能为空");
+			return false;
+		}
+	    if (!organization1.test(organization)) {
+			alert("组织名只能为中文");
+			return false;
+		}
+	    if (!state1.test(state)) {
+			alert("状态不能为空");
+			return false;
+		}
 	if(state == "启用"){
 		state = 1;
 	}else{
@@ -159,14 +173,33 @@ function saveOrganization() {
 } 
 //添加组织数据
 function addOrganization(){
+	var collegeName = document.getElementById("collegeName").value;
 	var organization = document.getElementById("organization").value;
 	var xjorganization = document.getElementById("xjorganization").value;
     var state = $('#state input[name="radio"]:checked ').val(); 
+    var organization1 = /^[\u4e00-\u9fa5]+$/;
+    var state1 = /^[1|0]$/ ;
+    if (collegeName == '') {
+		alert("所属学院不能为空");
+		return false;
+	}
+    if (organization == '') {
+		alert("组织不能为空");
+		return false;
+	}
+    if (!organization1.test(organization)) {
+		alert("组织名只能为中文");
+		return false;
+	}
+    if (!state1.test(state)) {
+		alert("状态不能为空");
+		return false;
+	}
 	 $.ajax({			 
 		 type : "POST",
 		 url : "saveOrUpdate",           
          dataType : "json",
-         data:{organization:organization,xjorganization:xjorganization,state:state},
+         data:{collegeName:collegeName,organization:organization,xjorganization:xjorganization,state:state},
 		 cache : false,
 		 async : true,
 		 success : function(data) {				
@@ -237,6 +270,7 @@ function enableOrganization(id){
 								onclick="checkAll('id',this)"></th>
 							<!-- <th data-checkbox="true"></th> -->
 							<th>编号</th>
+							<th>所属学院</th>
 							<th>组织名称</th>
 							<th>下属组织</th>
 							<th>状态</th>
@@ -248,6 +282,7 @@ function enableOrganization(id){
 							<tr id="tr_${c.id }">
 								<td><input type="checkbox" id="id" name="id" value="${c.id}" /></td>
 								<td>${status.index+1}</td>
+								<td>${c.collegeName}</td>
 								<td>${c.organization}</td>
 								<td>${c.xjorganization}</td>
 								
@@ -325,6 +360,7 @@ function enableOrganization(id){
 			<div class="modal-body">
 				<form class="form-inline">
 					<fieldset>
+						 <label>所属学院:</label><input type="text" id="collegeName"/><br/>
 						 <label>组织名字:</label><input type="text" id="organization"/><br/>
 						 <label>下属组织:</label><input type="text" id="xjorganization"/><br/>
 						 <label id="state">组织状态:

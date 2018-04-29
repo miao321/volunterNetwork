@@ -34,6 +34,7 @@ public class Enroll {
 	private Date hdTime;//活动开始时间 
 	private String hdType;//活动类别
 	private Integer pxTime;//培训时长
+	private Long actiId;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
@@ -144,6 +145,12 @@ public class Enroll {
 	}
 	public void setPxTime(Integer pxTime) {
 		this.pxTime = pxTime;
+	}
+	public Long getActiId() {
+		return actiId;
+	}
+	public void setActiId(Long actiId) {
+		this.actiId = actiId;
 	}
 	
 

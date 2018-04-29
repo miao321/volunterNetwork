@@ -18,8 +18,10 @@ import com.xxx.volunterNetwork.domain.Img;
 
 @Repository
 public interface ImgRepository extends PagingAndSortingRepository<Img, Long>,JpaSpecificationExecutor<Img> {
-	@Query(value="select * from t_img t ORDER BY id desc LIMIT 3",nativeQuery=true)
+	@Query(value="select * from t_img t ORDER BY id desc LIMIT 6",nativeQuery=true)
 	public List<Img> findImg();
+	@Query(value="select * from t_img t where t.state =1 ORDER BY id desc LIMIT 3",nativeQuery=true)
+	public List<Img> findImg2();
 	@Modifying
 	@Query("update Img img set img.state = ?2 where img.id = ?1")
 	public void updateState(Long id,Integer state);

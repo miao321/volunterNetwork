@@ -6,16 +6,21 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xxx.volunterNetwork.anno.SysControllerLog;
+import com.xxx.volunterNetwork.domain.Acti;
 import com.xxx.volunterNetwork.domain.Borad;
 import com.xxx.volunterNetwork.domain.Enroll;
 import com.xxx.volunterNetwork.domain.Opinion;
 import com.xxx.volunterNetwork.domain.User;
+import com.xxx.volunterNetwork.dto.ActiQueryDTO;
+import com.xxx.volunterNetwork.dto.EnrollQueryDTO;
 import com.xxx.volunterNetwork.service.IActiService;
 import com.xxx.volunterNetwork.service.IBoradService;
 import com.xxx.volunterNetwork.service.IEnrollService;
@@ -23,6 +28,7 @@ import com.xxx.volunterNetwork.service.ILoginService;
 import com.xxx.volunterNetwork.service.IPersonalService;
 import com.xxx.volunterNetwork.service.IUserService;
 import com.xxx.volunterNetwork.util.ExtAjaxResponse;
+import com.xxx.volunterNetwork.util.ExtPageable;
 
 @Controller
 public class PersonalController {
@@ -81,6 +87,20 @@ public class PersonalController {
 		} catch (Exception e) {
 			return new ExtAjaxResponse(false, "密码修改失败");			
 		}
+	}
+	
+	@RequestMapping("/record")
+	public String record(HttpSession session,EnrollQueryDTO enrollQueryDTO,ExtPageable extPageable) {
+		String userName = (String) session.getAttribute("userName");
+		Long id = (Long) session.getAttribute("userId");	
+		enrollQueryDTO.setUserName(userName);
+		Page<Enroll> page = enrollService.findAll(enrollQueryDTO.getSpecification(enrollQueryDTO),extPageable.getPageable2());
+		session.setAttribute("enrollLists", page.getContent());//内容
+		session.setAttribute("pageNumber", page.getNumber());//当前页
+		session.setAttribute("pageSize", page.getSize());//当前页条数
+		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
+		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数	
+		return "/record";
 	}
 	
 }

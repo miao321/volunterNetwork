@@ -42,6 +42,8 @@ public interface ActiRepository extends PagingAndSortingRepository<Acti, Long>,J
 	public List<Acti> findActi9();
 	@Query(value="select * from t_acti where state = 1",nativeQuery=true)
 	public List<Acti> findActi0();
+	@Query(value="select * from t_acti t where t.state = 1 and t.hdlx=?1",nativeQuery=true)
+	public Acti findByHdlx(String hdlx);
 	@Modifying
 	@Query("update Acti acti set acti.state = ?2 where acti.id = ?1")
 	public void updateState(Long id,Integer state);

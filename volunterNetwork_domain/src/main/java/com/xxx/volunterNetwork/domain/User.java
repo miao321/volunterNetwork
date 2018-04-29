@@ -59,17 +59,13 @@ public class User implements Serializable {
 	//private College college;     //用户跟学院是一对多关系
 	//private UserInfo userInfo;  //用户跟用户信心扩展是一对一关系
 	private Set<Role> roles = new HashSet<Role>();       //用户跟角色是多对多关系
-	private Set<Organization> college = new HashSet<Organization>(); //用户跟学院是一对多关系
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="user",fetch=FetchType.EAGER)
-	@JsonIgnore
-	public Set<Organization> getCollege() {
-		return college;
-	}
+	
 	
 	/*@OneToOne(cascade=CascadeType.ALL)
 	public UserInfo getUserInfo() {
@@ -169,9 +165,6 @@ public class User implements Serializable {
 		this.updateTime = updateTime;
 	}
 	
-	public void setCollege(Set<Organization> college) {
-		this.college = college;
-	}
 	/*public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
 	}*/

@@ -55,7 +55,7 @@
 													style="margin-left: 214px;">开始时间：<fmt:formatDate value="${enroll.hdTime }" type="date"/></p>
 												<p class="right_txt_time"
 													style="margin-left: 214px;">项目类别：${enroll.hdType }</p>
-												<a style="color: #ff8814"><p class="right_txt_time"
+												<a target="_blank" style="color: #ff8814" href="detail?id=${enroll.actiId }"><p class="right_txt_time"
 													style="margin-left: 214px;">查看详细>></p></a>
 											</div>
 										</div>

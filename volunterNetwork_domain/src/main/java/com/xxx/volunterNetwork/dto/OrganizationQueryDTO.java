@@ -18,22 +18,44 @@ import com.xxx.volunterNetwork.domain.Organization;
  * @date 2018年1月20日下午4:07:01
  *
  */
-public class OrganizationQueryDTO {	
-	private String fbzz;
-	private String menNum;
-	public String getFbzz() {
-		return fbzz;
+public class OrganizationQueryDTO {
+	private Long id;
+	private String oNum;   //项目数
+	private String organization;  //组织名
+	private String menNum;  //人数
+	private String img;//图片
+	
+	public Long getId() {
+		return id;
 	}
-	public void setFbzz(String fbzz) {
-		this.fbzz = fbzz;
+	public void setId(Long id) {
+		this.id = id;
 	}
+	public String getoNum() {
+		return oNum;
+	}
+	public void setoNum(String oNum) {
+		this.oNum = oNum;
+	}
+	public String getOrganization() {
+		return organization;
+	}
+	public void setOrganization(String organization) {
+		this.organization = organization;
+	}
+	
 	public String getMenNum() {
 		return menNum;
 	}
 	public void setMenNum(String menNum) {
 		this.menNum = menNum;
 	}
-
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	//提供static的工具方法： 根据当前OrganizationQueryDTO对象来组装动态查询条件
 	public static Specification<Organization> getSpecification(OrganizationQueryDTO organizationQueryDTO){
 		Specification<Organization> spec = new Specification<Organization>() {

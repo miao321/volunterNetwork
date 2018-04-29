@@ -127,11 +127,10 @@ public class ImgController {
 	}
 	
 	@RequestMapping("/findImg")
-	public void findImg(HttpSession session) {
+	public String findImg(HttpSession session) {
 		List<Img> img = imgService.findImg();
-		System.out.println("img:=="+img);
-		session.setAttribute("imgLists", imgService.findImg());
-		//return null;
+		session.setAttribute("imgLists", img);
+		return "/WEB-INF/pages/front/banFront";
 	}
 	
 	@RequestMapping("disableImg")

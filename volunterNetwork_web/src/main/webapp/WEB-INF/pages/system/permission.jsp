@@ -143,6 +143,20 @@ function savePermission() {
 	var token = document.getElementById("token").value;
 	var description = document.getElementById("description").value;
 	var state = document.getElementById("state").value;
+	var description1 = /^[\u4e00-\u9fa5]+$/;
+    var state1 = /^[1|0]$/ ;
+    if (description == '') {
+		alert("描述不能为空");
+		return false;
+	}
+    if (!description1.test(description)) {
+		alert("描述只能为中文");
+		return false;
+	}
+    if (!state1.test(state)) {
+		alert("状态不能为空");
+		return false;
+	}
 	if(state == "启用"){
 		state = 1;
 	}else{
@@ -166,6 +180,20 @@ function addPermission(){
 	var token = document.getElementById("token2").value;
 	var description = document.getElementById("description2").value;
     var state = $('#state2 input[name="radio"]:checked ').val(); 
+    var description1 = /^[\u4e00-\u9fa5]+$/;
+    var state1 = /^[1|0]$/ ;
+    if (description == '') {
+		alert("描述不能为空");
+		return false;
+	}
+    if (!description1.test(description)) {
+		alert("描述只能为中文");
+		return false;
+	}
+    if (!state1.test(state)) {
+		alert("状态不能为空");
+		return false;
+	}
 	 $.ajax({			 
 		 type : "POST",
 		 url : "saveOrUpdate",           

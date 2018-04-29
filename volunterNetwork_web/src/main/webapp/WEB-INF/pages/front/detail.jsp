@@ -64,9 +64,9 @@
         <li><a href="${pageContext.request.contextPath}/helpCenter">帮助中心</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
-        <li><a href="#">广东<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
-        <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-        <c:if test="${userName == null || userName == '' }">
+        <li><a href="#">莞工<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
+<!--         <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
+ -->        <c:if test="${userName == null || userName == '' }">
         <li><a href="login.jsp">登录</a></li>
         </c:if>
         <c:if test="${userName !=null || userName != '' }">
@@ -137,7 +137,7 @@
                         <h1 class="common_title fl">志愿详情页</h1>
                     </div>
                     <div class="consult_comment_body">
-                    	<form action="http://www.gdzyz.cn/mission/comment" method="post" id="pinglunform">
+                    	<form action="#" method="post" id="pinglunform">
                     		<input type="hidden" name="missionId" value="659842">
 							<input type="hidden" name="userId" value="">
                     	

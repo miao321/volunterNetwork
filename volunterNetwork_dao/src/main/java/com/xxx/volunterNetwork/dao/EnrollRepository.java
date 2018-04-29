@@ -26,4 +26,7 @@ public interface EnrollRepository extends PagingAndSortingRepository<Enroll, Lon
 	@Modifying
 	@Query("update Enroll enroll set enroll.state = ?2 where enroll.id = ?1")
 	public void updateState(Long id,Integer state);
+	@Modifying
+	@Query("from Enroll enroll where enroll.actiId = ?1")
+	public List<Enroll> findEnroll(Long id);
 }
