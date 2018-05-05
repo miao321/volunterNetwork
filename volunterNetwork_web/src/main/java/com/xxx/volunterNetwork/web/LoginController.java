@@ -71,21 +71,21 @@ public class LoginController {
 		
 		//取身份信息
 		String userName =  (String) subject.getPrincipal();
-		Set<Role> role = userService.getRoleByUserName(userName);
+		Set<Role> roles = userService.getRoleByUserName(userName);
 		session.setAttribute("userName", userName);
 		User user = loginService.findUser(userName);
 		session.setAttribute("user", user);
 		session.setAttribute("userName", user.getUserName());
 		session.setAttribute("userId", user.getId());
 		session.setAttribute("password", user.getPassword());	
-		/*for(Role role2 : role) {
-			if (role2.getRoleName() == "管理员" || role2.getRoleName() == "超级管理员") {
-				return "WEB-INF/pages/backstage";
-			}else {
-				return "WEB-INF/pages/volunterNetwork";
+		boolean root = false;
+		for(Role role : roles) {
+			if (role.getRoleName().equals("管理员") || role.getRoleName().equals("超级管理员")) {
+				root = true;
+				break;
 			}
-		}*/
-		return "WEB-INF/pages/backstage";
+		}
+		return root ? "WEB-INF/pages/backstage" : "WEB-INF/pages/volunterNetwork";
 	}	
 	//退出系统	
 	@RequestMapping(value="/logout",method=RequestMethod.GET) 

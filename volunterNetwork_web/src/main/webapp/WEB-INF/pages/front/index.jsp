@@ -67,7 +67,7 @@ function detail(hdlx){
         </c:if>
         <c:if test="${userName !=null || userName != '' }">
         	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
-        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
+        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/logout">退出</a></li>
         </c:if>
         <!-- <li><a href="#">注册</a></li> -->
       </ul>

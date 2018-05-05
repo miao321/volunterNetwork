@@ -1,43 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
-<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
-<title>Multiple charts on one page</title>
-</head>
-<body style="margin:20px;padding-top:0px;text-align:center;vertical-align:middle;">
-<table width="100%" border="0", cellspacing="0" cellpadding="0">
-<tr>
-	<td align="center">
-		<div style="font-family:微软雅黑;">时长统计情况</div>
-	</td>
-</tr>	
-<tr>
-	<td align="center">
-	<!-- saved from url=(0013)about:internet -->
-	<!-- amline script-->
-	  <script type="text/javascript" src="${pageContext.request.contextPath}/components/chart/amline_1.6.4.1/amline/swfobject.js"></script>
-		<!-- this id must be unique! -->
-	  <div id="flashcontent1">
-			<strong>You need to upgrade your Flash Player</strong>
-		</div>
-	
-		<script type="text/javascript">
-			// <![CDATA[		
-			var so = new SWFObject("${pageContext.request.contextPath}/components/chart/amline_1.6.4.1/amline/amline.swf", "amline1", "800", "300", "8", "#FFFFFF");
-			so.addVariable("path", "${pageContext.request.contextPath}/components/chart/amline_1.6.4.1/amline/");
-			so.addVariable("settings_file", encodeURIComponent("${pageContext.request.contextPath}/stat/chart/onlineinfo/amline_settings.xml"));
-			so.addVariable("data_file", encodeURIComponent("${pageContext.request.contextPath}/stat/chart/onlineinfo/data.xml"));		
-			so.write("flashcontent1");  // this id must match the div id above
-			// ]]>
-		</script>
-	<!-- end of amline script -->
-	</td>
-</tr>
-</table>
-</body>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>amCharts examples</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style4.css" type="text/css">
+        <script src="${pageContext.request.contextPath}/components/amchartNew/amcharts/amcharts.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/components/amchartNew/amcharts/serial.js" type="text/javascript"></script>
+
+        <script>
+            var chart;
+            var chartData = ${result};
+         
+            AmCharts.ready(function () {
+                // SERIAL CHART
+                chart = new AmCharts.AmSerialChart();
+                chart.dataProvider = chartData;
+                chart.categoryField = "college";
+                chart.startDuration = 0.5;
+                chart.balloon.color = "#000000";
+
+                // AXES
+                // category
+                var categoryAxis = chart.categoryAxis;
+                categoryAxis.fillAlpha = 1;
+                categoryAxis.fillColor = "#FAFAFA";
+                categoryAxis.labelRotation = 38;
+                categoryAxis.dashLength = 5;
+                categoryAxis.gridPosition = "start";
+                //categoryAxis.position = "top";
+
+                
+               
+                // value
+                var valueAxis = new AmCharts.ValueAxis();
+                valueAxis.title = "";
+                valueAxis.dashLength = 5;
+                valueAxis.axisAlpha = 0;
+                valueAxis.minimum = 1;
+                valueAxis.maximum = 1000;
+                valueAxis.integersOnly = true;
+                valueAxis.gridCount = 10;
+                valueAxis.reversed = false; // this line makes the value axis reversed
+                chart.addValueAxis(valueAxis);
+
+               
+
+                // Germany graph
+                var graph = new AmCharts.AmGraph();
+                graph.title = "时长";
+                graph.valueField = "amount";
+                graph.balloonText = "[[category]]: 时长[[value]]小时";
+                graph.bullet = "round";
+                chart.addGraph(graph);
+
+                // United Kingdom graph
+                var graph = new AmCharts.AmGraph();
+                graph.title = "人数";
+                graph.valueField = "menNum";
+                graph.balloonText = "[[category]]: 人数[[value]]人";
+                graph.bullet = "round";
+                chart.addGraph(graph);
+
+                // CURSOR
+                var chartCursor = new AmCharts.ChartCursor();
+                chartCursor.cursorPosition = "mouse";
+                chartCursor.zoomable = false;
+                chartCursor.cursorAlpha = 0;
+                chart.addChartCursor(chartCursor);
+
+                // LEGEND
+                var legend = new AmCharts.AmLegend();
+                legend.useGraphSettings = true;
+                chart.addLegend(legend);
+
+                // WRITE
+                chart.write("chartdiv");
+            });
+        </script>
+    </head>
+
+    <body>
+    	<div style="font-family:微软雅黑;font-size: 16px;font-weight: bold;width: 200px;margin: 0 auto;">人员/时长统计情况</div>
+        <div id="chartdiv" style="width: 100%; height: 500px;"></div>
+    </body>
+
 </html>

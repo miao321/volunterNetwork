@@ -66,15 +66,33 @@ public class StatChartController extends BaseAction {
 		return "/stat/chart/factorysale/index";
 	}
 	@RequestMapping("/persure")
-	public String onlineinfo() throws Exception {
+	public String onlineinfo(HttpSession session) throws Exception {
 		//1.执行sql语句，得到统计结果
-		List<String> list = execSQL("select t.college,sum(t.duration) samount from t_enroll t group by t.college order by samount desc");
+		List<String> list = execSQL("select o.organization organization,SUM(e.duration) samount,o.menNum menNum from t_organization o join t_enroll e where e.college = o.collegeName GROUP BY o.organization");
 		
-		//2.组织符合要求的xml数据
+		/*//2.组织符合要求的xml数据
 		String content = genBarDataSet(list);
 		
 		//3.将拼接好的字符串写入data.xml文件中
-		writeXML("stat\\chart\\onlineinfo\\data.xml",content);
+		writeXML("stat\\chart\\onlineinfo\\data.xml",content);*/
+		
+		 //2.组织符合要求的json数据
+		  StringBuilder sb = new StringBuilder();
+		    sb.append("[");
+		    int j=0;
+		    for(int i=0;i<list.size();i++){
+		    	sb.append("{").append("\"college\":\"").append(list.get(i)).append("\",")
+		    	              .append("\"amount\":\"").append(list.get((++i))).append("\",")
+		    	              .append("\"menNum\":\"").append(list.get((++i))).append("\",")
+		    	.append("}").append(",");
+		    	
+		    }
+		    sb.delete(sb.length()-1, sb.length());	    
+		    sb.append("]");
+		    System.out.println("=================="+sb.toString());
+		    //3.将json数据放入值栈中	  
+		    session.setAttribute("result", sb.toString());
+		
 		
 		//writeXML("stat\\chart\\factorysale\\data.xml",this.genPieDataSet(this.execSQL("select factory_name,sum(amount) samount from contract_product_c group by factory_name order by samount desc")));
 				

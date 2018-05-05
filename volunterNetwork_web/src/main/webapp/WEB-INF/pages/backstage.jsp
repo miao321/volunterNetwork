@@ -176,8 +176,8 @@ function saveMessage() {
 						onClick="openurl('stat/marjor');">学院注册情况</a></span></li>
 					<li><span class="glyphicon glyphicon-sort" aria-hidden="true"  style="margin-left:34px;"><a class="a" href="javascript:void(0);"
 						onClick="openurl('stat/marjorClass');">学院时长排名</a></span></li>
-					<li><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"  style="margin-left:-10px;"><a class="a" href="javascript:void(0);"
-						onClick="openurl('stat/persure');">压力图</a></span></li>						
+					<!-- <li><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"  style="margin-left:-10px;"><a class="a" href="javascript:void(0);"
+						onClick="openurl('stat/persure');">压力图</a></span></li> -->						
 				</ul>
 			</div>
 			<div class="div2">
@@ -228,7 +228,7 @@ function saveMessage() {
 						onClick="openurl('enroll/findPage');">报名管理</a></span></li>
 				</ul>
 			</div>
-			<a class="a1" href="login">
+			<a class="a1" href="logout">
 				<div class="div2">
 					<span class="glyphicon glyphicon-off" aria-hidden="true" style="font-size:18px; "></span>
 					退出后台
@@ -240,7 +240,7 @@ function saveMessage() {
 	
 		<iframe id="rightFrame" name="rightFrame" width="100%" height="100%"
 			scrolling="auto" marginheight="0" marginwidth="0" align="center"
-			style="border: 0px solid #CCC; margin: 0; padding: 0;" src="welcome.jsp">
+			style="border: 0px solid #CCC; margin: 0; padding: 0;" src="stat/persure">
 	    </iframe>
 	</div>
 
