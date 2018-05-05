@@ -9,11 +9,11 @@
 <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
 <title>Multiple charts on one page</title>
 </head>
-<body style="margin:20;padding-top:60;text-align:center;vertical-align:middle;">
+<body style="margin:20px;padding-top:0px;text-align:center;vertical-align:middle;">
 <table width="100%" border="0", cellspacing="0" cellpadding="0">
 <tr>
 	<td align="center">
-		<div style="font-family:微软雅黑;">系统访问压力图</div>
+		<div style="font-family:微软雅黑;">时长统计情况</div>
 	</td>
 </tr>	
 <tr>

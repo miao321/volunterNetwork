@@ -103,9 +103,9 @@
                 <div class="one_right_operation">
                     <span style="font-size: 16px;font-weight: bold;margin-top: -120px;">志愿文化</span>		          
 	            	<hr>
-	            	<a target="_blank" href="detail?id=${acti.id }" class="pic_link">	            							
+	            	<a target="_blank" href="detail?id=${acti.id }" class="pic_link" style="text-align: none;">	            							
 					<span class="left_pic fl"><img src="${pageContext.request.contextPath}/${acti.img }" id="article_logo999993431541" class="pic" style="width:230px;height: 160px;float: left;marign-left:120px;"></span>					
-					<div class="a" style="font-size: 15px;color:#323233;padding-top: 180px;">${acti.title }</div>
+					<div class="a" style="font-size: 15px;color:#323233;padding-top: 180px;">${acti.title }</div></a>
 					<div class="a" style="width：230px;line-height:20px;color:#999999;margin-top: 5px;">地点：${acti.xxdz }</div>
 					<div class="a" style="width：230px;line-height:20px;color:#999999;margin-top: 5px;">活动时间：<fmt:formatDate value="${acti.beginTime}" type="date"/> 至 <fmt:formatDate value="${acti.endTime}" type="date"/></div>					
 					<div class="a" style="width：230px;line-height:20px;color:#999999;margin-top: 5px;overflow:hidden;text-overflow:ellipsis; white-space: nowrap;">简介：${acti.hdjj }</div>	               

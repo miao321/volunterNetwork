@@ -11,7 +11,7 @@
 </head>
 
 <body style="text-align:center;vertical-align:middle;">
-<div style="margin-top:-35px;">
+<div style="margin-top:-20px;">
 <!-- ampie script-->
   <script type="text/javascript" src="${pageContext.request.contextPath}/components/chart/ampie_1.6.4.1/ampie/swfobject.js"></script>
 	<div id="flashcontent">
@@ -20,7 +20,7 @@
 
 	<script type="text/javascript">
 		// <![CDATA[		
-		var so = new SWFObject("${pageContext.request.contextPath}/components/chart/ampie_1.6.4.1/ampie/ampie.swf", "ampie", "660", "400", "8", "#FFFFFF");
+		var so = new SWFObject("${pageContext.request.contextPath}/components/chart/ampie_1.6.4.1/ampie/ampie.swf", "ampie", "860", "500", "8", "#FFFFFF");
 		so.addVariable("path", "${pageContext.request.contextPath}/components/chart/ampie_1.6.4.1/ampie/");
 		so.addVariable("settings_file", encodeURIComponent("${pageContext.request.contextPath}/stat/chart/factorysale/ampie_settings.xml"));                // you can set two or more different settings files here (separated by commas)
 		so.addVariable("data_file", encodeURIComponent("${pageContext.request.contextPath}/stat/chart/factorysale/data.xml"));

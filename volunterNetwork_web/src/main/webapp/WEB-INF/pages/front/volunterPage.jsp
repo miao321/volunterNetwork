@@ -39,6 +39,48 @@ function baoming(){
 	var college = document.getElementById("college").value;
 	var major = document.getElementById("major").value;
 	var idCard = document.getElementById("idCard").value;
+	var userName1 = /^[\u4e00-\u9fa5]+$/;
+	var studentNo1 = /^[0-9]*$/ ;
+	var sex1 = /^['男'|'女']$/ ;
+	var phone1 = /^1\d{10}$/;
+	var major1 = /^[\u4e00-\u9fa5]+$/;
+	var idCard1 = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+	if (userName == '') {
+		alert("姓名不能为空");
+		return false;
+	}
+	if (!userName1.test(userName)) {
+		alert("姓名只能为中文");
+		return false;
+	}
+	if (studentNo == '') {
+		alert("学号不能为空");
+		return false;
+	}
+	if (!studentNo1.test(studentNo)) {
+		alert("学号只能为数字");
+		return false;
+	}
+	if (!sex1.test(sex)) {
+		alert("性别不能为空");
+		return false;
+	}
+	if (!phone1.test(phone)) {
+		alert("请填写正确的手机号");
+		return false;
+	}
+	if (major == '') {
+		alert("专业不能为空");
+		return false;
+	}
+	if (!major1.test(major)) {
+		alert("专业只能为中文");
+		return false;
+	}
+	if (!idCard1.test(idCard)) {
+		alert("请填写正确的身份证号");
+		return false;
+	}
 	 $.ajax({			 
 		 type : "POST",
 		 url : "baoming/saveOrUpdate",           
@@ -48,7 +90,7 @@ function baoming(){
 		 cache : false,
 		 async : true,
 		 success : function(data) {				
-			//location.reload();
+			location.reload();
 		 }
 	}); 
 }
@@ -296,7 +338,23 @@ function addAttention(id){
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">学院:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="college" name="college" class="form-control" placeholder="请输入学院"  style="height: 36px;line-height: 36px;">
+					      <select type="text" id="college" name="college" class="form-control" placeholder="请输入发布组织">
+				      	<option>计算机与网络安全学院</option>
+				      	<option>电子工程与智能化学院</option>
+				      	<option>粤台产业科技学院</option>
+				      	<option>国际学院</option>
+				      	<option>生态环境与建筑工程学院</option>
+				      	<option>机械工程学院</option>
+				      	<option>经济与管理学院</option>
+				      	<option>文学与传媒学院</option>
+				      	<option>法律与社会工作学院</option>
+				      	<option>教育学院</option>
+				      	<option>化学工程与能源技术学院</option>
+				      	<option>中法联合学院</option>
+				      	<option>马克思主义学院</option>
+				      	<option>继续教育学院</option>
+				      	<option>校志愿中心</option>				      
+				      	</select>		
 					    </div>
 					  </div>
 					  <div class="form-group">

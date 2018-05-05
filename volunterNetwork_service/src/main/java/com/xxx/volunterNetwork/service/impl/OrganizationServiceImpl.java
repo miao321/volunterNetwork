@@ -95,7 +95,10 @@ public class OrganizationServiceImpl implements IOrganizationService {
 		for(Object[] obj : enroll) {
 			EnrollQueryDTO dto = new EnrollQueryDTO();
 			dto.setCollege(obj[0]+"");
+			
 			dto.setDuration(Integer.valueOf(obj[1]+""));
+			
+			
 			list.add(dto);
 		}
 		return list;

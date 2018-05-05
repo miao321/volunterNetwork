@@ -36,6 +36,7 @@ public class Acti {
 	private Integer zan;//点赞次数
 	private Integer attention;//关注
 	private String attentionName;//关注人名字
+	private Integer duration;//时长
 	public Acti() {
 		super();		
 	}
@@ -138,6 +139,9 @@ public class Acti {
 	public Integer getAttention() {
 		return attention;
 	}
+	public Integer getDuration() {
+		return duration;
+	}
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -200,6 +204,9 @@ public class Acti {
 	}
 	public void setAttentionName(String attentionName) {
 		this.attentionName = attentionName;
+	}
+	public void setDuration(Integer duration) {
+		this.duration = duration;
 	}
 	
 

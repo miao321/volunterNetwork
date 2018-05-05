@@ -100,6 +100,7 @@ public class OpinionController {
 	public String findPage(HttpSession session,OpinionQueryDTO opinionQueryDTO,ExtPageable extPageable){
 		Page<Opinion> page = opinionService.findAll(opinionQueryDTO.getSpecification(opinionQueryDTO), extPageable.getPageable());
 		session.setAttribute("opinionLists", page.getContent());//内容
+		System.out.println("page.getContent()===="+page.getContent());
 		session.setAttribute("pageNumber", page.getNumber());//当前页
 		session.setAttribute("pageSize", page.getSize());//当前页条数
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页

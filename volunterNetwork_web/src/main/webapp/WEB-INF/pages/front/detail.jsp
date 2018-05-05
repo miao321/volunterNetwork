@@ -22,16 +22,78 @@
 <link href="css/details_common.css" rel="stylesheet" type="text/css" />
 <link href="css/common.css" rel="stylesheet" type="text/css" />
 
-<!-- <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
-<link href="css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
-<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="css/index.css" rel="stylesheet" type="text/css" />
-<link href="css/index_animation.css" rel="stylesheet" type="text/css" />
-<link href="css/reset.css" rel="stylesheet" type="text/css" />
-<link href="css/common.css" rel="stylesheet" type="text/css" /> -->
-
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+//添加数据
+function baoming(){
+	var id = document.getElementById("bao").value;
+	var userName = document.getElementById("userName").value;
+	var studentNo = document.getElementById("studentNo").value;	
+	var sex = $('#sex input[name="sex"]:checked ').val();
+	var phone = document.getElementById("phone").value;
+	var college = document.getElementById("college").value;
+	var major = document.getElementById("major").value;
+	var idCard = document.getElementById("idCard").value;
+	var userName1 = /^[\u4e00-\u9fa5]+$/;
+	var studentNo1 = /^[0-9]*$/ ;
+	var sex1 = /^['男'|'女']$/ ;
+	var phone1 = /^1\d{10}$/;
+	var major1 = /^[\u4e00-\u9fa5]+$/;
+	var idCard1 = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+	if (userName == '') {
+		alert("姓名不能为空");
+		return false;
+	}
+	if (!userName1.test(userName)) {
+		alert("姓名只能为中文");
+		return false;
+	}
+	if (studentNo == '') {
+		alert("学号不能为空");
+		return false;
+	}
+	if (!studentNo1.test(studentNo)) {
+		alert("学号只能为数字");
+		return false;
+	}
+	if (!sex1.test(sex)) {
+		alert("性别不能为空");
+		return false;
+	}
+	if (!phone1.test(phone)) {
+		alert("请填写正确的手机号");
+		return false;
+	}
+	if (major == '') {
+		alert("专业不能为空");
+		return false;
+	}
+	if (!major1.test(major)) {
+		alert("专业只能为中文");
+		return false;
+	}
+	if (!idCard1.test(idCard)) {
+		alert("请填写正确的身份证号");
+		return false;
+	}
+	 $.ajax({			 
+		 type : "POST",
+		 url : "baoming/saveOrUpdate",           
+         dataType : "json",
+         data:{id:id,userName:userName,studentNo:studentNo,
+        	 sex:sex,phone:phone,college:college,major:major,idCard:idCard},
+		 cache : false,
+		 async : true,
+		 success : function(data) {				
+			location.reload();
+		 }
+	}); 
+}
+function durationDetail(id){
+	window.location.href="durationDetail?id="+id;
+}
+</script>
 <style>
 #div1 {margin:0 auto;height:300px;margin-top:-20px;}
 .item{width:1600px;height: 500px;}
@@ -158,13 +220,7 @@
             </div>
             <div class="content_one_right fr">
                 <div class="one_right_operation">
-                    <div class="progress_bar_box clearfix po_r" style="display: none;">
-                        <span class="progress_txt fl">报名截止</span>
-                        <p id="deadline" starttime="2018-12-01" createtime="2017-11-27" state="1003" endtime="2017-11-30"></p>
-                        <em class="progress_bar_total fl">
-                        <i class="progress_bar_already"></i></em>
-                        <span class="progress_txt fr" id="spareDay">剩0天</span>
-                    </div>
+                   
                     <div class="operate_btns clearfix">
                         <a href="javascript:;" class="btn fl like">
                             <i class="btn_bg"></i>
@@ -183,14 +239,117 @@
                         </a>
                     </div>
                     <div class="operate_btns2 clearfix">
-                        <a href="javascript:;" class="btn btn1" style="text-align: center;padding-top: -14px;">时长公示</a>
-<!--                         <a href="javascript:;" class="btn btn2">我要报名</a> -->
-                           <div class="btn btn2" style="background-color: rgb(153, 153, 153);">报名结束</div>
-                    </div>
+                        <a href="javascript:;" onclick="durationDetail(${acti.id})" class="btn btn1" style="text-align: center;padding-top: -14px;">时长公示</a>                      
+                        
+                         <c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set> 		       
+							<c:if test="${nowDate-acti.endTime.getTime()>0}"> 
+					       <button class="btn btn-default" style="width:100px;float:right;background:#999999; " type="button">
+								<input type="hidden" id="bao" value="${acti.id }">
+								报名截止
+						   </button>
+						   </c:if>
+						   <c:if test="${nowDate-acti.endTime.getTime()<0}"> 
+					       <button class="btn btn-warning" data-toggle="modal" data-target="#baoming" style="width:100px;float:right;background: #ff8814;color:#fff;" type="button">
+								<input type="hidden" id="bao" value="${acti.id }">
+								马上报名
+						   </button>
+						   </c:if>
+                        
+                  </div>
                 </div>
                 </div>
             </div>
         </div>
     </section>	
+    <!-- baoming -->
+<div class="modal fade" id="baoming" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" 
+						aria-hidden="true">×
+				</button>
+				<h4 class="modal-title" id="myModalLabel" style="font-size: 18px;font-weight: 600;">
+					马上报名
+				</h4>
+			</div>
+			<div class="modal-body">
+				<!-- <form class="form-inline"> -->
+				<form method="post" class="form-horizontal" role="form" >
+					 <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">姓名:</label>
+					    <div class="col-sm-10" >
+					      <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入姓名" style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">学号:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="studentNo" name="studentNo" class="form-control" placeholder="请输入学号" style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>
+					  <div class="form-group" >
+					    <label for="inputEmail3" class="col-sm-4 control-label" id="sex">性别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					      <input type="radio" name="sex" value="男"/> 男
+						  <input type="radio" name="sex" value="女"/> 女	
+						</label>				      
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">手机号:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="phone" name="phone" class="form-control" placeholder="请输入手机号"  style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">学院:</label>
+					    <div class="col-sm-10">
+					    <select type="text" id="college" name="college" class="form-control" placeholder="请输入发布组织">
+				      	<option>计算机与网络安全学院</option>
+				      	<option>电子工程与智能化学院</option>
+				      	<option>粤台产业科技学院</option>
+				      	<option>国际学院</option>
+				      	<option>生态环境与建筑工程学院</option>
+				      	<option>机械工程学院</option>
+				      	<option>经济与管理学院</option>
+				      	<option>文学与传媒学院</option>
+				      	<option>法律与社会工作学院</option>
+				      	<option>教育学院</option>
+				      	<option>化学工程与能源技术学院</option>
+				      	<option>中法联合学院</option>
+				      	<option>马克思主义学院</option>
+				      	<option>继续教育学院</option>
+				      	<option>校志愿中心</option>				      
+				      </select>					    	
+<!-- 					 <input type="text" id="college" name="college" class="form-control" placeholder="请输入学院"  style="height: 36px;line-height: 36px;">
+ -->					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">专业:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="major" name="major" class="form-control" placeholder="请输入专业"  style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>	
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">身份证号:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="idCard" name="idCard" class="form-control" placeholder="请输入身份证号"  style="height: 36px;line-height: 36px;">
+					    </div>
+					  </div>				 
+				</form>					
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" 
+						data-dismiss="modal">取消
+				</button>
+				<button type="button" class="btn btn-primary" onclick="baoming()">
+					保存
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+   $(function () { $('#baoming').modal('hide')});
+</script>	
 </body>
 </html>

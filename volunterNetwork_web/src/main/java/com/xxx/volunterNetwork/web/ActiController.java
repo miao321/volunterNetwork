@@ -154,6 +154,7 @@ public class ActiController {
 			
 			Date real_beginTime = null;
 			Date real_endTime = null;
+			Integer real_duration = null;
 			String real_img = null;
 			String real_hdlx = null;
 			String real_fbzz = null;
@@ -197,6 +198,8 @@ public class ActiController {
 						real_beginTime = dateFormat.parse(value);
 					}else if (filename.equalsIgnoreCase("endTime")) {
 						real_endTime = dateFormat.parse(value);
+					}else if (filename.equalsIgnoreCase("duration")) {
+						real_duration = Integer.valueOf(value);
 					}else if (filename.equalsIgnoreCase("hdlx")) {
 						real_hdlx = value;
 					}else if (filename.equalsIgnoreCase("fbzz")) {
@@ -247,7 +250,7 @@ public class ActiController {
 				}
 			}
 			Acti bean = ResultMap.ReflectMap(real_title, real_content,
-					real_fwyq, real_hdjj, real_xxdz,real_fbman, real_lxfs,real_beginTime,real_endTime, real_img,
+					real_fwyq, real_hdjj, real_xxdz,real_fbman, real_lxfs,real_beginTime,real_endTime,real_duration, real_img,
 					real_hdlx, real_fbzz, new Date(System.currentTimeMillis()), real_state, real_zmrs);
 			actiService.saveOrUpdate(bean);
 			return "/WEB-INF/pages/front/activityDetail";

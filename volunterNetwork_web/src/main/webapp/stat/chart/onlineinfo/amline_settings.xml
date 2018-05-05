@@ -1,1 +1,11 @@
-<settings><background><color>#FFFFFF,#CCCCCC</color><alpha>100</alpha></background><labels><label><y>24</y><width>520</width><align>center</align><text><![CDATA[<b>Passing data and settings directly from html file example</b>]]></text></label></labels></settings>
+<settings>
+<background><color>#FFFFFF</color>
+<alpha>100</alpha>
+</background>
+<labels><label>
+<y>64</y>
+<width>720</width>
+<align>center</align>
+<text><![CDATA[<b></b>]]></text>
+</label></labels>
+</settings>

@@ -56,6 +56,8 @@ public class IndexController {
 		enroll.setState(0);
 		enroll.setOrganization(acti.getFbzz());
 		enroll.setActiId(acti.getId());
+		enroll.setRemark("恭喜你成功报名此次活动，请注意查看手机消息。");
+		enroll.setDuration(acti.getDuration());
 		try {		
 			enrollService.saveOrUpdate(enroll);
 			return new ExtAjaxResponse(true, "添加数据成功");

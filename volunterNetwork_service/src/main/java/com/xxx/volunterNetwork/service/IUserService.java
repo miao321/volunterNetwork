@@ -1,11 +1,13 @@
 package com.xxx.volunterNetwork.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
+import com.xxx.volunterNetwork.domain.Role;
 import com.xxx.volunterNetwork.domain.User;
 /**
  * 
@@ -21,7 +23,7 @@ public interface IUserService {
 	public User findOne(Long id);
 	public List<User> findAll();
 	public User findUser(String userName); 
-	//public List<UserRole> getRoleByUserName(String userName);
+	public Set<Role> getRoleByUserName(String userName);
 	public List<String> getPermissionsByUserName(String userName);
 	//动态条件查询
 	public Page<User> findAll(Specification<User> spec,Pageable pageable);

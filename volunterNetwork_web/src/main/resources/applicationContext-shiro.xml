@@ -17,6 +17,7 @@ http://www.springframework.org/schema/context/spring-context.xsd">
 		<property name="securityManager" ref="securityManager" />
 		<!-- loginUrl认证提交地址，如果没有认证将会请求此地址进行认证，请求此地址将由formAuthenticationFilter进行表单认证 -->
 		<property name="loginUrl" value="/login" />
+		<!-- <property name="successUrl" value="/backstage"/>  --> 
 		<property name="unauthorizedUrl" value="/refuse" />
 		<!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
 		<property name="filterChainDefinitions">

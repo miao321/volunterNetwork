@@ -1,6 +1,8 @@
 package com.xxx.volunterNetwork.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xxx.volunterNetwork.dao.UserRepository;
+import com.xxx.volunterNetwork.domain.Permission;
+import com.xxx.volunterNetwork.domain.Role;
 import com.xxx.volunterNetwork.domain.User;
 import com.xxx.volunterNetwork.service.IUserService;
 /**
@@ -64,8 +68,7 @@ public class UserServiceImpl implements IUserService {
 		List<UserRoleQueryDTO>  list = new ArrayList<UserRoleQueryDTO>();
 		List<Object[]> userRole = userRepository.findUserRole();
 		for(Object[] obj : userRole) {
-			UserRoleQueryDTO dto = new UserRoleQueryDTO();
-			
+			UserRoleQueryDTO dto = new UserRoleQueryDTO();			
 			//dto.setRoleId(Long.parseLong(obj[0].toString()));
 			dto.setUserName(obj[0]+"");
 			dto.setDeptName(obj[1]+"");
@@ -83,8 +86,7 @@ public class UserServiceImpl implements IUserService {
 				return null;
 			}else {
 				dto.setAge(Integer.valueOf(obj[9]+""));
-			}
-			
+			}			
 			//dto.setBirthday(DateUtil.StringToHMS(obj[7]+""));
 			//dto.setAge(Integer.valueOf(obj[8]+""));
 			dto.setNativePlace(obj[9]+"");
@@ -99,25 +101,17 @@ public class UserServiceImpl implements IUserService {
 			dto.setEmail(obj[18]+"");
 			dto.setUserAccount(obj[19]+"");
 			dto.setRemark(obj[20]+"");
-			
-		
 			list.add(dto);
 		}
-		
-		 
 		return list;
 	}
-	
-	
-	
 	public List<UserRoleDTO> findUserRole2() {
 		List<UserRoleDTO>  list = new ArrayList<UserRoleDTO>();
 		List<Object[]> userRole = userRepository.findUserRole();
 		List<User> user  =  (List<User>) userRepository.findAll();
 		System.out.println("user++++:"+user);
 		for(Object[] obj : userRole) {
-			UserRoleDTO dto = new UserRoleDTO();
-			
+			UserRoleDTO dto = new UserRoleDTO();			
 			dto.setUserName(obj[0]+"");
 			dto.setDeptName(obj[1]+"");
 			dto.setRoleName(obj[2]+"");
@@ -134,8 +128,7 @@ public class UserServiceImpl implements IUserService {
 				return null;
 			}else {
 				dto.setAge(Integer.valueOf(obj[9]+""));
-			}
-			
+			}			
 			//dto.setBirthday(DateUtil.StringToHMS(obj[7]+""));
 			//dto.setAge(Integer.valueOf(obj[8]+""));
 			dto.setNativePlace(obj[9]+"");
@@ -150,29 +143,20 @@ public class UserServiceImpl implements IUserService {
 			dto.setEmail(obj[18]+"");
 			dto.setUserAccount(obj[19]+"");
 			dto.setRemark(obj[20]+"");
-			
-		
 			list.add(dto);
 		}
-		
-		 
 		return list;
 	}
+	*/
 	
 	
 	@Override
-	public List<User> find(String hql, Class<User> class1, String[] strings) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<UserRole> getRoleByUserName(String userName) {
+	public Set<Role> getRoleByUserName(String userName) {
 		User user = userRepository.findUser(userName);
 		if (user == null) {
 			return null;
 		}
-		List<UserRole> roles = user.getUserRoles();
-		
+		Set<Role> roles = user.getRoles();		
 		return roles;
 	}
 	
@@ -183,23 +167,19 @@ public class UserServiceImpl implements IUserService {
 			return null;
 		}
 		List<String> permissionLists = new ArrayList<String>();
-		for(UserRole userRole : user.getUserRoles()) {
-			System.out.println("userRole"+userRole);
-			Role role = userRole.getRole();
+		for(Role role : user.getRoles()) {
+			System.out.println("userRole:===="+role);
+			//Role role2 = role.getRoleName();
 			
 			for(Permission permission : role.getPermission()) {
 				permissionLists.add(permission.getUrl());
 			}
 		}
-		System.out.println("permissionLists:"+permissionLists);
+		System.out.println("permissionLists:==="+permissionLists);
 		return permissionLists;
 	}
-	*/
-	@Override
-	public List<String> getPermissionsByUserName(String userName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	
 	@Override
 	public List<User> find(String hql, Class<User> class1, String[] strings) {
 		// TODO Auto-generated method stub

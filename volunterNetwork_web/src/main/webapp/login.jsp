@@ -12,14 +12,12 @@
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="css/adminStyle.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-	body{
-	
-		background: url("images/login1.jpg") no-repeat;
-		background-size: 1380px 630px;
-		padding-top: 50px; 
-       /* 	//overflow: hidden; */
-		/* //height:768px;*/
-	} 
+body{
+
+	background: url("images/login1.jpg") no-repeat;
+	background-size: 1380px 630px;
+	padding-top: 50px;      
+} 
 </style>
 </head>
 <body onkeydown="keyLogin();">

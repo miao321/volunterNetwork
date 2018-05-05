@@ -75,14 +75,14 @@ function toView(){
 					$('#seeActi').modal('show');
 					
 					$("#title2").val(result.title);
-					alert($("#fwyp2").val(result.fwyp));
-					$("#content2").val(result.content);
+					$("#content2").html(result.content);
 					$("#fwyp2").val(result.fwyp);
 					$("#hdjj2").val(result.hdjj);
 					$("#xxdz2").val(result.xxdz);
 					$("#lxfs2").val(result.lxfs);
 					$("#beginTime2").val(result.beginTime);
 					$("#endTime2").val(result.endTime);
+					$("#duration2").val(result.duration);
 					$("#img2").val(result.img);
 					$("#hdlx2").val(result.hdlx);
 					$("#fbzz2").val(result.fbzz);
@@ -161,6 +161,7 @@ function editActi(id){
 				$("#lxfs1").val(result.lxfs);
 				$("#beginTime1").val(result.beginTime);
 				$("#endTime1").val(result.endTime);
+				$("#duration1").val(result.duration);
 				$("#img1").val(result.img);
 				$("#hdlx1").val(result.hdlx);
 				$("#fbzz1").val(result.fbzz);
@@ -180,22 +181,20 @@ function editActi(id){
 }
 function saveModule() {
 	var id = document.getElementById("id").value;
-	var parentName = document.getElementById("parentName").value;
-	var moduleName = document.getElementById("moduleName").value;
-	var layerNum = document.getElementById("layerNum").value;
-	var isLeaf = document.getElementById("isLeaf").value;	
-	var icon = document.getElementById("icon").value;
-	var cpermission = document.getElementById("cpermission").value;
-	var curl = document.getElementById("curl").value;
-	var ctype = document.getElementById("ctype").value;
-	var belong = document.getElementById("belong").value;
-	var remark = document.getElementById("remark").value;
-	var orderNo = document.getElementById("orderNo").value;
-	var createBy = document.getElementById("createBy").value;
-	var createCollege = document.getElementById("createCollege").value;
-	var createTime = document.getElementById("createTime").value;
-	var updateBy = document.getElementById("updateBy").value;
-	var updateTime = document.getElementById("updateTime").value;
+	var title = document.getElementById("title1").value;
+	var content = document.getElementById("content1").value;
+	var fwyp = document.getElementById("fwyp1").value;
+	var hdjj = document.getElementById("hdjj1").value;	
+	var xxdz = document.getElementById("xxdz1").value;
+	var lxfs = document.getElementById("lxfs1").value;
+	var beginTime = document.getElementById("beginTime1").value;
+	var endTime = document.getElementById("endTime1").value;
+	var duration = document.getElementById("duration1").value;
+	var img = document.getElementById("img1").value;
+	var hdlx = document.getElementById("hdlx1").value;
+	var fbzz = document.getElementById("fbzz1").value;
+	var fbtime = document.getElementById("fbtime1").value;
+	var zmrs = document.getElementById("zmrs1").value;	
 	var state = document.getElementById("state").value;
 	if(state == "启用"){
 		state = 1;
@@ -206,9 +205,9 @@ function saveModule() {
 		 type : "POST",
 		 url : "update",    
          dataType : "json",
-         data:{id:id,parentName:parentName,moduleName:moduleName,layerNum:layerNum,isLeaf:isLeaf,icon:icon,
-        	 cpermission:cpermission,curl:curl,ctype:ctype,belong:belong,remark:remark,orderNo:orderNo,
-        	 createBy:createBy,createCollege:createCollege,createTime:createTime,updateBy:updateBy,updateTime:updateTime,state:state},
+         data:{id:id,title:title,content:content,fwyp:fwyp,hdjj:hdjj,xxdz:xxdz,
+        	 lxfs:lxfs,beginTime:beginTime,endTime:endTime,duration:duration,img:img,
+        	 hdlx:hdlx,fbzz:fbzz,fbtime:fbtime,zmrs:zmrs,state:state},
 		 cache : false,
 		 async : true,
 		 success : function(data) {		
@@ -247,6 +246,7 @@ function saveModule() {
 					'fbman' : $("#fbman").val(),
 					'beginTime' : $("#beginTime").val(),
 					'endTime' : $("#endTime").val(),
+					'duration' : $("#duration").val(),
 					'img' : $("#img").val(),
 					'hdlx' : $("#hdlx").val(),
 					'fbzz' : $("#fbzz").val(),
@@ -294,6 +294,10 @@ function saveModule() {
 			}
 		    if ($("#endTime").val() == '') {
 				alert("活动结束时间不能为空");
+				return false;
+			}
+		    if ($("#duration").val() == '') {
+		    	alert("活动时长不能为空");
 				return false;
 			}
 		    if ($("#hdlx").val() == '') {
@@ -516,10 +520,17 @@ function enableActi(id){
 				       <input type="text" id="beginTime" name="beginTime" class="form-control Wdate" placeholder="请输入活动开始时间" onClick="WdatePicker({lang:'zh-cn',dateFmt:'yyyy/MM/dd HH:mm:ss',minDate:${nowDate}})" style="height:34px;">
 				    </div>
 				  </div>
+				   
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">活动结束时间:</label>
 				    <div class="col-sm-10">
 				       <input type="text" id="endTime" name="endTime" class="form-control Wdate" placeholder="请输入活动结束时间" onClick="WdatePicker({lang:'zh-cn',dateFmt:'yyyy/MM/dd HH:mm:ss',minDate:${nowDate}})" style="height:34px;">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">活动时长:</label>
+				    <div class="col-sm-10">
+				      <input type="text" id="duration" name="duration" class="form-control" placeholder="请输入活动时长">
 				    </div>
 				  </div>
 				  <div class="form-group">
@@ -668,6 +679,12 @@ function enableActi(id){
 				    </div>
 				  </div>
 				  <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">活动时长:</label>
+				    <div class="col-sm-10">
+				      <input type="text" id="duration1" name="duration1" class="form-control" placeholder="请输入活动时长">
+				    </div>
+				  </div>
+				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">照片:</label>
 				    <div class="col-sm-10">
 				      <input type="file" id="img1" name="img1" class="form-control" placeholder="请输入照片">
@@ -694,11 +711,12 @@ function enableActi(id){
 				    </div>
 				  </div>
 				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-4 control-label" id="state1" >用户状态:&nbsp;&nbsp;
-				    	<input type="radio" name="radio" value="1" style="padding-left: 4px;"/> 启用					    	
-					 	<input type="radio" name="radio" value="0"/> 停用
-				    </label>
-				  </div>
+				    <label for="inputEmail3" class="col-sm-2 control-label">活动状态:</label>
+				    <div class="col-sm-10">
+				    	<input type="text" id="state1" class="form-control" readonly="true"/>
+				    </div>
+				    
+				  </div> 
 				 
 				 <div class="form-group" style="width:180px;height:40px;margin: 0 auto;">
 				  
@@ -743,7 +761,7 @@ function enableActi(id){
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">服务内容:</label>
 				    <div class="col-sm-10">
-				      <textarea name="content2" id="content2" style="width:362px;height:400px;visibility:hidden;display: block;resize: none;"></textarea>
+				      <textarea name="content" id="content2" style="width:362px;height:400px;visibility:hidden;display: block;resize: none;"></textarea>
 				    </div>
 				  </div>
 				  <div class="form-group">
@@ -789,9 +807,15 @@ function enableActi(id){
 				    </div>
 				  </div>
 				  <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">活动时长:</label>
+				    <div class="col-sm-10">
+				      <input type="text" id="duration2" name="duration2" class="form-control" placeholder="请输入活动时长">
+				    </div>
+				  </div>
+				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">照片:</label>
 				    <div class="col-sm-10">
-				      <input type="file" id="img2" name="img2" class="form-control" placeholder="请输入照片">
+				      <input type="text" id="img2" name="img2" class="form-control" placeholder="请输入照片">
 				      <div id="fileQueue"></div>
 				    </div>
 				  </div>
@@ -814,12 +838,13 @@ function enableActi(id){
 				      <input type="text" id="fbtime2" name="fbtime2" class="form-control Wdate" placeholder="请输入发布时间" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" style="height:34px;">
 				    </div>
 				  </div>
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-4 control-label" id="state2" >用户状态:&nbsp;&nbsp;
-				    	<input type="radio" name="radio" value="1" style="padding-left: 4px;"/> 启用					    	
-					 	<input type="radio" name="radio" value="0"/> 停用
-				    </label>
-				  </div>
+				 <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">活动状态:</label>
+				    <div class="col-sm-10">
+				    	<input type="text" id="state2" class="form-control" readonly="true"/>
+				    </div>
+				    
+				  </div> 
 				</form>				
 			</div>
 			<div class="modal-footer">

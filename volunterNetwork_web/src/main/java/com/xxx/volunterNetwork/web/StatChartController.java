@@ -2,6 +2,9 @@ package com.xxx.volunterNetwork.web;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,30 +19,22 @@ public class StatChartController extends BaseAction {
 	
 	//最好要提供StatChartService接口及实现类
 	@Autowired
-	private SqlDao sqlDao;//为了省事
-    
+	private SqlDao sqlDao;//为了省事   
 	/**
 	 * 新版amChart实现
+	 * 学院时长排名
 	 */
-	/*@RequestMapping("/marjor")
-	public String factorysale() throws Exception {
+	@RequestMapping("/marjorClass")
+	public String productsale2(HttpSession session) throws Exception {
 		//1.执行sql语句，得到统计结果
-	    List<String> list = execSQL("select t.collegeName from t_college t");
-	    
+	    List<String> list = execSQL("select t.college,sum(t.duration) samount from t_enroll t group by t.college order by samount desc");	    
 	    //2.组织符合要求的json数据
 	    StringBuilder sb = new StringBuilder();
 	    sb.append("[");
-	    *//**
-	     *      {
-                    "country": "USA",
-                    "visits": 4025,
-                    "color": "#FF0F00"
-                }
-	     *//*
 	    String colors[]={"#FF0F00","#FF6600","#FF9E01","#FCD202","#F8FF01","#B0DE09","#04D215","#0D52D1","#2A0CD0","#8A0CCF","#CD0D74","#754DEB"};
 	    int j=0;
 	    for(int i=0;i<list.size();i++){
-	    	sb.append("{").append("\"factory\":\"").append(list.get(i)).append("\",")
+	    	sb.append("{").append("\"college\":\"").append(list.get(i)).append("\",")
 	    	              .append("\"amount\":\"").append(list.get((++i))).append("\",")
 	    	              .append("\"color\":\"").append(colors[j++]).append("\"")
 	    	.append("}").append(",");
@@ -47,76 +42,33 @@ public class StatChartController extends BaseAction {
 	    		j=0;
 	    	}
 	    }
-	    sb.delete(sb.length()-1, sb.length());
-	    
+	    sb.delete(sb.length()-1, sb.length());	    
 	    sb.append("]");
-	    
-	    //3.将json数据放入值栈中
-	    super.put("result", sb.toString());
-	    
+	    System.out.println("=================="+sb.toString());
+	    //3.将json数据放入值栈中	  
+	    session.setAttribute("result", sb.toString());
 	    //4.返回结果
-		return "/WEB-INF/pages/stat/chart/jStat.jsp?forward=factorysale";
+		return "/stat/chart/productsale/index";
 	}
-	*/
+	
 	/**
-	 * 厂家的销量排名(旧版amchart实现)
+	 * 学院注册人数排名(旧版amchart实现)
 	 */
 	@RequestMapping("/marjor")
 	public String factorysale() throws Exception {
 		//1.执行sql语句，得到统计结果
-		//select factory_name,sum(amount) samount from contract_product_c group by factory_name order by samount desc、
-		//select t.collegeName sum(t.collegeName) samount from t_college t group by t.collegeName order by t.collegeName desc
-	    List<String> list = execSQL("select t.collegeName from t_college t");
-	    
+		List<String> list = execSQL("select t.collegeName,menNum from t_organization t group by t.collegeName order by menNum desc");	    
 	    //2.组织符合要求的xml数据
-	    String content = genPieDataSet(list);
-	    
+	    String content = genPieDataSet(list);	    
 	    //3.将拼接好的字符串写入data.xml文件中
 	    writeXML("stat//chart//factorysale//data.xml",content);
-
-		 //writeXML("stat\\chart\\factorysale\\data.xml",this.genPieDataSet(this.execSQL("select factory_name,sum(amount) samount from contract_product_c group by factory_name order by samount desc")));
-	    
-	    
 	    //4.返回结果
 		return "/stat/chart/factorysale/index";
 	}
-	/**
-	 * 产品销量的前15名
-	 */
-	@RequestMapping("/marjorClass")
-	public String productsale() throws Exception {
-		//1.执行sql语句，得到统计结果
-		//select * from ( select product_no,sum(amount) samount from contract_product_c group by product_no order by samount desc ) b  limit 15"
-		List<String> list = execSQL("select t.collegeName from t_college t");
-		
-		//2.组织符合要求的xml数据
-		String content = genBarDataSet(list);
-		
-		//3.将拼接好的字符串写入data.xml文件中
-		writeXML("stat\\chart\\productsale\\data.xml",content);
-		
-		//4.返回结果
-		return "/stat/chart/productsale/index";
-	}
-	/**
-	 * 在线人数统计
-	 * 表：LOGIN_LOG_P
-	 *     它的数据来源于，在登录时，对于登录者的ip信息进行记录
-	 *     
-	 *  select a.a1, nvl(b.c,0)
-		from 
-		     (select * from online_info_t) a
-		left join 
-		      (select to_char(login_time,'HH24') a1, count(*) c from login_log_p group by  to_char(login_time,'HH24') order by a1)
-		       b
-		on (a.a1=b.a1)
-		order by a.a1
-	 */
 	@RequestMapping("/persure")
 	public String onlineinfo() throws Exception {
 		//1.执行sql语句，得到统计结果
-		//select a.a1, ifnull(b.c,0) from (select * from online_info_t) a left join (select date_format(login_time,'%k') a1, count(*) c from login_log_p group by  date_format(login_time,'%k') order by a1) b on (a.a1=b.a1) order by a.a1
-		List<String> list = execSQL("select t.collegeName from t_college t");
+		List<String> list = execSQL("select t.college,sum(t.duration) samount from t_enroll t group by t.college order by samount desc");
 		
 		//2.组织符合要求的xml数据
 		String content = genBarDataSet(list);
@@ -125,13 +77,10 @@ public class StatChartController extends BaseAction {
 		writeXML("stat\\chart\\onlineinfo\\data.xml",content);
 		
 		//writeXML("stat\\chart\\factorysale\\data.xml",this.genPieDataSet(this.execSQL("select factory_name,sum(amount) samount from contract_product_c group by factory_name order by samount desc")));
-		
-		
+				
 		//4.返回结果
 		return "/stat/chart/onlineinfo/index";
 	}
-
-
 	/**
 	 * 执行sql
 	 * @param sql
@@ -142,8 +91,6 @@ public class StatChartController extends BaseAction {
 	    List<String> list = sqlDao.executeSQL(sql);
 		return list;
 	}
-
-
 	/**
 	 * 生成柱状图的数据源
 	 * @param list
@@ -160,7 +107,7 @@ public class StatChartController extends BaseAction {
 	    	i++;
 	    }
 	    
-	    sb.append("</series><graphs><graph gid=\"30\" color=\"#FFCC00\" gradient_fill_colors=\"#111111, #1A897C\">");
+	    sb.append("</series><graphs><graph gid=\"60\" color=\"#FFCC00\" gradient_fill_colors=\"#111111, #1A897C\">");
 	    
 	    
 	    j=0;
@@ -170,7 +117,7 @@ public class StatChartController extends BaseAction {
 	    }
 	    
 	    sb.append("</graph></graphs>");
-	    sb.append("<labels><label lid=\"0\"><x>0</x><y>20</y><rotate></rotate><width></width><align>center</align><text_color></text_color><text_size></text_size><text><![CDATA[<b>压力图</b>]]></text></label></labels>");
+	    sb.append("<labels><label lid=\"0\"><x>10</x><y>80</y><rotate></rotate><width></width><align>center</align><text_color></text_color><text_size></text_size><text><![CDATA[<b></b>]]></text></label></labels>");
 	    sb.append("</chart>");
 		return sb.toString();
 	}

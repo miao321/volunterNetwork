@@ -3,6 +3,7 @@ package com.xxx.volunterNetwork.web;
 
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,12 +18,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.xxx.volunterNetwork.anno.SysControllerLog;
+import com.xxx.volunterNetwork.domain.Role;
 import com.xxx.volunterNetwork.domain.User;
 import com.xxx.volunterNetwork.service.ILoginService;
+import com.xxx.volunterNetwork.service.IUserService;
 import com.xxx.volunterNetwork.util.ExtAjaxResponse;
 import com.xxx.volunterNetwork.util.ExtResponse;
 
@@ -39,14 +44,10 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@Autowired
 	private ILoginService loginService;
-	
-	@RequestMapping("/test")
-	public String Test() {
-		return "WEB-INF/pages/college";
-	}
-	
+	@Autowired
+	private IUserService userService;
 	@RequestMapping(value="/login")
-	//@SysControllerLog(module="系统登录",methods="登录系统")
+	@SysControllerLog(module="系统登录",methods="登录系统")
 	public String login(HttpServletRequest request,HttpSession session) throws Exception {		
 		String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
 		if(exceptionClassName!=null){
@@ -56,81 +57,45 @@ public class LoginController {
 					exceptionClassName)) {				
 				session.setAttribute("result2", "用户名/密码错误");
 			} else{
-				//最终在异常处理器生成未知错误
-				//throw new Exception();
+				//最终在异常处理器生成未知错误			
 				session.setAttribute("result3", "未知错误");
 			}
 		}
-		return "WEB-INF/pages/login";
+		return "login";
 	}
-	@RequestMapping(value="backstage")
-	@SysControllerLog(module="系统登录",methods="登录系统")
-   public String first(HttpSession session)throws Exception{	
+    @RequestMapping(value="backstage")
+    @SysControllerLog(module="系统登录",methods="登录系统")
+    public String backstage(HttpSession session)throws Exception{	
 		//从shiro的session中取User
 		Subject subject = SecurityUtils.getSubject();
+		
 		//取身份信息
 		String userName =  (String) subject.getPrincipal();
+		Set<Role> role = userService.getRoleByUserName(userName);
 		session.setAttribute("userName", userName);
 		User user = loginService.findUser(userName);
 		session.setAttribute("user", user);
 		session.setAttribute("userName", user.getUserName());
 		session.setAttribute("userId", user.getId());
-		session.setAttribute("password", user.getPassword());
-		
-		/*if(user.getStudentNo() == "2014") {*/
-			return "WEB-INF/pages/backstage";
-		/*}else{
-			return "front";
+		session.setAttribute("password", user.getPassword());	
+		/*for(Role role2 : role) {
+			if (role2.getRoleName() == "管理员" || role2.getRoleName() == "超级管理员") {
+				return "WEB-INF/pages/backstage";
+			}else {
+				return "WEB-INF/pages/volunterNetwork";
+			}
 		}*/
-		
+		return "WEB-INF/pages/backstage";
 	}	
-	//修改密码
-	@RequestMapping("/updatePassword")
-	@SysControllerLog(module="用户管理",methods="修改密码")
-	public @ResponseBody ExtAjaxResponse changePassword(@RequestParam Long id,@RequestParam String password,@RequestParam String  comfirPassword,HttpSession session) throws NoSuchAlgorithmException {		
-		System.out.println(password);
-		System.out.println("pass:"+session.getAttribute("password"));
-		String comPassword = comfirPassword;
-		if (!password.equals(session.getAttribute("password"))) {
-			return new ExtAjaxResponse(false, "密码错误，请重新输入");
-		}
-		try {
-			loginService.changePassword(id,password, comPassword);			
-			return new ExtAjaxResponse(true, "密码修改成功");
-		} catch (Exception e) {
-			return new ExtAjaxResponse(false, "密码修改失败");			
-		}
-	}
-	
-	//修改个人信息
-	/*@RequestMapping("/updateMessage")
-	@SysControllerLog(module="用户管理",methods="修改个人信息")
-	public @ResponseBody ExtResponse updateMessage(HttpSession session) throws NoSuchAlgorithmException {					
-		User user = (User) session.getAttribute("user");
-		if (user != null) {
-			return new ExtResponse(true, "操作成功", user.getId(), user.getUserNo(), user.getUserName(), user.getPassword(), user.getUserNickName(), user.getSex(), user.getBirthday(), user.getAge(), user.getNativePlace(), user.getNation(),
-					user.getCulture(), user.getCollege(), user.getBody(), user.getMarriage(), user.getIdCord(), user.getPhone(), user.getFamilyPhone(), user.getEmail(), user.getUserAccount(), user.getDeptName(), user.getRemark());
-		}
-		return new ExtResponse(false, "操作不成功");
-	}*/
-	
-	//退出系统
-	@RequestMapping(value="logout")
+	//退出系统	
+	@RequestMapping(value="/logout",method=RequestMethod.GET) 
 	@SysControllerLog(module="用户模块",methods="退出系统")
-	public @ResponseBody ExtAjaxResponse logout(HttpServletRequest request) {
-		request.getSession().invalidate();
-		try {
-			
-			return new ExtAjaxResponse(true, "退出系统");
-		} catch (Exception e) {
-			return new ExtAjaxResponse(false, "退出系统失败");
-		}
-	}
-	/*public String loginout(HttpServletRequest request) {
-		request.getSession().invalidate();
-		return "WEB-INF/pages/logout";
-	}*/
-
+    public String logout(RedirectAttributes attr){  
+        //使用权限管理工具进行用户的退出，注销登录  
+        SecurityUtils.getSubject().logout();  
+        //addMessage(attr, "您已安全退出");  
+        return "redirect:/login.jsp";  
+    }  
 	//判断是否已经登录   ??有点问题
 	@RequestMapping("/isLogined")
 	public @ResponseBody ExtAjaxResponse isLogined() {

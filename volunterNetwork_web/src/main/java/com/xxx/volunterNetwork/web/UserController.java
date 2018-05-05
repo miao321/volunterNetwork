@@ -208,7 +208,10 @@ public class UserController {
 		return user;
 	}
 	@RequestMapping("changeMessage")
-	public String changeMessage() {
+	public String changeMessage(HttpSession session) {
+		Long id = (Long) session.getAttribute("userId");
+		User user = userService.findOne(id);
+		session.setAttribute("user", user);
 		return "/WEB-INF/pages/system/changeMessage";
 	}
 }
