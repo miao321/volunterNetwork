@@ -228,25 +228,25 @@ function enableOpinion(id){
 					 <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">标题:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="title" name="title" class="form-control" placeholder="请输入标题"  value="${result.title }">
+					      <input type="text" id="title" name="title" class="form-control" placeholder="请输入标题">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">内容:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="content" name="content" class="form-control" placeholder="请输入内容" value="${result.content }">
+					      <input type="text" id="content" name="content" class="form-control" placeholder="请输入内容">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">作者:</label>
 					    <div class="col-sm-10">
-					      <input  type="text" id="author" name="author" class="form-control" placeholder="请输入作者" value="${result.author }">
+					      <input  type="text" id="author" name="author" class="form-control" placeholder="请输入作者">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">发布时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="fbtime" name="fbtime" class="form-control" placeholder="请输入发布时间" value="${result.fbtime }">
+					      <input type="text" id="fbtime" name="fbtime" class="form-control" placeholder="请输入发布时间">
 					    </div>
 					  </div>				
 				</form>				

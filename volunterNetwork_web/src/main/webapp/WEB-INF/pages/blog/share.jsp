@@ -249,7 +249,7 @@ function enableShare(id){
 </form>	
 
 <!-- seeCollege -->
-<div class="modal fade" id="seeShare" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+<%-- <div class="modal fade" id="seeShare" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -330,6 +330,6 @@ function enableShare(id){
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
+ --%>
 </body>
 </html>

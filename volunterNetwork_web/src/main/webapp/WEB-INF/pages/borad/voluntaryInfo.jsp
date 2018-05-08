@@ -48,14 +48,17 @@
       </ul>
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
         <li><a href="#">广东<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
-        <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-        <c:if test="${userName == null || userName == '' }">
+        <%  
+		  if(session.getAttribute("userName")==null)
+		  {%>
         <li><a href="login.jsp">登录</a></li>
-        </c:if>
-        <c:if test="${userName !=null || userName != '' }">
+        <%} %>
+         <%  
+		  if(session.getAttribute("userName")!=null)
+		  {%>
         	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
         	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
-        </c:if>
+        <%} %>
         <!-- <li><a href="#">注册</a></li> -->
       </ul>
     </div><!-- /.navbar-collapse -->

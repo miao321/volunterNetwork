@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ function changeMessage(id){
 		 async : true,
 		 success : function(result) {
 			if (result.state !== 0) {
-				$('#editUser').modal('show');
+				$('#changeMessage').modal('show');
 				$("#id").val(result.id);			
 				$("#userName").val(result.userName);
 				$("#studentNo").val(result.studentNo);
@@ -274,4 +274,4 @@ function saveUser() {
    $(function () { $('#addUser').modal('hide')});
 </script>
 </body>
-</html>
+</html> --%>

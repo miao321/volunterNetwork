@@ -20,6 +20,7 @@ import com.xxx.volunterNetwork.domain.Borad;
 import com.xxx.volunterNetwork.domain.Enroll;
 import com.xxx.volunterNetwork.domain.Img;
 import com.xxx.volunterNetwork.domain.Organization;
+import com.xxx.volunterNetwork.domain.User;
 import com.xxx.volunterNetwork.dto.ActiQueryDTO;
 import com.xxx.volunterNetwork.dto.EnrollQueryDTO;
 import com.xxx.volunterNetwork.dto.OrganizationQueryDTO;
@@ -49,6 +50,14 @@ public class IndexController {
 	@RequestMapping("/baoming/saveOrUpdate")
 	public @ResponseBody ExtAjaxResponse saveOrUpdate(@RequestParam Long id,Enroll enroll,HttpSession session) {		
 		Acti acti = actiService.findOne(id);
+		User user = (User) session.getAttribute("userName");
+   	 	enroll.setUserName(user.getUserName());
+		enroll.setStudentNo(user.getStudentNo());
+		enroll.setSex(user.getSex());
+		enroll.setPhone(user.getPhone());
+		enroll.setCollege(user.getCollege());
+		//enroll.setMajor(user.getMajor());
+		enroll.setIdCard(user.getIdCard());
 		enroll.setImg(acti.getImg());
 		enroll.setHdName(acti.getTitle());
 		enroll.setHdType(acti.getHdlx());
@@ -67,7 +76,7 @@ public class IndexController {
 	}
 	//@RequestParam String hdlx,
 	@RequestMapping("/volunterNetwork")
-	public String index(HttpSession session) {
+	public String index(HttpSession session,EnrollQueryDTO enrollQueryDTO,ExtPageable extPageable) {
 		//从shiro的session中取User
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -87,9 +96,21 @@ public class IndexController {
 		List<Borad> borads = boradService.findInfo();
 		List<Borad> borads2 = boradService.findCulture();
 		List<Borad> borads3 = boradService.findMessage();
-		List<Enroll> enrolls = enrollService.findEnroll();
+		
+		Page<Enroll> page = enrollService.findAll(enrollQueryDTO.getSpecification(enrollQueryDTO), extPageable.getPageable3());
+		
+	
+		session.setAttribute("pageNumber", page.getNumber());//当前页
+		session.setAttribute("pageSize", page.getSize());//当前页条数
+		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
+		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
+		//List<Enroll> enrolls = enrollService.findEnroll();
+		
+		
 		List<Organization> volunter = organizationService.findVolunter();
 		List<EnrollQueryDTO> enrolls2 = organizationService.findEnroll();
+		List<OrganizationQueryDTO> organization = organizationService.findNum();		
+		Integer enroll = organizationService.findDuration();
 		
 		session.setAttribute("imgLists", imgs);
 		session.setAttribute("actiLists", actis);
@@ -104,9 +125,11 @@ public class IndexController {
 		session.setAttribute("boradLists", borads);
 		session.setAttribute("boradLists2", borads2);
 		session.setAttribute("boradLists3", borads3);
-		session.setAttribute("enrollLists", enrolls);
+		session.setAttribute("enrollLists", page.getContent());
 		session.setAttribute("volunterLists", volunter);
 		session.setAttribute("enroll2Lists", enrolls2);
+		session.setAttribute("organization", organization);
+		session.setAttribute("enroll", enroll);
 		return "/WEB-INF/pages/front/index";
 	}
 	@RequestMapping("/organization")
@@ -126,8 +149,7 @@ public class IndexController {
 		return "/WEB-INF/pages/front/xjorganization";
 	}	
 	@RequestMapping(value="/sort",method=RequestMethod.GET)
-	public String sort(@RequestParam String hdlx,@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,ActiQueryDTO actiQueryDTO,ExtPageable extPageable) {		
-			
+	public String sort(@RequestParam String hdlx,@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,ActiQueryDTO actiQueryDTO,ExtPageable extPageable) {					
 		session.setAttribute("hdlx", hdlx);
 		actiQueryDTO.setQuery(query);
 		actiQueryDTO.setHdlx(hdlx);  
@@ -142,16 +164,19 @@ public class IndexController {
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
 		return "/WEB-INF/pages/front/sort";
 	}
-
 	@RequestMapping("/detail")
 	public String findOne(@RequestParam Long id,HttpSession session) {
 		Acti acti = actiService.findOne(id);
 		session.setAttribute("acti", acti);		
 		return "/WEB-INF/pages/front/detail";
 	}		
-	@RequestMapping("/pageDetail")
-	public String pageDetail(HttpSession session,ActiQueryDTO actiQueryDTO,ExtPageable extPageable) {
-		Page<Acti> page = actiService.findAll(actiQueryDTO.getSpecification(actiQueryDTO), extPageable.getPageable2());
+	@RequestMapping(value="/pageDetail",method=RequestMethod.GET)
+	public String pageDetail(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,ActiQueryDTO actiQueryDTO,ExtPageable extPageable) {
+		actiQueryDTO.setQuery(query);		
+		actiQueryDTO.setTitle(query);
+		actiQueryDTO.setFbzz(query); 
+		actiQueryDTO.setXxdz(query);
+		Page<Acti> page = actiService.findAll(actiQueryDTO.getSpecification3(actiQueryDTO), extPageable.getPageable2());
 		session.setAttribute("actiLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页
 		session.setAttribute("pageSize", page.getSize());//当前页条数
@@ -159,9 +184,13 @@ public class IndexController {
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数		
 		return "/WEB-INF/pages/front/volunterPage";
 	}
-	@RequestMapping("/duration")
-	public String duration(HttpSession session,ActiQueryDTO actiQueryDTO,ExtPageable extPageable) {
-		Page<Acti> page = actiService.findAll(actiQueryDTO.getSpecification(actiQueryDTO), extPageable.getPageable2());
+	@RequestMapping(value="/duration",method=RequestMethod.GET)
+	public String duration(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,ActiQueryDTO actiQueryDTO,ExtPageable extPageable) {
+		actiQueryDTO.setQuery(query);		
+		actiQueryDTO.setTitle(query);
+		actiQueryDTO.setFbzz(query); 
+		actiQueryDTO.setXxdz(query);
+		Page<Acti> page = actiService.findAll(actiQueryDTO.getSpecification3(actiQueryDTO), extPageable.getPageable2());
 		session.setAttribute("actiLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页
 		session.setAttribute("pageSize", page.getSize());//当前页条数
@@ -170,11 +199,17 @@ public class IndexController {
 		return "/WEB-INF/pages/front/duration";
 	}
 	@RequestMapping("/durationDetail")
-	public String durationDetail(@RequestParam Long id,HttpSession session) {
+	public String durationDetail(@RequestParam Long id,HttpSession session,EnrollQueryDTO enrollQueryDTO,ExtPageable extPageable) {
 		Acti acti = actiService.findOne(id);
-		List<Enroll> enrollLists = enrollService.findEnroll(id);
+		enrollQueryDTO.setActiId(id);
+		Page<Enroll> page = enrollService.findAll(enrollQueryDTO.getSpecification(enrollQueryDTO), extPageable.getPageable());
+		//List<Enroll> enrollLists = enrollService.findEnroll(id);
 		session.setAttribute("acti", acti);		
-		session.setAttribute("enrollLists", enrollLists);
+		session.setAttribute("enrollLists", page.getContent());
+		session.setAttribute("pageNumber", page.getNumber());//当前页
+		session.setAttribute("pageSize", page.getSize());//当前页条数
+		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
+		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
 		return "/WEB-INF/pages/front/durationDetail";
 	}	
 	@RequestMapping("addZan")

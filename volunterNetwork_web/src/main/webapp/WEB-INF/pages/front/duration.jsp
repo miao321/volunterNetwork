@@ -23,6 +23,13 @@
 <script type="text/javascript" src="js/hm.js"></script>
 <script type="text/javascript" src="js/i.js"></script>
 <script type="text/javascript" src="js/crossdomain.js"></script>
+<script type="text/javascript">
+function searchActi(){
+	var query = document.getElementById("searchActi").value;	
+	var hdlx = "<%=session.getAttribute("hdlx") %>";
+	window.location.href="duration?query="+query;
+}
+</script>
 <style type="text/css">
 	.box_vo{
 		width: 68px;
@@ -117,13 +124,17 @@
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
         <li><a href="#">莞工<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
 <!--         <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
- -->        <c:if test="${userName == null || userName == '' }">
+ -->        <%  
+		  if(session.getAttribute("userName")==null)
+		  {%>
         <li><a href="login.jsp">登录</a></li>
-        </c:if>
-        <c:if test="${userName !=null || userName != '' }">
+        <%} %>
+         <%  
+		  if(session.getAttribute("userName")!=null)
+		  {%>
         	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
         	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
-        </c:if>
+        <%} %>
         <!-- <li><a href="#">注册</a></li> -->
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -150,10 +161,10 @@
 				  <option value="已结束">浏览人数最多</option>			  
 				</select>	
 			</form>
-			<form class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
-				<input class="input-medium search-query" type="text" placeholder="请输入关键字" style="height: 40px;"/>
-				<button type="submit" class="btn btn-info">查找</button>
-			</form>
+			<div class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
+				<input class="input-medium search-query" id="searchActi" type="text" placeholder="请输入关键字" style="height: 40px;"/>
+				<button type="button" class="btn btn-info" onclick="searchActi()">查找</button>
+			</div>
 		</div>
 	</div>
 </div>
@@ -176,6 +187,71 @@
 	    </li><hr/ style="margin-bottom: 0px;">
 	    </c:forEach>
 	</ul>
+	<nav aria-label="Page navigation"
+		style="margin:0 auto;margin-top:-16px;">
+	<ul class="pager pagination-lg">
+		<c:if test="${pageNumber>0 }">
+			<li><a
+				href="<c:url value="/duration?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+		</c:if>		
+		<c:if test="${pageNumber-3 >= 1 }">
+			<li><a
+					href="<c:url value="/duration?page=${pageNumber-3}"/>">${pageNumber-3}</a>
+				</li>
+		</c:if>
+		<c:if test="${pageNumber-2 >= 1 }">
+			<li><a
+					href="<c:url value="/duration?page=${pageNumber-2}"/>">${pageNumber-2}</a>
+				</li>
+		</c:if>
+		<c:if test="${pageNumber-1 >= 1 }">
+			<li><a
+					href="<c:url value="/duration?page=${pageNumber-1}"/>">${pageNumber-1}</a>
+				</li>
+		</c:if>
+		<c:if test="${pageNumber >= 1 }">
+			<li><a
+					href="<c:url value="/duration?page=${pageNumber}"/>">${pageNumber}</a>
+				</li>
+		</c:if>					
+		<c:if test="${pageNumber+1 <= pageTotalPages}">
+		<c:set var="active" value="${active}" />
+			<li class="${active}"><a
+					href="<c:url value="/duration?page=${pageNumber+1}"/>">${pageNumber+1}</a>
+				</li>
+		</c:if>
+		<c:if test="${pageNumber+2 <= pageTotalPages && !(pageNumber-3 >= 1)}">
+			<li><a
+					href="<c:url value="/duration?page=${pageNumber+2}"/>">${pageNumber+2}</a>
+				</li>
+		</c:if>
+		<c:if test="${pageNumber+3 <= pageTotalPages && !(pageNumber-2 >= 1)}">
+			<li><a
+					href="<c:url value="/duration?page=${pageNumber+3}"/>">${pageNumber+3}</a>
+				</li>
+		</c:if>
+		<c:if test="${pageNumber+4 <= pageTotalPages && !(pageNumber-1 >= 1)}">
+			<li><a
+					href="<c:url value="/duration?page=${pageNumber+4}"/>">${pageNumber+4}</a>
+				</li>
+		</c:if>
+		<c:if test="${pageNumber+5 <= pageTotalPages && !(pageNumber >= 1)}">
+			<li><a
+					href="<c:url value="/duration?page=${pageNumber+5}"/>">${pageNumber+5}</a>
+				</li>
+		</c:if>
+		
+		<c:if test="${pageNumber+1 < pageTotalPages }">
+		<li><a
+			href="<c:url value="/duration?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
+		</li>
+		</c:if>
+	</ul>
+	<ul class="pager pagination-lg">
+		<li>共${pageTotalElements}条记录 共${pageTotalPages}页
+			当前第${pageNumber+1}页</li>
+	</ul>
+	</nav>
 </div>	
 </body>
 </html>

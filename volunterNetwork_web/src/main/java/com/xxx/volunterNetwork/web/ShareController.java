@@ -97,7 +97,8 @@ public class ShareController {
 	}
 	@RequestMapping("/findPage")
 	public String findPage(HttpSession session,ShareQueryDTO shareQueryDTO,ExtPageable extPageable){
-		Page<Share> page = shareService.findAll(shareQueryDTO.getSpecification(shareQueryDTO), extPageable.getPageable());
+		Page<Share> page = shareService.findAll(shareQueryDTO.getSpecification2(shareQueryDTO), extPageable.getPageable());
+		System.out.println("page.getContent():"+page.getContent());
 		session.setAttribute("shareLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页
 		session.setAttribute("pageSize", page.getSize());//当前页条数

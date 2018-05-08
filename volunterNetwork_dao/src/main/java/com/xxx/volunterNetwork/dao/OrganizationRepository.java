@@ -31,4 +31,8 @@ public interface OrganizationRepository extends PagingAndSortingRepository<Organ
 	
 	@Query(value="select t.college,sum(t.duration) from t_enroll t group by t.college ORDER BY duration desc",nativeQuery=true)
 	public List<Object[]> findEnroll();
+	@Query(value="select FORMAT(sum(t.menNum),'0') menNum,count(t.organization) orNum,count(t.xjorganization) xjorNum from t_organization t",nativeQuery=true)
+	public List<Object[]> findNum();
+	@Query(value="select sum(t.duration) durationNum from t_enroll t",nativeQuery=true)
+	public Integer findDuration();
 }

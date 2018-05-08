@@ -85,13 +85,17 @@
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
         <li><a href="#">莞工<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
 <!--         <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
- -->        <c:if test="${userName == null || userName == '' }">
+ -->        <%  
+		  if(session.getAttribute("userName")==null)
+		  {%>
         <li><a href="login.jsp">登录</a></li>
-        </c:if>
-        <c:if test="${userName !=null || userName != '' }">
+        <%} %>
+         <%  
+		  if(session.getAttribute("userName")!=null)
+		  {%>
         	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
         	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
-        </c:if>
+        <%} %>
         <!-- <li><a href="#">注册</a></li> -->
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -144,10 +148,20 @@
 			<div class="nav_block nav_block_one bgcWhite mb_10">
 			<ul class="nav_block_list">				
 	          <li class="nav_block_item my_msg" style="text-align: left;">
-	            <div class="item_con" style="font-size: 15px;"><span class="glyphicon glyphicon-time" aria-hidden="true" style="padding-right: 4px;color: orange;"></span>志愿时长：${duration }小时</div>
+	          	<c:if test="${duration != null}">
+	            	<div class="item_con" style="font-size: 15px;"><span class="glyphicon glyphicon-time" aria-hidden="true" style="padding-right: 4px;color: orange;"></span>志愿时长：${duration }小时</div>
+	          	</c:if>
+	          	<c:if test="${duration == null}">
+	            	<div class="item_con" style="font-size: 15px;"><span class="glyphicon glyphicon-time" aria-hidden="true" style="padding-right: 4px;color: orange;"></span>志愿时长：0小时</div>
+	          	</c:if>
 	          </li>
 	          <li class="nav_block_item my_msg" style="text-align: left;">
-	            <div class="item_con" style="font-size: 15px;"><span class="glyphicon glyphicon-film" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>培训时长：${pxTime }小时</div>
+	            <c:if test="${pxTime != null}">
+	            	<div class="item_con" style="font-size: 15px;"><span class="glyphicon glyphicon-film" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>培训时长：${pxTime }小时</div>
+	            </c:if>
+	            <c:if test="${pxTime == null}">
+	            	<div class="item_con" style="font-size: 15px;"><span class="glyphicon glyphicon-film" aria-hidden="true" style="padding-right: 4px;color: blue;"></span>培训时长：0小时</div>
+	            </c:if>
 	          </li>
 	          <li class="nav_block_item my_msg" style="text-align: left;">
 	            <div class="item_con" style="font-size: 15px;"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" style="padding-right: 4px;color: green;"></span>报名活动：${enrollCount }个</div>

@@ -94,7 +94,7 @@ public class PersonalController {
 		String userName = (String) session.getAttribute("userName");
 		Long id = (Long) session.getAttribute("userId");	
 		enrollQueryDTO.setUserName(userName);
-		Page<Enroll> page = enrollService.findAll(enrollQueryDTO.getSpecification(enrollQueryDTO),extPageable.getPageable2());
+		Page<Enroll> page = enrollService.findAll(enrollQueryDTO.getSpecification2(enrollQueryDTO),extPageable.getPageable2());
 		session.setAttribute("enrollLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页
 		session.setAttribute("pageSize", page.getSize());//当前页条数

@@ -58,13 +58,17 @@
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
         <li><a href="#">莞工<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
 <!--         <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
- -->        <c:if test="${userName == null || userName == '' }">
+ -->       <%  
+		  if(session.getAttribute("userName")==null)
+		  {%>
         <li><a href="login.jsp">登录</a></li>
-        </c:if>
-        <c:if test="${userName !=null || userName != '' }">
+        <%} %>
+         <%  
+		  if(session.getAttribute("userName")!=null)
+		  {%>
         	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
         	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
-        </c:if>
+        <%} %>
         <!-- <li><a href="#">注册</a></li> -->
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -95,6 +99,71 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<nav aria-label="Page navigation"
+							style="margin:0 auto;margin-top:-16px;">
+						<ul class="pager pagination-lg">
+							<c:if test="${pageNumber>0 }">
+								<li><a
+									href="<c:url value="/durationDetail?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+							</c:if>		
+							<c:if test="${pageNumber-3 >= 1 }">
+								<li><a
+										href="<c:url value="/durationDetail?page=${pageNumber-3}"/>">${pageNumber-3}</a>
+									</li>
+							</c:if>
+							<c:if test="${pageNumber-2 >= 1 }">
+								<li><a
+										href="<c:url value="/durationDetail?page=${pageNumber-2}"/>">${pageNumber-2}</a>
+									</li>
+							</c:if>
+							<c:if test="${pageNumber-1 >= 1 }">
+								<li><a
+										href="<c:url value="/durationDetail?page=${pageNumber-1}"/>">${pageNumber-1}</a>
+									</li>
+							</c:if>
+							<c:if test="${pageNumber >= 1 }">
+								<li><a
+										href="<c:url value="/durationDetail?page=${pageNumber}"/>">${pageNumber}</a>
+									</li>
+							</c:if>					
+							<c:if test="${pageNumber+1 <= pageTotalPages}">
+							<c:set var="active" value="${active}" />
+								<li class="${active}"><a
+										href="<c:url value="/durationDetail?page=${pageNumber+1}"/>">${pageNumber+1}</a>
+									</li>
+							</c:if>
+							<c:if test="${pageNumber+2 <= pageTotalPages && !(pageNumber-3 >= 1)}">
+								<li><a
+										href="<c:url value="/durationDetail?page=${pageNumber+2}"/>">${pageNumber+2}</a>
+									</li>
+							</c:if>
+							<c:if test="${pageNumber+3 <= pageTotalPages && !(pageNumber-2 >= 1)}">
+								<li><a
+										href="<c:url value="/durationDetail?page=${pageNumber+3}"/>">${pageNumber+3}</a>
+									</li>
+							</c:if>
+							<c:if test="${pageNumber+4 <= pageTotalPages && !(pageNumber-1 >= 1)}">
+								<li><a
+										href="<c:url value="/durationDetail?page=${pageNumber+4}"/>">${pageNumber+4}</a>
+									</li>
+							</c:if>
+							<c:if test="${pageNumber+5 <= pageTotalPages && !(pageNumber >= 1)}">
+								<li><a
+										href="<c:url value="/durationDetail?page=${pageNumber+5}"/>">${pageNumber+5}</a>
+									</li>
+							</c:if>
+							
+							<c:if test="${pageNumber+1 < pageTotalPages }">
+							<li><a
+								href="<c:url value="/durationDetail?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
+							</li>
+							</c:if>
+						</ul>
+						<ul class="pager pagination-lg">
+							<li>共${pageTotalElements}条记录 共${pageTotalPages}页
+								当前第${pageNumber+1}页</li>
+						</ul>
+						</nav>
 					</div>
 				</div>
 			</div>

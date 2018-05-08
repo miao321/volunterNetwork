@@ -41,10 +41,16 @@ KindEditor.ready(function(K) {
     });      
 });
 //添加数据
-function baoming(){
+function share(){
+	var userName = "<%=session.getAttribute("userName")%>";
+	if ($.isEmptyObject(userName) == false) {
+		alert("请先登录！");
+		return false;
+	}
 	var title = document.getElementById("title").value;
 	var content = $("#content").val();
-	 $.ajax({			 
+	 $.ajax({	
+		 
 		 type : "POST",
 		 url : "saveOrUpdate",           
          dataType : "json",
@@ -55,6 +61,10 @@ function baoming(){
 			location.reload();
 		 }
 	}); 
+}
+function searchActi(){
+	var query = document.getElementById("searchActi").value;	
+	window.location.href="blog?query="+query;
 }
 </script>
 <style type="text/css">
@@ -151,13 +161,17 @@ function baoming(){
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
         <li><a href="#">莞工<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
 <!--         <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
- -->        <c:if test="${userName == null || userName == '' }">
+ -->       <%  
+		  if(session.getAttribute("userName")==null)
+		  {%>
         <li><a href="login.jsp">登录</a></li>
-        </c:if>
-        <c:if test="${userName !=null || userName != '' }">
+        <%} %>
+         <%  
+		  if(session.getAttribute("userName")!=null)
+		  {%>
         	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
-        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
-        </c:if>
+        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/logout">退出</a></li>
+        <%} %>
         <!-- <li><a href="#">注册</a></li> -->
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -172,7 +186,7 @@ function baoming(){
 				<div class="clpd1 main_content">
 					<div class="cc forum_info_box isthread covered"
 						id="J_forum_info_box"
-						style="background-image: url(images/blog.jpg);width: 1200px;">
+						style="background-image: url(images/blog.jpg);width: 1189px;">
 						<div class="cc forum_headline">
 							<div class="fl bread_crumb" id="bread_crumb">
 								<a href="#">推荐</a><em>&gt;</em>
@@ -207,13 +221,15 @@ function baoming(){
 	<div class="row-fluid">
 		<div class="span12">
 			
-			<form class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
+			<div class="form-search" style="float:right;margin-bottom: 10px;">
 				<button class="btn btn-warning" data-toggle="modal" data-target="#baoming" style="margin-left:10px;width:80px;float:right;background: #ff8814;" type="button">
 					发帖
 			    </button>
-				<button type="submit" class="btn btn-info">最新发帖</button>
-				<button type="submit" class="btn btn-info">最后回复</button>
-			</form>
+				<div class="form-search" style="height:20px;float:right;margin-right: 30px;margin-bottom: 10px;">
+					<input class="input-medium search-query" id="searchActi" type="text" placeholder="请输入关键字" style="height: 30px;"/>
+					<button type="button" class="btn btn-info" onclick="searchActi()">查找</button>
+			    </div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -335,7 +351,7 @@ function baoming(){
 				<button type="button" class="btn btn-default" 
 						data-dismiss="modal">取消
 				</button>
-				<button type="button" class="btn btn-primary" onclick="baoming()">
+				<button type="button" class="btn btn-primary" onclick="share()">
 					保存
 				</button>
 			</div>

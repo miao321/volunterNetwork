@@ -12,21 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.xxx.volunterNetwork.domain.Acti;
-import com.xxx.volunterNetwork.domain.Comment;
-import com.xxx.volunterNetwork.domain.Enroll;
-import com.xxx.volunterNetwork.domain.Img;
+import com.xxx.volunterNetwork.anno.SysControllerLog;
+import com.xxx.volunterNetwork.domain.Borad;
 import com.xxx.volunterNetwork.domain.Share;
 import com.xxx.volunterNetwork.domain.User;
+import com.xxx.volunterNetwork.dto.BoradQueryDTO;
 import com.xxx.volunterNetwork.dto.CommentQueryDTO;
 import com.xxx.volunterNetwork.dto.ShareQueryDTO;
 import com.xxx.volunterNetwork.service.IActiService;
+import com.xxx.volunterNetwork.service.IBoradService;
 import com.xxx.volunterNetwork.service.ICommentService;
 import com.xxx.volunterNetwork.service.IEnrollService;
 import com.xxx.volunterNetwork.service.IImgService;
 import com.xxx.volunterNetwork.service.IShareService;
 import com.xxx.volunterNetwork.service.IUserService;
-import com.xxx.volunterNetwork.service.impl.CommentServiceImpl;
 import com.xxx.volunterNetwork.util.ExtAjaxResponse;
 import com.xxx.volunterNetwork.util.ExtPageable;
 
@@ -44,6 +43,8 @@ public class BlogController {
 	private ICommentService commentService;
 	@Autowired
 	private IUserService userService;
+	@Autowired
+	private IBoradService boradService;
 	
 	@RequestMapping("/saveOrUpdate")
 	public @ResponseBody ExtAjaxResponse saveOrUpdate(Share share,HttpSession session) {		
@@ -63,7 +64,10 @@ public class BlogController {
 		}	
 	}
 	@RequestMapping("/blog")
-	public String index(HttpSession session,ShareQueryDTO shareQueryDTO,ExtPageable extPageable) {
+	public String index(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,ShareQueryDTO shareQueryDTO,ExtPageable extPageable) {
+		shareQueryDTO.setAuthor(query);
+		shareQueryDTO.setContent(query);
+		shareQueryDTO.setTitle(query);
 		Page<Share> page = shareService.findAll(shareQueryDTO.getSpecification(shareQueryDTO), extPageable.getPageable());
 		List<Share> shareLists = shareService.findShare();
 		session.setAttribute("shareLists", page.getContent());//内容
@@ -71,8 +75,7 @@ public class BlogController {
 		session.setAttribute("pageSize", page.getSize());//当前页条数
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
-		/*List<Share> shareLists = shareService.findAll();
-		session.setAttribute("shareLists", shareLists);*/
+		
 		return "/WEB-INF/pages/blog/blog";
 	}
 	@RequestMapping("/blogDetail")
@@ -86,6 +89,18 @@ public class BlogController {
 		}*/
 		session.setAttribute("commentList", commentList);
 		return "/WEB-INF/pages/blog/blogDetail";
-	}		
+	}
+	@RequestMapping("/boradPage")
+	@SysControllerLog(module="模块管理",methods="查找所有数据并分页排序")
+	public String findPage(HttpSession session,BoradQueryDTO boradQueryDTO,ExtPageable extPageable){
+		Page<Borad> page = boradService.findAll(boradQueryDTO.getSpecification(boradQueryDTO), extPageable.getPageable());
+		System.out.println("actiLists:+++"+page.getContent());
+		session.setAttribute("boradLists", page.getContent());//内容
+		session.setAttribute("pageNumber", page.getNumber());//当前页
+		session.setAttribute("pageSize", page.getSize());//当前页条数
+		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
+		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
+		return "/WEB-INF/pages/borad/boradPage";	
+	}
 	
 }

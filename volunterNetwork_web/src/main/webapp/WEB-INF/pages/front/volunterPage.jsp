@@ -30,63 +30,17 @@ select{width:220px;border:1px solid #cccccc;background-color:#ffffff;}
 </style>
 <script type="text/javascript">
 //添加数据
-function baoming(){
-	var id = document.getElementById("bao").value;
-	var userName = document.getElementById("userName").value;
-	var studentNo = document.getElementById("studentNo").value;	
-	var sex = $('#sex input[name="sex"]:checked ').val();
-	var phone = document.getElementById("phone").value;
-	var college = document.getElementById("college").value;
-	var major = document.getElementById("major").value;
-	var idCard = document.getElementById("idCard").value;
-	var userName1 = /^[\u4e00-\u9fa5]+$/;
-	var studentNo1 = /^[0-9]*$/ ;
-	var sex1 = /^['男'|'女']$/ ;
-	var phone1 = /^1\d{10}$/;
-	var major1 = /^[\u4e00-\u9fa5]+$/;
-	var idCard1 = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
-	if (userName == '') {
-		alert("姓名不能为空");
-		return false;
-	}
-	if (!userName1.test(userName)) {
-		alert("姓名只能为中文");
-		return false;
-	}
-	if (studentNo == '') {
-		alert("学号不能为空");
-		return false;
-	}
-	if (!studentNo1.test(studentNo)) {
-		alert("学号只能为数字");
-		return false;
-	}
-	if (!sex1.test(sex)) {
-		alert("性别不能为空");
-		return false;
-	}
-	if (!phone1.test(phone)) {
-		alert("请填写正确的手机号");
-		return false;
-	}
-	if (major == '') {
-		alert("专业不能为空");
-		return false;
-	}
-	if (!major1.test(major)) {
-		alert("专业只能为中文");
-		return false;
-	}
-	if (!idCard1.test(idCard)) {
-		alert("请填写正确的身份证号");
+function baoming(id){	
+	var userName = "<%=session.getAttribute("userName")%>";
+	if ($.isEmptyObject(userName) == false) {
+		alert("请先登录！");
 		return false;
 	}
 	 $.ajax({			 
 		 type : "POST",
 		 url : "baoming/saveOrUpdate",           
          dataType : "json",
-         data:{id:id,userName:userName,studentNo:studentNo,
-        	 sex:sex,phone:phone,college:college,major:major,idCard:idCard},
+         data:{id:id},
 		 cache : false,
 		 async : true,
 		 success : function(data) {				
@@ -120,6 +74,11 @@ function addAttention(id){
 		}
 	});
 }
+function searchActi(){
+	var query = document.getElementById("searchActi").value;	
+	var hdlx = "<%=session.getAttribute("hdlx") %>";
+	window.location.href="pageDetail?query="+query;
+}
 </script>
 </head>
 <body>
@@ -149,13 +108,17 @@ function addAttention(id){
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
         <li><a href="#">莞工<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
 <!--         <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
- -->        <c:if test="${userName == null || userName == '' }">
+ -->        <%  
+		  if(session.getAttribute("userName")==null)
+		  {%>
         <li><a href="login.jsp">登录</a></li>
-        </c:if>
-        <c:if test="${userName !=null || userName != '' }">
+        <%} %>
+         <%  
+		  if(session.getAttribute("userName")!=null)
+		  {%>
         	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
         	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
-        </c:if>
+        <%} %>
         <!-- <li><a href="#">注册</a></li> -->
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -181,10 +144,10 @@ function addAttention(id){
 				  <option value="浏览人数最多">浏览人数最多</option>			  
 				</select>	
 			</form>
-			<form class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
-				<input class="input-medium search-query" type="text" placeholder="请输入关键字" style="height: 36px;"/>
-				<button type="submit" class="btn btn-info">查找</button>
-			</form>
+			<div class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
+				<input class="input-medium search-query" id="searchActi" type="text" placeholder="请输入关键字" style="height: 40px;"/>
+				<button type="button" class="btn btn-info" onclick="searchActi()">查找</button>
+			</div>
 		</div>
 	</div>
 </div>
@@ -222,8 +185,7 @@ function addAttention(id){
 			   </button>
 			   </c:if>
 			   <c:if test="${nowDate-acti.endTime.getTime()<0}"> 
-		       <button class="btn btn-warning" data-toggle="modal" data-target="#baoming" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;color:#fff;" type="button">
-					<input type="hidden" id="bao" value="${acti.id }">
+		       <button class="btn btn-warning" onclick="baoming(${acti.id })" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;color:#fff;" type="button">				
 					马上报名
 			   </button>
 			   </c:if>
@@ -296,95 +258,7 @@ function addAttention(id){
 				</ul>
 				</nav>
 </div>
-<!-- baoming -->
-<div class="modal fade" id="baoming" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" 
-						aria-hidden="true">×
-				</button>
-				<h4 class="modal-title" id="myModalLabel" style="font-size: 18px;font-weight: 600;">
-					马上报名
-				</h4>
-			</div>
-			<div class="modal-body">
-				<!-- <form class="form-inline"> -->
-				<form method="post" class="form-horizontal" role="form" >
-					 <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">姓名:</label>
-					    <div class="col-sm-10" >
-					      <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入姓名" style="height: 36px;line-height: 36px;">
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">学号:</label>
-					    <div class="col-sm-10">
-					      <input type="text" id="studentNo" name="studentNo" class="form-control" placeholder="请输入学号" style="height: 36px;line-height: 36px;">
-					    </div>
-					  </div>
-					  <div class="form-group" >
-					    <label for="inputEmail3" class="col-sm-4 control-label" id="sex">性别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					      <input type="radio" name="sex" value="男"/> 男
-						  <input type="radio" name="sex" value="女"/> 女	
-						</label>				      
-					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">手机号:</label>
-					    <div class="col-sm-10">
-					      <input type="text" id="phone" name="phone" class="form-control" placeholder="请输入手机号"  style="height: 36px;line-height: 36px;">
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">学院:</label>
-					    <div class="col-sm-10">
-					      <select type="text" id="college" name="college" class="form-control" placeholder="请输入发布组织">
-				      	<option>计算机与网络安全学院</option>
-				      	<option>电子工程与智能化学院</option>
-				      	<option>粤台产业科技学院</option>
-				      	<option>国际学院</option>
-				      	<option>生态环境与建筑工程学院</option>
-				      	<option>机械工程学院</option>
-				      	<option>经济与管理学院</option>
-				      	<option>文学与传媒学院</option>
-				      	<option>法律与社会工作学院</option>
-				      	<option>教育学院</option>
-				      	<option>化学工程与能源技术学院</option>
-				      	<option>中法联合学院</option>
-				      	<option>马克思主义学院</option>
-				      	<option>继续教育学院</option>
-				      	<option>校志愿中心</option>				      
-				      	</select>		
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">专业:</label>
-					    <div class="col-sm-10">
-					      <input type="text" id="major" name="major" class="form-control" placeholder="请输入专业"  style="height: 36px;line-height: 36px;">
-					    </div>
-					  </div>	
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">身份证号:</label>
-					    <div class="col-sm-10">
-					      <input type="text" id="idCard" name="idCard" class="form-control" placeholder="请输入身份证号"  style="height: 36px;line-height: 36px;">
-					    </div>
-					  </div>				 
-				</form>					
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" 
-						data-dismiss="modal">取消
-				</button>
-				<button type="button" class="btn btn-primary" onclick="baoming()">
-					保存
-				</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<script>
-   $(function () { $('#baoming').modal('hide')});
-</script>
+
 	
 </body>
 </html>

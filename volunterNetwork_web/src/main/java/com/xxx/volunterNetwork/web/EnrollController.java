@@ -111,6 +111,18 @@ public class EnrollController {
 		List<Enroll> enrollLists = enrollService.findAll();
 		return enrollLists;		
 	}	
+	/*@RequestMapping("/findPage")
+	@SysControllerLog(module="模块管理",methods="查找所有数据并分页排序")
+	public @ResponseBody ExtAjaxResponse findPage(HttpSession session,EnrollQueryDTO enrollQueryDTO,ExtPageable extPageable){
+		Page<Enroll> page = enrollService.findAll(enrollQueryDTO.getSpecification(enrollQueryDTO), extPageable.getPageable());
+		System.out.println("enrollLists:+++"+page.getContent());
+		session.setAttribute("enrollLists", page.getContent());//内容
+		session.setAttribute("pageNumber", page.getNumber());//当前页
+		session.setAttribute("pageSize", page.getSize());//当前页条数
+		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
+		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
+		return new ExtAjaxResponse(true, "操作成功");
+	}*/
 	@RequestMapping("/findPage")
 	@SysControllerLog(module="模块管理",methods="查找所有数据并分页排序")
 	public String findPage(HttpSession session,EnrollQueryDTO enrollQueryDTO,ExtPageable extPageable){
@@ -121,7 +133,7 @@ public class EnrollController {
 		session.setAttribute("pageSize", page.getSize());//当前页条数
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
-		return "/WEB-INF/pages/system/enroll";	
+		return "/WEB-INF/pages/system/enroll";
 	}
 	
 	@RequestMapping("disableEnroll")

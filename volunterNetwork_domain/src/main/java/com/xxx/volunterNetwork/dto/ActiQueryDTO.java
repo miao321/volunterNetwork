@@ -145,26 +145,11 @@ public class ActiQueryDTO {
 					/*//1.Predicate查询条件集合
 					List<Predicate> list = new ArrayList<Predicate>();				
 					//2.根据QueryDTO数据字段的值进行判断以及条件的组装	
-					if(actiQueryDTO != null && !StringUtils.isEmpty(actiQueryDTO.getHdlx())) {
-						Predicate p1 = cb.like(root.get("hdlx").as(String.class), "%"+actiQueryDTO.getHdlx()+"");
-						list.add(p1);
-					}	
-					if(actiQueryDTO != null && !StringUtils.isEmpty(actiQueryDTO.getTitle())) {
-						Predicate p2 = cb.like(root.get("title").as(String.class), "%"+actiQueryDTO.getTitle()+"%");
-						list.add(p2);
-					}
-					if(actiQueryDTO != null && !StringUtils.isEmpty(actiQueryDTO.getFbzz())) {
-						Predicate p3 = cb.like(root.get("fbzz").as(String.class), "%"+actiQueryDTO.getFbzz()+"%");
-						list.add(p3);
-					}
-					if(actiQueryDTO != null && !StringUtils.isEmpty(actiQueryDTO.getXxdz())) {
-						Predicate p4 = cb.like(root.get("xxdz").as(String.class), "%"+actiQueryDTO.getXxdz()+"%");
-						list.add(p4);
-					}
+					
 					//3.Predicate查询条件集合的size创建对应的Predicate查询条件数组
-					Predicate[] p = new Predicate[list.size()];
+					
 					//4.CirteriaBuilder的and函数组装  查询条件数组
-					return cb.and(list.toArray(p));	*/
+						*/
 					
 					  
 					Date now = new Date(System.currentTimeMillis());
@@ -206,4 +191,36 @@ public class ActiQueryDTO {
 			};		
 			return spec;
 		}
+		
+		//提供static的工具方法： 根据当前actiQueryDTO对象来组装动态查询条件
+				public static Specification<Acti> getSpecification3(ActiQueryDTO actiQueryDTO){
+					Specification<Acti> spec = new Specification<Acti>() {
+						public Predicate toPredicate(Root<Acti> root, CriteriaQuery<?> query, CriteriaBuilder cb) {							
+							/*//1.Predicate查询条件集合
+							List<Predicate> list = new ArrayList<Predicate>();				
+							//2.根据QueryDTO数据字段的值进行判断以及条件的组装	
+							
+							//3.Predicate查询条件集合的size创建对应的Predicate查询条件数组
+							
+							//4.CirteriaBuilder的and函数组装  查询条件数组
+								*/
+							
+							  
+							Date now = new Date(System.currentTimeMillis());
+							
+							
+							Predicate beginTime = cb.lessThanOrEqualTo(root.get("beginTime").as(Date.class), now);
+							Predicate endTime = cb.greaterThanOrEqualTo(root.get("endTime").as(Date.class), now);
+							//Predicate hdlx = cb.like(root.get("hdlx").as(String.class), "%"+actiQueryDTO.getHdlx()+"");
+							Predicate title = cb.like(root.get("title").as(String.class), "%"+actiQueryDTO.getTitle()+"%");
+							Predicate fbzz = cb.like(root.get("fbzz").as(String.class), "%"+actiQueryDTO.getFbzz()+"%");
+							Predicate xxdz = cb.like(root.get("xxdz").as(String.class), "%"+actiQueryDTO.getXxdz()+"%");				
+							Predicate p = cb.or(title,fbzz,xxdz);
+							//p = cb.and(hdlx,p);
+									 
+							return p;				
+						}
+					};		
+					return spec;
+				}
 }

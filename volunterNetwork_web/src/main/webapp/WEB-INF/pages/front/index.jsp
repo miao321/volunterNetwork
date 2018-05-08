@@ -26,7 +26,19 @@
 function detail(hdlx){
 	window.location.href="sort?hdlx="+hdlx;	
 }
-
+function exchange(){
+	$.ajax({			 
+		 type : "POST",
+		 url : "enroll/findPage",           
+        dataType : "json",
+        //data:{id:id},
+		 cache : false,
+		 async : true,
+		 success : function(data) {				
+			location.reload();
+		 }
+	}); 
+}
 </script>
 <style>
         #div1 {margin:0 auto;height:300px;margin-top:-20px;}
@@ -62,13 +74,17 @@ function detail(hdlx){
       <ul class="nav navbar-nav navbar-right" style="font-size: 16px;font-weight: bold;margin-top: 4px;">
         <li><a href="#">莞工<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
 <!--         <li><a href="#">分站导航<span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
- -->        <c:if test="${userName == null || userName == '' }">
+ -->        <%  
+		  if(session.getAttribute("userName")==null)
+		  {%>
         <li><a href="login.jsp">登录</a></li>
-        </c:if>
-        <c:if test="${userName !=null || userName != '' }">
+        <%} %>
+         <%  
+		  if(session.getAttribute("userName")!=null)
+		  {%>
         	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
         	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/logout">退出</a></li>
-        </c:if>
+        <%} %>
         <!-- <li><a href="#">注册</a></li> -->
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -97,11 +113,11 @@ function detail(hdlx){
             </div>
 
             <!-- Controls -->
-          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev" style="margin-top: 200px;">
+          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left" id="aaron1"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next" style="margin-top: 200px;">
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
                 <span class="glyphicon glyphicon-chevron-right" id="aaron2"></span>
                 <span class="sr-only">Next</span>
             </a>
@@ -211,69 +227,38 @@ function detail(hdlx){
             <div class="num_content">
               <div class="num_item_box">
                 <h2 class="num_item_title">注册志愿者 (人)</h2>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">9</li>
+                <c:forEach items="${organization}" var="organization" varStatus="status">
+                <ol class="number_show clearfix">               
+                  <li class="num" style="margin-right: 0px;">${organization.mNum}</li>
                 </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">3</li>
-                </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">2</li>
-                </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">7</li>
-                </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">5</li>
-                </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">4</li>
-                </ol>
+                </c:forEach>           
               </div>
               <div class="num_item_box">
-                <h2 class="num_item_title">志愿服务时长 (万小时)</h2>
+                <h2 class="num_item_title">志愿服务时长 (小时)</h2>
+                
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">1</li>
+                  <li class="num" style="margin-right: 0px;">${enroll }</li>
                 </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">5</li>
-                </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">8</li>
-                </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">3</li>
-                </ol>
+                
+                
               </div>
               <div class="num_item_box">
                 <h2 class="num_item_title">志愿服务组织 (个)</h2>
+                <c:forEach items="${organization}" var="organization" varStatus="status">  
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">1</li>
+                  <li class="num" style="margin-right: 0px;">${organization.xjorNum }</li>
                 </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">3</li>
-                </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">7</li>
-                </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">9</li>
-                </ol>
+                </c:forEach>
+                
               </div>
               <div class="num_item_box">
-                <h2 class="num_item_title">志愿服务团体 (个)</h2>
+                <h2 class="num_item_title">志愿服务团体 (个)</h2>                
+                <c:forEach items="${organization}" var="organization" varStatus="status">               
                 <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">5</li>
+                  <li class="num" style="margin-right: 0px;">${organization.orNum }</li>
                 </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">5</li>
-                </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">5</li>
-                </ol>
-                <ol class="number_show clearfix">
-                  <li class="num" style="margin-right: 0px;padding-top: 8px;">0</li>
-                </ol>
+                </c:forEach>
+                
               </div>
             </div>
           </div>
@@ -503,7 +488,7 @@ function detail(hdlx){
         <div class="w1200">
           <div class="common_title_box clearfix">
             <h1 class="common_title fl" style="margin-left:-80px;">活跃志愿者</h1>
-            <a href="javascript:void(0);" class="seeMore fr">换一换</a></div>
+            <a href="${pageContext.request.contextPath }/volunterNetwork?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}" class="seeMore fr">换一换</a></div>
 			<div class="act_volunteer">
             <ul class="vol_list clearfix">
               <c:forEach items="${enrollLists}" var="enroll" varStatus="status">
@@ -540,7 +525,7 @@ function detail(hdlx){
 						<a href="#panel-45204" data-toggle="tab">政策法规</a>
 					</li>
 					<li style="float: right;">
-						<a href="#" data-toggle="tab">更多</a>
+						<a href="boradPage">更多</a>
 					</li>
 				</ul>
 				<div class="tab-content">
@@ -657,8 +642,7 @@ function detail(hdlx){
 				                  <div class="item_con clearfix">
 					                  
 				                    <div class="right_txt">
-				                      <a target="_blank" href="http://www.gdzyz.cn/policyLaw/detail.do?pageno=29" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #333;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">·&nbsp;《志愿服务条例》</a>
-				                      
+				                      <a target="_blank" href="http://www.gdzyz.cn/policyLaw/detail.do?pageno=29" class="right_txt_title oneLineOh" style="font-size: 16px;font-weight: bold;color: #333;padding-left: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">·&nbsp;《志愿服务条例》</a>				                      
 				                    </div>
 				                  </div>
 				                 </li>
@@ -678,56 +662,25 @@ function detail(hdlx){
 							<c:forEach items="${volunterLists}" var="volunter" varStatus="status">			
 							<span style="width:190px;font-size: 14px;font-weight: bold;float: left;margin-top:10px;color: #999;display: block;padding-left: 6px;">${status.index+1 } ${volunter.collegeName }</span>
 							<span style="width:70px;font-size: 14px;font-weight: bold;float: right;margin-top:10px;display: block;">${volunter.menNum }人</span>
-							</c:forEach>
-							
+							</c:forEach>							
 						</div>
 						<div class="a2" style="float: right;width:260px;background: #e3e3e3;">
 							<span style="font-size: 18px;font-weight: bold;float: left;margin: 20px 0 10px 0;padding-left: 80px;">志愿服务时长</span>
 							<c:forEach items="${enroll2Lists}" var="enroll" varStatus="status">			
 							<span style="width:190px;font-size: 14px;font-weight: bold;float: left;margin-top:10px;color: #999;display: block;padding-left: 6px;">${status.index+1 } ${enroll.college }</span>
 							<span style="width:70px;font-size: 14px;font-weight: bold;float: right;margin-top:10px;display: block;">${enroll.duration } 小时</span>
-							</c:forEach>
-							
+							</c:forEach>							
 						</div>
-					</div>
-					<!-- <div class="row-fluid">
-						<div class="span6" style="float: left;width: 265px;margin-left: -20px">
-							<span style="font-size: 18px;font-weight: bold;float: left;margin-top: 20px;padding-left: 40px;">志愿者</span>
-							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: -120px;margin-top: 60px;color: #999">1 化学工程与能源技术学院</span>
-							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 20px;margin-top: 60px;">32123人</span>
-							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: -120px;margin-top: 60px;color: #999">1 化学工程与能源技术学院</span>
-							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 20px;margin-top: 60px;">32123人</span>
-					 	</div>
-						<table style="height:60px;border-color:000000;border-left-style:solid;border-width:1px"><tr><td valign="top"></td></tr></table>						
-						 <div class="span6" style="float: right;width: 265px;">
-							<span style="font-size: 18px;font-weight: bold;float: right;margin-top: -60px;margin-right: 40px;">志愿服务时长</span>
-							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: 10px;margin-top:-20px;color: #999">化学工程与能源技术学院</span>
-							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 0px;margin-top:-20px;">32123小时</span> 
-							<span style="font-size: 14px;font-weight: bold;float: left;margin-left: 10px;margin-top:-20px;color: #999">化学工程与能源技术学院</span>
-							<span style="font-size: 14px;font-weight: bold;float: right;margin-right: 0px;margin-top:-20px;">32123小时</span> 
-							
-						</div>
-						
-					</div> -->
+					</div>					
 				</div>
-			</div>
-		
-		
-		
-	</div>
-	
+			</div>		
+	</div>	
 </div>
-<div style="background: #e9573f;margin: 0 auto;height:70px;margin-top: 20px;">
+<div style="background: #da4453;margin: 0 auto;height:70px;margin-top: 20px;">
 	<div class="inner_box" style="margin: 0 auto;text-align: center;font-size: 16px;font-weight: bold;margin-top: 16px;">
-		<p class="inner_box_p" style="padding-top: 16px;">© Copyright 2015,idgut</p>
+		<p class="inner_box_p" style="padding-top: 16px;">© Copyright 2018,idgut</p>
 		<p class="inner_box_p">Powered by miao, Theme idgut Created by gdzyz.cn</p>
 	</div>
 </div>
-<!-- <script type="text/javascript">
-$("#menu .a").click(function(){
-	$("#menu .a").removeClass("active");
-	$(this).addClass("active");
-});
-</script> -->
 </body>
 </html>

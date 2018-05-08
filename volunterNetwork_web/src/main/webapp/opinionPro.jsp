@@ -28,6 +28,11 @@
     });    
 //添加数据 	
 function addOpinion(){
+	var userName = "<%=session.getAttribute("userName")%>";
+	if ($.isEmptyObject(userName) == false) {
+		alert("请先登录！");
+		return false;
+	}
 	var title = document.getElementById("title").value;
 	var content = $("#content").val();
 	$.ajax({

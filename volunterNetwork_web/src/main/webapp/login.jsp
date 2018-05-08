@@ -8,19 +8,23 @@
 <script src="js/jquery-3.2.1.min.js" type="text/javascript"> </script>
 <script src="js/keyEvent.js" type="text/javascript"> </script>
 <script src="js/bootstrap.min.js"> </script>
+<link rel="shortcut icon" type="image/x-icon" href="images/logo.ico" media="screen" /> 
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="css/adminStyle.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 body{
-
+	
 	background: url("images/login1.jpg") no-repeat;
-	background-size: 1380px 630px;
-	padding-top: 50px;      
+	background-size: 1368px 638px;
+	/* background-size: 100% 638px;  
+    -moz-background-size: 100% 100%;  
+    -webkit-background-size: 100% 100%;  */
+	
 } 
 </style>
 </head>
-<body onkeydown="keyLogin();">
+<body onkeydown="keyLogin();" style="width: 100%;margin: 0;padding: 0;">
 	<div class="navbar navbar-default navbar-fixed-top" style="background:#272727;color:white" >
 		<div class="container">
 			<div class="row" >
@@ -31,7 +35,7 @@ body{
 		</div>
 	</div>
 	
-	<div class="row" style="margin-top:100px;align:center;">
+	<div class="row1" style="margin-top:100px;align:center;">
 		<div class="col-sm-offset-4 col-sm-4" style="background:#eee;width:500px;border-radius:8px;box-shadow:5px 5px 5px #333">
 			<form action="login" method="post" role="form">
 				<div class="form-group" style="margin-top:-18px">

@@ -74,7 +74,7 @@ body{width:100%;height:100%}
 .img_txt_nav .center_number_box .num_content .num_item_box{text-align: center;font-size:0;margin-bottom:16px;}
 .img_txt_nav .center_number_box .num_content .num_item_title{font-size:14px;color:#fff;margin-bottom:12px;}
 .img_txt_nav .center_number_box .num_content .num_item_box .number_show{display:inline-block;font-size:14px;}
-.img_txt_nav .center_number_box .number_show li{width:30px;height:40px;float: left;margin-right:2px;font-size: 28px;
+.img_txt_nav .center_number_box .number_show li{height:40px;float: left;padding-left:8px;padding-right:8px;margin-right:2px;font-size: 28px;
     color: #FFFFFF;
     background-color: #ff8814;
     margin-left: 2px;}

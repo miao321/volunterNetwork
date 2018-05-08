@@ -24,7 +24,10 @@ public class OrganizationQueryDTO {
 	private String organization;  //组织名
 	private String menNum;  //人数
 	private String img;//图片
-	
+	private String mNum;
+	private String orNum;
+	private String xjorNum;
+	private String durationNum;
 	public Long getId() {
 		return id;
 	}
@@ -55,6 +58,30 @@ public class OrganizationQueryDTO {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public String getmNum() {
+		return mNum;
+	}
+	public void setmNum(String mNum) {
+		this.mNum = mNum;
+	}
+	public String getOrNum() {
+		return orNum;
+	}
+	public void setOrNum(String orNum) {
+		this.orNum = orNum;
+	}
+	public String getXjorNum() {
+		return xjorNum;
+	}
+	public void setXjorNum(String xjorNum) {
+		this.xjorNum = xjorNum;
+	}
+	public String getDurationNum() {
+		return durationNum;
+	}
+	public void setDurationNum(String durationNum) {
+		this.durationNum = durationNum;
 	}
 	//提供static的工具方法： 根据当前OrganizationQueryDTO对象来组装动态查询条件
 	public static Specification<Organization> getSpecification(OrganizationQueryDTO organizationQueryDTO){

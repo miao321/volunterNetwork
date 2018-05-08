@@ -421,6 +421,7 @@ function enableUser(id){
 }
 //添加角色
 function addRole(){
+	alert(321);
 	var checkbox = document.getElementsByName("rId");
 	if(isChecked()){
 		$.ajax({			 
@@ -429,7 +430,8 @@ function addRole(){
 	         dataType : "json",
 			 cache : false,
 			 async : true,
-			 success : function(result) {				
+			 success : function(result) {	
+				 alert(4353);
 				 $('#addRole').modal('show');
 					
 			 }
@@ -490,12 +492,7 @@ function saveRole(){
 				<button class="btn btn-info" onclick="addRole()" style="margin: 6px 0;" type="button">
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-plus" aria-hidden="true"></span> 角色
 				</button>
-				<!-- <button class="btn btn-info" onclick="addRole()" style="margin: 6px 0;" type="button">
-					<span style="margin: 0px 4px;" class="glyphicon glyphicon-plus" aria-hidden="true"></span> 修改密码
-				</button>
-				<button class="btn btn-info" onclick="addRole()" style="margin: 6px 0;" type="button">
-					<span style="margin: 0px 4px;" class="glyphicon glyphicon-plus" aria-hidden="true"></span> 修改个人信息
-				</button> -->
+				
 				<table class="table" id="table">
 					<thead>
 						<tr>
@@ -1062,8 +1059,6 @@ function saveRole(){
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<script>
-   $(function () { $('#addRole').modal('hide')});
-</script>
+
 </body>
 </html>

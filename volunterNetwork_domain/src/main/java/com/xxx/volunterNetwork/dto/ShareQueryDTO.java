@@ -20,7 +20,28 @@ import com.xxx.volunterNetwork.domain.Share;
  *
  */
 
-public class ShareQueryDTO {	
+public class ShareQueryDTO {
+	private String author;
+	private String title;
+	private String content;
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	private Integer state;
 	//提供static的工具方法： 根据当前shareQueryDTO对象来组装动态查询条件
 	public Integer getState() {
@@ -33,17 +54,33 @@ public class ShareQueryDTO {
 		Specification<Share> spec = new Specification<Share>() {
 			public Predicate toPredicate(Root<Share> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				//1.Predicate查询条件集合
-				List<Predicate> list = new ArrayList<Predicate>();				
+				//List<Predicate> list = new ArrayList<Predicate>();				
 				//2.根据QueryDTO数据字段的值进行判断以及条件的组装
-				/*if (shareQueryDTO != null && !StringUtils.isEmpty(shareQueryDTO.getState())) {
-					Predicate p1 = cb.like(root.get("state").as(String.class),shareQueryDTO.getState() == 1 );
-					cb.
-					list.add(p1);
-				}*/
+				Predicate title = cb.like(root.get("title").as(String.class), "%"+shareQueryDTO.getTitle()+"%");
+				Predicate author = cb.like(root.get("author").as(String.class), "%"+shareQueryDTO.getAuthor()+"%");
+				Predicate content = cb.like(root.get("content").as(String.class), "%"+shareQueryDTO.getContent()+"%");				
+				Predicate p = cb.or(title,author,content);
+			
 				//3.Predicate查询条件集合的size创建对应的Predicate查询条件数组
-				Predicate[] p = new Predicate[list.size()];
+				
 				//4.CirteriaBuilder的and函数组装  查询条件数组
-				return cb.and(list.toArray(p));		
+				return p;		
+			}
+		};		
+		return spec;
+	}
+	public static Specification<Share> getSpecification2(ShareQueryDTO shareQueryDTO){
+		Specification<Share> spec = new Specification<Share>() {
+			public Predicate toPredicate(Root<Share> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				return null;
+				//1.Predicate查询条件集合
+				//List<Predicate> list = new ArrayList<Predicate>();				
+				//2.根据QueryDTO数据字段的值进行判断以及条件的组装
+				
+				//3.Predicate查询条件集合的size创建对应的Predicate查询条件数组
+				
+				//4.CirteriaBuilder的and函数组装  查询条件数组
+				//return p;		
 			}
 		};		
 		return spec;

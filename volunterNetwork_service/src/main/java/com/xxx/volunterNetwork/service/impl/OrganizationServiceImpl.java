@@ -1,5 +1,6 @@
 package com.xxx.volunterNetwork.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,11 +95,8 @@ public class OrganizationServiceImpl implements IOrganizationService {
 		List<Object[]> enroll = organizationRepository.findEnroll();
 		for(Object[] obj : enroll) {
 			EnrollQueryDTO dto = new EnrollQueryDTO();
-			dto.setCollege(obj[0]+"");
-			
-			dto.setDuration(Integer.valueOf(obj[1]+""));
-			
-			
+			dto.setCollege(obj[0]+"");			
+			dto.setDuration(Integer.valueOf(obj[1]+""));						
 			list.add(dto);
 		}
 		return list;
@@ -107,6 +105,36 @@ public class OrganizationServiceImpl implements IOrganizationService {
 	public List<Organization> findVolunter() {
 		return organizationRepository.findVolunter();
 	}
+	@Override
+	public List<OrganizationQueryDTO> findNum() {
+		List<OrganizationQueryDTO> list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> organization = organizationRepository.findNum();
+		for(Object[] obj : organization) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			dto.setmNum(obj[0]+"");
+			dto.setOrNum(obj[1]+"");
+			dto.setXjorNum(obj[2]+"");
+			list.add(dto);
+		}
+		return list;
+	}
+	/*@Override
+	public List<OrganizationQueryDTO> findDuration() {
+		List<OrganizationQueryDTO> list = new ArrayList<OrganizationQueryDTO>();
+		List<Object[]> enroll = organizationRepository.findDuration();		
+		for(Object[] obj : enroll) {
+			OrganizationQueryDTO dto = new OrganizationQueryDTO();
+			
+			dto.setDurationNum((BigDecimal)obj[0]+"");
+			list.add(dto);
+		}
+		return list;
+	}*/
+	@Override
+	public Integer findDuration() {
+		return organizationRepository.findDuration();
+	}
+
 	
 	
 }

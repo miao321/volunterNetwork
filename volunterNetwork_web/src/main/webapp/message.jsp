@@ -62,7 +62,9 @@
           						<span class="glyphicon glyphicon-volume-up" aria-hidden="true" style="font-size: 24px;margin-left: -36px;"></span>
           						<span style="margin-left: 10px;">活动消息</span>
           					</a>
+          				
           					<c:forEach items="${enrolls}" var="enroll" varStatus="status">
+          					
           					<div style="width:600px;margin: 0 auto;">&nbsp;&nbsp;${enroll.remark }</div>
           					</c:forEach>
           					</div>
