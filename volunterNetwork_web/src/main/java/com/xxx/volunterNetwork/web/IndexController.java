@@ -47,33 +47,7 @@ public class IndexController {
 	private IBoradService boradService;
 	@Autowired
 	private IOrganizationService organizationService;
-	@RequestMapping("/baoming/saveOrUpdate")
-	public @ResponseBody ExtAjaxResponse saveOrUpdate(@RequestParam Long id,Enroll enroll,HttpSession session) {		
-		Acti acti = actiService.findOne(id);
-		User user = (User) session.getAttribute("userName");
-   	 	enroll.setUserName(user.getUserName());
-		enroll.setStudentNo(user.getStudentNo());
-		enroll.setSex(user.getSex());
-		enroll.setPhone(user.getPhone());
-		enroll.setCollege(user.getCollege());
-		//enroll.setMajor(user.getMajor());
-		enroll.setIdCard(user.getIdCard());
-		enroll.setImg(acti.getImg());
-		enroll.setHdName(acti.getTitle());
-		enroll.setHdType(acti.getHdlx());
-		enroll.setHdTime(acti.getBeginTime());
-		enroll.setState(0);
-		enroll.setOrganization(acti.getFbzz());
-		enroll.setActiId(acti.getId());
-		enroll.setRemark("恭喜你成功报名此次活动，请注意查看手机消息。");
-		enroll.setDuration(acti.getDuration());
-		try {		
-			enrollService.saveOrUpdate(enroll);
-			return new ExtAjaxResponse(true, "添加数据成功");
-		} catch (Exception e) {
-			return new ExtAjaxResponse(false, "添加数据失败");
-		}	
-	}
+	
 	//@RequestParam String hdlx,
 	@RequestMapping("/volunterNetwork")
 	public String index(HttpSession session,EnrollQueryDTO enrollQueryDTO,ExtPageable extPageable) {
@@ -131,6 +105,41 @@ public class IndexController {
 		session.setAttribute("organization", organization);
 		session.setAttribute("enroll", enroll);
 		return "/WEB-INF/pages/front/index";
+	}
+	@RequestMapping("/baoming/saveOrUpdate")
+	public @ResponseBody ExtAjaxResponse saveOrUpdate(@RequestParam Long id,Enroll enroll,HttpSession session) {		
+		Acti acti = actiService.findOne(id);
+		String userName = (String) session.getAttribute("userName");
+		if(userName == null) {
+			return new ExtAjaxResponse(false, "请先登录!");
+		}
+		Enroll enroll2 = enrollService.findUser(userName);
+		if (enroll2 != null) {
+			return new ExtAjaxResponse(false, "你已报名，乖，静静的等通知！");
+		}
+		User user = userService.findUser(userName);
+   	 	enroll.setUserName(user.getUserName());
+		enroll.setStudentNo(user.getStudentNo());
+		enroll.setSex(user.getSex());
+		enroll.setPhone(user.getPhone());
+		enroll.setCollege(user.getCollege());
+		//enroll.setMajor(user.getMajor());
+		enroll.setIdCard(user.getIdCard());
+		enroll.setImg(acti.getImg());
+		enroll.setHdName(acti.getTitle());
+		enroll.setHdType(acti.getHdlx());
+		enroll.setHdTime(acti.getBeginTime());
+		enroll.setState(0);
+		enroll.setOrganization(acti.getFbzz());
+		enroll.setActiId(acti.getId());
+		enroll.setRemark("恭喜你成功报名此次活动，请注意查看手机消息。");
+		enroll.setDuration(acti.getDuration());
+		try {		
+			enrollService.saveOrUpdate(enroll);
+			return new ExtAjaxResponse(true, "添加数据成功");
+		} catch (Exception e) {
+			return new ExtAjaxResponse(false, "添加数据失败");
+		}	
 	}
 	@RequestMapping("/organization")
 	public String organization(HttpSession session) {

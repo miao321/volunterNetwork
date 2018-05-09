@@ -31,11 +31,6 @@ select{width:220px;border:1px solid #cccccc;background-color:#ffffff;}
 <script type="text/javascript">
 //添加数据
 function baoming(id){	
-	var userName = "<%=session.getAttribute("userName")%>";
-	if ($.isEmptyObject(userName) == false) {
-		alert("请先登录！");
-		return false;
-	}
 	 $.ajax({			 
 		 type : "POST",
 		 url : "baoming/saveOrUpdate",           
@@ -43,9 +38,14 @@ function baoming(id){
          data:{id:id},
 		 cache : false,
 		 async : true,
-		 success : function(data) {				
-			location.reload();
-		 }
+		 success : function(data) {	
+			alert(data.msg);
+			//location.reload();
+		 },
+		 failure:function(data){
+			 alert(data);
+        	 alert(data.msg);
+         }
 	}); 
 }
 function addZan(id){
@@ -117,7 +117,7 @@ function searchActi(){
 		  if(session.getAttribute("userName")!=null)
 		  {%>
         	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
-        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
+        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/logout">退出</a></li>
         <%} %>
         <!-- <li><a href="#">注册</a></li> -->
       </ul>

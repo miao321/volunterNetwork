@@ -18,18 +18,28 @@ import com.xxx.volunterNetwork.domain.Module;
  *
  */
 public class ModuleQueryDTO {	
-
+	private String moduleName;
+	private String parentName;
+	public String getModuleName() {
+		return moduleName;
+	}
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
+	}
+	public String getParentName() {
+		return parentName;
+	}
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
 	//提供static的工具方法： 根据当前moduleQueryDTO对象来组装动态查询条件
 	public static Specification<Module> getSpecification(ModuleQueryDTO moduleQueryDTO){
 		Specification<Module> spec = new Specification<Module>() {
 			public Predicate toPredicate(Root<Module> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				//1.Predicate查询条件集合
-				List<Predicate> list = new ArrayList<Predicate>();				
-				//2.根据QueryDTO数据字段的值进行判断以及条件的组装				
-				//3.Predicate查询条件集合的size创建对应的Predicate查询条件数组
-				Predicate[] p = new Predicate[list.size()];
-				//4.CirteriaBuilder的and函数组装  查询条件数组
-				return cb.and(list.toArray(p));				
+				Predicate moduleName = cb.like(root.get("moduleName").as(String.class), "%"+moduleQueryDTO.getModuleName()+"%");
+				Predicate parentName = cb.like(root.get("parentName").as(String.class), "%"+moduleQueryDTO.getParentName()+"%");				
+				Predicate p = cb.or(moduleName,parentName);
+				return p;		
 			}
 		};		
 		return spec;

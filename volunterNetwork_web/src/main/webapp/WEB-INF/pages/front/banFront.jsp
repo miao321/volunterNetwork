@@ -24,7 +24,7 @@
 $(document).ready(function() {
 	var state1 = /^[1|0]$/ ;
 	$('#img').uploadifive({
-		'uploadScript' : 'img/uploadImg',
+		'uploadScript' : 'uploadImg',
 		'queueID' : 'fileQueue',
 		'auto' : false,
 		'multi' : false,
@@ -34,7 +34,7 @@ $(document).ready(function() {
 	
 	$("#uploadImg").click(function() {
 		$('#img').uploadifive({				
-			'uploadScript' : 'img/uploadImg',
+			'uploadScript' : 'uploadImg',
 			'queueID' : 'fileQueue',
 			'auto' : false,
 			'multi' : false,

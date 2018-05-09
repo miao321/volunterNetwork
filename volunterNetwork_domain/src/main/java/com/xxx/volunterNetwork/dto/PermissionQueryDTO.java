@@ -22,6 +22,8 @@ public class PermissionQueryDTO {
 	private Long roleId;
 	private Long permissionId;
 	private String roleName;
+	private String url;
+	private String description;
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -46,17 +48,26 @@ public class PermissionQueryDTO {
 	public String getRoleName() {
 		return roleName;
 	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	//提供static的工具方法： 根据当前permissionQueryDTO对象来组装动态查询条件
 	public static Specification<Permission> getSpecification(PermissionQueryDTO permissionQueryDTO){
 		Specification<Permission> spec = new Specification<Permission>() {
 			public Predicate toPredicate(Root<Permission> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				//1.Predicate查询条件集合
-				List<Predicate> list = new ArrayList<Predicate>();				
-				//2.根据QueryDTO数据字段的值进行判断以及条件的组装				
-				//3.Predicate查询条件集合的size创建对应的Predicate查询条件数组
-				Predicate[] p = new Predicate[list.size()];
-				//4.CirteriaBuilder的and函数组装  查询条件数组
-				return cb.and(list.toArray(p));				
+				Predicate url = cb.like(root.get("url").as(String.class), "%"+permissionQueryDTO.getUrl()+"%");
+				Predicate description = cb.like(root.get("description").as(String.class), "%"+permissionQueryDTO.getDescription()+"%");				
+				Predicate p = cb.or(url,description);
+				return p;				
 			}
 		};		
 		return spec;

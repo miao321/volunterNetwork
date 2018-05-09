@@ -229,7 +229,7 @@ function returnFont(){
 					<!-- <li><span class="glyphicon glyphicon-list" aria-hidden="true" style="margin-left:34px;"><a class="a" href="javascript:void(0);"
 						onClick="openurl('empty.html');">活动分类管理</a></span></li> -->
 					<li><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-left:34px;color: orange;"><a class="a" href="javascript:void(0);"
-						onClick="openurl('user/findPage');">用户中心管理</a></span></li>
+						onClick="openurl('user/findUserPage');">用户中心管理</a></span></li>
 					<li><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-left:6px;color: blue;"><a class="a" href="javascript:void(0);"
 						onClick="openurl('enroll/findPage');">报名管理</a></span></li>
 				</ul>

@@ -56,6 +56,31 @@
 	    var rframe = parent.document.getElementById("rightFrame");
 	    rframe.src = url;
 	}
+  
+  
+  $("#uploadImg").click(function() {	
+		$('#img').uploadifive({				
+			'uploadScript' : 'uploadImg',
+			'queueID' : 'fileQueue',
+			'auto' : false,
+			'multi' : false,
+			'buttonText' : '选择图片',
+			'formData' : {				
+				'img' : $("#img").val(),				
+			},
+			'fileSizeLimit' : 500
+		});	
+		$('#img').uploadifive('upload');
+	});
+  
+ function checkPhoto(myupload){
+	    var file=document.getElementById("filesize");
+	    if(file.value==""){        
+	        alert("请选择图片后上传");
+	        return false;
+	    }
+	    
+	}
 </script>
 </head>
 <body>
@@ -94,7 +119,7 @@
 		  if(session.getAttribute("userName")!=null)
 		  {%>
         	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
-        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
+        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/logout">退出</a></li>
         <%} %>
         <!-- <li><a href="#">注册</a></li> -->
       </ul>
@@ -107,7 +132,16 @@
 			<div class="person" style="width:200px;height: 100px;background: #fff;margin-left: 70px;margin-top: -10px;">
 				<img src="images/headimgboy1.jpg" style="width: 58px;height: 58px;float: left;margin: 21px 0 21px 21px;"/>
 				<span style="float:right;margin-right: 50px;margin-top: 20px;">${userName }</span>
-				<button style="float:right;width: 70px;height: 24px;margin-right: 30px;" type="button" class="btn btn-info"><h3 style="text-align: center;color: #fff;">设置头像</h3></button>
+				<!-- <form action="acti/uploadImg"  id="formId" class="form-horizontal" enctype="multipart/form-data" method="post"> -->
+				<button style="float:right;width: 70px;height: 24px;margin-right: 30px;padding: 0px 0px;" type="button" class="btn btn-info">设置头像</button>
+				<!-- <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">照片:</label>
+				    <div class="col-sm-10">
+				      <input type="file" id="img" name="img" class="form-control" placeholder="请输入照片">
+				      <div id="fileQueue"></div>
+				    </div>
+				  </div>
+				</form> -->
 			</div>
 		</div>
 		<div class="div2">

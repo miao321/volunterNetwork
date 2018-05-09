@@ -97,7 +97,10 @@ public class OpinionController {
 		return new ExtJsonResult<Opinion>(opinionLists);
 	}
 	@RequestMapping("/findPage")
-	public String findPage(HttpSession session,OpinionQueryDTO opinionQueryDTO,ExtPageable extPageable){
+	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,OpinionQueryDTO opinionQueryDTO,ExtPageable extPageable){
+		opinionQueryDTO.setAuthor(query);
+		opinionQueryDTO.setContent(query);
+		opinionQueryDTO.setTitle(query);
 		Page<Opinion> page = opinionService.findAll(opinionQueryDTO.getSpecification(opinionQueryDTO), extPageable.getPageable());
 		session.setAttribute("opinionLists", page.getContent());//内容
 		System.out.println("page.getContent()===="+page.getContent());

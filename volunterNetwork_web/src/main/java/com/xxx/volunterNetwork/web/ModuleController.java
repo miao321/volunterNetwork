@@ -96,7 +96,9 @@ public class ModuleController {
 	}	
 	@RequestMapping("/findPage")
 	@SysControllerLog(module="模块管理",methods="查找所有数据并分页排序")
-	public String findPage(HttpSession session,ModuleQueryDTO moduleQueryDTO,ExtPageable extPageable){
+	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,ModuleQueryDTO moduleQueryDTO,ExtPageable extPageable){
+		moduleQueryDTO.setModuleName(query);
+		moduleQueryDTO.setParentName(query);
 		Page<Module> page = moduleService.findAll(moduleQueryDTO.getSpecification(moduleQueryDTO), extPageable.getPageable());
 		session.setAttribute("moduleLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页

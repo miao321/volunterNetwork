@@ -111,7 +111,9 @@ public class PermissionController {
 	}
 	@RequestMapping("/findPage")
 	@SysControllerLog(module="部门管理",methods="查找多条数据并分页排序")
-	public String findPage(HttpSession session,PermissionQueryDTO permissionQueryDTO,ExtPageable extPageable){
+	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,PermissionQueryDTO permissionQueryDTO,ExtPageable extPageable){
+		permissionQueryDTO.setUrl(query);
+		permissionQueryDTO.setDescription(query);
 		Page<Permission> page = permissionService.findAll(permissionQueryDTO.getSpecification(permissionQueryDTO), extPageable.getPageable());	
 		session.setAttribute("permissionLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页

@@ -133,7 +133,7 @@ function searchActi(){
 		  if(session.getAttribute("userName")!=null)
 		  {%>
         	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
-        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
+        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/logout">退出</a></li>
         <%} %>
         <!-- <li><a href="#">注册</a></li> -->
       </ul>

@@ -23,7 +23,7 @@ public interface IEnrollService {
 	public List<Enroll> findAll();
 	public void updateState(Long id,Integer state);
 	public List<Enroll> findEnroll();
-	
+	public Enroll findUser(String userName);
 	public List<Enroll> findEnroll(Long id);
 	//动态条件查询
 	public Page<Enroll> findAll(Specification<Enroll> spec,Pageable pageable);

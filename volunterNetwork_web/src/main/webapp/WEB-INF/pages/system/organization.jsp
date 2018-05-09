@@ -246,6 +246,10 @@ function enableOrganization(id){
 		 }
 	}); 
 }
+function search(){
+	var query = document.getElementById("searchActi").value;	
+	window.location.href="findPage?query="+query;
+}
 </script>
 </head>
 <body>
@@ -263,6 +267,10 @@ function enableOrganization(id){
 				<button class="btn btn-info" onclick="deleteOrganizations()" style="margin: 6px 0;" type="button">
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-trash" aria-hidden="true"></span> 批量删除
 				</button>
+				<div class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
+					<input class="input-medium search-query" id="searchActi" type="text" placeholder="请输入关键字" style="height: 34px;margin-top: 10px;"/>
+					<button type="button" class="btn btn-info" onclick="search()">查找</button>
+				</div>
 				<table class="table" id="table">
 					<thead>
 						<tr>
@@ -315,20 +323,54 @@ function enableOrganization(id){
 					<c:if test="${pageNumber>0 }">
 						<li><a
 							href="<c:url value="/organization/findPage?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+					</c:if>		
+					<c:if test="${pageNumber-3 >= 1 }">
+						<li><a
+								href="<c:url value="/organization/findPage?page=${pageNumber-3}"/>">${pageNumber-3}</a>
+							</li>
 					</c:if>
-					<%-- <%
-						int currentPage = 1;
-						if(${pageTotalPages }>5){
-							pageTotalPages = 5;
-						}
-					%> --%>
-					<c:forEach begin="${pageNumber+1 }" end="${pageTotalPages }"
-						varStatus="loop">
-						<c:set var="active" value="${loop.index==page?'active':''}" />
+					<c:if test="${pageNumber-2 >= 1 }">
+						<li><a
+								href="<c:url value="/organization/findPage?page=${pageNumber-2}"/>">${pageNumber-2}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber-1 >= 1 }">
+						<li><a
+								href="<c:url value="/organization/findPage?page=${pageNumber-1}"/>">${pageNumber-1}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber >= 1 }">
+						<li><a
+								href="<c:url value="/organization/findPage?page=${pageNumber}"/>">${pageNumber}</a>
+							</li>
+					</c:if>					
+					<c:if test="${pageNumber+1 <= pageTotalPages}">
+					<c:set var="active" value="${active}" />
 						<li class="${active}"><a
-							href="<c:url value="/organization/findPage?page=${loop.index}"/>">${loop.index}</a>
-						</li>
-					</c:forEach>
+								href="<c:url value="/organization/findPage?page=${pageNumber+1}"/>">${pageNumber+1}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+2 <= pageTotalPages && !(pageNumber-3 >= 1)}">
+						<li><a
+								href="<c:url value="/organization/findPage?page=${pageNumber+2}"/>">${pageNumber+2}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+3 <= pageTotalPages && !(pageNumber-2 >= 1)}">
+						<li><a
+								href="<c:url value="/organization/findPage?page=${pageNumber+3}"/>">${pageNumber+3}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+4 <= pageTotalPages && !(pageNumber-1 >= 1)}">
+						<li><a
+								href="<c:url value="/organization/findPage?page=${pageNumber+4}"/>">${pageNumber+4}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+5 <= pageTotalPages && !(pageNumber >= 1)}">
+						<li><a
+								href="<c:url value="/organization/findPage?page=${pageNumber+5}"/>">${pageNumber+5}</a>
+							</li>
+					</c:if>
+					
 					<c:if test="${pageNumber+1 < pageTotalPages }">
 					<li><a
 						href="<c:url value="/organization/findPage?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
@@ -401,7 +443,7 @@ function enableOrganization(id){
 					<fieldset>
 						 <input type="hidden" id="id">
 						 <label>组织名字:</label><input type="text" id="organization2"/><br/>
-						 <label>下属组织:</label><input type="text" id="oxjrganization2"/><br/>
+						 <label>下属组织:</label><input type="text" id="xjorganization2"/><br/>
 						 <label>组织状态:</label><input type="text" id="state2" readonly="true"/><br/>
 					</fieldset>
 				</form>
@@ -432,9 +474,9 @@ function enableOrganization(id){
 			<div class="modal-body">
 				<form class="form-inline">
 					<fieldset>					
-						 <label>组织名字:</label><input type="text" id="organization3" value="${result.organizationName }" style="padding-left: 4px;"/><br/>
-						 <label>下属组织:</label><input type="text" id="xjorganization3" value="${result.major }" style="padding-left: 4px;"/><br/>
-						 <label>组织状态:</label><input type="text" id="state3" value="${result.state }" style="padding-left: 4px;"/><br/>						
+						 <label>组织名字:</label><input type="text" id="organization3" style="padding-left: 4px;"/><br/>
+						 <label>下属组织:</label><input type="text" id="xjorganization3" style="padding-left: 4px;"/><br/>
+						 <label>组织状态:</label><input type="text" id="state3" style="padding-left: 4px;"/><br/>						
 					</fieldset>
 				</form>
 			</div>

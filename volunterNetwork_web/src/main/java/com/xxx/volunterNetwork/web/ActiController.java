@@ -112,9 +112,11 @@ public class ActiController {
 	}	
 	@RequestMapping("/findPage")
 	@SysControllerLog(module="模块管理",methods="查找所有数据并分页排序")
-	public String findPage(HttpSession session,ActiQueryDTO actiQueryDTO,ExtPageable extPageable){
-		Page<Acti> page = actiService.findAll(actiQueryDTO.getSpecification(actiQueryDTO), extPageable.getPageable());
-		System.out.println("actiLists:+++"+page.getContent());
+	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,ActiQueryDTO actiQueryDTO,ExtPageable extPageable){
+		actiQueryDTO.setFbzz(query);
+		actiQueryDTO.setContent(query);
+		actiQueryDTO.setTitle(query);
+		Page<Acti> page = actiService.findAll(actiQueryDTO.getSpecification4(actiQueryDTO), extPageable.getPageable());
 		session.setAttribute("actiLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页
 		session.setAttribute("pageSize", page.getSize());//当前页条数
@@ -185,7 +187,7 @@ public class ActiController {
 						System.out.println("real_content:"+real_content);
 					} else if (filename.equalsIgnoreCase("fwyp")) {
 						real_fwyq = value;
-						System.out.println("real_fwyq:"+real_fwyq);
+						
 					} else if (filename.equalsIgnoreCase("hdjj")) {
 						real_hdjj = value;
 					}else if (filename.equalsIgnoreCase("xxdz")) {
@@ -200,6 +202,7 @@ public class ActiController {
 						real_endTime = dateFormat.parse(value);
 					}else if (filename.equalsIgnoreCase("duration")) {
 						real_duration = Integer.valueOf(value);
+						System.out.println("real_duration:"+real_duration);
 					}else if (filename.equalsIgnoreCase("hdlx")) {
 						real_hdlx = value;
 					}else if (filename.equalsIgnoreCase("fbzz")) {

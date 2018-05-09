@@ -287,6 +287,8 @@ function addUser(){
 	var userName = document.getElementById("userName2").value;
 	var studentNo = document.getElementById("studentNo2").value;
 	var password = document.getElementById("password2").value;
+	var idCard = document.getElementById("idCard2").value;
+	var college = document.getElementById("college2").value;
 	var inTake = document.getElementById("inTake2").value;
 	var birthday = document.getElementById("birthday2").value;
 	var sex = $('#sex2 input[name="sex"]:checked ').val();
@@ -370,7 +372,7 @@ function addUser(){
 		 type : "POST",
 		 url : "saveOrUpdate",           
          dataType : "json",
-         data:{userName:userName,studentNo:studentNo,password:password,inTake:inTake,birthday:birthday,
+         data:{userName:userName,studentNo:studentNo,password:password,idCard:idCard,college:college,inTake:inTake,birthday:birthday,
         	 sex:sex,phone:phone,email:email,ancestor:ancestor,politicalStatus:politicalStatus,remark:remark,
         	 createBy:createBy,createCollege:createCollege,createTime:createTime,updateBy:updateBy,updateTime:updateTime,
         	 state:state},
@@ -420,8 +422,7 @@ function enableUser(id){
 	}); 
 }
 //添加角色
-function addRole(){
-	alert(321);
+function addRole(){	
 	var checkbox = document.getElementsByName("rId");
 	if(isChecked()){
 		$.ajax({			 
@@ -430,8 +431,7 @@ function addRole(){
 	         dataType : "json",
 			 cache : false,
 			 async : true,
-			 success : function(result) {	
-				 alert(4353);
+			 success : function(result) {					
 				 $('#addRole').modal('show');
 					
 			 }
@@ -473,6 +473,10 @@ function saveRole(){
 		
 	}); 	
 }
+function search(){
+	var query = document.getElementById("searchActi").value;	
+	window.location.href="findPage?query="+query;
+}
 </script>
 </head>
 <body>
@@ -492,7 +496,10 @@ function saveRole(){
 				<button class="btn btn-info" onclick="addRole()" style="margin: 6px 0;" type="button">
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-plus" aria-hidden="true"></span> 角色
 				</button>
-				
+				<div class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
+					<input class="input-medium search-query" id="searchActi" type="text" placeholder="请输入关键字" style="height: 34px;margin-top: 10px;"/>
+					<button type="button" class="btn btn-info" onclick="search()">查找</button>
+				</div>
 				<table class="table" id="table">
 					<thead>
 						<tr>
@@ -502,6 +509,7 @@ function saveRole(){
 							<th>编号</th>
 							<th>用户名</th>
 							<th>用户学号</th>
+							<th>学院</th>
 							<th>状态</th>
 							<th>操作</th>
 						</tr>
@@ -513,7 +521,7 @@ function saveRole(){
 								<td>${status.index+1}</td>
 								<td>${user.userName}</td>
 								<td>${user.studentNo}</td>
-							
+								<td>${user.college }</td>
 								<c:if test="${user.state ==1}">
 								<td id="sta">启用</td>
 								</c:if>
@@ -641,6 +649,35 @@ function saveRole(){
 					    </div>
 					  </div>
 					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">身份证号:</label>
+					    <div class="col-sm-10">
+					      <input type="password" id="idCard2" name="idCard2" class="form-control" placeholder="请输入身份证号">
+					    </div>
+					  </div>
+					  <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">所属学院:</label>
+				    <div class="col-sm-10">
+				      <select type="text" id="college2" name="college2" class="form-control" placeholder="请输入所属学院">
+				      	<option>计算机与网络安全学院</option>
+				      	<option>电子工程与智能化学院</option>
+				      	<option>粤台产业科技学院</option>
+				      	<option>国际学院</option>
+				      	<option>生态环境与建筑工程学院</option>
+				      	<option>机械工程学院</option>
+				      	<option>经济与管理学院</option>
+				      	<option>文学与传媒学院</option>
+				      	<option>法律与社会工作学院</option>
+				      	<option>教育学院</option>
+				      	<option>化学工程与能源技术学院</option>
+				      	<option>中法联合学院</option>
+				      	<option>马克思主义学院</option>
+				      	<option>继续教育学院</option>
+				      				      
+				       </select>
+				     </div>
+				   </div>
+					  
+					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">入学时间:</label>
 					    <div class="col-sm-10">
 					      <input type="text" onClick="WdatePicker({lang:'zh-cn',dateFmt:'yyyy/MM/dd HH:mm:ss',minDate:${nowDate}})" id="inTake2" name="inTake2" class="form-control Wdate" placeholder="请输入入学时间" style="height:34px;">
@@ -689,13 +726,13 @@ function saveRole(){
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">所属学院:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">创建者学院:</label>
 					    <div class="col-sm-10">
 					      <input type="text" id="createBy2" name="createBy2" class="form-control" placeholder="请输入所属学院">
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">所属专业:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">创建者专业:</label>
 					    <div class="col-sm-10">
 					      <input type="text" id="createCollege2" name="createCollege2" class="form-control" placeholder="请输入所属专业">
 					    </div>
@@ -900,103 +937,103 @@ function saveRole(){
 					 <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">用户名:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="userName1" name="userName1" class="form-control" placeholder="请输入用户名" value="${result.userName }">
+					      <input type="text" id="userName1" name="userName1" class="form-control" placeholder="请输入用户名">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">学号:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="studentNo1" name="studentNo1" class="form-control" placeholder="请输入学号" value="${result.studentNo }">
+					      <input type="text" id="studentNo1" name="studentNo1" class="form-control" placeholder="请输入学号">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">用户密码:</label>
 					    <div class="col-sm-10">
-					      <input type="password" id="password1" name="password1" class="form-control" placeholder="请输入标题" value="${result.password }">
+					      <input type="password" id="password1" name="password1" class="form-control" placeholder="请输入标题">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">入学时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="inTake1" name="inTake1" class="form-control Wdate" placeholder="请输入入学时间" style="height:34px;" value="${result.inTake }">
+					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="inTake1" name="inTake1" class="form-control Wdate" placeholder="请输入入学时间" style="height:34px;">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">出生年月:</label>
 					    <div class="col-sm-10">
-					      <input type="text" onClick="WdatePicker({dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="birthday1" name="birthday1" class="form-control Wdate" placeholder="请输入出生年月" style="height:34px;" value="${result.birthday }">
+					      <input type="text" onClick="WdatePicker({dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="birthday1" name="birthday1" class="form-control Wdate" placeholder="请输入出生年月" style="height:34px;">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">性别:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="sex1" class="form-control" value="${result.sex }"/>
+					      <input type="text" id="sex1" class="form-control"/>
 						</div>				      
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">手机号:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="phone1" name="phone1" class="form-control" placeholder="请输入手机号" value="${result.phone }">
+					      <input type="text" id="phone1" name="phone1" class="form-control" placeholder="请输入手机号">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">邮箱:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="email1" name="email1" class="form-control" placeholder="请输入邮箱" value="${result.email }">
+					      <input type="text" id="email1" name="email1" class="form-control" placeholder="请输入邮箱">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">籍贯:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="ancestor1" name="ancestor1" class="form-control" placeholder="请输入籍贯" value="${result.ancestor }">
+					      <input type="text" id="ancestor1" name="ancestor1" class="form-control" placeholder="请输入籍贯">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">政治面貌:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="politicalStatus1" name="politicalStatus1" class="form-control" placeholder="请输入政治面貌" value="${result.politicalStatus }">
+					      <input type="text" id="politicalStatus1" name="politicalStatus1" class="form-control" placeholder="请输入政治面貌">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">备注:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="remark1" name="remark1" class="form-control" placeholder="请输入备注" value="${result.remark }">
+					      <input type="text" id="remark1" name="remark1" class="form-control" placeholder="请输入备注">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">创建者:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="createBy1" name="createBy1" class="form-control" placeholder="请输入创建者" value="${result.createBy }">
+					      <input type="text" id="createBy1" name="createBy1" class="form-control" placeholder="请输入创建者">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">创建者学院:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="createCollege1" name="createCollege1" class="form-control" placeholder="请输入创建者学院" value="${result.createCollege }">
+					      <input type="text" id="createCollege1" name="createCollege1" class="form-control" placeholder="请输入创建者学院">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">创建时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime1" name="createTime1" class="form-control Wdate" placeholder="请输入创建时间" style="height:34px;" value="${result.createTime }">
+					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime1" name="createTime1" class="form-control Wdate" placeholder="请输入创建时间" style="height:34px;">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">修改者:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="updateBy1" name="updateBy1" class="form-control" placeholder="请输入修改者" value="${result.updateBy }">
+					      <input type="text" id="updateBy1" name="updateBy1" class="form-control" placeholder="请输入修改者">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">修改时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime1" name="updateTime1" class="form-control Wdate" placeholder="请输入修改时间" style="height:34px;" value="${result.updateTime }">
+					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime1" name="updateTime1" class="form-control Wdate" placeholder="请输入修改时间" style="height:34px;">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label" >用户状态:</label>
 					    <div class="col-sm-10">	
-					    	<input type="text" id="state1" class="form-control" value="${result.state }" />
+					    	<input type="text" id="state1" class="form-control" />
 					    </div>
 					    
 					    	

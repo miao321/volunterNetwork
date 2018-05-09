@@ -159,7 +159,7 @@ function changePassword(){
 									</button> -->
 							    </label>							    	
 							    <div class="col-sm-3" style="margin-top: 4px;">
-							     <input type="text" id="remark2" name="remark2" class="form-control" placeholder="请选择归属组织">
+							     <input type="text" id="remark2" name="remark2" class="form-control" value="${user.college}">
 						 	     
 							     </div>
 							     <div class="col-sm-3" style="margin-top: 10px;">

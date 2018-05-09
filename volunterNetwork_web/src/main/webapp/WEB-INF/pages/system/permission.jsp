@@ -245,6 +245,10 @@ function enablePermission(id){
 		 }
 	}); 
 }
+function search(){
+	var query = document.getElementById("searchActi").value;	
+	window.location.href="findPage?query="+query;
+}
 </script>
 </head>
 <body>
@@ -261,6 +265,10 @@ function enablePermission(id){
 				<button class="btn btn-info" onclick="deletePermissions()" style="margin: 6px 0;" type="button">
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-trash" aria-hidden="true"></span> 批量删除
 				</button>
+				<div class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
+					<input class="input-medium search-query" id="searchActi" type="text" placeholder="请输入关键字" style="height: 34px;margin-top: 10px;"/>
+					<button type="button" class="btn btn-info" onclick="search()">查找</button>
+				</div>
 				<table class="table" id="table">
 					<thead>
 						<tr>
@@ -312,17 +320,59 @@ function enablePermission(id){
 					<c:if test="${pageNumber>0 }">
 						<li><a
 							href="<c:url value="/permission/findPage?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+					</c:if>		
+					<c:if test="${pageNumber-3 >= 1 }">
+						<li><a
+								href="<c:url value="/permission/findPage?page=${pageNumber-3}"/>">${pageNumber-3}</a>
+							</li>
 					</c:if>
-					<c:forEach begin="${pageNumber+1 }" end="${pageTotalPages }"
-						varStatus="loop">
-						<c:set var="active" value="${loop.index==page?'active':''}" />
+					<c:if test="${pageNumber-2 >= 1 }">
+						<li><a
+								href="<c:url value="/permission/findPage?page=${pageNumber-2}"/>">${pageNumber-2}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber-1 >= 1 }">
+						<li><a
+								href="<c:url value="/permission/findPage?page=${pageNumber-1}"/>">${pageNumber-1}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber >= 1 }">
+						<li><a
+								href="<c:url value="/permission/findPage?page=${pageNumber}"/>">${pageNumber}</a>
+							</li>
+					</c:if>					
+					<c:if test="${pageNumber+1 <= pageTotalPages}">
+					<c:set var="active" value="${active}" />
 						<li class="${active}"><a
-							href="<c:url value="/permission/findPage?page=${loop.index}"/>">${loop.index}</a>
-						</li>
-					</c:forEach>
+								href="<c:url value="/permission/findPage?page=${pageNumber+1}"/>">${pageNumber+1}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+2 <= pageTotalPages && !(pageNumber-3 >= 1)}">
+						<li><a
+								href="<c:url value="/permission/findPage?page=${pageNumber+2}"/>">${pageNumber+2}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+3 <= pageTotalPages && !(pageNumber-2 >= 1)}">
+						<li><a
+								href="<c:url value="/permission/findPage?page=${pageNumber+3}"/>">${pageNumber+3}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+4 <= pageTotalPages && !(pageNumber-1 >= 1)}">
+						<li><a
+								href="<c:url value="/permission/findPage?page=${pageNumber+4}"/>">${pageNumber+4}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+5 <= pageTotalPages && !(pageNumber >= 1)}">
+						<li><a
+								href="<c:url value="/permission/findPage?page=${pageNumber+5}"/>">${pageNumber+5}</a>
+							</li>
+					</c:if>
+					
+					<c:if test="${pageNumber+1 < pageTotalPages }">
 					<li><a
 						href="<c:url value="/permission/findPage?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
 					</li>
+					</c:if>
 				</ul>
 				<ul class="pager pagination-lg">
 					<li>共${pageTotalElements}条记录 共${pageTotalPages}页
@@ -459,25 +509,25 @@ function enablePermission(id){
 					 <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">资源URL:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="url1" name="url1" class="form-control" value="${result.url }">
+					      <input type="text" id="url1" name="url1" class="form-control">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">token:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="token1" name="token1" class="form-control" value="${result.token }">
+					      <input type="text" id="token1" name="token1" class="form-control">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">权限描述:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="description1" name="description1" class="form-control" value="${result.description }">
+					      <input type="text" id="description1" name="description1" class="form-control">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">用户状态:</label>
 					    <div class="col-sm-10">
-					    	<input type="text" id="state1" class="form-control" value="${result.state }"/>
+					    	<input type="text" id="state1" class="form-control"/>
 					    </div>
 					    
 					  </div>

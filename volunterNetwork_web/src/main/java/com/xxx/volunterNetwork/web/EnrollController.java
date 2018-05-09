@@ -125,9 +125,12 @@ public class EnrollController {
 	}*/
 	@RequestMapping("/findPage")
 	@SysControllerLog(module="模块管理",methods="查找所有数据并分页排序")
-	public String findPage(HttpSession session,EnrollQueryDTO enrollQueryDTO,ExtPageable extPageable){
-		Page<Enroll> page = enrollService.findAll(enrollQueryDTO.getSpecification(enrollQueryDTO), extPageable.getPageable());
-		System.out.println("enrollLists:+++"+page.getContent());
+	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,EnrollQueryDTO enrollQueryDTO,ExtPageable extPageable){
+		enrollQueryDTO.setUserName(query);
+		enrollQueryDTO.setCollege(query);
+		enrollQueryDTO.setStudentNo(query);
+		enrollQueryDTO.setHdName(query);
+		Page<Enroll> page = enrollService.findAll(enrollQueryDTO.getSpecification3(enrollQueryDTO), extPageable.getPageable());
 		session.setAttribute("enrollLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页
 		session.setAttribute("pageSize", page.getSize());//当前页条数

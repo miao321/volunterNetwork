@@ -25,6 +25,8 @@ public class EnrollQueryDTO {
 	private String userName;
 	private String college;
 	private Integer duration;
+	private String studentNo;
+	private String hdName;
 	public Long getId() {
 		return id;
 	}
@@ -54,6 +56,18 @@ public class EnrollQueryDTO {
 	}
 	public void setDuration(Integer duration) {
 		this.duration = duration;
+	}
+	public String getStudentNo() {
+		return studentNo;
+	}
+	public void setStudentNo(String studentNo) {
+		this.studentNo = studentNo;
+	}
+	public String getHdName() {
+		return hdName;
+	}
+	public void setHdName(String hdName) {
+		this.hdName = hdName;
 	}
 	//提供static的工具方法： 根据当前enrollQueryDTO对象来组装动态查询条件
 	public static Specification<Enroll> getSpecification(EnrollQueryDTO enrollQueryDTO){
@@ -95,4 +109,20 @@ public class EnrollQueryDTO {
 			};		
 			return spec;
 		}
+		
+
+		//提供static的工具方法： 根据当前enrollQueryDTO对象来组装动态查询条件
+			public static Specification<Enroll> getSpecification3(EnrollQueryDTO enrollQueryDTO){
+				Specification<Enroll> spec = new Specification<Enroll>() {
+					public Predicate toPredicate(Root<Enroll> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+						Predicate userName = cb.like(root.get("userName").as(String.class), "%"+enrollQueryDTO.getUserName()+"%");
+						Predicate college = cb.like(root.get("college").as(String.class), "%"+enrollQueryDTO.getCollege()+"%");				
+						Predicate studentNo = cb.like(root.get("studentNo").as(String.class), "%"+enrollQueryDTO.getStudentNo()+"%");				
+						Predicate hdName = cb.like(root.get("hdName").as(String.class), "%"+enrollQueryDTO.getHdName()+"%");				
+						Predicate p = cb.or(userName,college,studentNo,hdName);
+						return p;		
+					}
+				};		
+				return spec;
+			}
 }

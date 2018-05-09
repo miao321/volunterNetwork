@@ -28,6 +28,7 @@ public class ActiQueryDTO {
 	private String fbzz;
 	private String xxdz;
 	private String query;
+	private String content;
 	public String getHdlx() {
 		return hdlx;
 	}
@@ -57,6 +58,12 @@ public class ActiQueryDTO {
 	}
 	public void setQuery(String query) {
 		this.query = query;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public ActiQueryDTO() {
 
@@ -193,34 +200,48 @@ public class ActiQueryDTO {
 		}
 		
 		//提供static的工具方法： 根据当前actiQueryDTO对象来组装动态查询条件
-				public static Specification<Acti> getSpecification3(ActiQueryDTO actiQueryDTO){
-					Specification<Acti> spec = new Specification<Acti>() {
-						public Predicate toPredicate(Root<Acti> root, CriteriaQuery<?> query, CriteriaBuilder cb) {							
-							/*//1.Predicate查询条件集合
-							List<Predicate> list = new ArrayList<Predicate>();				
-							//2.根据QueryDTO数据字段的值进行判断以及条件的组装	
-							
-							//3.Predicate查询条件集合的size创建对应的Predicate查询条件数组
-							
-							//4.CirteriaBuilder的and函数组装  查询条件数组
-								*/
-							
-							  
-							Date now = new Date(System.currentTimeMillis());
-							
-							
-							Predicate beginTime = cb.lessThanOrEqualTo(root.get("beginTime").as(Date.class), now);
-							Predicate endTime = cb.greaterThanOrEqualTo(root.get("endTime").as(Date.class), now);
-							//Predicate hdlx = cb.like(root.get("hdlx").as(String.class), "%"+actiQueryDTO.getHdlx()+"");
-							Predicate title = cb.like(root.get("title").as(String.class), "%"+actiQueryDTO.getTitle()+"%");
-							Predicate fbzz = cb.like(root.get("fbzz").as(String.class), "%"+actiQueryDTO.getFbzz()+"%");
-							Predicate xxdz = cb.like(root.get("xxdz").as(String.class), "%"+actiQueryDTO.getXxdz()+"%");				
-							Predicate p = cb.or(title,fbzz,xxdz);
-							//p = cb.and(hdlx,p);
-									 
-							return p;				
-						}
-					};		
-					return spec;
+		public static Specification<Acti> getSpecification3(ActiQueryDTO actiQueryDTO){
+			Specification<Acti> spec = new Specification<Acti>() {
+				public Predicate toPredicate(Root<Acti> root, CriteriaQuery<?> query, CriteriaBuilder cb) {							
+					/*//1.Predicate查询条件集合
+					List<Predicate> list = new ArrayList<Predicate>();				
+					//2.根据QueryDTO数据字段的值进行判断以及条件的组装	
+					
+					//3.Predicate查询条件集合的size创建对应的Predicate查询条件数组
+					
+					//4.CirteriaBuilder的and函数组装  查询条件数组
+						*/
+					
+					  
+					Date now = new Date(System.currentTimeMillis());
+					
+					
+					Predicate beginTime = cb.lessThanOrEqualTo(root.get("beginTime").as(Date.class), now);
+					Predicate endTime = cb.greaterThanOrEqualTo(root.get("endTime").as(Date.class), now);
+					//Predicate hdlx = cb.like(root.get("hdlx").as(String.class), "%"+actiQueryDTO.getHdlx()+"");
+					Predicate title = cb.like(root.get("title").as(String.class), "%"+actiQueryDTO.getTitle()+"%");
+					Predicate fbzz = cb.like(root.get("fbzz").as(String.class), "%"+actiQueryDTO.getFbzz()+"%");
+					Predicate xxdz = cb.like(root.get("xxdz").as(String.class), "%"+actiQueryDTO.getXxdz()+"%");				
+					Predicate p = cb.or(title,fbzz,xxdz);
+					//p = cb.and(hdlx,p);
+							 
+					return p;				
 				}
+			};		
+			return spec;
+		}
+		
+		//提供static的工具方法： 根据当前actiQueryDTO对象来组装动态查询条件
+		public static Specification<Acti> getSpecification4(ActiQueryDTO actiQueryDTO){
+			Specification<Acti> spec = new Specification<Acti>() {
+				public Predicate toPredicate(Root<Acti> root, CriteriaQuery<?> query, CriteriaBuilder cb) {							
+					Predicate fbzz = cb.like(root.get("fbzz").as(String.class), "%"+actiQueryDTO.getFbzz()+"%");
+					Predicate content = cb.like(root.get("content").as(String.class), "%"+actiQueryDTO.getContent()+"%");				
+					Predicate title = cb.like(root.get("title").as(String.class), "%"+actiQueryDTO.getTitle()+"%");				
+					Predicate p = cb.or(fbzz,content,title);
+					return p;				
+				}
+			};		
+			return spec;
+		}
 }

@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="t_user")
 public class User implements Serializable {
 	private Long id;
-	private String collegeId;   //学院id
+	private String college;   //学院id
 	private String studentNo;   //学号
 	private String userName;    //姓名
 	private String password;
@@ -55,6 +55,7 @@ public class User implements Serializable {
 	private String email;     //邮箱
 	private String remark;    //备注
 	private String ancestor;  //籍贯
+	private String idCard;    //身份证号
 	private String politicalStatus;   //政治面貌	
 	//private College college;     //用户跟学院是一对多关系
 	//private UserInfo userInfo;  //用户跟用户信心扩展是一对一关系
@@ -79,8 +80,8 @@ public class User implements Serializable {
 	public Set<Role> getRoles() {
 		return roles;
 	}
-	public String getCollegeId() {
-		return collegeId;
+	public String getCollege() {
+		return college;
 	}
 	public String getStudentNo() {
 		return studentNo;
@@ -134,11 +135,14 @@ public class User implements Serializable {
 	public String getPoliticalStatus() {
 		return politicalStatus;
 	}
+	public String getIdCard() {
+		return idCard;
+	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public void setCollegeId(String collegeId) {
-		this.collegeId = collegeId;
+	public void setCollege(String college) {
+		this.college = college;
 	}
 	public void setStudentNo(String studentNo) {
 		this.studentNo = studentNo;
@@ -215,6 +219,9 @@ public class User implements Serializable {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
 	}
 	
 	

@@ -322,6 +322,10 @@ function enableModule(id){
 		 }
 	}); 
 }
+function search(){
+	var query = document.getElementById("searchActi").value;	
+	window.location.href="findPage?query="+query;
+}
 </script>
 </head>
 <body>
@@ -338,6 +342,10 @@ function enableModule(id){
 				<button class="btn btn-info" onclick="deleteModules()" style="margin: 6px 0;" type="button">
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-trash" aria-hidden="true"></span> 批量删除
 				</button>
+				<div class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
+					<input class="input-medium search-query" id="searchActi" type="text" placeholder="请输入关键字" style="height: 34px;margin-top: 10px;"/>
+					<button type="button" class="btn btn-info" onclick="search()">查找</button>
+				</div>
 				<table class="table" id="table">
 					<thead>
 						<tr>
@@ -387,17 +395,59 @@ function enableModule(id){
 					<c:if test="${pageNumber>0 }">
 						<li><a
 							href="<c:url value="/module/findPage?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+					</c:if>		
+					<c:if test="${pageNumber-3 >= 1 }">
+						<li><a
+								href="<c:url value="/module/findPage?page=${pageNumber-3}"/>">${pageNumber-3}</a>
+							</li>
 					</c:if>
-					<c:forEach begin="${pageNumber+1 }" end="${pageTotalPages}"
-						varStatus="loop">
-						<c:set var="active" value="${loop.index==page?'active':''}" />
+					<c:if test="${pageNumber-2 >= 1 }">
+						<li><a
+								href="<c:url value="/module/findPage?page=${pageNumber-2}"/>">${pageNumber-2}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber-1 >= 1 }">
+						<li><a
+								href="<c:url value="/module/findPage?page=${pageNumber-1}"/>">${pageNumber-1}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber >= 1 }">
+						<li><a
+								href="<c:url value="/module/findPage?page=${pageNumber}"/>">${pageNumber}</a>
+							</li>
+					</c:if>					
+					<c:if test="${pageNumber+1 <= pageTotalPages}">
+					<c:set var="active" value="${active}" />
 						<li class="${active}"><a
-							href="<c:url value="/module/findPage?page=${loop.index}"/>">${loop.index}</a>
-						</li>
-					</c:forEach>
+								href="<c:url value="/module/findPage?page=${pageNumber+1}"/>">${pageNumber+1}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+2 <= pageTotalPages && !(pageNumber-3 >= 1)}">
+						<li><a
+								href="<c:url value="/module/findPage?page=${pageNumber+2}"/>">${pageNumber+2}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+3 <= pageTotalPages && !(pageNumber-2 >= 1)}">
+						<li><a
+								href="<c:url value="/module/findPage?page=${pageNumber+3}"/>">${pageNumber+3}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+4 <= pageTotalPages && !(pageNumber-1 >= 1)}">
+						<li><a
+								href="<c:url value="/module/findPage?page=${pageNumber+4}"/>">${pageNumber+4}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+5 <= pageTotalPages && !(pageNumber >= 1)}">
+						<li><a
+								href="<c:url value="/module/findPage?page=${pageNumber+5}"/>">${pageNumber+5}</a>
+							</li>
+					</c:if>
+					
+					<c:if test="${pageNumber+1 < pageTotalPages }">
 					<li><a
 						href="<c:url value="/module/findPage?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
 					</li>
+					</c:if>
 				</ul>
 				<ul class="pager pagination-lg">
 					<li>共${pageTotalElements}条记录 共${pageTotalPages}页
@@ -692,103 +742,103 @@ function enableModule(id){
 					 <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">父模块名字:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="parentName1" name="parentName1" class="form-control"  value="${result.parentName }">
+					      <input type="text" id="parentName1" name="parentName1" class="form-control">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">模块名字:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="moduleName1" name="moduleName1" class="form-control" value="${result.moduleName }">
+					      <input type="text" id="moduleName1" name="moduleName1" class="form-control">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">层数:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="layerNum1" name="layerNum1" class="form-control" value="${result.layerNum }">
+					      <input type="text" id="layerNum1" name="layerNum1" class="form-control">
 					    </div>
 					  </div>
 					   <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">叶子节点:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="isLeaf1" name="isLeaf1" class="form-control" value="${result.isLeaf }">
+					      <input type="text" id="isLeaf1" name="isLeaf1" class="form-control">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">图片:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="icon1" name="icon1" class="form-control" value="${result.icon }">
+					      <input type="text" id="icon1" name="icon1" class="form-control">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">权限:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="cpermission1" name="cpermission1" class="form-control" value="${result.cpermission }">
+					      <input type="text" id="cpermission1" name="cpermission1" class="form-control">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">链接地址:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="curl1" name="curl1" class="form-control" value="${result.curl }">
+					      <input type="text" id="curl1" name="curl1" class="form-control">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">类型:</label>
 					    <div class="col-sm-10">
-					      <input  type="text" id="ctype1" name="ctype1" class="form-control" value="${result.ctype }">
+					      <input  type="text" id="ctype1" name="ctype1" class="form-control">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">从属:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="belong1" name="belong1" class="form-control" value="${result.belong }">
+					      <input type="text" id="belong1" name="belong1" class="form-control">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">备注:</label>
 					    <div class="col-sm-10">
-					      <input  type="text" id="remark1" name="remark1" class="form-control" value="${result.remark }">
+					      <input  type="text" id="remark1" name="remark1" class="form-control">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">序号:</label>
 					    <div class="col-sm-10">
-					      <input  type="text" id="orderNo1" name="orderNo1" class="form-control" value="${result.orderNo }">
+					      <input  type="text" id="orderNo1" name="orderNo1" class="form-control">
 					    </div>
 					  </div>
 					 <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">创建者:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="createBy1" name="createBy1" class="form-control" placeholder="请输入创建者" value="${result.createBy }">
+					      <input type="text" id="createBy1" name="createBy1" class="form-control" placeholder="请输入创建者">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">创建者学院:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="createCollege1" name="createCollege1" class="form-control" placeholder="请输入创建者学院" value="${result.createCollege }">
+					      <input type="text" id="createCollege1" name="createCollege1" class="form-control" placeholder="请输入创建者学院">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">创建时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime1" name="createTime1" placeholder="请输入创建时间" style="height:34px;" value="${result.createTime }">
+					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime1" name="createTime1" placeholder="请输入创建时间" style="height:34px;">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">修改者:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="updateBy1" name="updateBy1" class="form-control" placeholder="请输入修改者" value="${result.updateBy }">
+					      <input type="text" id="updateBy1" name="updateBy1" class="form-control" placeholder="请输入修改者">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">修改时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime1" name="updateTime1" placeholder="请输入修改时间" style="height:34px;" value="${result.updateTime }">
+					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime1" name="updateTime1" placeholder="请输入修改时间" style="height:34px;">
 					    </div>
 					  </div>
 					   <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">用户状态:</label>
 					    <div class="col-sm-10">
-					    	<input type="text" id="state1" class="form-control" value="${result.state }"/>
+					    	<input type="text" id="state1" class="form-control"/>
 					    </div>
 					    
 					  </div>			

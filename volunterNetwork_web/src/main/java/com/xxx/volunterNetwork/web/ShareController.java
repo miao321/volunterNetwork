@@ -96,7 +96,10 @@ public class ShareController {
 		return new ExtJsonResult<Share>(shareLists);
 	}
 	@RequestMapping("/findPage")
-	public String findPage(HttpSession session,ShareQueryDTO shareQueryDTO,ExtPageable extPageable){
+	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,ShareQueryDTO shareQueryDTO,ExtPageable extPageable){
+		shareQueryDTO.setAuthor(query);
+		shareQueryDTO.setContent(query);
+		shareQueryDTO.setTitle(query);
 		Page<Share> page = shareService.findAll(shareQueryDTO.getSpecification2(shareQueryDTO), extPageable.getPageable());
 		System.out.println("page.getContent():"+page.getContent());
 		session.setAttribute("shareLists", page.getContent());//内容

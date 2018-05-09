@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.xxx.volunterNetwork.domain.Enroll;
 import com.xxx.volunterNetwork.domain.Img;
+import com.xxx.volunterNetwork.domain.User;
 /**
  * 
  * @author miao
@@ -29,4 +30,6 @@ public interface EnrollRepository extends PagingAndSortingRepository<Enroll, Lon
 	@Modifying
 	@Query("from Enroll enroll where enroll.actiId = ?1")
 	public List<Enroll> findEnroll(Long id);
+	@Query("from Enroll enroll where enroll.userName =?1")
+	public Enroll findUser(String userName);
 }

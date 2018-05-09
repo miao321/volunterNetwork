@@ -112,7 +112,10 @@ public class OrganizationController {
 	}	
 	@RequestMapping("/findPage")
 	@SysControllerLog(module="模块管理",methods="查找所有数据并分页排序")
-	public String findPage(HttpSession session,OrganizationQueryDTO organizationQueryDTO,ExtPageable extPageable){
+	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,OrganizationQueryDTO organizationQueryDTO,ExtPageable extPageable){
+		organizationQueryDTO.setCollegeName(query);
+		organizationQueryDTO.setOrganization(query);
+		organizationQueryDTO.setXjorganization(query);
 		Page<Organization> page = organizationService.findAll(organizationQueryDTO.getSpecification(organizationQueryDTO), extPageable.getPageable());
 		System.out.println("organizationLists:+++"+page.getContent());
 		session.setAttribute("organizationLists", page.getContent());//内容

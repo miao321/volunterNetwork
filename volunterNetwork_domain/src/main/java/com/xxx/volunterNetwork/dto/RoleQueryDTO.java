@@ -22,50 +22,53 @@ public class RoleQueryDTO {
 	private Long roleId;
 	private Long permissionId;
 	private String permissionName;
+	private String roleName;
+	private String remark;
 
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
-
 	public void setPermissionId(Long permissionId) {
 		this.permissionId = permissionId;
 	}
-
 	public void setPermissionName(String permissionName) {
 		this.permissionName = permissionName;
 	}
-
 	public Long getId() {
 		return id;
 	}
-
 	public Long getRoleId() {
 		return roleId;
 	}
-
 	public Long getPermissionId() {
 		return permissionId;
 	}
-
 	public String getPermissionName() {
 		return permissionName;
 	}
-
+	public String getRoleName() {
+		return roleName;
+	}
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 	//提供static的工具方法： 根据当前roleQueryDTO对象来组装动态查询条件
 	public static Specification<Role> getSpecification(RoleQueryDTO roleQueryDTO){
 		Specification<Role> spec = new Specification<Role>() {
 			public Predicate toPredicate(Root<Role> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				//1.Predicate查询条件集合
-				List<Predicate> list = new ArrayList<Predicate>();				
-				//2.根据QueryDTO数据字段的值进行判断以及条件的组装				
-				//3.Predicate查询条件集合的size创建对应的Predicate查询条件数组
-				Predicate[] p = new Predicate[list.size()];
-				//4.CirteriaBuilder的and函数组装  查询条件数组
-				return cb.and(list.toArray(p));				
+				Predicate roleName = cb.like(root.get("roleName").as(String.class), "%"+roleQueryDTO.getRoleName()+"%");
+				Predicate remark = cb.like(root.get("remark").as(String.class), "%"+roleQueryDTO.getRemark()+"%");				
+				Predicate p = cb.or(roleName,remark);
+				return p;			
 			}
 		};		
 		return spec;

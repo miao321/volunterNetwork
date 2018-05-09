@@ -70,7 +70,7 @@
 		  if(session.getAttribute("userName")!=null)
 		  {%>
         	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
-        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
+        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/logout">退出</a></li>
         <%} %>
         <!-- <li><a href="#">注册</a></li> -->
       </ul>
@@ -82,27 +82,16 @@
 		<span style="color: #adadad;font-size: 18px;">推荐 &nbsp; /&nbsp; i&nbsp论坛  &nbsp;&nbsp; / &nbsp;${share.title }</span>
 	</div>
     <div class="item_con clearfix"  style="background: #fff;margin-top: 4px;">
-     	<div>
+     	<div style="float:left;width: 170px;">
 	     	<a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="pic_link">
 	        	 <img src="${pageContext.request.contextPath}/images/login.jpg" id="article_logo999993431541" class="pic" style="width:170px;height: 110px;float: left;">
 	        </a>
         </div> 
-          <div class="right_txt" style="margin-top: 26px;">	           	
+        <div style="float:left;width:950px;margin-top: 26px;">	           	
             <p class="right_txt_p" style="margin-left:190px;margin-top:-26px;margin-bottom:10px;font-size:14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${share.author } &nbsp;<span style="color: #adadad;">发布于：<fmt:formatDate value="${share.fbtime }" type="date"/></span></p>		       	
          	 <hr/>
-         	<span style="float:left;width:950px;display:block;font-size: 20px;color: #000;padding-left: 20px;">${share.content }441412312313131333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333343222222223333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333</span>
-        
-         <p class="right_txt_p" style="margin-left:190px;padding-top: 8px;display: block;float: left;">作者：${share.author } &nbsp;<fmt:formatDate value="${share.fbtime }" type="date"/>&nbsp;&nbsp;最后回应：${share.endResp } &nbsp;<fmt:formatDate value="${share.fbtime }" type="date"/></p>
-       	 <div style="float: left;display: block;margin-left: -500px;margin-top: 20px;">
-       	<!--  <button  type="button" class="btn btn-default" onclick="toView()" style="margin: 26px 0;">					
-			<span style="margin: 0px 4px;" class="glyphicon glyphicon-comment" aria-hidden="true" style="color:red;"></span> 回复				
-		</button> -->
-		<!-- <button class="btn btn-default" onclick="deleteUsers()" style="margin: 26px 0;margin-left: 190px;" type="button">
-			<span style="margin: 0px 4px;" class="glyphicon glyphicon-heart-empty" aria-hidden="true" style="color:red;"></span> 喜欢
-		</button> -->
-		<a href="javascript:;" class="date-dz-z pull-left" style="margin: 26px 0;margin-left: 190px;"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a>
-		
-		</div>
+         	<span style="float:left;width:950px;display:block;font-size: 20px;color: #000;padding-left: 20px;">${share.content }</span>        
+            <span style="float: left;width:950px;margin-bottom:20px;margin-left:20px;padding-top: 8px;display: block;">作者：${share.author } &nbsp;<fmt:formatDate value="${share.fbtime }" type="date"/>&nbsp;&nbsp;最后回应：${share.endResp } &nbsp;<fmt:formatDate value="${share.fbtime }" type="date"/></span>      	
        </div>     
      </div>		      
 	
@@ -179,7 +168,7 @@ $('.commentAll').on('click','.plBtn',function(){
 		 cache : false,
 		 async : true,
 		 success : function(result) {
-			 alert(result.userId);
+			
 			oHtml = '<div class="comment-show-con clearfix"><div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath }/images/headimgboy5.jpg" alt=""></div> <div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"> <a href="#" class="comment-size-name">${userName} : </a> <span class="my-pl-con">&nbsp;'+ oSize +'</span> </div> <div class="date-dz"> <span class="date-dz-left pull-left comment-time">'+now+'</span> <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
 		    if(oSize.replace(/(^\s*)|(\s*$)/g, "") != ''){
 		        $(obj).parents('.reviewArea ').siblings('.comment-show').prepend(oHtml);

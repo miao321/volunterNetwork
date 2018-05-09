@@ -106,8 +106,12 @@ public class BoradController {
 	}	
 	@RequestMapping("/findPage")
 	@SysControllerLog(module="模块管理",methods="查找所有数据并分页排序")
-	public String findPage(HttpSession session,BoradQueryDTO boradQueryDTO,ExtPageable extPageable){
-		Page<Borad> page = boradService.findAll(boradQueryDTO.getSpecification(boradQueryDTO), extPageable.getPageable());
+	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,BoradQueryDTO boradQueryDTO,ExtPageable extPageable){
+		boradQueryDTO.setFbman(query);
+		boradQueryDTO.setFblx(query);
+		boradQueryDTO.setContent(query);
+		boradQueryDTO.setTitle(query);
+		Page<Borad> page = boradService.findAll(boradQueryDTO.getSpecification2(boradQueryDTO), extPageable.getPageable());
 		session.setAttribute("boradLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页
 		session.setAttribute("pageSize", page.getSize());//当前页条数

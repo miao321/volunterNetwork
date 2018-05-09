@@ -28,6 +28,8 @@ public class OrganizationQueryDTO {
 	private String orNum;
 	private String xjorNum;
 	private String durationNum;
+	private String collegeName;
+	private String xjorganization;
 	public Long getId() {
 		return id;
 	}
@@ -83,17 +85,27 @@ public class OrganizationQueryDTO {
 	public void setDurationNum(String durationNum) {
 		this.durationNum = durationNum;
 	}
+	public String getCollegeName() {
+		return collegeName;
+	}
+	public void setCollegeName(String collegeName) {
+		this.collegeName = collegeName;
+	}
+	public String getXjorganization() {
+		return xjorganization;
+	}
+	public void setXjorganization(String xjorganization) {
+		this.xjorganization = xjorganization;
+	}
 	//提供static的工具方法： 根据当前OrganizationQueryDTO对象来组装动态查询条件
 	public static Specification<Organization> getSpecification(OrganizationQueryDTO organizationQueryDTO){
 		Specification<Organization> spec = new Specification<Organization>() {
 			public Predicate toPredicate(Root<Organization> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				//1.Predicate查询条件集合
-				List<Predicate> list = new ArrayList<Predicate>();				
-				//2.根据QueryDTO数据字段的值进行判断以及条件的组装				
-				//3.Predicate查询条件集合的size创建对应的Predicate查询条件数组
-				Predicate[] p = new Predicate[list.size()];
-				//4.CirteriaBuilder的and函数组装  查询条件数组
-				return cb.and(list.toArray(p));				
+				Predicate organization = cb.like(root.get("organization").as(String.class), "%"+organizationQueryDTO.getOrganization()+"%");
+				Predicate xjorganization = cb.like(root.get("xjorganization").as(String.class), "%"+organizationQueryDTO.getXjorganization()+"%");
+				Predicate collegeName = cb.like(root.get("collegeName").as(String.class), "%"+organizationQueryDTO.getCollegeName()+"%");				
+				Predicate p = cb.or(organization,xjorganization,collegeName);
+				return p;				
 			}
 		};		
 		return spec;

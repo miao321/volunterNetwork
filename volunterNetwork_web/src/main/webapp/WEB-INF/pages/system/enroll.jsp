@@ -211,6 +211,10 @@ function enableEnroll(id){
 		 }
 	}); 
 }
+function search(){
+	var query = document.getElementById("searchActi").value;	
+	window.location.href="findPage?query="+query;
+}
 </script>
 </head>
 <body>
@@ -224,6 +228,10 @@ function enableEnroll(id){
 				<button class="btn btn-info" onclick="deleteEnrolls()" style="margin: 6px 0;" type="button">
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-trash" aria-hidden="true"></span> 批量删除
 				</button>
+				<div class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
+					<input class="input-medium search-query" id="searchActi" type="text" placeholder="请输入关键字" style="height: 34px;margin-top: 10px;"/>
+					<button type="button" class="btn btn-info" onclick="search()">查找</button>
+				</div>
 				<table class="table" id="table">
 					<thead>
 						<tr>
@@ -235,6 +243,7 @@ function enableEnroll(id){
 							<th>学号</th>
 							<th>手机号</th>
 							<th>学院</th>
+							<th>活动名</th>
 							<th>专业</th>
 							<th>性别</th>
 							<th>是否录用</th>
@@ -250,6 +259,7 @@ function enableEnroll(id){
 								<td>${c.studentNo}</td>
 								<td>${c.phone}</td>
 								<td>${c.college}</td>
+								<td>${c.hdName}</td>
 								<td>${c.major}</td>
 								<td>${c.sex}</td>
 								<c:if test="${c.state ==1}">

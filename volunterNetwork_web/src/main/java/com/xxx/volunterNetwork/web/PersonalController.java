@@ -1,10 +1,28 @@
 package com.xxx.volunterNetwork.web;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -12,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.xxx.volunterNetwork.anno.SysControllerLog;
 import com.xxx.volunterNetwork.domain.Acti;
@@ -29,6 +49,7 @@ import com.xxx.volunterNetwork.service.IPersonalService;
 import com.xxx.volunterNetwork.service.IUserService;
 import com.xxx.volunterNetwork.util.ExtAjaxResponse;
 import com.xxx.volunterNetwork.util.ExtPageable;
+import com.xxx.volunterNetwork.util.ResultMap;
 
 @Controller
 public class PersonalController {
@@ -101,6 +122,75 @@ public class PersonalController {
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数	
 		return "/record";
+	}
+	
+	@RequestMapping("/changePhoto")	
+	public String upload(HttpServletRequest request, HttpServletResponse response,HttpSession session)
+			throws ServletException, IOException {
+		try {	
+			String real_img = null;		
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+			File f = new File("e:/target");
+			if (!f.exists()) {
+				f.mkdir();
+			}
+			factory.setRepository(f);
+			ServletFileUpload upload = new ServletFileUpload(factory);
+			List<FileItem> fileitems = upload.parseRequest(request);
+			// 遍历
+			for (FileItem fileitem : fileitems) {
+				// 判断是文件还是字符串
+				if (fileitem.isFormField()) {
+					// 文件
+					String filename = fileitem.getFieldName();
+					String value = fileitem.getString("utf-8");
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");					
+				} else {
+					// 文件名
+					String filename = fileitem.getName();
+					filename = filename
+							.substring(filename.lastIndexOf("/") + 1);
+					// 随机编辑名称
+					filename = filename.substring(filename.lastIndexOf("."));
+					filename = UUID.randomUUID().toString() + filename;
+					// 获取完整的名称
+					String webpath = "/upload/";
+					String filepath = request.getServletContext().getRealPath(
+							webpath + filename);
+					real_img = webpath + filename;
+					// 创建文件
+					File file = new File(filepath);
+					file.getParentFile().mkdirs();
+					file.createNewFile();
+					// 获取图像文件
+					BufferedImage image = ImageIO.read(fileitem
+							.getInputStream());
+					// 获取输入流
+					InputStream in = fileitem.getInputStream();
+					// 获取输出流
+					OutputStream out = new FileOutputStream(file);
+					// 文件对拷
+					byte[] buffer = new byte[1024];
+					int len;
+					while ((len = in.read(buffer)) > 0) {
+						out.write(buffer, 0, len);
+					}
+					// 关闭流
+					in.close();
+					out.close();
+					// 删除缓存文件
+					fileitem.delete();
+				}
+			}
+			//Acti bean = ResultMap.ReflectMap(real_img);
+			Long id = (Long) session.getAttribute("userId");
+			User user = userService.findOne(id);
+			user.setImg(real_img);
+			userService.saveOrUpdate(user);
+			return "/WEB-INF/pages/front/personal";
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 }

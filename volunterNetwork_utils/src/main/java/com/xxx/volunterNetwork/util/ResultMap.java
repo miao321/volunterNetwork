@@ -12,7 +12,7 @@ public class ResultMap {
 	public static Acti ReflectMap(String title,String content,String fwyq,String hdjj,String xxdz,
 			String fbman,String lxfs,Date BeginTime,Date endTime,Integer duration,String img,String hdlx,String fbzz,Date fbtime,
 			Integer state,Integer zmrs) {
-		Acti bean = new Acti(title,content,fwyq,hdjj,xxdz,fbman,lxfs,BeginTime,endTime,
+		Acti bean = new Acti(title,content,fwyq,hdjj,xxdz,fbman,lxfs,BeginTime,endTime,duration,
 				img,hdlx,fbzz,fbtime,state,zmrs);
 		return bean;
 	}

@@ -23,16 +23,30 @@ function checkAll(who, obj){
 		curCheckBox.item(i).checked = obj.checked;
 	}
 }
-//判断是否选择了数据
+//判断是否只选择了一条数据
 function isOnlyChecked(){
-	 var checkBoxArray = document.getElementsByName('id');
-		var count=0;
-		for(var index=0; index<checkBoxArray.length; index++) {
-			if (checkBoxArray[index].checked) {
-				count++;
-			}	
-		} 
+	var checkBoxArray = document.getElementsByName('id');
+	var count=0;
+	for(var index=0; index<checkBoxArray.length; index++) {
+		if (checkBoxArray[index].checked) {
+			count++;
+		}	
+	} 
 	if(count==1)
+		return true;
+	else
+		return false;
+}
+//判断是否选择了数据
+function isChecked(){
+	var checkbox = document.getElementsByName('id');
+	var strIds =[];  
+    for ( var i = 0; i < checkbox.length; i++) {  
+        if(checkbox[i].checked){  
+       	 strIds.push(checkbox[i].value); 
+        }  
+    }  
+	if(strIds!=0)
 		return true;
 	else
 		return false;
@@ -53,12 +67,20 @@ function toView(){
 			 data : {id:id},
 			 cache : false,
 			 async : true,
-			 success : function(result) {
+			 success : function(result) {	
 				if (result.state != 0) {
-					$('#seeShare').modal('show');
-					$("#roleName1").val(result.roleName);
+					$('#seeUser').modal('show');
+					$("#userName1").val(result.userName);
+					$("#studentNo1").val(result.studentNo);
+					$("#password1").val(result.password);
+					$("#inTake1").val(result.inTake);
+					$("#birthday1").val(result.birthday);
+					$("#sex1").val(result.sex);
+					$("#phone1").val(result.phone);
+					$("#email1").val(result.email);
+					$("#ancestor1").val(result.ancestor);
+					$("#politicalStatus1").val(result.politicalStatus);
 					$("#remark1").val(result.remark);
-					$("#orderNo1").val(result.orderNo);
 					$("#createBy1").val(result.createBy);
 					$("#createCollege1").val(result.createCollege);
 					$("#createTime1").val(result.createTime);
@@ -74,57 +96,17 @@ function toView(){
 				}
 					
 			 }}); 
-		 
+			 
 	 }else{
 		 alert("请先选择一项并且只能选择一项，再进行操作！");
 	 }
 }  	
-//删除单条数据
-function deleteShare(id){
-	 $.ajax({			 
-		 type : "POST",
-		 url : "delete",
-		 data : {id:id},
-		 cache : false,
-		 async : true,
-		 success : function(result) {
-			 /* if (result.msg) {
-				 alert(result.msg);
-			}else{ */
-				$("#tr_"+id).remove();
-			/* } */
-		 }
-	}); 	
-}
-//删除多条数据
-function deleteShares(){
-	 var checkbox = document.getElementsByName("id"); 
-     var strIds =[];  
-     for ( var i = 0; i < checkbox.length; i++) {  
-         if(checkbox[i].checked){  
-        	 strIds.push(checkbox[i].value); 
-         }  
-     }    
-	 $.ajax({			 
-		 type : "POST",	
-         dataType : "json",
-		 url : "deleteShares",
-		 data : {ids:strIds.toString()},
-		 cache : false,
-		 async : true,
-		 success : function(result) {	
-			 for(var i= 0;i<strIds.length;i++){  
-				 $("#tr_"+strIds[i]).remove();
-		     } 			
-		 }
-	}); 	
-}
 
 //禁用数据
-function disableShare(id){
+function disableUser(id){
 	$.ajax({			 
 		 type : "POST",
-		 url : "disableShare",           
+		 url : "disableUser",           
          dataType : "json",
          data:{id:id},
 		 cache : false,
@@ -135,16 +117,15 @@ function disableShare(id){
 				 location.reload();
 			}else{
 				alert("该数据已经被禁用无需重复操作!");
-			}
-			 
+			}			 
 		 }
 	}); 
 }
 //启用数据
-function enableShare(id){
+function enableUser(id){
 	$.ajax({			 
 		 type : "POST",
-		 url : "enableShare",           
+		 url : "enableUser",           
          dataType : "json",
          data:{id:id},
 		 cache : false,
@@ -161,7 +142,7 @@ function enableShare(id){
 }
 function search(){
 	var query = document.getElementById("searchActi").value;	
-	window.location.href="findPage?query="+query;
+	window.location.href="findUserPage?query="+query;
 }
 </script>
 </head>
@@ -169,17 +150,14 @@ function search(){
 <form>
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<div class="span12">
+			<div class="span12">							
 				<button  type="button" class="btn btn-info" onclick="toView()" style="margin: 6px 0;">					
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-edit" aria-hidden="true"></span> 查看					
-				</button>
-				<button class="btn btn-info" onclick="deleteShares()" style="margin: 6px 0;" type="button">
-					<span style="margin: 0px 4px;" class="glyphicon glyphicon-trash" aria-hidden="true"></span> 批量删除
 				</button>
 				<div class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
 					<input class="input-medium search-query" id="searchActi" type="text" placeholder="请输入关键字" style="height: 34px;margin-top: 10px;"/>
 					<button type="button" class="btn btn-info" onclick="search()">查找</button>
-				</div>
+				</div>			
 				<table class="table" id="table">
 					<thead>
 						<tr>
@@ -187,41 +165,33 @@ function search(){
 								onclick="checkAll('id',this)"></th>
 							<!-- <th data-checkbox="true"></th> -->
 							<th>编号</th>
-							<th>标题</th>
-							<th>内容</th>
-							<th>作者</th>
-							<th>发布时间</th>
+							<th>用户名</th>
+							<th>用户学号</th>
+							<th>学院</th>
 							<th>状态</th>
 							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${shareLists}" var="r" varStatus="status">
-							<tr id="tr_${r.id }">
-								<td><input type="checkbox" id="id" name="id" value="${r.id}" /></td>
+						<c:forEach items="${userLists}" var="user" varStatus="status">
+							<tr id="tr_${user.id }">
+								<td><input type="checkbox" id="id" name="id" value="${user.id}" /></td>
 								<td>${status.index+1}</td>
-								<td>${r.title}</td>
-								<td>${r.content}</td>
-								<td>${r.author}</td>
-								<td><fmt:formatDate value="${r.fbtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								<c:if test="${r.state ==1}">
-								<td id="sta">已审核</td>
+								<td>${user.userName}</td>
+								<td>${user.studentNo}</td>
+								<td>${user.college }</td>
+								<c:if test="${user.state ==1}">
+								<td id="sta">启用</td>
 								</c:if>
-								<c:if test="${r.state ==0}">
-								<td id="sta">未审核</td>
+								<c:if test="${user.state ==0}">
+								<td id="sta">停用</td>
 								</c:if>
-								<td>
-									<a onclick="deleteShare(${r.id})" id="id"><span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-trash" aria-hidden="true"
-									data-toggle="tooltip" data-placement="top" title="删除" >										
-									</span></a>
+								<td>									
 									<span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-ban-circle" aria-hidden="true"
-									data-toggle="tooltip" data-placement="top" title="未审核" onclick="disableShare(${r.id})"></span>
+									data-toggle="tooltip" data-placement="top" title="禁用" onclick="disableUser(${user.id})"></span>
 									<span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-ok-circle" aria-hidden="true"
-									data-toggle="tooltip" data-placement="top" title="已审核" onclick="enableShare(${r.id})"></span>
+									data-toggle="tooltip" data-placement="top" title="启用" onclick="enableUser(${user.id})"></span>
 								</td>
-								<c:if test="${pageNumber+1 > pageTotalPages }">
-									该页还没有内容
-								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -231,58 +201,58 @@ function search(){
 				<ul class="pager pagination-lg">
 					<c:if test="${pageNumber>0 }">
 						<li><a
-							href="<c:url value="/share/findPage?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+							href="<c:url value="/user/findUserPage?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
 					</c:if>		
 					<c:if test="${pageNumber-3 >= 1 }">
 						<li><a
-								href="<c:url value="/share/findPage?page=${pageNumber-3}"/>">${pageNumber-3}</a>
+								href="<c:url value="/user/findUserPage?page=${pageNumber-3}"/>">${pageNumber-3}</a>
 							</li>
 					</c:if>
 					<c:if test="${pageNumber-2 >= 1 }">
 						<li><a
-								href="<c:url value="/share/findPage?page=${pageNumber-2}"/>">${pageNumber-2}</a>
+								href="<c:url value="/user/findUserPage?page=${pageNumber-2}"/>">${pageNumber-2}</a>
 							</li>
 					</c:if>
 					<c:if test="${pageNumber-1 >= 1 }">
 						<li><a
-								href="<c:url value="/share/findPage?page=${pageNumber-1}"/>">${pageNumber-1}</a>
+								href="<c:url value="/user/findUserPage?page=${pageNumber-1}"/>">${pageNumber-1}</a>
 							</li>
 					</c:if>
 					<c:if test="${pageNumber >= 1 }">
 						<li><a
-								href="<c:url value="/share/findPage?page=${pageNumber}"/>">${pageNumber}</a>
+								href="<c:url value="/user/findUserPage?page=${pageNumber}"/>">${pageNumber}</a>
 							</li>
 					</c:if>					
 					<c:if test="${pageNumber+1 <= pageTotalPages}">
 					<c:set var="active" value="${active}" />
 						<li class="${active}"><a
-								href="<c:url value="/share/findPage?page=${pageNumber+1}"/>">${pageNumber+1}</a>
+								href="<c:url value="/user/findUserPage?page=${pageNumber+1}"/>">${pageNumber+1}</a>
 							</li>
 					</c:if>
 					<c:if test="${pageNumber+2 <= pageTotalPages && !(pageNumber-3 >= 1)}">
 						<li><a
-								href="<c:url value="/share/findPage?page=${pageNumber+2}"/>">${pageNumber+2}</a>
+								href="<c:url value="/user/findUserPage?page=${pageNumber+2}"/>">${pageNumber+2}</a>
 							</li>
 					</c:if>
 					<c:if test="${pageNumber+3 <= pageTotalPages && !(pageNumber-2 >= 1)}">
 						<li><a
-								href="<c:url value="/share/findPage?page=${pageNumber+3}"/>">${pageNumber+3}</a>
+								href="<c:url value="/user/findUserPage?page=${pageNumber+3}"/>">${pageNumber+3}</a>
 							</li>
 					</c:if>
 					<c:if test="${pageNumber+4 <= pageTotalPages && !(pageNumber-1 >= 1)}">
 						<li><a
-								href="<c:url value="/share/findPage?page=${pageNumber+4}"/>">${pageNumber+4}</a>
+								href="<c:url value="/user/findUserPage?page=${pageNumber+4}"/>">${pageNumber+4}</a>
 							</li>
 					</c:if>
 					<c:if test="${pageNumber+5 <= pageTotalPages && !(pageNumber >= 1)}">
 						<li><a
-								href="<c:url value="/share/findPage?page=${pageNumber+5}"/>">${pageNumber+5}</a>
+								href="<c:url value="/user/findUserPage?page=${pageNumber+5}"/>">${pageNumber+5}</a>
 							</li>
 					</c:if>
 					
 					<c:if test="${pageNumber+1 < pageTotalPages }">
 					<li><a
-						href="<c:url value="/share/findPage?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
+						href="<c:url value="/user/findUserPage?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
 					</li>
 					</c:if>
 				</ul>
@@ -296,8 +266,9 @@ function search(){
 	</div>
 </form>	
 
-<!-- seeCollege -->
-<%-- <div class="modal fade" id="seeShare" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+
+<!-- seeUser -->
+<div class="modal fade" id="seeUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -305,70 +276,120 @@ function search(){
 						aria-hidden="true">×
 				</button>
 				<h4 class="modal-title" id="myModalLabel">
-					角色信息
+					用户信息
 				</h4>
 			</div>
 			<div class="modal-body">
 				<form method="post" class="form-horizontal" role="form" >
-					<input type="hidden" id="id">
 					 <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">角色名字:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">用户名:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="roleName1" name="roleName1" class="form-control" placeholder="请输入角色名字"  value="${result.roleName }">
+					      <input type="text" id="userName1" name="userName1" class="form-control" placeholder="请输入用户名">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">学号:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="studentNo1" name="studentNo1" class="form-control" placeholder="请输入学号">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">用户密码:</label>
+					    <div class="col-sm-10">
+					      <input type="password" id="password1" name="password1" class="form-control" placeholder="请输入标题">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">入学时间:</label>
+					    <div class="col-sm-10">
+					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="inTake1" name="inTake1" class="form-control Wdate" placeholder="请输入入学时间" style="height:34px;">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">出生年月:</label>
+					    <div class="col-sm-10">
+					      <input type="text" onClick="WdatePicker({dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="birthday1" name="birthday1" class="form-control Wdate" placeholder="请输入出生年月" style="height:34px;">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">性别:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="sex1" class="form-control"/>
+						</div>				      
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">手机号:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="phone1" name="phone1" class="form-control" placeholder="请输入手机号">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">邮箱:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="email1" name="email1" class="form-control" placeholder="请输入邮箱">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">籍贯:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="ancestor1" name="ancestor1" class="form-control" placeholder="请输入籍贯">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">政治面貌:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="politicalStatus1" name="politicalStatus1" class="form-control" placeholder="请输入政治面貌">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">备注:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="remark1" name="remark1" class="form-control" placeholder="请输入备注" value="${result.remark }">
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">编号:</label>
-					    <div class="col-sm-10">
-					      <input  type="text" id="orderNo1" name="orderNo1" class="form-control" placeholder="请输入编号" value="${result.orderNo }">
+					      <input type="text" id="remark1" name="remark1" class="form-control" placeholder="请输入备注">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">创建者:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="createBy1" name="createBy1" class="form-control" placeholder="请输入创建者" value="${result.createBy }">
+					      <input type="text" id="createBy1" name="createBy1" class="form-control" placeholder="请输入创建者">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">创建者学院:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="createCollege1" name="createCollege1" class="form-control" placeholder="请输入创建者学院" value="${result.createCollege }">
+					      <input type="text" id="createCollege1" name="createCollege1" class="form-control" placeholder="请输入创建者学院">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">创建时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime1" name="createTime1" placeholder="请输入创建时间" style="height:34px;" value="${result.createTime }">
+					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime1" name="createTime1" class="form-control Wdate" placeholder="请输入创建时间" style="height:34px;">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">修改者:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="updateBy1" name="updateBy1" class="form-control" placeholder="请输入修改者" value="${result.updateBy }">
+					      <input type="text" id="updateBy1" name="updateBy1" class="form-control" placeholder="请输入修改者">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">修改时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime1" name="updateTime1" placeholder="请输入修改时间" style="height:34px;" value="${result.updateTime }">
+					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime1" name="updateTime1" class="form-control Wdate" placeholder="请输入修改时间" style="height:34px;">
 					    </div>
 					  </div>
-					   <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">用户状态:</label>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label" >用户状态:</label>
+					    <div class="col-sm-10">	
+					    	<input type="text" id="state1" class="form-control" />
+					    </div>
+					  </div>
+					 <%--  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">标题:</label>
 					    <div class="col-sm-10">
-					    	<input type="text" id="state1" class="form-control" value="${result.state }"/>
+					      <input type="text" id="title" name="title" class="form-control" placeholder="请输入标题" value="${result.userName }">
 					    </div>
-					    
-					  </div>
-				
-				</form>
-				
+					  </div> --%>
+				</form>					
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" 
@@ -378,6 +399,5 @@ function search(){
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
- --%>
 </body>
 </html>

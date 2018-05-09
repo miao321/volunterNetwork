@@ -215,8 +215,7 @@ function saveModule() {
 		 }
 	}); 
 } 
-//添加数据
- 	
+//添加数据 	
     $(document).ready(function() {
     	var state1 = /^[1|0]$/ ;
 		$('#img').uploadifive({
@@ -360,6 +359,10 @@ function enableActi(id){
 		 }
 	}); 
 }
+function search(){
+	var query = document.getElementById("searchActi").value;	
+	window.location.href="findPage?query="+query;
+}
 </script>
 </head>
 <body>
@@ -376,6 +379,10 @@ function enableActi(id){
 				<button class="btn btn-info" onclick="deleteActis()" style="margin: 6px 0;" type="button">
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-trash" aria-hidden="true"></span> 批量删除
 				</button>
+				<div class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
+					<input class="input-medium search-query" id="searchActi" type="text" placeholder="请输入关键字" style="height: 34px;margin-top: 10px;"/>
+					<button type="button" class="btn btn-info" onclick="search()">查找</button>
+				</div>
 				<table class="table" id="table">
 					<thead>
 						<tr>
@@ -430,17 +437,59 @@ function enableActi(id){
 					<c:if test="${pageNumber>0 }">
 						<li><a
 							href="<c:url value="/acti/findPage?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+					</c:if>		
+					<c:if test="${pageNumber-3 >= 1 }">
+						<li><a
+								href="<c:url value="/acti/findPage?page=${pageNumber-3}"/>">${pageNumber-3}</a>
+							</li>
 					</c:if>
-					<c:forEach begin="${pageNumber+1 }" end="${pageTotalPages}"
-						varStatus="loop">
-						<c:set var="active" value="${loop.index==page?'active':''}" />
+					<c:if test="${pageNumber-2 >= 1 }">
+						<li><a
+								href="<c:url value="/acti/findPage?page=${pageNumber-2}"/>">${pageNumber-2}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber-1 >= 1 }">
+						<li><a
+								href="<c:url value="/acti/findPage?page=${pageNumber-1}"/>">${pageNumber-1}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber >= 1 }">
+						<li><a
+								href="<c:url value="/acti/findPage?page=${pageNumber}"/>">${pageNumber}</a>
+							</li>
+					</c:if>					
+					<c:if test="${pageNumber+1 <= pageTotalPages}">
+					<c:set var="active" value="${active}" />
 						<li class="${active}"><a
-							href="<c:url value="/acti/findPage?page=${loop.index}"/>">${loop.index}</a>
-						</li>
-					</c:forEach>
+								href="<c:url value="/acti/findPage?page=${pageNumber+1}"/>">${pageNumber+1}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+2 <= pageTotalPages && !(pageNumber-3 >= 1)}">
+						<li><a
+								href="<c:url value="/acti/findPage?page=${pageNumber+2}"/>">${pageNumber+2}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+3 <= pageTotalPages && !(pageNumber-2 >= 1)}">
+						<li><a
+								href="<c:url value="/acti/findPage?page=${pageNumber+3}"/>">${pageNumber+3}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+4 <= pageTotalPages && !(pageNumber-1 >= 1)}">
+						<li><a
+								href="<c:url value="/acti/findPage?page=${pageNumber+4}"/>">${pageNumber+4}</a>
+							</li>
+					</c:if>
+					<c:if test="${pageNumber+5 <= pageTotalPages && !(pageNumber >= 1)}">
+						<li><a
+								href="<c:url value="/acti/findPage?page=${pageNumber+5}"/>">${pageNumber+5}</a>
+							</li>
+					</c:if>
+					
+					<c:if test="${pageNumber+1 < pageTotalPages }">
 					<li><a
 						href="<c:url value="/acti/findPage?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
 					</li>
+					</c:if>
 				</ul>
 				<ul class="pager pagination-lg">
 					<li>共${pageTotalElements}条记录 共${pageTotalPages}页
@@ -589,7 +638,7 @@ function enableActi(id){
 				    </div>
 				  </div>
 				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-4 control-label" id="state" >用户状态:&nbsp;&nbsp;
+				    <label for="inputEmail3" class="col-sm-4 control-label" id="state" >活动状态:&nbsp;&nbsp;
 				    	<input type="radio" name="radio" value="1" style="padding-left: 4px;"/> 启用					    	
 					 	<input type="radio" name="radio" value="0"/> 停用
 				    </label>

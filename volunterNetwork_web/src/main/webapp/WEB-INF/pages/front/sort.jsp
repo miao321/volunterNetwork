@@ -24,69 +24,49 @@
 <script type="text/javascript" src="js/crossdomain.js"></script>
 <script type="text/javascript">
 //添加数据
-function baoming(){
-	var id = document.getElementById("bao").value;
-	var userName = document.getElementById("userName").value;
-	var studentNo = document.getElementById("studentNo").value;	
-	var sex = $('#sex input[name="sex"]:checked ').val();
-	var phone = document.getElementById("phone").value;
-	var college = document.getElementById("college").value;
-	var major = document.getElementById("major").value;
-	var idCard = document.getElementById("idCard").value;
-	var userName1 = /^[\u4e00-\u9fa5]+$/;
-	var studentNo1 = /^[0-9]*$/ ;
-	var sex1 = /^['男'|'女']$/ ;
-	var phone1 = /^1\d{10}$/;
-	var major1 = /^[\u4e00-\u9fa5]+$/;
-	var idCard1 = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
-	if (userName == '') {
-		alert("姓名不能为空");
-		return false;
-	}
-	if (!userName1.test(userName)) {
-		alert("姓名只能为中文");
-		return false;
-	}
-	if (studentNo == '') {
-		alert("学号不能为空");
-		return false;
-	}
-	if (!studentNo1.test(studentNo)) {
-		alert("学号只能为数字");
-		return false;
-	}
-	if (!sex1.test(sex)) {
-		alert("性别不能为空");
-		return false;
-	}
-	if (!phone1.test(phone)) {
-		alert("请填写正确的手机号");
-		return false;
-	}
-	if (major == '') {
-		alert("专业不能为空");
-		return false;
-	}
-	if (!major1.test(major)) {
-		alert("专业只能为中文");
-		return false;
-	}
-	if (!idCard1.test(idCard)) {
-		alert("请填写正确的身份证号");
-		return false;
-	}
+function baoming(id){	
 	 $.ajax({			 
 		 type : "POST",
 		 url : "baoming/saveOrUpdate",           
          dataType : "json",
-         data:{id:id,userName:userName,studentNo:studentNo,
-        	 sex:sex,phone:phone,college:college,major:major,idCard:idCard},
+         data:{id:id},
 		 cache : false,
 		 async : true,
-		 success : function(data) {				
-			location.reload();
-		 }
+		 success : function(data) {	
+			alert(data.msg);
+			//location.reload();
+		 },
+		 failure:function(data){
+			 alert(data);
+        	 alert(data.msg);
+         }
 	}); 
+}
+function addZan(id){
+	$.ajax({
+		type:"POST",
+		url:"addZan",
+		dataType:"json",
+		data:{id:id},
+		cache:false,
+		async:true,
+		success:function(data){
+			location.reload();
+		}
+	});
+}
+function addAttention(id){
+	$.ajax({
+		type:"POST",
+		url:"addAttention",
+		dataType:"json",
+		data:{id:id},
+		cache:false,
+		async:true,
+		success:function(data){
+			location.reload();
+		}
+	});
 }
 function searchActi(){
 	var query = document.getElementById("searchActi").value;	
@@ -200,7 +180,7 @@ function searchActi(){
 		  if(session.getAttribute("userName")!=null)
 		  {%>
         	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
-        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/login">退出</a></li>
+        	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/logout">退出</a></li>
         <%} %>
         <!-- <li><a href="#">注册</a></li> -->
       </ul>
@@ -250,13 +230,13 @@ function searchActi(){
 		       </div>     
 		     </div>
 		      <div class="box_vo box_l">
-		       	 <p val="592411" class="opion invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>感兴趣</em><strong class="goodNum">${acti.zan }</strong></a></p>
+		       	 <p val="592411" class="opion invite"><a href="javascript:;" onclick="addZan(${acti.id})" id="parise789749" style="cursor: pointer;text-decoration: none;"><i></i><em>感兴趣</em><strong class="goodNum">${acti.zan }</strong></a></p>
 		       </div>
 		       <div class="box_vo box_m">
 		       	 <p val="592411" class="opion opion2 invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>招募人数</em><strong class="goodNum">${acti.zmrs }</strong></a></p>
 		       </div>
 		       <div class="box_vo box_r">
-		       	 <p val="592411" class="opion opion3 invite"><a href="javascript:;" id="parise789749" style="cursor: default;"><i></i><em>关注</em><strong class="goodNum">${acti.attention }</strong></a></p>
+		       	 <p val="592411" class="opion opion3 invite"><a href="javascript:;" onclick="addAttention(${acti.id})" id="parise789749" style="cursor: pointer;text-decoration: none;"><i></i><em>关注</em><strong class="goodNum">${acti.attention }</strong></a></p>
 		       </div>
 		        <c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set> 		       
 				<c:if test="${nowDate-acti.endTime.getTime()>0}"> 
@@ -266,8 +246,7 @@ function searchActi(){
 			   </button>
 			   </c:if>
 			   <c:if test="${nowDate-acti.endTime.getTime()<0}"> 
-		       <button class="btn btn-warning" data-toggle="modal" data-target="#baoming" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;color:#fff;" type="button">
-					<input type="hidden" id="bao" value="${acti.id }">
+		       <button class="btn btn-warning" onclick="baoming(${acti.id })" style="width:160px;float:right;margin-top: -80px;margin-right:90px;background: #ff8814;color:#fff;" type="button">
 					马上报名
 			   </button>
 			   </c:if>
@@ -282,58 +261,58 @@ function searchActi(){
 <ul class="pager pagination-lg">
 	<c:if test="${pageNumber>0 }">
 		<li><a
-			href="<c:url value="/sort?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+			href="<c:url value="/sort?hdlx=${hdlx }&page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
 	</c:if>		
 	<c:if test="${pageNumber-3 >= 1 }">
 		<li><a
-				href="<c:url value="/sort?page=${pageNumber-3}"/>">${pageNumber-3}</a>
+				href="<c:url value="/sort?hdlx=${hdlx }&page=${pageNumber-3}"/>">${pageNumber-3}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber-2 >= 1 }">
 		<li><a
-				href="<c:url value="/sort?page=${pageNumber-2}"/>">${pageNumber-2}</a>
+				href="<c:url value="/sort?hdlx=${hdlx }&page=${pageNumber-2}"/>">${pageNumber-2}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber-1 >= 1 }">
 		<li><a
-				href="<c:url value="/sort?page=${pageNumber-1}"/>">${pageNumber-1}</a>
+				href="<c:url value="/sort?hdlx=${hdlx }&page=${pageNumber-1}"/>">${pageNumber-1}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber >= 1 }">
 		<li><a
-				href="<c:url value="/sort?page=${pageNumber}"/>">${pageNumber}</a>
+				href="<c:url value="/sort?hdlx=${hdlx }&page=${pageNumber}"/>">${pageNumber}</a>
 			</li>
 	</c:if>					
 	<c:if test="${pageNumber+1 <= pageTotalPages}">
 	<c:set var="active" value="${active}" />
 		<li class="${active}"><a
-				href="<c:url value="/sort?page=${pageNumber+1}"/>">${pageNumber+1}</a>
+				href="<c:url value="/sort?hdlx=${hdlx }&page=${pageNumber+1}"/>">${pageNumber+1}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber+2 <= pageTotalPages && !(pageNumber-3 >= 1)}">
 		<li><a
-				href="<c:url value="/sort?page=${pageNumber+2}"/>">${pageNumber+2}</a>
+				href="<c:url value="/sort?hdlx=${hdlx }&page=${pageNumber+2}"/>">${pageNumber+2}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber+3 <= pageTotalPages && !(pageNumber-2 >= 1)}">
 		<li><a
-				href="<c:url value="/sort?page=${pageNumber+3}"/>">${pageNumber+3}</a>
+				href="<c:url value="/sort?hdlx=${hdlx }&page=${pageNumber+3}"/>">${pageNumber+3}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber+4 <= pageTotalPages && !(pageNumber-1 >= 1)}">
 		<li><a
-				href="<c:url value="/sort?page=${pageNumber+4}"/>">${pageNumber+4}</a>
+				href="<c:url value="/sort?hdlx=${hdlx }&page=${pageNumber+4}"/>">${pageNumber+4}</a>
 			</li>
 	</c:if>
 	<c:if test="${pageNumber+5 <= pageTotalPages && !(pageNumber >= 1)}">
 		<li><a
-				href="<c:url value="/sort?page=${pageNumber+5}"/>">${pageNumber+5}</a>
+				href="<c:url value="/sort?hdlx=${hdlx }&page=${pageNumber+5}"/>">${pageNumber+5}</a>
 			</li>
 	</c:if>
 	
 	<c:if test="${pageNumber+1 < pageTotalPages }">
 	<li><a
-		href="<c:url value="/sort?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
+		href="<c:url value="/sort?hdlx=${hdlx }&page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
 	</li>
 	</c:if>
 </ul>

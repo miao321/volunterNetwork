@@ -162,7 +162,9 @@ public class UserController {
 		return userLists;		
 	}	
 	@RequestMapping("/findPage")
-	public String findPage(HttpSession session,UserQueryDTO userQueryDTO,ExtPageable extPageable){
+	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,UserQueryDTO userQueryDTO,ExtPageable extPageable){
+		userQueryDTO.setUserName(query);
+		userQueryDTO.setStudentNo(query);
 		Page<User> page = userService.findAll(userQueryDTO.getSpecification(userQueryDTO), extPageable.getPageable());
 		session.setAttribute("userLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页
@@ -170,6 +172,19 @@ public class UserController {
 		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
 		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
 		return "/WEB-INF/pages/system/user";	
+	}
+	@RequestMapping("/findUserPage")
+	public String findUserPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,UserQueryDTO userQueryDTO,ExtPageable extPageable){
+		userQueryDTO.setUserName(query);
+		userQueryDTO.setStudentNo(query);
+		Page<User> page = userService.findAll(userQueryDTO.getSpecification(userQueryDTO), extPageable.getPageable());
+		System.out.println("page.getContent():===="+page.getContent());
+		session.setAttribute("userLists", page.getContent());//内容
+		session.setAttribute("pageNumber", page.getNumber());//当前页
+		session.setAttribute("pageSize", page.getSize());//当前页条数
+		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
+		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
+		return "/WEB-INF/pages/system/userDetail";	
 	}
 /*
 	@RequestMapping("/findUserRole")

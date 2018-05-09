@@ -53,6 +53,7 @@ public class Acti {
 		this.lxfs = lxfs;
 		this.beginTime = beginTime;
 		this.endTime = endTime;
+		
 		this.img = img;
 		this.hdlx = hdlx;
 		this.fbzz = fbzz;
@@ -63,7 +64,7 @@ public class Acti {
 		this.attention = attention;
 	}
 	public Acti(String title, String content, String fwyq, String hdjj, String xxdz,String fbman, String lxfs, Date beginTime,Date endTime,
-			String img, String hdlx, String fbzz, Date fbtime, Integer state, Integer zmrs) {	
+			Integer duration,String img, String hdlx, String fbzz, Date fbtime, Integer state, Integer zmrs) {	
 		this.title = title;
 		this.content = content;
 		this.fwyq = fwyq;
@@ -73,6 +74,7 @@ public class Acti {
 		this.lxfs = lxfs;
 		this.beginTime = beginTime;
 		this.endTime = endTime;
+		this.duration = duration;
 		this.img = img;
 		this.hdlx = hdlx;
 		this.fbzz = fbzz;

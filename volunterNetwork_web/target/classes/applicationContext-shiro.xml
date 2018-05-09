@@ -62,6 +62,7 @@ http://www.springframework.org/schema/context/spring-context.xsd">
 				 /messageBlog = anon
 				 /boradPage = anon
 				 /enroll/findPage = anon
+				 /baoming/saveOrUpdate = anon
 				 <!--  /login = anon  -->
 				  /** =authc
 				  /*.*=authc

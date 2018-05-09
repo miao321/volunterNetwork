@@ -147,7 +147,9 @@ public class RoleController {
 		return new ExtJsonResult<Role>(roleLists);
 	}
 	@RequestMapping("/findPage")
-	public String findPage(HttpSession session,RoleQueryDTO roleQueryDTO,ExtPageable extPageable){
+	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,RoleQueryDTO roleQueryDTO,ExtPageable extPageable){
+		roleQueryDTO.setRoleName(query);
+		roleQueryDTO.setRemark(query);
 		Page<Role> page = roleService.findAll(roleQueryDTO.getSpecification(roleQueryDTO), extPageable.getPageable());
 		session.setAttribute("roleLists", page.getContent());//内容
 		session.setAttribute("pageNumber", page.getNumber());//当前页
