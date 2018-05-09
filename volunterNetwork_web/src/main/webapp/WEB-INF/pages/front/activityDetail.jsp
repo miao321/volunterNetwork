@@ -15,11 +15,11 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/WdatePicker.js"></script>
 <script charset="utf-8" src="${pageContext.request.contextPath}/kindeditor/kindeditor-all-min.js"></script>
 <script charset="utf-8" src="${pageContext.request.contextPath}/kindeditor/lang/zh-CN.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/background.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/WdatePicker.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.uploadifive.min.js"></script>
+
 
 <script type="text/javascript">
 var editor;
@@ -72,11 +72,11 @@ function toView(){
 			 async : true,
 			 success : function(result) {
 				if (result.state != 0) {
-					$('#seeActi').modal('show');
-					
+					$('#seeActi').modal('show');					
 					$("#title2").val(result.title);
+					//editor.html("#content2",result.content);
 					$("#content2").html(result.content);
-					$("#fwyp2").val(result.fwyp);
+					$("#fwyq2").val(result.fwyq);
 					$("#hdjj2").val(result.hdjj);
 					$("#xxdz2").val(result.xxdz);
 					$("#lxfs2").val(result.lxfs);
@@ -153,9 +153,9 @@ function editActi(id){
 				$('#editActi').modal('show');
 				$("#id").val(result.id);
 				$("#title1").val(result.title);
-				alert($("#fwyp1").val(result.fwyp));
+				//editor.html("#content1",result.content);
 				$("#content1").val(result.content);
-				$("#fwyp1").val(result.fwyp);
+				$("#fwyq1").val(result.fwyq);
 				$("#hdjj1").val(result.hdjj);
 				$("#xxdz1").val(result.xxdz);
 				$("#lxfs1").val(result.lxfs);
@@ -183,7 +183,7 @@ function saveModule() {
 	var id = document.getElementById("id").value;
 	var title = document.getElementById("title1").value;
 	var content = document.getElementById("content1").value;
-	var fwyp = document.getElementById("fwyp1").value;
+	var fwyp = document.getElementById("fwyq1").value;
 	var hdjj = document.getElementById("hdjj1").value;	
 	var xxdz = document.getElementById("xxdz1").value;
 	var lxfs = document.getElementById("lxfs1").value;
@@ -682,7 +682,7 @@ function search(){
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">服务内容:</label>
 				    <div class="col-sm-10">
-				      <textarea name="content1" id="content1" style="width:362px;height:400px;visibility:hidden;display: block;resize: none;"></textarea>
+				      <textarea name="content1" id="content1" style="width:468px;height:400px;resize: none;"></textarea>
 				    </div>
 				  </div>
 				  <div class="form-group">
@@ -736,7 +736,7 @@ function search(){
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">照片:</label>
 				    <div class="col-sm-10">
-				      <input type="file" id="img1" name="img1" class="form-control" placeholder="请输入照片">
+				      <input type="text" id="img1" name="img1" class="form-control" placeholder="请输入照片">
 				      <div id="fileQueue"></div>
 				    </div>
 				  </div>
@@ -810,7 +810,7 @@ function search(){
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">服务内容:</label>
 				    <div class="col-sm-10">
-				      <textarea name="content" id="content2" style="width:362px;height:400px;visibility:hidden;display: block;resize: none;"></textarea>
+				      <textarea name="content1" id="content2" style="width:468px;height:400px;resize: none;"></textarea>
 				    </div>
 				  </div>
 				  <div class="form-group">

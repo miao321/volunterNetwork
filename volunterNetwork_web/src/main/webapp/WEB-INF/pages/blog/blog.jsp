@@ -42,11 +42,6 @@ KindEditor.ready(function(K) {
 });
 //添加数据
 function share(){
-	var userName = "<%=session.getAttribute("userName")%>";
-	if ($.isEmptyObject(userName) == false) {
-		alert("请先登录！");
-		return false;
-	}
 	var title = document.getElementById("title").value;
 	var content = $("#content").val();
 	 $.ajax({	
@@ -57,7 +52,8 @@ function share(){
          data:{title:title,content:content},
 		 cache : false,
 		 async : true,
-		 success : function(data) {				
+		 success : function(data) {
+			alert(data.msg);
 			location.reload();
 		 }
 	}); 

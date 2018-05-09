@@ -56,18 +56,16 @@ function toView(){
 			 success : function(result) {
 				if (result.state != 0) {
 					$('#seeShare').modal('show');
-					$("#roleName1").val(result.roleName);
-					$("#remark1").val(result.remark);
-					$("#orderNo1").val(result.orderNo);
-					$("#createBy1").val(result.createBy);
-					$("#createCollege1").val(result.createCollege);
-					$("#createTime1").val(result.createTime);
-					$("#updateBy1").val(result.updateBy);
-					$("#updateTime1").val(result.updateTime);
+					$("#title1").val(result.title);
+					$("#author1").val(result.author);
+					$("#content1").val(result.content);
+					$("#endResp1").val(result.endResp);
+					$("#fbtime1").val(result.fbtime);
+					
 					if(result.state == 1){
-						$("#state1").val("启用");
+						$("#state1").val("已审核");
 					}else{
-						$("#state1").val("停用");
+						$("#state1").val("未审核");
 					}	
 				}else{
 					alert("该数据是禁用状态无法查看!");
@@ -297,7 +295,7 @@ function search(){
 </form>	
 
 <!-- seeCollege -->
-<%-- <div class="modal fade" id="seeShare" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="seeShare" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -305,64 +303,49 @@ function search(){
 						aria-hidden="true">×
 				</button>
 				<h4 class="modal-title" id="myModalLabel">
-					角色信息
+					帖子信息
 				</h4>
 			</div>
 			<div class="modal-body">
 				<form method="post" class="form-horizontal" role="form" >
 					<input type="hidden" id="id">
+					<div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">标题:</label>
+					    <div class="col-sm-10">
+					      <input type="text" id="title1" name="title1" class="form-control" placeholder="请输入标题">
+					    </div>
+					  </div>
 					 <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">角色名字:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">作者:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="roleName1" name="roleName1" class="form-control" placeholder="请输入角色名字"  value="${result.roleName }">
+					      <input type="text" id="author1" name="author1" class="form-control" placeholder="请输入作者">
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">备注:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">内容:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="remark1" name="remark1" class="form-control" placeholder="请输入备注" value="${result.remark }">
+					      <input type="text" id="content1" name="content1" class="form-control" placeholder="请输入内容">
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">编号:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">最后回复:</label>
 					    <div class="col-sm-10">
-					      <input  type="text" id="orderNo1" name="orderNo1" class="form-control" placeholder="请输入编号" value="${result.orderNo }">
+					      <input  type="text" id="endResp1" name="endResp1" class="form-control" placeholder="请输入最后回复">
 					    </div>
 					  </div>
+					 
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">创建者:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">发布时间:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="createBy1" name="createBy1" class="form-control" placeholder="请输入创建者" value="${result.createBy }">
+					      <input type="text" id="fbtime1" name="fbtime1" class="form-control" placeholder="请输入发布时间">
 					    </div>
 					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">创建者学院:</label>
-					    <div class="col-sm-10">
-					      <input type="text" id="createCollege1" name="createCollege1" class="form-control" placeholder="请输入创建者学院" value="${result.createCollege }">
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">创建时间:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="createTime1" name="createTime1" placeholder="请输入创建时间" style="height:34px;" value="${result.createTime }">
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">修改者:</label>
-					    <div class="col-sm-10">
-					      <input type="text" id="updateBy1" name="updateBy1" class="form-control" placeholder="请输入修改者" value="${result.updateBy }">
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">修改时间:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control Wdate" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="updateTime1" name="updateTime1" placeholder="请输入修改时间" style="height:34px;" value="${result.updateTime }">
-					    </div>
-					  </div>
+					 
+					  
 					   <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">用户状态:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">帖子状态:</label>
 					    <div class="col-sm-10">
-					    	<input type="text" id="state1" class="form-control" value="${result.state }"/>
+					    	<input type="text" id="state1" class="form-control"/>
 					    </div>
 					    
 					  </div>
@@ -378,6 +361,6 @@ function search(){
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
- --%>
+
 </body>
 </html>

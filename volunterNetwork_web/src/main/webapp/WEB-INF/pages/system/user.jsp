@@ -327,6 +327,15 @@ function addUser(){
 		alert("学号只能为数字");
 		return false;
 	}
+    if (idCard == '') {
+    	alert("身份证号不能为空");
+    	return false;
+		
+	}
+    if (college == '') {
+		alert("学院不能为空");
+		return false;
+	}
     if (password == '') {
 		alert("密码不能为空");
 		return false;
@@ -433,6 +442,7 @@ function addRole(){
 			 async : true,
 			 success : function(result) {					
 				 $('#addRole').modal('show');
+				 $("#rId").val(result.roleName);
 					
 			 }
 		}); 

@@ -25,16 +25,18 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/comment2.css">
 
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.flexText.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
+	var $2 = $.noConflict(true);
+</script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.qqFace.js"></script>
+ 
+<script type="text/javascript">
 //添加数据
 function baoming(id){	
-	var userName = "<%=session.getAttribute("userName")%>";
-	if ($.isEmptyObject(userName) == false) {
-		alert("请先登录！");
-		return false;
-	}
+	
 	$.ajax({			 
 		 type : "POST",
 		 url : "baoming/saveOrUpdate",           
@@ -42,7 +44,8 @@ function baoming(id){
          data:{id:id},
 		 cache : false,
 		 async : true,
-		 success : function(data) {				
+		 success : function(data) {
+			 alert(data.msg);
 			location.reload();
 		 }
 	}); 
@@ -204,6 +207,7 @@ function addAttention(id){
                         <ul class="user_consult_list">
                         	<!-- 暂无评论，静态评论屏蔽 -->
                         </ul>
+                     </div>
                   	 <%} %>
                   	 <%  
 					  if(session.getAttribute("userName")!=null)
@@ -215,7 +219,7 @@ function addAttention(id){
 	                    		<!-- 评论框 预设 -->
 		                        <div class="commentAll" style="border: 0px solid #ededed;">
 		                        <div class="reviewArea clearfix">
-						        <textarea style="width:820px;height: 80px;" id="saytext" class="content comment-input saytext" placeholder="请输入你想说的&hellip;" onkeyup="keyUP(this)"></textarea>      
+						        <textarea style="width:820px;height: 80px;" id="saytext2" class="content comment-input saytext" placeholder="请输入你想说的&hellip;" onkeyup="keyUP(this)"></textarea>      
 						        <a href="javascript:;" class="plBtn" >评论</a>       
 		                        </div>
 		                        </div>
@@ -247,44 +251,10 @@ function addAttention(id){
 						    </c:forEach>		
 	      						
 	                        </ul>
+	                        </div>
 	                        <%} %>
-                  	  <%--  <%  
-					  if(session.getAttribute("userName")!=null)
-					  {%>              	 
-                  	 <div class="commentAll" style="width:880px;background: #fff;">
-						    <div class="reviewArea clearfix">
-						        <textarea style="height: 80px;" id="saytext" class="content comment-input saytext" placeholder="请输入你想说的&hellip;" onkeyup="keyUP(this)"></textarea>      
-						       
-						        <a href="javascript:;" class="plBtn" style="margin-top: 50px;">评论</a>       
-						    </div>						  
-						    <c:forEach items="${commentList}" var="comment" varStatus="status">						    
-						    <div class="comment-show">
-						        <div class="comment-show-con clearfix">
-						            <div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath }/images/headimgboy5.jpg" alt="" style="width: 50px;height: 50px;"></div>
-						            <div class="comment-show-con-list pull-left clearfix">
-						                <div class="pl-text clearfix">
-						                    <a href="#" class="comment-size-name">${comment.userName } :</a>
-						                    <span class="my-pl-con">&nbsp;${comment.content }</span>
-						                </div>
-						                <div class="date-dz">
-						                    <span class="date-dz-left pull-left comment-time"><fmt:formatDate value="${comment.respTime }" type="both"/></span>
-						                    <div class="date-dz-right pull-right comment-pl-block">
-						                        <a href="javascript:;" class="removeBlock">删除</a>
-						                        <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left" onclick="commentShow(${comment.id},this)" data-id="${comment.id}">回复</a>
-						                        <span class="pull-left date-dz-line">|</span>
-						                        <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a>
-						                    </div>
-						                </div>
-						                <div class="hf-list-con" id="con${comment.id}"></div>
-						            </div>
-						        </div>
-						    </div>					    
-						    </c:forEach>
-						</div>							                  	 
-                  	 <%
-					  }
-                  	 %> --%>
-                    </div>
+                  	
+                    
                 </div>
             </div>
             <div class="content_one_right fr" >
@@ -355,17 +325,16 @@ $('.commentAll').on('click','.plBtn',function(){
     if(s<10) s = '0' + s;
     var now=year+'-'+month+"-"+date+" "+h+':'+m+":"+s;
     //获取输入内容
-    var oSize = $('.comment-input').val();
+    var oSize = $('#saytext2').val();
     console.log(oSize);    
     //ajax将评论存到数据库
     $.ajax({			 
 		 type : "POST",
-		 url : "comment/saveOrUpdate",
+		 url : "comment/saveOr",
 		 data : {content:oSize},
 		 cache : false,
 		 async : true,
 		 success : function(result) {
-			 alert("321"+result.userId);
 			oHtml = '<div class="comment-show-con clearfix"><div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath }/images/headimgboy5.jpg" alt=""></div> <div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"> <a href="#" class="comment-size-name">${userName} : </a> <span class="my-pl-con">&nbsp;'+ oSize +'</span> </div> <div class="date-dz"> <span class="date-dz-left pull-left comment-time">'+now+'</span> <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
 		    if(oSize.replace(/(^\s*)|(\s*$)/g, "") != ''){
 		        $(obj).parents('.reviewArea ').siblings('.comment-show').prepend(oHtml);
@@ -376,7 +345,12 @@ $('.commentAll').on('click','.plBtn',function(){
 		 error:function(result){
 		        alert("添加数据失败");
 		       }
-    }); 	       
+    }); 
+    oHtml = '<div class="comment-show-con clearfix"><div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath }/images/headimgboy5.jpg" alt=""></div> <div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"> <a href="#" class="comment-size-name">${userName} : </a> <span class="my-pl-con">&nbsp;'+ oSize +'</span> </div> <div class="date-dz"> <span class="date-dz-left pull-left comment-time">'+now+'</span> <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
+    if(oSize.replace(/(^\s*)|(\s*$)/g, "") != ''){
+        $(obj).parents('.reviewArea ').siblings('.comment-show').prepend(oHtml);
+        $(obj).siblings('.flex-text-wrap').find('.comment-input').prop('value','').siblings('pre').find('span').text('');
+    }
 });
 <!--点击回复动态创建回复块-->
 

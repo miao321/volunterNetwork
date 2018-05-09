@@ -18,14 +18,20 @@
 <script charset="utf-8" src="${pageContext.request.contextPath}/kindeditor/lang/zh-CN.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/WdatePicker.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.uploadifive.min.js"></script>
+
+
 <script type="text/javascript">
 var editor;
 KindEditor.ready(function(K) {
     editor = K.create('textarea[name="content"]', {
     	 allowFileManager : true,
          allowImageUpload:false,
-         resizeType : 1,          
+         resizeType : 1,
+         width:"100%",
+         height:"400px",
          afterBlur: function () { this.sync(); }
+    
+    	
     });      
 });   
 //点击全选
@@ -69,10 +75,9 @@ function toView(){
 				if (result.state != 0) {
 					$('#seeborad').modal('show');
 					$("#title1").val(result.title);
-					$("#content1").val(result.content);
-					alert($("#content1").val(result.content));
-					$("#img1").val(result.img);
-					alert($("#img1").val(result.img));
+					editor.html(result.content);
+					//$("#content1").val(result.content);
+					$("#img1").val(result.img);					
 					$("#fbman1").val(result.fbman);
 					$("#fbtime1").val(result.fbtime);
 					$("#fblx1").val(result.fblx);
@@ -127,65 +132,7 @@ function deleteborads(){
 		 }
 	}); 	
 }
-//修改数据
-function editborad(id){
-	 $.ajax({			 
-		 type : "POST",
-		 url : "findOne",
-		 data : {id:id},
-		 cache : false,
-		 async : true,
-		 success : function(result) {
-			if (result.state !== 0) {
-				$('#editborad').modal('show');
-				$("#id").val(result.id);							
-				$("#title").val(result.title);
-				$("#content").val(result.content);
-				alert($("#content").val(result.content));
-				$("#img").val(result.img);
-				alert($("#img").val(result.img));
-				$("#fbman").val(result.fbman);
-				$("#fbtime").val(result.fbtime);
-				$("#fblx").val(result.fblx);
-				if(result.state == 1){
-					$("#state").val("启用");
-				}else{
-					$("#state").val("停用");
-				}
-			}else{
-				alert("该数据是禁用状态无法编辑!");
-			}
-			
-		 }
-	}); 	
-}
-function saveborad() {
-	var id = document.getElementById("id").value;
-	var title = document.getElementById("title").value;
-	var content = document.getElementById("content").value;
-	var img = document.getElementById("img").value;
-	var fbman = document.getElementById("fbman").value;	
-	var fbtime = document.getElementById("fbtime").value;
-	var fblx = document.getElementById("fblx").value;
-	var state = document.getElementById("state").value;
-	if(state == "启用"){
-		state = 1;
-	}else{
-		state = 0;
-	}
-	 $.ajax({			 
-		 type : "POST",
-		 url : "update",    
-         dataType : "json",
-         data:{id:id,title:title,content:content,img:img,fbman:fbman,fbtime:fbtime,
-        	fblx:fblx,state:state},
-		 cache : false,
-		 async : true,
-		 success : function(data) {		
-			location.reload();
-		 }
-	}); 
-} 
+
 //禁用数据
 function disableborad(id){
 	$.ajax({			 
@@ -362,85 +309,6 @@ function search(){
 		</div>
 	</div>
 </form>	
-
-<!-- eidtborad -->
-<div class="modal fade" id="editborad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" 
-						aria-hidden="true">×
-				</button>
-				<h4 class="modal-title" id="myModalLabel">
-					编辑模块信息
-				</h4>
-			</div>
-			<div class="modal-body">
-				<form class="form-inline">
-					<fieldset>
-						 <div class="form-group"  style="margin-top: 16px;">
-						    <label for="inputEmail3" class="col-sm-2 control-label">标题:</label>
-						    <div class="col-sm-10">
-						      <input type="text" id="title" name="title" class="form-control" placeholder="请输入标题">
-						    </div>
-						  </div>
-						  <div class="form-group">
-						    <label for="inputEmail3" class="col-sm-2 control-label">内容:</label>
-						    <div class="col-sm-10">
-						      <textarea name="content" id="content" style="width:662px;height:400px;visibility:hidden;display: block;resize: none;"></textarea>
-						    </div>
-						  </div>
-						   <div class="form-group">
-						    <label for="inputEmail3" class="col-sm-2 control-label">照片:</label>
-						    <div class="col-sm-10">
-						      <input type="file" id="img" name="img" class="form-control" placeholder="请输入照片">
-						      <div id="fileQueue"></div>
-						    </div>
-						  </div>
-						  <div class="form-group">
-						    <label for="inputEmail3" class="col-sm-2 control-label">发布人:</label>
-						    <div class="col-sm-10">
-						      <input type="text" id="fbman" name="fbman" class="form-control" placeholder="请输入发布人">
-						    </div>
-						  </div>
-						  <div class="form-group">
-						    <label for="inputEmail3" class="col-sm-2 control-label">发布时间:</label>						   
-						    <div class="col-sm-10">
-						      <input type="text" id="fbtime" name="fbtime" class="form-control Wdate" placeholder="请输入发布时间" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" style="height:34px;">
-						    </div>
-						  </div>
-						  <div class="form-group">
-						    <label for="inputEmail3" class="col-sm-2 control-label">发布类型:</label>						   
-						    <div class="col-sm-10">
-						      <input type="text" id="fblx" name="fblx" class="form-control" placeholder="请输入发布类型"">
-						    </div>
-						  </div>
-						 <div class="form-group">
-						    <label for="inputEmail3" class="col-sm-4 control-label" id="state" >用户状态:&nbsp;&nbsp;
-						    	<input type="radio" name="radio" value="1" style="padding-left: 4px;"/> 启用					    	
-							 	<input type="radio" name="radio" value="0"/> 停用
-						    </label>
-						  </div>
-						  
-						<!--  <div class="form-group" style="width:180px;height:40px;margin: 0 auto;">				  
-							<div class="col-sm-8">
-								<button type="button" id="uploadImg" class="btn btn-primary" class="form-control" style="width:100%">添加</button>
-							</div>
-						</div> -->
-					</fieldset>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" 
-						data-dismiss="modal">取消
-				</button>
-				<button type="button" class="btn btn-primary" onclick="saveborad()">
-					保存
-				</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 <!-- seeborad -->
 <div class="modal fade" id="seeborad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
 	<div class="modal-dialog">
@@ -454,7 +322,7 @@ function search(){
 				</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-inline">
+				<form class="form-horizontal" enctype="multipart/form-data" method="post">
 					<fieldset>
 						 <div class="form-group"  style="margin-top: 16px;">
 						    <label for="inputEmail3" class="col-sm-2 control-label">标题:</label>
@@ -462,10 +330,11 @@ function search(){
 						      <input type="text" id="title1" name="title1" class="form-control" placeholder="请输入标题">
 						    </div>
 						  </div>
+						  
 						  <div class="form-group">
 						    <label for="inputEmail3" class="col-sm-2 control-label">内容:</label>
 						    <div class="col-sm-10">
-						      <textarea name="content1" id="content1" style="width:662px;height:400px;resize: none;"></textarea>
+						      <textarea name="content" id="content1" style="width:362px;height:400px;visibility:hidden;display: block;resize: none;"></textarea>
 						    </div>
 						  </div>
 						   <div class="form-group">

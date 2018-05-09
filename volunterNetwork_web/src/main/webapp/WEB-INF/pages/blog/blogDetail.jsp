@@ -117,10 +117,10 @@
                 <div class="date-dz">
                     <span class="date-dz-left pull-left comment-time"><fmt:formatDate value="${comment.respTime }" type="both"/></span>
                     <div class="date-dz-right pull-right comment-pl-block">
-                        <a href="javascript:;" class="removeBlock">删除</a>
+                        <!-- <a href="javascript:;" class="removeBlock">删除</a> -->
                         <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left" onclick="commentShow(${comment.id},this)" data-id="${comment.id}">回复</a>
                         <span class="pull-left date-dz-line">|</span>
-                        <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a>
+                        <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">0</i>)</a>
                     </div>
                 </div>
                 <div class="hf-list-con" id="con${comment.id}"></div>

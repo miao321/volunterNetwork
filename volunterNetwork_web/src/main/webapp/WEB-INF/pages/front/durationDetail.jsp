@@ -104,58 +104,58 @@
 						<ul class="pager pagination-lg">
 							<c:if test="${pageNumber>0 }">
 								<li><a
-									href="<c:url value="/durationDetail?page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
+									href="<c:url value="/durationDetail?id=${acti.id}&page=${pageNumber>1?pageNumber:1}"/>">&laquo;上一页</a></li>
 							</c:if>		
 							<c:if test="${pageNumber-3 >= 1 }">
 								<li><a
-										href="<c:url value="/durationDetail?page=${pageNumber-3}"/>">${pageNumber-3}</a>
+										href="<c:url value="/durationDetail?id=${acti.id}&page=${pageNumber-3}"/>">${pageNumber-3}</a>
 									</li>
 							</c:if>
 							<c:if test="${pageNumber-2 >= 1 }">
 								<li><a
-										href="<c:url value="/durationDetail?page=${pageNumber-2}"/>">${pageNumber-2}</a>
+										href="<c:url value="/durationDetail?id=${acti.id}&page=${pageNumber-2}"/>">${pageNumber-2}</a>
 									</li>
 							</c:if>
 							<c:if test="${pageNumber-1 >= 1 }">
 								<li><a
-										href="<c:url value="/durationDetail?page=${pageNumber-1}"/>">${pageNumber-1}</a>
+										href="<c:url value="/durationDetail?id=${acti.id}&page=${pageNumber-1}"/>">${pageNumber-1}</a>
 									</li>
 							</c:if>
 							<c:if test="${pageNumber >= 1 }">
 								<li><a
-										href="<c:url value="/durationDetail?page=${pageNumber}"/>">${pageNumber}</a>
+										href="<c:url value="/durationDetail?id=${acti.id}&page=${pageNumber}"/>">${pageNumber}</a>
 									</li>
 							</c:if>					
 							<c:if test="${pageNumber+1 <= pageTotalPages}">
 							<c:set var="active" value="${active}" />
 								<li class="${active}"><a
-										href="<c:url value="/durationDetail?page=${pageNumber+1}"/>">${pageNumber+1}</a>
+										href="<c:url value="/durationDetail?id=${acti.id}&page=${pageNumber+1}"/>">${pageNumber+1}</a>
 									</li>
 							</c:if>
 							<c:if test="${pageNumber+2 <= pageTotalPages && !(pageNumber-3 >= 1)}">
 								<li><a
-										href="<c:url value="/durationDetail?page=${pageNumber+2}"/>">${pageNumber+2}</a>
+										href="<c:url value="/durationDetail?id=${acti.id}&page=${pageNumber+2}"/>">${pageNumber+2}</a>
 									</li>
 							</c:if>
 							<c:if test="${pageNumber+3 <= pageTotalPages && !(pageNumber-2 >= 1)}">
 								<li><a
-										href="<c:url value="/durationDetail?page=${pageNumber+3}"/>">${pageNumber+3}</a>
+										href="<c:url value="/durationDetail?id=${acti.id}&page=${pageNumber+3}"/>">${pageNumber+3}</a>
 									</li>
 							</c:if>
 							<c:if test="${pageNumber+4 <= pageTotalPages && !(pageNumber-1 >= 1)}">
 								<li><a
-										href="<c:url value="/durationDetail?page=${pageNumber+4}"/>">${pageNumber+4}</a>
+										href="<c:url value="/durationDetail?id=${acti.id}&page=${pageNumber+4}"/>">${pageNumber+4}</a>
 									</li>
 							</c:if>
 							<c:if test="${pageNumber+5 <= pageTotalPages && !(pageNumber >= 1)}">
 								<li><a
-										href="<c:url value="/durationDetail?page=${pageNumber+5}"/>">${pageNumber+5}</a>
+										href="<c:url value="/durationDetail?id=${acti.id}&page=${pageNumber+5}"/>">${pageNumber+5}</a>
 									</li>
 							</c:if>
 							
 							<c:if test="${pageNumber+1 < pageTotalPages }">
 							<li><a
-								href="<c:url value="/durationDetail?page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
+								href="<c:url value="/durationDetail?id=${acti.id}&page=${pageNumber+1<pageTotalPages?pageNumber+2:pageTotalPages}"/>">下一页&raquo;</a>
 							</li>
 							</c:if>
 						</ul>

@@ -24,6 +24,7 @@ public class ShareQueryDTO {
 	private String author;
 	private String title;
 	private String content;
+	
 	public String getAuthor() {
 		return author;
 	}
@@ -56,10 +57,12 @@ public class ShareQueryDTO {
 				//1.Predicate查询条件集合
 				//List<Predicate> list = new ArrayList<Predicate>();				
 				//2.根据QueryDTO数据字段的值进行判断以及条件的组装
+				Predicate state = cb.equal(root.get("state").as(String.class), shareQueryDTO.getState());				
 				Predicate title = cb.like(root.get("title").as(String.class), "%"+shareQueryDTO.getTitle()+"%");
 				Predicate author = cb.like(root.get("author").as(String.class), "%"+shareQueryDTO.getAuthor()+"%");
 				Predicate content = cb.like(root.get("content").as(String.class), "%"+shareQueryDTO.getContent()+"%");				
 				Predicate p = cb.or(title,author,content);
+				p = cb.and(state,p);
 			
 				//3.Predicate查询条件集合的size创建对应的Predicate查询条件数组
 				

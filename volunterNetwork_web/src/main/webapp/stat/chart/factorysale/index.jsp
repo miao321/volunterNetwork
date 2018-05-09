@@ -14,7 +14,7 @@
 <div style="margin-top:-20px;">
 <!-- ampie script-->
   <script type="text/javascript" src="${pageContext.request.contextPath}/components/chart/ampie_1.6.4.1/ampie/swfobject.js"></script>
-	<div id="flashcontent">
+	<div id="flashcontent" style="margin-top: 40px;">
 		<strong>You need to upgrade your Flash Player</strong>
 	</div>
 

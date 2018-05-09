@@ -60,6 +60,32 @@ public class CommentController {
 			return new ExtAjaxResponse(false, "添加数据失败");
 		}	
 	}
+	@RequestMapping("/saveOr")
+	public @ResponseBody ExtAjaxResponse saveOr(@RequestParam String content,Comment comment,HttpSession session) {		
+		System.out.println("com:===="+comment);
+		Long userId = (Long) session.getAttribute("userId");
+		System.out.println("userId:"+userId);
+		Long actiId = (Long) session.getAttribute("actiId");
+		System.out.println("shareId:"+actiId);
+		System.out.println("com:"+content);
+		comment.setState(1);
+		comment.setZan("1");
+		comment.setContent(content);
+		comment.setUserId(userId);
+		comment.setParentId(actiId);
+		comment.setRespTime(new Date(System.currentTimeMillis()));
+		try {	
+			System.out.println("commm:"+comment.getContent());
+			System.out.println("commm23:"+comment.getParentId());
+			System.out.println("commm3:"+comment.getUserId());
+			System.out.println("commm45:"+comment.getRespTime());
+			
+			commentService.saveOrUpdate(comment);
+			return new ExtAjaxResponse(true, "添加数据成功");
+		} catch (Exception e) {
+			return new ExtAjaxResponse(false, "添加数据失败");
+		}	
+	}
 	@RequestMapping("/save")
 	public @ResponseBody ExtAjaxResponse save(Comment comment,HttpSession session) {		
 		Long userId = (Long) session.getAttribute("userId");	

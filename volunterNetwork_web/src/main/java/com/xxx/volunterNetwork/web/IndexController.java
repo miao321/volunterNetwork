@@ -176,6 +176,7 @@ public class IndexController {
 	@RequestMapping("/detail")
 	public String findOne(@RequestParam Long id,HttpSession session) {
 		Acti acti = actiService.findOne(id);
+		session.setAttribute("actiId", id);
 		session.setAttribute("acti", acti);		
 		return "/WEB-INF/pages/front/detail";
 	}		
@@ -214,6 +215,17 @@ public class IndexController {
 		Page<Enroll> page = enrollService.findAll(enrollQueryDTO.getSpecification(enrollQueryDTO), extPageable.getPageable());
 		//List<Enroll> enrollLists = enrollService.findEnroll(id);
 		session.setAttribute("acti", acti);		
+		session.setAttribute("enrollLists", page.getContent());
+		session.setAttribute("pageNumber", page.getNumber());//当前页
+		session.setAttribute("pageSize", page.getSize());//当前页条数
+		session.setAttribute("pageTotalPages", page.getTotalPages());//共几页
+		session.setAttribute("pageTotalElements", page.getTotalElements());//总条数
+		return "/WEB-INF/pages/front/durationDetail";
+	}	
+	@RequestMapping("/durationDetail2")
+	public String durationDetail2(HttpSession session,EnrollQueryDTO enrollQueryDTO,ExtPageable extPageable) {
+		
+		Page<Enroll> page = enrollService.findAll(enrollQueryDTO.getSpecification(enrollQueryDTO), extPageable.getPageable());	
 		session.setAttribute("enrollLists", page.getContent());
 		session.setAttribute("pageNumber", page.getNumber());//当前页
 		session.setAttribute("pageSize", page.getSize());//当前页条数

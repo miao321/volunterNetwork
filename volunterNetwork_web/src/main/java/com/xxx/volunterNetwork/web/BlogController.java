@@ -48,6 +48,10 @@ public class BlogController {
 	
 	@RequestMapping("/saveOrUpdate")
 	public @ResponseBody ExtAjaxResponse saveOrUpdate(Share share,HttpSession session) {		
+		String userName = (String) session.getAttribute("userName");
+		if(userName == null) {
+			return new ExtAjaxResponse(false, "请先登录!");
+		}
 		String author = (String) session.getAttribute("userName");
 		Long userId = (Long) session.getAttribute("userId");
 		User user = userService.findOne(userId);
@@ -68,6 +72,7 @@ public class BlogController {
 		shareQueryDTO.setAuthor(query);
 		shareQueryDTO.setContent(query);
 		shareQueryDTO.setTitle(query);
+		shareQueryDTO.setState(1);
 		Page<Share> page = shareService.findAll(shareQueryDTO.getSpecification(shareQueryDTO), extPageable.getPageable());
 		List<Share> shareLists = shareService.findShare();
 		session.setAttribute("shareLists", page.getContent());//内容

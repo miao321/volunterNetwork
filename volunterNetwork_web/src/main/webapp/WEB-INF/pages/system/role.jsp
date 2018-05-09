@@ -290,7 +290,7 @@ function addPermission(){
 		 async : true,
 		 success : function(result) {				
 			 $('#addPermission').modal('show');
-			// alert(result);			
+			 $('#pId').value(result.url)		
 		 }
 	}); 
 }
