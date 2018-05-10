@@ -82,7 +82,7 @@ function exchange(){
          <%  
 		  if(session.getAttribute("userName")!=null)
 		  {%>
-        	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
+        	<li><a href="${pageContext.request.contextPath}/personal">您好，${studentNo }</a></li>
         	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/logout">退出</a></li>
         <%} %>
         <!-- <li><a href="#">注册</a></li> -->
@@ -101,7 +101,7 @@ function exchange(){
 	                </div> --%>
             		<c:if test="${status.first}">
 	                <div class="item active">
-	                    <img src="${pageContext.request.contextPath}/${ img.img}" style="width:1600px;height: 500px;" >
+	                    <img src="${pageContext.request.contextPath}/${ img.img}" style="width:100%;height: 500px;" >
 	                </div>
 	             	</c:if>
 	               	<c:if test="${!status.first}">

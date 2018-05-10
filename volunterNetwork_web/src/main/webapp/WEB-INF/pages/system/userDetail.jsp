@@ -165,8 +165,8 @@ function search(){
 								onclick="checkAll('id',this)"></th>
 							<!-- <th data-checkbox="true"></th> -->
 							<th>编号</th>
-							<th>用户名</th>
 							<th>用户学号</th>
+							<th>用户名</th>
 							<th>学院</th>
 							<th>状态</th>
 							<th>操作</th>

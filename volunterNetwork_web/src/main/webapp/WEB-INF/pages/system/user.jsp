@@ -197,28 +197,30 @@ function saveUser() {
 	var updateBy = document.getElementById("updateBy").value;
 	var updateTime = document.getElementById("updateTime").value;
 	var state = document.getElementById("state").value;
-	var userName1 = /^[\u4e00-\u9fa5]+$/;
+	var userName1 = /^[0-9]*$/ ;
     var createBy1 = /^[\u4e00-\u9fa5]+$/;
     var createCollege1 = /^[\u4e00-\u9fa5]+$/;
-    var studentNo1 = /^[0-9]*$/ ;
+    var studentNo1 = /^[\u4e00-\u9fa5]+$/;
     var password1 = /^[a-zA-Z]\w{5,17}$/;
     var phone1 = /^1\d{10}$/;
     var sex1 = /^['男'|'女']$/ ;
     var state1 = /^[1|0]$/ ;
     if (userName == '') {
-		alert("用户名不能为空");
+    	alert("学号不能为空");
 		return false;
 	}
     if (!userName1.test(userName)) {
-		alert("用户名只能为中文");
+    	alert("学号只能为数字");
 		return false;
 	}
     if (studentNo == '') {
-		alert("学号不能为空");
+		
+		alert("用户名不能为空");
 		return false;
 	}
     if (!studentNo1.test(studentNo)) {
-		alert("学号只能为数字");
+		
+		alert("用户名只能为中文");
 		return false;
 	}
     if (password == '') {
@@ -258,10 +260,7 @@ function saveUser() {
 		alert("专业只能为中文");
 		return false;
 	}
-    if (!state1.test(state)) {
-		alert("状态不能为空");
-		return false;
-	}
+    
 	if(state == "启用"){
 		state = 1;
 	}else{
@@ -303,28 +302,30 @@ function addUser(){
 	var updateBy = document.getElementById("updateBy2").value;
 	var updateTime = document.getElementById("updateTime2").value;
     var state = $('#state2 input[name="radio"]:checked ').val(); 
-    var userName1 = /^[\u4e00-\u9fa5]+$/;
+    var userName1 = /^[0-9]*$/ ;
     var createBy1 = /^[\u4e00-\u9fa5]+$/;
     var createCollege1 = /^[\u4e00-\u9fa5]+$/;
-    var studentNo1 = /^[0-9]*$/ ;
+    var studentNo1 = /^[\u4e00-\u9fa5]+$/;
     var password1 = /^[a-zA-Z]\w{5,17}$/;
     var phone1 = /^1\d{10}$/;
     var sex1 = /^['男'|'女']$/ ;
     var state1 = /^[1|0]$/ ;
     if (userName == '') {
-		alert("用户名不能为空");
+    	alert("学号不能为空");
+		
 		return false;
 	}
     if (!userName1.test(userName)) {
-		alert("用户名只能为中文");
+    	alert("学号只能为数字");
+		
 		return false;
 	}
     if (studentNo == '') {
-		alert("学号不能为空");
+    	alert("用户名不能为空");
 		return false;
 	}
     if (!studentNo1.test(studentNo)) {
-		alert("学号只能为数字");
+    	alert("用户名只能为中文");
 		return false;
 	}
     if (idCard == '') {
@@ -517,8 +518,8 @@ function search(){
 								onclick="checkAll('id',this)"></th>
 							<!-- <th data-checkbox="true"></th> -->
 							<th>编号</th>
-							<th>用户名</th>
 							<th>用户学号</th>
+							<th>用户名</th>
 							<th>学院</th>
 							<th>状态</th>
 							<th>操作</th>
@@ -641,15 +642,15 @@ function search(){
 				<form method="post" class="form-horizontal" role="form" >
 				<c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set>
 					 <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">用户名:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">学号:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="userName2" name="userName2" class="form-control" placeholder="请输入用户名">
+					      <input type="text" id="userName2" name="userName2" class="form-control" placeholder="请输入学号">
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">学号:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">用户名:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="studentNo2" name="studentNo2" class="form-control" placeholder="请输入学号">
+					      <input type="text" id="studentNo2" name="studentNo2" class="form-control" placeholder="请输入用户名">
 					    </div>
 					  </div>
 					  <div class="form-group">
@@ -808,15 +809,15 @@ function search(){
 			<div class="modal-body">
 				<form method="post" class="form-horizontal" role="form" >
 					 <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">用户名:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">学号:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入用户名">
+					      <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入学号">
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">学号:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">用户名:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="studentNo" name="studentNo" class="form-control" placeholder="请输入学号">
+					      <input type="text" id="studentNo" name="studentNo" class="form-control" placeholder="请输入用户名">
 					    </div>
 					  </div>
 					  <div class="form-group">
@@ -945,15 +946,15 @@ function search(){
 			<div class="modal-body">
 				<form method="post" class="form-horizontal" role="form" >
 					 <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">用户名:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">学号:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="userName1" name="userName1" class="form-control" placeholder="请输入用户名">
+					      <input type="text" id="userName1" name="userName1" class="form-control" placeholder="请输入学号">
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">学号:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">用户名:</label>
 					    <div class="col-sm-10">
-					      <input type="text" id="studentNo1" name="studentNo1" class="form-control" placeholder="请输入学号">
+					      <input type="text" id="studentNo1" name="studentNo1" class="form-control" placeholder="请输入用户名">
 					    </div>
 					  </div>
 					  <div class="form-group">

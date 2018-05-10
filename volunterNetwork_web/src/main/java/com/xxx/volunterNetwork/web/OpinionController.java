@@ -46,7 +46,7 @@ public class OpinionController {
 		/*if (opinionService.findOpinion(opinion.getOpinionName()) != null) {
 			return new ExtAjaxResponse(false, "该角色已经存在不用再添加");
 		}*/
-		String userName = (String) session.getAttribute("userName");
+		String userName = (String) session.getAttribute("studentNo");
 		opinion.setAuthor(userName);
 		opinion.setFbtime(new Date(System.currentTimeMillis()));
 		try {

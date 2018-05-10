@@ -141,7 +141,7 @@ function returnFont(){
 		<div class="fr top-link">
 			<a href="javascript:void(0);"
 						onClick="changeMessage(${userId})" target="mainCont" title="修改个人信息"><i
-				class="adminIcon"></i><span>管理员：<%=session.getAttribute("userName")%></span></a>
+				class="adminIcon"></i><span>管理员：<%=session.getAttribute("studentNo")%></span></a>
 		</div>
 	</div>
 	<div class="left">

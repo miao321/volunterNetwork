@@ -118,7 +118,7 @@
          <%  
 		  if(session.getAttribute("userName")!=null)
 		  {%>
-        	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
+        	<li><a href="${pageContext.request.contextPath}/personal">您好，${studentNo }</a></li>
         	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/logout">退出</a></li>
         <%} %>
         <!-- <li><a href="#">注册</a></li> -->
@@ -131,7 +131,7 @@
 		<div class="div2">							
 			<div class="person" style="width:200px;height: 100px;background: #fff;margin-left: 70px;margin-top: -10px;">
 				<img src="images/headimgboy1.jpg" style="width: 58px;height: 58px;float: left;margin: 21px 0 21px 21px;"/>
-				<span style="float:right;margin-right: 50px;margin-top: 20px;">${userName }</span>
+				<span style="float:right;margin-right: 50px;margin-top: 20px;">${studentNo }</span>
 				<!-- <form action="acti/uploadImg"  id="formId" class="form-horizontal" enctype="multipart/form-data" method="post"> -->
 				<button style="float:right;width: 70px;height: 24px;margin-right: 30px;padding: 0px 0px;" type="button" class="btn btn-info">设置头像</button>
 				<!-- <div class="form-group">

@@ -25,4 +25,6 @@ public interface CommentRepository extends PagingAndSortingRepository<Comment, L
 	public void updateState(Long id,Integer state);
 	@Query(value="select c.*,u.userName,u.img from t_comment c,t_user u,t_share s where c.userId=u.id and c.parentId=s.id and s.id=?1 ORDER BY c.respTime desc limit 5",nativeQuery=true)
 	public List<Object[]> findComment(Long id);
+	@Query(value="select c.*,u.userName,u.img from t_comment c,t_user u,t_acti a where c.userId=u.id and c.parentId=a.id and a.id=?1 ORDER BY c.respTime desc limit 5",nativeQuery=true)
+	public List<Object[]> findComment2(Long id);
 }

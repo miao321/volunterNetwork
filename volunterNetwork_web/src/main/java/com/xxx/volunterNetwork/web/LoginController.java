@@ -73,11 +73,17 @@ public class LoginController {
 		String userName =  (String) subject.getPrincipal();
 		Set<Role> roles = userService.getRoleByUserName(userName);
 		session.setAttribute("userName", userName);
+		
 		User user = loginService.findUser(userName);
 		session.setAttribute("user", user);
 		session.setAttribute("userName", user.getUserName());
 		session.setAttribute("userId", user.getId());
-		session.setAttribute("password", user.getPassword());	
+		session.setAttribute("password", user.getPassword());
+		session.setAttribute("studentNo", user.getStudentNo());
+		/*if (user.getState() == 0) {
+			session.setAttribute("result4", "该用户已被禁用，请联系管理员");
+			//return "redirect:/login.jsp"; 
+		}*/
 		boolean root = false;
 		for(Role role : roles) {
 			if (role.getRoleName().equals("管理员") || role.getRoleName().equals("超级管理员")) {
@@ -86,6 +92,7 @@ public class LoginController {
 			}
 		}
 		return root ? "WEB-INF/pages/backstage" : "WEB-INF/pages/volunterNetwork";
+		
 	}	
 	//退出系统	
 	@RequestMapping(value="/logout",method=RequestMethod.GET) 

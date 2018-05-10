@@ -52,7 +52,7 @@ public class BlogController {
 		if(userName == null) {
 			return new ExtAjaxResponse(false, "请先登录!");
 		}
-		String author = (String) session.getAttribute("userName");
+		String author = (String) session.getAttribute("studentNo");
 		Long userId = (Long) session.getAttribute("userId");
 		User user = userService.findOne(userId);
 		share.setState(0);
@@ -62,7 +62,7 @@ public class BlogController {
 		
 		try {		
 			shareService.saveOrUpdate(share);
-			return new ExtAjaxResponse(true, "添加数据成功");
+			return new ExtAjaxResponse(true, "发帖成功，等待审核。");
 		} catch (Exception e) {
 			return new ExtAjaxResponse(false, "添加数据失败");
 		}	
@@ -89,9 +89,6 @@ public class BlogController {
 		session.setAttribute("share", share);
 		session.setAttribute("shareId", share.getId());
 		List<CommentQueryDTO> commentList = commentService.findComment(share.getId());
-		/*for(CommentQueryDTO obj :commentList) {
-			obj.getId()
-		}*/
 		session.setAttribute("commentList", commentList);
 		return "/WEB-INF/pages/blog/blogDetail";
 	}

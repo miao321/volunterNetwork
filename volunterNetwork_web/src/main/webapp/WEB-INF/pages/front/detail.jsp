@@ -122,7 +122,7 @@ function addAttention(id){
          <%  
 		  if(session.getAttribute("userName")!=null)
 		  {%>
-        	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
+        	<li><a href="${pageContext.request.contextPath}/personal">您好，${studentNo }</a></li>
         	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/logout">退出</a></li>
         <%} %>
         <!-- <li><a href="#">注册</a></li> -->
@@ -238,10 +238,10 @@ function addAttention(id){
 						                <div class="date-dz">
 						                    <span class="date-dz-left pull-left comment-time"><fmt:formatDate value="${comment.respTime }" type="both"/></span>
 						                    <div class="date-dz-right pull-right comment-pl-block">
-						                        <a href="javascript:;" class="removeBlock">删除</a>
+						                        <!-- <a href="javascript:;" class="removeBlock">删除</a> -->
 						                        <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left" onclick="commentShow(${comment.id},this)" data-id="${comment.id}">回复</a>
 						                        <span class="pull-left date-dz-line">|</span>
-						                        <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a>
+						                        <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">0</i>)</a>
 						                    </div>
 						                </div>
 						                <div class="hf-list-con" id="con${comment.id}"></div>
@@ -330,7 +330,7 @@ $('.commentAll').on('click','.plBtn',function(){
     //ajax将评论存到数据库
     $.ajax({			 
 		 type : "POST",
-		 url : "comment/saveOr",
+		 url : "comment/saveActi",
 		 data : {content:oSize},
 		 cache : false,
 		 async : true,
@@ -340,19 +340,16 @@ $('.commentAll').on('click','.plBtn',function(){
 		        $(obj).parents('.reviewArea ').siblings('.comment-show').prepend(oHtml);
 		        $(obj).siblings('.flex-text-wrap').find('.comment-input').prop('value','').siblings('pre').find('span').text('');
 		    }
-				
+		    location.reload();
 		 },
 		 error:function(result){
 		        alert("添加数据失败");
 		       }
     }); 
-    oHtml = '<div class="comment-show-con clearfix"><div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath }/images/headimgboy5.jpg" alt=""></div> <div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"> <a href="#" class="comment-size-name">${userName} : </a> <span class="my-pl-con">&nbsp;'+ oSize +'</span> </div> <div class="date-dz"> <span class="date-dz-left pull-left comment-time">'+now+'</span> <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
-    if(oSize.replace(/(^\s*)|(\s*$)/g, "") != ''){
-        $(obj).parents('.reviewArea ').siblings('.comment-show').prepend(oHtml);
-        $(obj).siblings('.flex-text-wrap').find('.comment-input').prop('value','').siblings('pre').find('span').text('');
-    }
+   
 });
 <!--点击回复动态创建回复块-->
+
 
 function commentShow(id,obj){		
     //获取回复人的名字

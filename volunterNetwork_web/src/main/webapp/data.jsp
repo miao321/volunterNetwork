@@ -33,6 +33,35 @@ function changePassword(){
 		}
 	});
 }
+
+function addUser() {
+	var id = document.getElementById("id").value;	
+	var userName = document.getElementById("userName").value;
+	var studentNo = document.getElementById("studentNo").value;
+	var password = document.getElementById("password").value;
+	var college = document.getElementById("college").value;
+	var inTake = document.getElementById("inTake").value;
+	var birthday = document.getElementById("birthday").value;
+	var sex = document.getElementById("sex").value;
+	var phone = document.getElementById("phone").value;
+	var email = document.getElementById("email").value;
+	var ancestor = document.getElementById("ancestor").value;	
+	var politicalStatus = document.getElementById("politicalStatus").value;
+	var remark = document.getElementById("remark").value;	
+	
+	 $.ajax({			 
+		 type : "POST",
+		 url : "${pageContext.request.contextPath}/user/saveOrUpdate",    
+         dataType : "json",
+         data:{id:id,userName:studentNo,studentNo:userName,password:password,college:college,inTake:inTake,birthday:birthday,
+        	 sex:sex,phone:phone,email:email,ancestor:ancestor,politicalStatus:politicalStatus,remark:remark},
+		 cache : false,
+		 async : true,
+		 success : function(data) {		
+			location.reload();
+		 }
+	}); 
+} 
 </script>
 
 </head>
@@ -55,17 +84,17 @@ function changePassword(){
 				<div class="tab-content">
 					<div class="tab-pane active" id="panel-22521">
 					  <form method="post" class="form-horizontal" role="form" style="margin-top: 30px;"  >
-					   
+					   <input type="hidden" id="id" value="${user.id }">
 					  <div class="form-group" style="margin-top: 20px;">
 					    <label for="inputEmail3" class="col-sm-2 control-label"><span style="padding-right: 8px;color: red;" >*</span>姓名:</label>
 					    <div class="col-sm-3">
-					      <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入姓名" value="${user.userName }">
+					      <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入姓名" value="${user.studentNo }">
 					    </div>
 					  </div>
 					  <div class="form-group">			  	
-					    <label for="inputEmail3" class="col-sm-2 control-label"><span style="padding-right: 8px;color: red;" >*</span>学号:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label"><span style="padding-right: 8px;color: red;">*</span>学号:</label>
 					    <div class="col-sm-3">
-					      <input type="text" id="studentNo" name="studentNo" class="form-control" placeholder="请输入学号" value="${user.studentNo }">
+					      <input type="text" id="studentNo" name="studentNo" class="form-control" placeholder="请输入学号" value="${user.userName }" >
 					    </div>
 					  </div>
 					  <div class="form-group">
@@ -77,29 +106,29 @@ function changePassword(){
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">学院:</label>
 					    <div class="col-sm-3">
-					      <input type="password" id="college" name="college" class="form-control" placeholder="请输入学院">
+					      <input type="text" id="college" name="college" class="form-control" placeholder="请输入学院" value="${user.college }">
 					    </div>
 					  </div>
-					  <div class="form-group">
+					  <%-- <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">专业:</label>
 					    <div class="col-sm-3">
-					      <input type="password" id="major" name="major" class="form-control" placeholder="请输入专业">
+					      <input type="password" id="major" name="major" class="form-control" placeholder="请输入专业" value="${user.major }">
 					    </div>
-					  </div>
+					  </div> --%>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">入学时间:</label>
 					    <div class="col-sm-3">
-					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="inTake2" name="inTake2" class="form-control Wdate" placeholder="请输入入学时间" style="height:34px;" value="${user.inTake }">
+					      <input type="text" onClick="WdatePicker({lang:'zh-cn',minDate:new Date(),dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="inTake" name="inTake" class="form-control Wdate" placeholder="请输入入学时间" style="height:34px;" value="${user.inTake }">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">出生年月:</label>
 					    <div class="col-sm-3">
-					      <input type="text" onClick="WdatePicker({dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="birthday2" name="birthday2" class="form-control Wdate" placeholder="请输入出生年月" style="height:34px;">
+					      <input type="text" onClick="WdatePicker({dateFmt:'yyyy/MM/dd HH:mm:ss'})" id="birthday" name="birthday" class="form-control Wdate" placeholder="请输入出生年月" style="height:34px;" value="${user.birthday }">
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-3 control-label" id="sex2">性别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					    <label for="inputEmail3" class="col-sm-3 control-label" id="sex">性别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					      <c:if test="${user.sex == '男' }">
 					      <input type="radio" name="sex" value="${user.sex }" checked/> ${user.sex }
 					      <input type="radio" name="sex" value="女"/>女
@@ -113,36 +142,36 @@ function changePassword(){
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">手机号:</label>
 					    <div class="col-sm-3">
-					      <input type="text" id="phone2" name="phone2" class="form-control" placeholder="请输入手机号">
+					      <input type="text" id="phone" name="phone" class="form-control" placeholder="请输入手机号" value="${user.phone }">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">邮箱:</label>
 					    <div class="col-sm-3">
-					      <input type="text" id="email2" name="email2" class="form-control" placeholder="请输入邮箱">
+					      <input type="text" id="email" name="email" class="form-control" placeholder="请输入邮箱" value="${user.email }">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">籍贯:</label>
 					    <div class="col-sm-3">
-					      <input type="text" id="ancestor2" name="ancestor2" class="form-control" placeholder="请输入籍贯">
+					      <input type="text" id="ancestor" name="ancestor" class="form-control" placeholder="请输入籍贯" value="${user.ancestor }">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">政治面貌:</label>
 					    <div class="col-sm-3">
-					      <input type="text" id="politicalStatus2" name="politicalStatus2" class="form-control" placeholder="请输入政治面貌">
+					      <input type="text" id="politicalStatus" name="politicalStatus" class="form-control" placeholder="请输入政治面貌" value="${user.politicalStatus }">
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label">备注:</label>
 					    <div class="col-sm-3">
-					      <input type="text" id="remark2" name="remark2" class="form-control" placeholder="请输入备注">
+					      <input type="text" id="remark" name="remark" class="form-control" placeholder="请输入备注" value="${user.remark }">
 					    </div>
 					  </div>
 					 <div class="form-group" style="margin-left: 200px;margin-top: 20px;">
 					 	<div class="col-sm-3">
-					    <button type="button" class="btn btn-primary" onclick="addUser()">
+					    <button type="button" class="btn btn-primary" onclick="addUser(${user.id})">
 						保存
 						</div>
 						</button>

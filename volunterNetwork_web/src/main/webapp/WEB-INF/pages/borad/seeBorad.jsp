@@ -363,7 +363,7 @@ function search(){
 						    </div>
 						  </div>
 						 <div class="form-group">
-					    	<label for="inputEmail3" class="col-sm-2 control-label">用户状态:</label>
+					    	<label for="inputEmail3" class="col-sm-2 control-label">公告状态:</label>
 						    <div class="col-sm-10">
 						    	<input type="text" id="state1" class="form-control" readonly="true"/>
 						    </div>					    

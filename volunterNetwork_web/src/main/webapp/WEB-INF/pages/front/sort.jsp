@@ -179,7 +179,7 @@ function searchActi(){
          <%  
 		  if(session.getAttribute("userName")!=null)
 		  {%>
-        	<li><a href="${pageContext.request.contextPath}/personal">${userName }</a></li>
+        	<li><a href="${pageContext.request.contextPath}/personal">您好，${studentNo }</a></li>
         	<li style="margin-left: -14px;"><a href="${pageContext.request.contextPath}/logout">退出</a></li>
         <%} %>
         <!-- <li><a href="#">注册</a></li> -->
@@ -190,7 +190,7 @@ function searchActi(){
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-			<div class="btn_search" style="float: left;">
+			<!-- <div class="btn_search" style="float: left;">
 				<select id="sid1" style="margin-left: 70px;margin-top: 8px;width: 84px;text-align: center;" onchange="searchActi5()">				  
 				  <option value="进行中" selected>进行中</option>
 				  <option value="已结束">已结束</option>				 	  
@@ -206,7 +206,7 @@ function searchActi(){
 				  <option value="开始时间先后" onclick="searchActi2('开始时间先后')">开始时间先后</option>
 				  <option value="浏览人数最多" onclick="searchActi2('浏览人数最多')">浏览人数最多</option>			  
 				</select>	
-			</div>
+			</div> -->
 			<div class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
 				<input class="input-medium search-query" id="searchActi" type="text" placeholder="请输入关键字" style="height: 40px;"/>
 				<button type="button" class="btn btn-info" onclick="searchActi()">查找</button>

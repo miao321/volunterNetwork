@@ -20,12 +20,15 @@ import com.xxx.volunterNetwork.domain.Borad;
 import com.xxx.volunterNetwork.domain.Enroll;
 import com.xxx.volunterNetwork.domain.Img;
 import com.xxx.volunterNetwork.domain.Organization;
+import com.xxx.volunterNetwork.domain.Share;
 import com.xxx.volunterNetwork.domain.User;
 import com.xxx.volunterNetwork.dto.ActiQueryDTO;
+import com.xxx.volunterNetwork.dto.CommentQueryDTO;
 import com.xxx.volunterNetwork.dto.EnrollQueryDTO;
 import com.xxx.volunterNetwork.dto.OrganizationQueryDTO;
 import com.xxx.volunterNetwork.service.IActiService;
 import com.xxx.volunterNetwork.service.IBoradService;
+import com.xxx.volunterNetwork.service.ICommentService;
 import com.xxx.volunterNetwork.service.IEnrollService;
 import com.xxx.volunterNetwork.service.IImgService;
 import com.xxx.volunterNetwork.service.IOrganizationService;
@@ -47,6 +50,8 @@ public class IndexController {
 	private IBoradService boradService;
 	@Autowired
 	private IOrganizationService organizationService;
+	@Autowired
+	private ICommentService commentService;
 	
 	//@RequestParam String hdlx,
 	@RequestMapping("/volunterNetwork")
@@ -55,7 +60,13 @@ public class IndexController {
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
 		String userName =  (String) subject.getPrincipal();
+		User user = userService.findUser(userName);
 		session.setAttribute("userName", userName);
+		if(user != null) {
+			session.setAttribute("studentNo", user.getStudentNo());
+			session.setAttribute("userId", user.getId());
+		}
+		
 		List<Img> imgs = imgService.findImg2();
 		
 		List<Acti> actis = actiService.findActi();
@@ -136,7 +147,7 @@ public class IndexController {
 		enroll.setDuration(acti.getDuration());
 		try {		
 			enrollService.saveOrUpdate(enroll);
-			return new ExtAjaxResponse(true, "添加数据成功");
+			return new ExtAjaxResponse(true, "报名成功，请等待信息。");
 		} catch (Exception e) {
 			return new ExtAjaxResponse(false, "添加数据失败");
 		}	
@@ -178,6 +189,8 @@ public class IndexController {
 		Acti acti = actiService.findOne(id);
 		session.setAttribute("actiId", id);
 		session.setAttribute("acti", acti);		
+		List<CommentQueryDTO> commentList = commentService.findComment2(acti.getId());
+		session.setAttribute("commentList", commentList);
 		return "/WEB-INF/pages/front/detail";
 	}		
 	@RequestMapping(value="/pageDetail",method=RequestMethod.GET)

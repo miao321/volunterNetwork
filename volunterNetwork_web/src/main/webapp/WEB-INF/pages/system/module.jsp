@@ -571,7 +571,7 @@ function search(){
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-4 control-label" id="state2" >用户状态:&nbsp;&nbsp;
+					    <label for="inputEmail3" class="col-sm-4 control-label" id="state2" >模块状态:&nbsp;&nbsp;
 					    	<input type="radio" name="radio" value="1" style="padding-left: 4px;"/> 启用					    	
 						 	<input type="radio" name="radio" value="0"/> 停用
 					    </label>
@@ -704,7 +704,7 @@ function search(){
 					    </div>
 					  </div>
 					   <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">用户状态:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">模块状态:</label>
 					    <div class="col-sm-10">
 					    	<input type="text" id="state" class="form-control" readonly="true"/>
 					    </div>
@@ -836,7 +836,7 @@ function search(){
 					    </div>
 					  </div>
 					   <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">用户状态:</label>
+					    <label for="inputEmail3" class="col-sm-2 control-label">模块状态:</label>
 					    <div class="col-sm-10">
 					    	<input type="text" id="state1" class="form-control"/>
 					    </div>

@@ -28,9 +28,9 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long>,J
 	@Modifying
 	@Query("update User user set user.state = ?2 where user.id = ?1")
 	public void updateState(Long id,Integer state);
-	@Query(value="select r.roleName from t_user as u left join t_role_t_user as ru on u.id=ru.users_id left join t_role as r on r.id=ru.roles_id where userName = ?1",nativeQuery=true)
+	@Query(value="select r.roleName from t_user as u left join t_role_t_user as ru on u.id=ru.users_id left join t_role as r on r.id=ru.roles_id where userName = ?1 and u.state =1",nativeQuery=true)
 	public Role getRoleByUserName(String userName);
-	@Query(value="select r.roleName,p.url from t_role as r left join t_permission_t_role as pr on r.id=pr.role_id left join t_permission as p on p.id=pr.permission_id where userName = ?1",nativeQuery=true)
+	@Query(value="select r.roleName,p.url from t_role as r left join t_permission_t_role as pr on r.id=pr.role_id left join t_permission as p on p.id=pr.permission_id where userName = ?1 and u.state =1",nativeQuery=true)
 	public List<Object[]> getPermissionsByUserName(String userName);
 	
 	/*

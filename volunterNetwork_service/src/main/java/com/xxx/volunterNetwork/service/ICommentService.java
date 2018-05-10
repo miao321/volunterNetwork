@@ -24,6 +24,7 @@ public interface ICommentService {
 	public List<Comment> findAll();
 	public void updateState(Long id,Integer state);
 	public List<CommentQueryDTO> findComment(Long id);
+	public List<CommentQueryDTO> findComment2(Long id);
 	//动态条件查询
 	public Page<Comment> findAll(Specification<Comment> spec,Pageable pageable);
 
