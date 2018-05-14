@@ -72,4 +72,8 @@ public class PermissionServiceImpl implements IPermissionService {
 		permissionRepository.updateState(id, state);
 		
 	}
+	@Override
+	public List<Permission> findPermission() {
+		return permissionRepository.findPermission();
+	}
 }

@@ -24,9 +24,9 @@ public interface RoleRepository extends PagingAndSortingRepository<Role, Long>,J
 	
 	@Query(value="select r.id,p.url from t_permission as p left join t_permission_t_role as pr on p.id=pr.permission_id left join t_role as r on r.id=pr.role_id",nativeQuery=true)
 	public List<Object[]> findPermission();
-	
-	@Query("from Role role where role.roleName =?1")
-	public Role findRole(String roleName);*/
+	*/
+	@Query("from Role role where role.state = 1")
+	public List<Role> findRole();
 	@Modifying
 	@Query("update Role role set role.state = ?2 where role.id = ?1")
 	public void updateState(Long id,Integer state);

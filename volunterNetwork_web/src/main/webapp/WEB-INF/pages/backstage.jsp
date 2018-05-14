@@ -131,7 +131,7 @@ function returnFont(){
 		<div class="title">
 			<h3>莞工志愿者网管理后台</h3>
 		</div>
-		<button style="margin-top:24px; margin-left: 400px;" class="btn btn-info" onclick="returnFont()" style="margin: 6px 0;" type="button">
+		<button style="margin-top:24px; margin-left: 350px;" class="btn btn-info" onclick="returnFont()" style="margin: 6px 0;" type="button">
 			<span style="margin: 0px 4px;" class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> 返回前台
 		</button>
 		<button style="margin-top:24px;" class="btn btn-info" data-toggle="modal" data-target="#changePassword" style="margin: 6px 0;" type="button">

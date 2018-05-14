@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xxx.volunterNetwork.anno.SysControllerLog;
 import com.xxx.volunterNetwork.domain.Permission;
+import com.xxx.volunterNetwork.domain.Role;
 import com.xxx.volunterNetwork.domain.User;
 import com.xxx.volunterNetwork.dto.PermissionQueryDTO;
 import com.xxx.volunterNetwork.service.IPermissionService;
@@ -40,6 +41,7 @@ public class PermissionController {
 	@Autowired
 	private IPermissionService permissionService;
 	@RequestMapping("/saveOrUpdate")
+	@SysControllerLog(module="权限管理",methods="添加权限")
 	public @ResponseBody ExtAjaxResponse saveOrUpdate(Permission permission) {
 		/*if (permissionService.findPermission(permission.getPermissionName()) != null) {
 			return new ExtAjaxResponse(false, "该部门已经存在 不用再添加");
@@ -52,6 +54,7 @@ public class PermissionController {
 		}	
 	}
 	@RequestMapping("/update")
+	@SysControllerLog(module="权限管理",methods="修改权限信息")
 	public @ResponseBody ExtAjaxResponse update(Permission permission) {
 		/*if (permissionService.findPermission(permission.getPermissionName()) != null) {
 			return new ExtAjaxResponse(false, "该部门已经存在 不用再添加");
@@ -69,6 +72,7 @@ public class PermissionController {
 		}	
 	}	
 	@RequestMapping("/delete")
+	@SysControllerLog(module="权限管理",methods="删除单条权限")
 	public String delete(@RequestParam Long id) {
 		try {
 			Permission permission = permissionService.findOne(id);
@@ -82,6 +86,7 @@ public class PermissionController {
 		}		
 	}
 	@RequestMapping("/deletePermissions")
+	@SysControllerLog(module="权限管理",methods="批量删除权限")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long ids[]) {
 		try {
 			List<Long> idsLists = Arrays.asList(ids);
@@ -97,6 +102,7 @@ public class PermissionController {
 		}
 	}	
 	@RequestMapping("/findOne")
+	@SysControllerLog(module="权限管理",methods="查看权限信息")
 	public @ResponseBody Permission findOne(@RequestParam Long id,HttpSession session) {		
 		Permission permission = permissionService.findOne(id);
 		session.setAttribute("permission", permission);
@@ -104,13 +110,20 @@ public class PermissionController {
 	}	
 	@RequestMapping("/findAll")
 	public String findAll(HttpSession session){
-		List<Permission> permissionLists = permissionService.findAll();
+		List<Permission> permissionLists = permissionService.findPermission();
 		System.out.println("permission:"+permissionLists);
 		session.setAttribute("permissionLists", permissionLists);
 		return "/WEB-INF/pages/system/permission";
 	}
+	@RequestMapping("/findAll2")
+	public @ResponseBody ExtJsonResult<Permission> findAll2(HttpSession session){
+		List<Permission> permissionLists = permissionService.findPermission();
+		System.out.println("permission:"+permissionLists);
+		session.setAttribute("permissionLists", permissionLists);
+		return new ExtJsonResult<Permission>(permissionLists);
+	}
 	@RequestMapping("/findPage")
-	@SysControllerLog(module="部门管理",methods="查找多条数据并分页排序")
+	@SysControllerLog(module="权限管理",methods="查找多条数据并分页排序")
 	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,PermissionQueryDTO permissionQueryDTO,ExtPageable extPageable){
 		permissionQueryDTO.setUrl(query);
 		permissionQueryDTO.setDescription(query);
@@ -148,6 +161,7 @@ public class PermissionController {
 	}*/
 	
 	@RequestMapping("disablePermission")
+	@SysControllerLog(module="权限管理",methods="禁用权限")
 	public @ResponseBody Permission disablePermission(@RequestParam Long id) {
 		Permission permission = permissionService.findOne(id);
 		if (permission.getState() != null) {
@@ -156,6 +170,7 @@ public class PermissionController {
 		return permission;
 	}
 	@RequestMapping("enablePermission")
+	@SysControllerLog(module="权限管理",methods="启用权限")
 	public @ResponseBody Permission enablePermission(@RequestParam Long id) {
 		Permission permission = permissionService.findOne(id);
 		if (permission.getState() != null) {

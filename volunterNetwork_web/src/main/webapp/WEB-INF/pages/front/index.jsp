@@ -496,7 +496,7 @@ function exchange(){
                 <div class="vol_item_con clearfix">
                   <div class="volunteer_pic fl"><a target="_blank"><img src="${pageContext.request.contextPath}/${enroll.img }" id="personal_logoff80808149a355710149aa7329e967f7" class="pic"></a></div>
                   <div class="volunteer_txt_info">
-                    <p class="volunteer_name">${enroll.userName }</p>
+                    <p class="volunteer_name">${enroll.studentNo }</p>
                     <p class="vol_duration">时长：${enroll.duration }</p>
                   </div>
                 </div>

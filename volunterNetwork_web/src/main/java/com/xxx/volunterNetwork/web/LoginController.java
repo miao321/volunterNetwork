@@ -96,10 +96,12 @@ public class LoginController {
 	}	
 	//退出系统	
 	@RequestMapping(value="/logout",method=RequestMethod.GET) 
-	@SysControllerLog(module="用户模块",methods="退出系统")
-    public String logout(RedirectAttributes attr){  
+	@SysControllerLog(module="退出系统",methods="退出系统")
+    public String logout(RedirectAttributes attr,HttpSession session){  
         //使用权限管理工具进行用户的退出，注销登录  
-        SecurityUtils.getSubject().logout();  
+		 //session.invalidate();
+        SecurityUtils.getSubject().logout(); 
+       
         //addMessage(attr, "您已安全退出");  
         return "redirect:/login.jsp";  
     }  

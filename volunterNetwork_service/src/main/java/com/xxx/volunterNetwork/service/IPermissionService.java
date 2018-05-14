@@ -20,7 +20,7 @@ public interface IPermissionService {
 	public void delete(List<Long> ids);
 	public Permission findOne(Long id);
 	public List<Permission> findAll();
-	
+	public List<Permission> findPermission();
 	public void updateState(Long id,Integer state);
 	
 	//public Permission findPermission(String permissionName);

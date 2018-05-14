@@ -81,43 +81,51 @@ function toView(){
 }  	
 //删除单条数据
 function deleteRole(id){
-	 $.ajax({			 
-		 type : "POST",
-		 url : "delete",
-		 data : {id:id},
-		 cache : false,
-		 async : true,
-		 success : function(result) {
-			 /* if (result.msg) {
-				 alert(result.msg);
-			}else{ */
-				$("#tr_"+id).remove();
-			/* } */
-		 }
-	}); 	
+	var flag = confirm("确定删除吗?");
+	if (flag) {
+		$.ajax({			 
+			 type : "POST",
+			 url : "delete",
+			 data : {id:id},
+			 cache : false,
+			 async : true,
+			 success : function(result) {
+				 /* if (result.msg) {
+					 alert(result.msg);
+				}else{ */
+					$("#tr_"+id).remove();
+				/* } */
+			 }
+		}); 
+	}
+	 	
 }
 //删除多条数据
 function deleteRoles(){
 	 var checkbox = document.getElementsByName("id"); 
-     var strIds =[];  
+     var strIds =[]; 
+     var flag = confirm("确定删除吗?");
      for ( var i = 0; i < checkbox.length; i++) {  
          if(checkbox[i].checked){  
         	 strIds.push(checkbox[i].value); 
          }  
-     }    
-	 $.ajax({			 
-		 type : "POST",	
-         dataType : "json",
-		 url : "deleteRoles",
-		 data : {ids:strIds.toString()},
-		 cache : false,
-		 async : true,
-		 success : function(result) {	
-			 for(var i= 0;i<strIds.length;i++){  
-				 $("#tr_"+strIds[i]).remove();
-		     } 			
-		 }
-	}); 	
+     }  
+     if (flag) {
+    	 $.ajax({			 
+    		 type : "POST",	
+             dataType : "json",
+    		 url : "deleteRoles",
+    		 data : {ids:strIds.toString()},
+    		 cache : false,
+    		 async : true,
+    		 success : function(result) {	
+    			 for(var i= 0;i<strIds.length;i++){  
+    				 $("#tr_"+strIds[i]).remove();
+    		     } 			
+    		 }
+    	}); 
+	}
+	 	
 }
 //修改数据
 function editRole(id){
@@ -283,14 +291,24 @@ function enableRole(id){
 function addPermission(){
 	$.ajax({			 
 		 type : "POST",
-		 url : "${pageContext.request.contextPath}/permission/findAll",           
+		 url : "${pageContext.request.contextPath}/permission/findAll2",           
         //dataType : "json",
-      // data:{id:id},
+      // data:{id:id},<input type="checkbox" id="pId" name="pId" value="${p.id}" />${p.url }
 		 cache : false,
 		 async : true,
-		 success : function(result) {				
-			 $('#addPermission').modal('show');
-			 $('#pId').value(result.url)		
+		 success : function(result) {		
+			 $("#addPermission form").html('');
+			 var lists=result.lists;
+			 console.log(lists);
+			 for(var a in lists){
+				 //window.dialogArguments;
+				 //alert(a.id);<input type="checkbox" id="pId" name="pId" value="${p.id}" />${p.url }
+				 //$("#addRole").find("input").html(a.roleName);
+				 console.log(lists[a].id);
+				 var inpunt='<input type="checkbox" name="pId" value="'+lists[a].id+'" />'+lists[a].url;
+				 $("#addPermission form").append(inpunt);
+				 $('#addPermission').modal('show');
+			 }	
 		 }
 	}); 
 }
@@ -363,6 +381,7 @@ function search(){
 							<th>角色名称</th>
 							<th>备注</th>
 							<th>创建时间</th>
+							<th>状态</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -374,12 +393,12 @@ function search(){
 								<td>${r.roleName}</td>
 								<td>${r.remark}</td>
 								<td><fmt:formatDate value="${r.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-							<%-- 	<c:if test="${c.state ==1}">
+								<c:if test="${r.state ==1}">
 								<td id="sta">启用</td>
 								</c:if>
-								<c:if test="${c.state ==0}">
+								<c:if test="${r.state ==0}">
 								<td id="sta">停用</td>
-								</c:if> --%>
+								</c:if>
 								<td>
 									<a onclick="editRole(${r.id})">
 										<span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-pencil" aria-hidden="true"
@@ -736,7 +755,7 @@ function search(){
 			</div>
 			<div class="modal-body">
 				<form class="form-inline">
-					<fieldset>
+					<%-- <fieldset>
 						 <c:forEach items="${permissionLists}" var="p">
 							<tr id="tr_${p.id }">
 								
@@ -744,7 +763,7 @@ function search(){
 								
 							</tr>
 						</c:forEach>
-					</fieldset>
+					</fieldset> --%>
 				</form>
 			</div>
 			<div class="modal-footer">

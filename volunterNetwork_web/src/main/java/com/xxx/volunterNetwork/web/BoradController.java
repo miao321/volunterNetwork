@@ -45,6 +45,7 @@ public class BoradController {
 	private IBoradService boradService;
 	
 	@RequestMapping("/saveOrUpdate")
+	@SysControllerLog(module="添加公告",methods="添加公告")
 	public String saveOrUpdate(Borad borad) {		
 		try {		
 			//boradService.saveOrUpdate(borad);
@@ -56,6 +57,7 @@ public class BoradController {
 		}	
 	}
 	@RequestMapping("/update")
+	@SysControllerLog(module="修改公告",methods="修改公告")
 	public @ResponseBody ExtAjaxResponse update(Borad borad) {
 		/*if (collegeService.findCollege(college.getCollegeName()) != null) {
 			return new ExtAjaxResponse(false, "该部门已经存在 不用再添加");
@@ -70,6 +72,7 @@ public class BoradController {
 		}	
 	}	
 	@RequestMapping("/delete")
+	@SysControllerLog(module="添加公告",methods="删除公告")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long id) {
 		try {
 			Borad borad = boradService.findOne(id);
@@ -82,6 +85,7 @@ public class BoradController {
 		}		
 	}
 	@RequestMapping("/deleteborads")
+	@SysControllerLog(module="添加公告",methods="批量删除公告")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long[] ids) {
 		try {
 			List<Long> idsLists = Arrays.asList(ids);
@@ -94,6 +98,7 @@ public class BoradController {
 		}
 	}	
 	@RequestMapping("/findOne")
+	@SysControllerLog(module="添加公告",methods="查看一条公告")
 	public @ResponseBody Borad findOne(@RequestParam Long id,HttpSession session) {
 		Borad borad = boradService.findOne(id);
 		session.setAttribute("borad", borad);
@@ -105,7 +110,7 @@ public class BoradController {
 		return  boradLists;		
 	}	
 	@RequestMapping("/findPage")
-	@SysControllerLog(module="模块管理",methods="查找所有数据并分页排序")
+	@SysControllerLog(module="公告管理",methods="查找所有数据并分页排序")
 	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,BoradQueryDTO boradQueryDTO,ExtPageable extPageable){
 		boradQueryDTO.setFbman(query);
 		boradQueryDTO.setFblx(query);
@@ -121,6 +126,7 @@ public class BoradController {
 	}
 	
 	@RequestMapping("disableborad")
+	@SysControllerLog(module="添加公告",methods="禁用公告")
 	public @ResponseBody Borad disableBorad(@RequestParam Long id) {
 		Borad borad = boradService.findOne(id);
 		if (borad.getState() != null) {
@@ -129,6 +135,7 @@ public class BoradController {
 		return borad;
 	}
 	@RequestMapping("enableborad")
+	@SysControllerLog(module="添加公告",methods="启用公告")
 	public @ResponseBody Borad enableBorad(@RequestParam Long id) {
 		Borad borad = boradService.findOne(id);
 		if (borad.getState() != null) {
@@ -138,6 +145,7 @@ public class BoradController {
 	}
 	
 	@RequestMapping("uploadImg")
+	@SysControllerLog(module="添加公告",methods="添加公告")
 	public String upload(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {				

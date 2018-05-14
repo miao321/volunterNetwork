@@ -31,4 +31,5 @@ public interface IUserService {
 	//public List<UserRoleDTO> findUserRole2();
 	public List<User> find(String hql, Class<User> class1, String[] strings);
 	public void updateState(Long id,Integer state);
+	/*public void jianRole(Long id);*/
 }

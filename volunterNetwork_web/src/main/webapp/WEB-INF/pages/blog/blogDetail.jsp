@@ -84,11 +84,11 @@
     <div class="item_con clearfix"  style="background: #fff;margin-top: 4px;">
      	<div style="float:left;width: 170px;">
 	     	<a target="_blank" href="http://dg.izyz.org/article/detail.do?pageno=999993431541" class="pic_link">
-	        	 <img src="${pageContext.request.contextPath}/images/login.jpg" id="article_logo999993431541" class="pic" style="width:170px;height: 110px;float: left;">
+	        	 <img src="${pageContext.request.contextPath}/images/headimgboy7.jpg" id="article_logo999993431541" class="pic" style="width:170px;height: 110px;float: left;">
 	        </a>
         </div> 
         <div style="float:left;width:950px;margin-top: 26px;">	           	
-            <p class="right_txt_p" style="margin-left:190px;margin-top:-26px;margin-bottom:10px;font-size:14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${share.author } &nbsp;<span style="color: #adadad;">发布于：<fmt:formatDate value="${share.fbtime }" type="date"/></span></p>		       	
+            <p class="right_txt_p" style="margin-left:10px;margin-top:-26px;margin-bottom:10px;font-size:14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${share.author } &nbsp;<span style="color: #adadad;">发布于：<fmt:formatDate value="${share.fbtime }" type="date"/></span></p>		       	
          	 <hr/>
          	<span style="float:left;width:950px;display:block;font-size: 20px;color: #000;padding-left: 20px;">${share.content }</span>        
             <span style="float: left;width:950px;margin-bottom:20px;margin-left:20px;padding-top: 8px;display: block;">作者：${share.author } &nbsp;<fmt:formatDate value="${share.fbtime }" type="date"/>&nbsp;&nbsp;最后回应：${share.endResp } &nbsp;<fmt:formatDate value="${share.fbtime }" type="date"/></span>      	
@@ -111,7 +111,7 @@
             <div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath }/images/headimgboy5.jpg" alt="" style="width: 50px;height: 50px;"></div>
             <div class="comment-show-con-list pull-left clearfix">
                 <div class="pl-text clearfix">
-                    <a href="#" class="comment-size-name">${comment.userName } :</a>
+                    <a href="#" class="comment-size-name">${comment.userName }: </a>
                     <span class="my-pl-con">&nbsp;${comment.content }</span>
                 </div>
                 <div class="date-dz">
@@ -169,7 +169,7 @@ $('.commentAll').on('click','.plBtn',function(){
 		 async : true,
 		 success : function(result) {
 			
-			oHtml = '<div class="comment-show-con clearfix"><div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath }/images/headimgboy5.jpg" alt=""></div> <div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"> <a href="#" class="comment-size-name">${userName} : </a> <span class="my-pl-con">&nbsp;'+ oSize +'</span> </div> <div class="date-dz"> <span class="date-dz-left pull-left comment-time">'+now+'</span> <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
+			oHtml = '<div class="comment-show-con clearfix"><div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath }/images/headimgboy5.jpg" alt="" style="width: 50px;height: 50px;"></div> <div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"> <a href="#" class="comment-size-name">${studentNo} : </a> <span class="my-pl-con">&nbsp;'+ oSize +'</span> </div> <div class="date-dz"> <span class="date-dz-left pull-left comment-time">'+now+'</span> <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
 		    if(oSize.replace(/(^\s*)|(\s*$)/g, "") != ''){
 		        $(obj).parents('.reviewArea ').siblings('.comment-show').prepend(oHtml);
 		        $(obj).siblings('.flex-text-wrap').find('.comment-input').prop('value','').siblings('pre').find('span').text('');

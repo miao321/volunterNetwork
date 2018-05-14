@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xxx.volunterNetwork.anno.SysControllerLog;
 import com.xxx.volunterNetwork.domain.Opinion;
 import com.xxx.volunterNetwork.dto.OpinionQueryDTO;
 import com.xxx.volunterNetwork.service.IOpinionService;
@@ -58,8 +60,9 @@ public class OpinionController {
 	}
 	
 	@RequestMapping("/delete")
-//	@RequiresPermissions("opinion/delete")
-//	@RequiresOpinions("管理员")
+	//@RequiresPermissions("log/delete")
+	@RequiresRoles("超级管理员")
+	@SysControllerLog(module="意见反馈",methods="删除意见")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long id) {
 		Opinion opinion = opinionService.findOne(id);
 		try {			
@@ -71,7 +74,8 @@ public class OpinionController {
 	}
 	@RequestMapping("/deleteOpinions")
 //	@RequiresPermissions("opinion/deleteOpinions")
-//	@RequiresOpinions("管理员")
+	@RequiresRoles("超级管理员")
+	@SysControllerLog(module="意见反馈",methods="批量删除意见")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long[] ids) {
 		try {
 			List<Long> idsLists = Arrays.asList(ids);
@@ -84,6 +88,7 @@ public class OpinionController {
 		}
 	}	
 	@RequestMapping("/findOne")
+	@SysControllerLog(module="意见反馈",methods="查看意见信息")
 	public @ResponseBody Opinion findOne(@RequestParam Long id) {
 		Opinion opinion = opinionService.findOne(id);
 		return opinion;
@@ -97,6 +102,7 @@ public class OpinionController {
 		return new ExtJsonResult<Opinion>(opinionLists);
 	}
 	@RequestMapping("/findPage")
+	@SysControllerLog(module="意见反馈",methods="查看意见反馈列表")
 	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,OpinionQueryDTO opinionQueryDTO,ExtPageable extPageable){
 		opinionQueryDTO.setAuthor(query);
 		opinionQueryDTO.setContent(query);
@@ -124,6 +130,7 @@ public class OpinionController {
 	}*/
 	
 	@RequestMapping("disableOpinion")
+	@SysControllerLog(module="意见反馈",methods="禁用意见")
 	public @ResponseBody Opinion disableOpinion(@RequestParam Long id) {
 		Opinion opinion = opinionService.findOne(id);
 		if (opinion.getState() != null) {
@@ -132,6 +139,7 @@ public class OpinionController {
 		return opinion;
 	}
 	@RequestMapping("enableOpinion")
+	@SysControllerLog(module="意见反馈",methods="启用意见")
 	public @ResponseBody Opinion enableOpinion(@RequestParam Long id) {
 		Opinion opinion = opinionService.findOne(id);
 		if (opinion.getState() != null) {

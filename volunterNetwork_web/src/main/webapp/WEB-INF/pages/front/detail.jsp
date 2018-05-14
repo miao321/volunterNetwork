@@ -232,7 +232,7 @@ function addAttention(id){
 						            <div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath }/images/headimgboy5.jpg" alt="" style="width: 50px;height: 50px;"></div>
 						            <div class="comment-show-con-list pull-left clearfix">
 						                <div class="pl-text clearfix">
-						                    <a href="#" class="comment-size-name">${comment.userName } :</a>
+						                    <a href="#" class="comment-size-name">${comment.studentNo } :</a>
 						                    <span class="my-pl-con">&nbsp;${comment.content }</span>
 						                </div>
 						                <div class="date-dz">
@@ -240,8 +240,8 @@ function addAttention(id){
 						                    <div class="date-dz-right pull-right comment-pl-block">
 						                        <!-- <a href="javascript:;" class="removeBlock">删除</a> -->
 						                        <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left" onclick="commentShow(${comment.id},this)" data-id="${comment.id}">回复</a>
-						                        <span class="pull-left date-dz-line">|</span>
-						                        <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">0</i>)</a>
+						                        <!-- <span class="pull-left date-dz-line">|</span> -->
+						                        <!-- <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">0</i>)</a> -->
 						                    </div>
 						                </div>
 						                <div class="hf-list-con" id="con${comment.id}"></div>

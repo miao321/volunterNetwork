@@ -22,7 +22,7 @@ public interface IRoleService {
 	public void delete(List<Long> ids);
 	public Role findOne(Long id);
 	public List<Role> findAll();
-	
+	public List<Role> findRole();
 	public void updateState(Long id,Integer state);
 /*	public Role findRole(String roleName);*/
 	

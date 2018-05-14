@@ -98,39 +98,47 @@ function toView(){
 }  	
 //删除单条数据
 function deleteborad(id){
-	 $.ajax({			 
-		 type : "POST",
-		 url : "delete",
-		 data : {id:id},
-		 cache : false,
-		 async : true,
-		 success : function(result) {	
-			 $("#tr_"+id).remove();
-		 }
-	}); 	
+	var flag = confirm("确定删除吗?");
+	if (flag) {
+		$.ajax({			 
+			 type : "POST",
+			 url : "delete",
+			 data : {id:id},
+			 cache : false,
+			 async : true,
+			 success : function(result) {	
+				 $("#tr_"+id).remove();
+			 }
+		});
+	}
+	  	
 }
 //删除多条数据
 function deleteborads(){
 	 var checkbox = document.getElementsByName("id"); 
-     var strIds =[];  
+     var strIds =[]; 
+     var flag = confirm("确定删除吗?");
      for ( var i = 0; i < checkbox.length; i++) {  
          if(checkbox[i].checked){  
         	 strIds.push(checkbox[i].value); 
          }  
-     }    
-	 $.ajax({			 
-		 type : "POST",	
-         dataType : "json",
-		 url : "deleteborads",
-		 data : {ids:strIds.toString()},
-		 cache : false,
-		 async : true,
-		 success : function(result) {	
-			 for(var i= 0;i<strIds.length;i++){  
-				 $("#tr_"+strIds[i]).remove();
-		     } 			
-		 }
-	}); 	
+     }   
+     if (flag) {
+    	 $.ajax({			 
+    		 type : "POST",	
+             dataType : "json",
+    		 url : "deleteborads",
+    		 data : {ids:strIds.toString()},
+    		 cache : false,
+    		 async : true,
+    		 success : function(result) {	
+    			 for(var i= 0;i<strIds.length;i++){  
+    				 $("#tr_"+strIds[i]).remove();
+    		     } 			
+    		 }
+    	}); 	
+	}
+	 
 }
 
 //禁用数据

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xxx.volunterNetwork.anno.SysControllerLog;
 import com.xxx.volunterNetwork.domain.Permission;
 import com.xxx.volunterNetwork.domain.Share;
 import com.xxx.volunterNetwork.dto.PermissionQueryDTO;
@@ -42,6 +43,7 @@ public class ShareController {
 	@RequestMapping("/saveOrUpdate")
 //	@RequiresPermissions("share/saveOrUpdate")
 //	@RequiresShares("管理员")
+	
 	public @ResponseBody ExtAjaxResponse saveOrUpdate(Share share) {
 		
 		/*if (shareService.findShare(share.getShareName()) != null) {
@@ -59,6 +61,7 @@ public class ShareController {
 	@RequestMapping("/delete")
 //	@RequiresPermissions("share/delete")
 //	@RequiresShares("管理员")
+	@SysControllerLog(module="分享管理",methods="删除帖子")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long id) {
 		try {
 			Share share = shareService.findOne(id);
@@ -71,6 +74,7 @@ public class ShareController {
 	@RequestMapping("/deleteShares")
 //	@RequiresPermissions("share/deleteShares")
 //	@RequiresShares("管理员")
+	@SysControllerLog(module="分享管理",methods="批量删除管理")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long[] ids) {
 		try {
 			List<Long> idsLists = Arrays.asList(ids);
@@ -83,6 +87,7 @@ public class ShareController {
 		}
 	}	
 	@RequestMapping("/findOne")
+	@SysControllerLog(module="分享管理",methods="查看帖子")
 	public @ResponseBody Share findOne(@RequestParam Long id) {
 		Share share = shareService.findOne(id);
 		return share;
@@ -96,6 +101,7 @@ public class ShareController {
 		return new ExtJsonResult<Share>(shareLists);
 	}
 	@RequestMapping("/findPage")
+	@SysControllerLog(module="分享管理",methods="查看分享列表")
 	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,ShareQueryDTO shareQueryDTO,ExtPageable extPageable){
 		shareQueryDTO.setAuthor(query);
 		shareQueryDTO.setContent(query);
@@ -123,6 +129,7 @@ public class ShareController {
 	}*/
 	
 	@RequestMapping("disableShare")
+	@SysControllerLog(module="分享管理",methods="帖子不通过")
 	public @ResponseBody Share disableShare(@RequestParam Long id) {
 		Share share = shareService.findOne(id);
 		if (share.getState() != null) {
@@ -131,6 +138,7 @@ public class ShareController {
 		return share;
 	}
 	@RequestMapping("enableShare")
+	@SysControllerLog(module="分享管理",methods="帖子通过")
 	public @ResponseBody Share enableShare(@RequestParam Long id) {
 		Share share = shareService.findOne(id);
 		if (share.getState() != null) {

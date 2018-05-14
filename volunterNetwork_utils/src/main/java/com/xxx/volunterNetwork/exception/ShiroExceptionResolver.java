@@ -28,7 +28,7 @@ public class ShiroExceptionResolver implements HandlerExceptionResolver {
 		 if(ex instanceof UnauthorizedException) {
 			 ModelAndView view = new ModelAndView(new MappingJackson2JsonView());  
 		        view.addObject("success", false);  
-		        view.addObject("msg", "您无权限,请跟管理员申请权限");  
+		        view.addObject("msg", "您无权限,请跟超级管理员申请权限");  
 		        return view;  
 	            
 	        }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xxx.volunterNetwork.anno.SysControllerLog;
 import com.xxx.volunterNetwork.domain.Permission;
 import com.xxx.volunterNetwork.domain.Role;
 import com.xxx.volunterNetwork.dto.PermissionQueryDTO;
@@ -42,6 +43,7 @@ public class RoleController {
 	@RequestMapping("/saveOrUpdate")
 //	@RequiresPermissions("role/saveOrUpdate")
 //	@RequiresRoles("管理员")
+	@SysControllerLog(module="角色管理",methods="添加角色")
 	public @ResponseBody ExtAjaxResponse saveOrUpdate(Role role) {
 		
 		/*if (roleService.findRole(role.getRoleName()) != null) {
@@ -55,6 +57,7 @@ public class RoleController {
 		}	
 	}
 	@RequestMapping("/savePermission")
+	@SysControllerLog(module="角色管理",methods="添加权限")
 	public @ResponseBody ExtAjaxResponse savePermission(PermissionQueryDTO permissionQueryDTO,@RequestParam Long permissionId,@RequestParam Long roleId) {
 		Role role = roleService.findOne(roleId);
 		System.out.println(role+"+++++++");
@@ -71,6 +74,7 @@ public class RoleController {
 		}	
 	}	
 	@RequestMapping("/update")
+	@SysControllerLog(module="角色管理",methods="修改角信息")
 	public @ResponseBody ExtAjaxResponse update(Role role) {
 		/*if (collegeService.findCollege(college.getCollegeName()) != null) {
 			return new ExtAjaxResponse(false, "该部门已经存在 不用再添加");
@@ -95,6 +99,7 @@ public class RoleController {
 	@RequestMapping("/delete")
 //	@RequiresPermissions("role/delete")
 //	@RequiresRoles("管理员")
+	@SysControllerLog(module="角色管理",methods="删除角色")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long id) {
 		try {
 			Role role = roleService.findOne(id);
@@ -118,6 +123,7 @@ public class RoleController {
 	@RequestMapping("/deleteRoles")
 //	@RequiresPermissions("role/deleteRoles")
 //	@RequiresRoles("管理员")
+	@SysControllerLog(module="角色管理",methods="批量删除角色")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long[] ids) {
 		try {
 			List<Long> idsLists = Arrays.asList(ids);
@@ -134,6 +140,7 @@ public class RoleController {
 		}
 	}	
 	@RequestMapping("/findOne")
+	@SysControllerLog(module="角色管理",methods="查看角色信息")
 	public @ResponseBody Role findOne(@RequestParam Long id) {
 		Role role = roleService.findOne(id);
 		return role;
@@ -141,12 +148,13 @@ public class RoleController {
 	
 	@RequestMapping("/findAll")
 	public @ResponseBody ExtJsonResult<Role> findAll(HttpSession session){
-		List<Role> roleLists = roleService.findAll();
+		List<Role> roleLists = roleService.findRole();
 		session.setAttribute("roleLists", roleLists);
 		System.out.println("roleLists:"+roleLists);
 		return new ExtJsonResult<Role>(roleLists);
 	}
 	@RequestMapping("/findPage")
+	@SysControllerLog(module="角色管理",methods="查看角色管理列表")
 	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,RoleQueryDTO roleQueryDTO,ExtPageable extPageable){
 		roleQueryDTO.setRoleName(query);
 		roleQueryDTO.setRemark(query);
@@ -172,6 +180,7 @@ public class RoleController {
 	}*/
 	
 	@RequestMapping("disableRole")
+	@SysControllerLog(module="角色管理",methods="禁用角色")
 	public @ResponseBody Role disableRole(@RequestParam Long id) {
 		Role role = roleService.findOne(id);
 		if (role.getState() != null) {
@@ -180,6 +189,7 @@ public class RoleController {
 		return role;
 	}
 	@RequestMapping("enableRole")
+	@SysControllerLog(module="角色管理",methods="启用角色")
 	public @ResponseBody Role enableRole(@RequestParam Long id) {
 		Role role = roleService.findOne(id);
 		if (role.getState() != null) {

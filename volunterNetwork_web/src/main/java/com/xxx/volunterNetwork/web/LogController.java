@@ -39,7 +39,8 @@ public class LogController {
 	private ILogService logService;
 	@RequestMapping("/delete")
 	@RequiresPermissions("log/delete")
-	@RequiresRoles("管理员")
+	@RequiresRoles("超级管理员")
+	@SysControllerLog(module="日志管理",methods="删除日志")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long id) {		
 		try {
 			Log log = logService.findOne(id);
@@ -53,7 +54,8 @@ public class LogController {
 	}
 	@RequestMapping("/deleteLogs")
 	@RequiresPermissions("log/deleteLogs")
-	@RequiresRoles("管理员")
+	@RequiresRoles("超级管理员")
+	@SysControllerLog(module="日志管理",methods="批量删除日志")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long[] ids) {
 		try {
 			List<Long> idsLists = Arrays.asList(ids);

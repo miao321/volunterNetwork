@@ -49,6 +49,7 @@ public class OrganizationController {
 	
 	String sPath = System.getProperty("evan.webapp");
 	@RequestMapping("/saveOrUpdate")
+	@SysControllerLog(module="组织管理",methods="添加组织")
 	public @ResponseBody ExtAjaxResponse saveOrUpdate(Organization organization) {
 		
 		/*if (organizationService.findOrganization(organization.getOrganizationName()) != null) {
@@ -62,6 +63,7 @@ public class OrganizationController {
 		}	
 	}
 	@RequestMapping("/update")
+	@SysControllerLog(module="组织管理",methods="修改组织信息")
 	public @ResponseBody ExtAjaxResponse update(Organization organization) {
 		/*if (collegeService.findCollege(college.getCollegeName()) != null) {
 			return new ExtAjaxResponse(false, "该部门已经存在 不用再添加");
@@ -76,6 +78,7 @@ public class OrganizationController {
 		}	
 	}	
 	@RequestMapping("/delete")
+	@SysControllerLog(module="组织管理",methods="删除组织信息")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long id) {
 		try {
 			Organization organization = organizationService.findOne(id);
@@ -88,6 +91,7 @@ public class OrganizationController {
 		}		
 	}
 	@RequestMapping("/deleteOrganizations")
+	@SysControllerLog(module="组织管理",methods="批量删除组织信息")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long[] ids) {
 		try {
 			List<Long> idsLists = Arrays.asList(ids);
@@ -100,6 +104,7 @@ public class OrganizationController {
 		}
 	}	
 	@RequestMapping("/findOne")
+	@SysControllerLog(module="组织管理",methods="查看组织信息")
 	public @ResponseBody Organization findOne(@RequestParam Long id,HttpSession session) {
 		Organization organization = organizationService.findOne(id);
 		session.setAttribute("organization", organization);
@@ -111,7 +116,7 @@ public class OrganizationController {
 		return organizationLists;		
 	}	
 	@RequestMapping("/findPage")
-	@SysControllerLog(module="模块管理",methods="查找所有数据并分页排序")
+	@SysControllerLog(module="组织管理",methods="查找所有数据并分页排序")
 	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,OrganizationQueryDTO organizationQueryDTO,ExtPageable extPageable){
 		organizationQueryDTO.setCollegeName(query);
 		organizationQueryDTO.setOrganization(query);
@@ -127,6 +132,7 @@ public class OrganizationController {
 	}
 	
 	@RequestMapping("disableOrganization")
+	@SysControllerLog(module="组织管理",methods="禁用组织")
 	public @ResponseBody Organization disableOrganization(@RequestParam Long id) {
 		Organization organization = organizationService.findOne(id);
 		if (organization.getState() != null) {
@@ -135,6 +141,7 @@ public class OrganizationController {
 		return organization;
 	}
 	@RequestMapping("enableOrganization")
+	@SysControllerLog(module="组织管理",methods="启用组织")
 	public @ResponseBody Organization enableOrganization(@RequestParam Long id) {
 		Organization organization = organizationService.findOne(id);
 		if (organization.getState() != null) {
@@ -143,6 +150,7 @@ public class OrganizationController {
 		return organization;
 	}
 	@RequestMapping("uploadImg")
+	@SysControllerLog(module="组织管理",methods="上传信息")
 	public String upload(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {	

@@ -194,5 +194,11 @@ public class UserServiceImpl implements IUserService {
 		userRepository.updateState(id, state);
 		
 	}
+
+	/*@Override
+	public void jianRole(Long id) {
+		userRepository.jianRole(id);
+		
+	}*/
 	
 }

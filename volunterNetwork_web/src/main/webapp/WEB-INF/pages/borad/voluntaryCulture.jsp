@@ -92,45 +92,7 @@
                     <div class="common_title_box clearfix">
                         <h1 class="common_title fl">信息公告</h1>
                     </div>
-                    <div class="consult_comment_body">
-                    	<form action="http://www.gdzyz.cn/mission/comment" method="post" id="pinglunform">
-                    		<input type="hidden" name="missionId" value="659842">
-							<input type="hidden" name="userId" value="">
-                    	
-	                        <div class="login_register">
-	                            <p class="fl askUToLogin">别默默的看，快登录点评一下吧！</p>
-	                            <div class="login_Or_register clearfix">
-	                 
-	                                <a href="http://www.gdzyz.cn/login/index.do" class="reg fl">登录</a> 
-	                            </div>
-	                        </div>
-                        </form>
-                        <ul class="user_consult_list">
-                        	<!-- 暂无评论，静态评论屏蔽 -->
-                        </ul>
-                    <!-- <div class="pages ser-pages">
-                    	<div class="pages-infos">
-                    		<div class="mod-pages" style="line-height:28px;height:28px;">
-                    		<span style="float:left;line-height:40px;">每页显示:</span>
-                    		<select onchange="window.location.href=(&#39;/mission/detail?missionId=659842&amp;pageIndex=1&amp;pageSize=&#39; + this.options[this.options.selectedIndex].value);" style="width:60px;float:left;display:inline;background-color:#fff;height:40px;line-height:40px;padding:0 2px;border:1px #e6e6e6 solid;margin-right:4px;" name="dynamic_length">
-                    		<option value="5">5</option>
-                    		<option value="10" selected="selected">10</option>
-                    		<option value="20">20</option><option value="50">50</option>
-                    		<option value="100">100</option>
-                    		</select>
-                    		<a href="javascript:;" style="width:90px;color: #999999;cursor: not-allowed;background-color: #ffffff;border-color: #dddddd;">&lt; 上页</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=1" class="cur">1</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=2">2</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=3">3</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=4">4</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=5">5</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=6">6</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=7">7</a>
-                    		<a href="http://www.gdzyz.cn/mission/detail?missionId=659842&amp;pageSize=10&amp;pageIndex=2" style="width:90px;">下一页 &gt;</a>
-                    		</div>
-                    	</div>
-                    </div> -->
-                    </div>
+                  
                 </div>
             </div>
             <div class="content_one_right fr">

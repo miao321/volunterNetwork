@@ -37,5 +37,7 @@ public interface PermissionRepository extends PagingAndSortingRepository<Permiss
 	@Modifying
 	@Query("update Permission permission set permission.state = ?2 where permission.id = ?1")
 	public void updateState(Long id,Integer state);
+	@Query("from Permission o where o.state = 1")
+	public List<Permission> findPermission();
 
 }

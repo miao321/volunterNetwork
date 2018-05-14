@@ -64,5 +64,9 @@ public class RoleServiceImpl implements IRoleService {
 		roleRepository.updateState(id, state);
 		
 	}
+	@Override
+	public List<Role> findRole() {
+		return roleRepository.findRole();
+	}
 
 }

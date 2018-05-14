@@ -103,6 +103,8 @@ function toView(){
 }  	
 //删除单条数据
 function deleteUser(id){
+	var flag = confirm("确定删除吗?");
+	if (flag) {
 		 $.ajax({			 
 			 type : "POST",
 			 url : "delete",
@@ -113,30 +115,36 @@ function deleteUser(id){
 				 $("#tr_"+id).remove();
 			 }
 		}); 	
+	} 
+		
 }
 //删除多条数据
 function deleteUsers(){
 	 var checkbox = document.getElementsByName("id"); 
-     var strIds =[];  
+     var strIds =[]; 
+     var flag = confirm("确定删除吗?");
      for ( var i = 0; i < checkbox.length; i++) {  
          if(checkbox[i].checked){  
         	 strIds.push(checkbox[i].value); 
          }  
-     }    
-	 $.ajax({			 
-		 type : "POST",	
-         dataType : "json",
-		 url : "deleteUsers",
-		 data : {ids:strIds.toString()},
-		 cache : false,
-		 async : true,
-		 success : function(result) {	
-			 for(var i= 0;i<strIds.length;i++){  
-				 $("#tr_"+strIds[i]).remove();
-		     } 
-			
-		 }
-	}); 	
+     }
+     if (flag) {
+    	 $.ajax({			 
+    		 type : "POST",	
+             dataType : "json",
+    		 url : "deleteUsers",
+    		 data : {ids:strIds.toString()},
+    		 cache : false,
+    		 async : true,
+    		 success : function(result) {	
+    			 for(var i= 0;i<strIds.length;i++){  
+    				 $("#tr_"+strIds[i]).remove();
+    		     } 
+    			
+    		 }
+    	}); 
+	}
+	 	
 }
 //修改数据
 function editUser(id){
@@ -441,9 +449,21 @@ function addRole(){
 	         dataType : "json",
 			 cache : false,
 			 async : true,
-			 success : function(result) {					
-				 $('#addRole').modal('show');
-				 $("#rId").val(result.roleName);
+			 success : function(result) {	
+				 $("#addRole form").html('');
+				 var lists=result.lists;
+				 console.log(lists);
+				 for(var a in lists){
+					 //window.dialogArguments;
+					 //alert(a.id);
+					 //$("#addRole").find("input").html(a.roleName);
+					 console.log(lists[a].id);
+					 var inpunt='<input style="margin-left: 4px;" type="radio" name="rId" value="'+lists[a].id+'" />'+lists[a].roleName;
+					 $("#addRole form").append(inpunt);
+					 $('#addRole').modal('show');
+				 }
+				
+				 
 					
 			 }
 		}); 
@@ -484,6 +504,33 @@ function saveRole(){
 		
 	}); 	
 }
+//出去角色
+function jianRole(){
+	var checkbox2 = document.getElementsByName("id"); 
+	var userIds =[];
+	for ( var j = 0; j < checkbox2.length; j++) {  
+        if(checkbox2[j].checked){  
+       	 userIds.push(checkbox2[j].value); 
+        }  
+    }    
+	if(isChecked()){
+		$.ajax({			 
+			 type : "POST",
+			 url : "jianRole",  
+			 data : {id:userIds.toString()},
+	         dataType : "json",
+			 cache : false,
+			 async : true,
+			 success : function(result) {	
+				  location.reload();
+				 
+			 }
+		}); 
+	}else{
+		alert("请选中用户进行添加角色");
+	}
+}
+
 function search(){
 	var query = document.getElementById("searchActi").value;	
 	window.location.href="findPage?query="+query;
@@ -507,6 +554,9 @@ function search(){
 				<button class="btn btn-info" onclick="addRole()" style="margin: 6px 0;" type="button">
 					<span style="margin: 0px 4px;" class="glyphicon glyphicon-plus" aria-hidden="true"></span> 角色
 				</button>
+				<!-- <button class="btn btn-info" onclick="jianRole()" style="margin: 6px 0;" type="button">
+					<span style="margin: 0px 4px;" class="glyphicon glyphicon-plus" aria-hidden="true"></span> -角色
+				</button> -->
 				<div class="form-search" style="float:right;margin-right: 70px;margin-bottom: 10px;">
 					<input class="input-medium search-query" id="searchActi" type="text" placeholder="请输入关键字" style="height: 34px;margin-top: 10px;"/>
 					<button type="button" class="btn btn-info" onclick="search()">查找</button>
@@ -1081,19 +1131,17 @@ function search(){
 			</div>
 			<div class="modal-body">
 				<form class="form-inline">
-					<fieldset>
 						
-						<c:forEach items="${roleLists}" var="r" varStatus="status">											 
+						<%-- <c:forEach items="${roleLists}" var="r" varStatus="status">											 
 							<tr id="tr_${r.id }">	
 								<td>									  								
-								<input style="margin-left: 4px;" type="radio" id="rId" name="rId" value="${r.id}" />${r.roleName }								
+								<input style="margin-left: 4px;" type="radio" id="rId${status.index }" name="rId" value="${r.id}" />${r.roleName }								
 								</td>													
 							 </tr>
 							 <c:if test="${status.count % 7 == 0}">
 							 	<br/>
 							 </c:if>													
-						</c:forEach>						
-					</fieldset>
+						</c:forEach>		 --%>				
 				</form>
 			</div>
 			<div class="modal-footer">

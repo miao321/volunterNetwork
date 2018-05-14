@@ -49,6 +49,7 @@ public class ActiController {
 	
 	String sPath = System.getProperty("evan.webapp");
 	@RequestMapping("/saveOrUpdate")
+	@SysControllerLog(module="活动发布管理",methods="添加活动")
 	public @ResponseBody ExtAjaxResponse saveOrUpdate(Acti acti) {
 		
 		/*if (actiService.findActi(acti.getActiName()) != null) {
@@ -62,6 +63,7 @@ public class ActiController {
 		}	
 	}
 	@RequestMapping("/update")
+	@SysControllerLog(module="活动发布管理",methods="修改活动")
 	public @ResponseBody ExtAjaxResponse update(Acti acti) {
 		/*if (collegeService.findCollege(college.getCollegeName()) != null) {
 			return new ExtAjaxResponse(false, "该部门已经存在 不用再添加");
@@ -76,6 +78,7 @@ public class ActiController {
 		}	
 	}	
 	@RequestMapping("/delete")
+	@SysControllerLog(module="活动发布管理",methods="删除活动")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long id) {
 		try {
 			Acti acti = actiService.findOne(id);
@@ -88,6 +91,7 @@ public class ActiController {
 		}		
 	}
 	@RequestMapping("/deleteActis")
+	@SysControllerLog(module="活动发布管理",methods="批量删除活动")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long[] ids) {
 		try {
 			List<Long> idsLists = Arrays.asList(ids);
@@ -100,6 +104,7 @@ public class ActiController {
 		}
 	}	
 	@RequestMapping("/findOne")
+	@SysControllerLog(module="活动发布管理",methods="查看活动")
 	public @ResponseBody Acti findOne(@RequestParam Long id,HttpSession session) {
 		Acti acti = actiService.findOne(id);
 		session.setAttribute("acti", acti);
@@ -111,7 +116,7 @@ public class ActiController {
 		return actiLists;		
 	}	
 	@RequestMapping("/findPage")
-	@SysControllerLog(module="模块管理",methods="查找所有数据并分页排序")
+	@SysControllerLog(module="活动发布管理",methods="查找所有数据并分页排序")
 	public String findPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,ActiQueryDTO actiQueryDTO,ExtPageable extPageable){
 		actiQueryDTO.setFbzz(query);
 		actiQueryDTO.setContent(query);
@@ -126,6 +131,7 @@ public class ActiController {
 	}
 	
 	@RequestMapping("disableActi")
+	@SysControllerLog(module="活动发布管理",methods="禁用活动")
 	public @ResponseBody Acti disableActi(@RequestParam Long id) {
 		Acti acti = actiService.findOne(id);
 		if (acti.getState() != null) {
@@ -134,6 +140,7 @@ public class ActiController {
 		return acti;
 	}
 	@RequestMapping("enableActi")
+	@SysControllerLog(module="活动发布管理",methods="启用活动")
 	public @ResponseBody Acti enableActi(@RequestParam Long id) {
 		Acti acti = actiService.findOne(id);
 		if (acti.getState() != null) {
@@ -142,6 +149,7 @@ public class ActiController {
 		return acti;
 	}
 	@RequestMapping("uploadImg")
+	@SysControllerLog(module="活动发布管理",methods="添加活动")
 	public String upload(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {	

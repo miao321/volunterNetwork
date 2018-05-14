@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import com.xxx.volunterNetwork.anno.SysControllerLog;
 import com.xxx.volunterNetwork.domain.Organization;
 import com.xxx.volunterNetwork.domain.Role;
 import com.xxx.volunterNetwork.domain.User;
@@ -42,6 +42,7 @@ public class UserController {
 	@RequestMapping("/saveOrUpdate")
 //	@RequiresPermissions("user/saveOrUpdate")
 //	@RequiresRoles("管理员")
+	@SysControllerLog(module="用户管理",methods="添加用户")
 	public @ResponseBody ExtAjaxResponse saveOrUpdate(User user) {
 		/*User user2 = loginService.findUser(user.getStudentNo());
 		if (user2 != null) {
@@ -60,6 +61,7 @@ public class UserController {
 	@RequestMapping("/save")
 //	@RequiresPermissions("user/save")
 //	@RequiresRoles("管理员")
+	@SysControllerLog(module="用户管理",methods="修改用户信息")
 	public @ResponseBody ExtAjaxResponse save(User user,@RequestParam Long id) {
 		try {
 			//user.setPassword(EncryptUtils.encript(user.getPassword()));
@@ -70,6 +72,7 @@ public class UserController {
 		}	
 	}	
 	@RequestMapping("/saveRole")
+	@SysControllerLog(module="用户管理",methods="添加角色")
 	public @ResponseBody ExtAjaxResponse saveRole(UserQueryDTO userQueryDTO,@RequestParam Long roleId,@RequestParam Long userId) {
 		//Role role = roleService.findOne(roleId);
 		
@@ -88,6 +91,7 @@ public class UserController {
 		}	
 	}	
 	@RequestMapping("/update")
+	@SysControllerLog(module="用户管理",methods="修改用户信息")
 	public @ResponseBody ExtAjaxResponse update(User user) {
 		User u = userService.findOne(user.getId());
 		u.setUserName(user.getUserName());
@@ -117,6 +121,7 @@ public class UserController {
 //	@RequiresPermissions("user/delete")
 //	@RequiresRoles("管理员")
 	@RequestMapping("/delete")
+	@SysControllerLog(module="用户管理",methods="删除用户")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long id) {
 		
 		try {
@@ -134,6 +139,7 @@ public class UserController {
 	@RequestMapping("/deleteUsers")
 //	@RequiresPermissions("user/deleteUsers")
 //	@RequiresRoles("管理员")
+	@SysControllerLog(module="用户管理",methods="批量删除用户")
 	public @ResponseBody ExtAjaxResponse delete(@RequestParam Long[] ids) {
 		try {
 			List<Long> idsLists = Arrays.asList(ids);
@@ -149,7 +155,19 @@ public class UserController {
 			return new ExtAjaxResponse(false, "操作失败");
 		}
 	}	
+	@RequestMapping("/jianRole")
+	public @ResponseBody ExtAjaxResponse jianRole(@RequestParam Long id) {
+		/*try {*/
+		User user = userService.findOne(id);
+		user.setRoles(null);
+		userService.saveOrUpdate(user);
+			return new ExtAjaxResponse(true, "操作成功");
+		/*} catch (Exception e) {
+			return new ExtAjaxResponse(false, "操作失败");
+		}*/		
+	}	
 	@RequestMapping("/findOne")
+	@SysControllerLog(module="用户管理",methods="查看用户信息")
 	public @ResponseBody User findOne(@RequestParam Long id,HttpSession session) {
 		User user = userService.findOne(id);
 		System.out.println("user:"+user);
@@ -174,6 +192,7 @@ public class UserController {
 		return "/WEB-INF/pages/system/user";	
 	}
 	@RequestMapping("/findUserPage")
+	@SysControllerLog(module="用户管理",methods="查看用户列表")
 	public String findUserPage(@RequestParam(value="query",required=false, defaultValue="") String query,HttpSession session,UserQueryDTO userQueryDTO,ExtPageable extPageable){
 		userQueryDTO.setUserName(query);
 		userQueryDTO.setStudentNo(query);
@@ -207,6 +226,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("disableUser")
+	@SysControllerLog(module="用户管理",methods="禁用用户")
 	public @ResponseBody User disableUser(@RequestParam Long id) {
 		User user = userService.findOne(id);
 		if (user.getState() != null) {
@@ -215,6 +235,7 @@ public class UserController {
 		return user;
 	}
 	@RequestMapping("enableUser")
+	@SysControllerLog(module="用户管理",methods="启用用户")
 	public @ResponseBody User enableUser(@RequestParam Long id) {
 		User user = userService.findOne(id);
 		if (user.getState() != null) {
@@ -223,6 +244,7 @@ public class UserController {
 		return user;
 	}
 	@RequestMapping("changeMessage")
+	@SysControllerLog(module="用户管理",methods="修改信息")
 	public String changeMessage(HttpSession session) {
 		Long id = (Long) session.getAttribute("userId");
 		User user = userService.findOne(id);

@@ -93,7 +93,9 @@ function enableImg(id){
 }
 //删除单条数据
 function deleteImg(id){
-		 $.ajax({			 
+	var flag = confirm("确定删除吗?");
+	if (flag) {
+		$.ajax({			 
 			 type : "POST",
 			 url : "delete",
 			 data : {id:id},
@@ -103,6 +105,8 @@ function deleteImg(id){
 				 $("#tr_"+id).remove();
 			 }
 		}); 	
+	}
+		 
 }
 </script>
 </head>

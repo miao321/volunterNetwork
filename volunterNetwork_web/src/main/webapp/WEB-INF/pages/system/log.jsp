@@ -13,7 +13,7 @@
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
+
 <script type="text/javascript">
 //点击全选
 function checkAll(who, obj){
@@ -37,20 +37,21 @@ function isOnlyChecked(){
 		return false;
 }
 //删除单条数据
-function deleteCollege(id){
+function deleteLog(id){
 		 $.ajax({			 
 			 type : "POST",
 			 url : "delete",
 			 data : {id:id},
 			 cache : false,
 			 async : true,
-			 success : function(result) {	
+			 success : function(result) {
+				 alert(result.msg);
 				 $("#tr_"+id).remove();
 			 }
 		}); 	
 }
 //删除多条数据
-function deleteColleges(){
+function deleteLogs(){
 	 var checkbox = document.getElementsByName("id"); 
      var strIds =[];  
      for ( var i = 0; i < checkbox.length; i++) {  
@@ -67,6 +68,7 @@ function deleteColleges(){
 		 async : true,
 		 success : function(result) {	
 			 for(var i= 0;i<strIds.length;i++){  
+				 alert(result.msg);
 				 $("#tr_"+strIds[i]).remove();
 		     } 			
 		 }
@@ -108,7 +110,7 @@ function deleteColleges(){
 								
 								
 								<td>									
-									<a onclick="deleteLog(${c.id})" id="id"><span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-trash" aria-hidden="true"
+									<a onclick="deleteLog(${log.id})" id="id"><span style="margin: 0 4px; cursor: pointer;"class="glyphicon glyphicon-trash" aria-hidden="true"
 									data-toggle="tooltip" data-placement="top" title="删除" >										
 									</span></a>
 								</td>

@@ -33,6 +33,9 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long>,J
 	@Query(value="select r.roleName,p.url from t_role as r left join t_permission_t_role as pr on r.id=pr.role_id left join t_permission as p on p.id=pr.permission_id where userName = ?1 and u.state =1",nativeQuery=true)
 	public List<Object[]> getPermissionsByUserName(String userName);
 	
+	/*@Query(value="delete from t_role_t_user where users_id = ?1 ",nativeQuery=true)
+	public void jianRole(Long id);*/
+	
 	/*
 	@Query(value="select u.userName,u.deptName,r.roleName,u.userNo,u.password,u.userNickName,"
 			+ "u.sex,u.birthday,u.age,u.nativePlace,u.nation,u.culture,u.college,u.body,u.marriage, "

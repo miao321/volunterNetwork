@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.xxx.volunterNetwork.anno.SysControllerLog;
 import com.xxx.volunterNetwork.dao.SqlDao;
 import com.xxx.volunterNetwork.util.FileUtil;
 @Controller
@@ -25,6 +26,7 @@ public class StatChartController extends BaseAction {
 	 * 学院时长排名
 	 */
 	@RequestMapping("/marjorClass")
+	@SysControllerLog(module="统计分析",methods="查看饼图")
 	public String productsale2(HttpSession session) throws Exception {
 		//1.执行sql语句，得到统计结果
 	    List<String> list = execSQL("select t.college,sum(t.duration) samount from t_enroll t group by t.college order by samount desc");	    
@@ -55,6 +57,7 @@ public class StatChartController extends BaseAction {
 	 * 学院注册人数排名(旧版amchart实现)
 	 */
 	@RequestMapping("/marjor")
+	@SysControllerLog(module="统计分析",methods="查看柱状图")
 	public String factorysale() throws Exception {
 		//1.执行sql语句，得到统计结果
 		List<String> list = execSQL("select t.collegeName,menNum from t_organization t group by t.collegeName order by menNum desc");	    

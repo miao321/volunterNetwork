@@ -81,7 +81,8 @@ public class CommentServiceImpl implements ICommentService {
 			
 			dto.setUserName(obj[7]+"");
 			dto.setContent(obj[6]+"");
-			dto.setImg(obj[8]+"");
+			dto.setStudentNo(obj[8]+"");
+			dto.setImg(obj[9]+"");
 			dto.setRespTime(DateUtil.StringToHMS(obj[3]+""));	
 			list.add(dto);
 		}
@@ -98,7 +99,8 @@ public class CommentServiceImpl implements ICommentService {
 			dto.setId(Long.valueOf(obj[0]+""));		
 			dto.setUserName(obj[7]+"");
 			dto.setContent(obj[6]+"");
-			dto.setImg(obj[8]+"");
+			dto.setStudentNo(obj[8]+"");
+			dto.setImg(obj[9]+"");
 			dto.setRespTime(DateUtil.StringToHMS(obj[3]+""));	
 			list.add(dto);
 		}

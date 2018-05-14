@@ -26,6 +26,7 @@ public class CommentQueryDTO {
 	private String img;
 	private String content;
 	private Date respTime;	
+	private String studentNo;
 	public Long getId() {
 		return id;
 	}
@@ -64,6 +65,14 @@ public class CommentQueryDTO {
 
 	public void setRespTime(Date respTime) {
 		this.respTime = respTime;
+	}
+
+	public String getStudentNo() {
+		return studentNo;
+	}
+
+	public void setStudentNo(String studentNo) {
+		this.studentNo = studentNo;
 	}
 
 	//提供static的工具方法： 根据当前commentQueryDTO对象来组装动态查询条件
